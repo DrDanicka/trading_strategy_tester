@@ -2,3 +2,4 @@ docs/specifikace.docx
 .DS_Store
 .idea/
 **/__pycache__/
+test.ipynb
