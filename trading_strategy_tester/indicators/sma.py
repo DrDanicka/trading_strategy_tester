@@ -5,17 +5,27 @@ def sma(series: pd.Series, length: int = 14, offset: int = 0) -> pd.Series:
     """
     Calculate the Simple Moving Average (SMA) of a given series.
 
+    The Simple Moving Average (SMA) is a widely-used technical indicator that smooths out price data by creating
+    a constantly updated average price over a specified number of periods. It is commonly used to identify
+    trends in the data by filtering out the "noise" of short-term fluctuations.
+
     Parameters:
-    series (pd.Series): The data series (e.g., closing prices) for which to calculate the SMA.
-    length (int): The window length to calculate the SMA.
-    offset (int): The number of periods by which to offset the SMA.
+    -----------
+    series : pd.Series
+        A pandas Series representing the series data (e.g., closing prices) for which the SMA is to be calculated.
+    length : int
+        The window length to calculate the SMA.
+    offset : int
+        The number of periods by which to offset the SMA.
 
     Returns:
-    pd.Series: The SMA of the given series.
+    --------
+    pd.Series
+        The SMA of the given series.
     """
     sma_series = series.rolling(window=length).mean()
 
     if offset != 0:
         sma_series = sma_series.shift(offset)
 
-    return sma_series
+    return pd.Series(sma_series, name=f'SMA_{length}_{offset}')
