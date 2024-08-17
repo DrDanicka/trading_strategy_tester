@@ -22,30 +22,34 @@ class Strategy():
         self.end_date = end_date
         self.interval = interval
         self.period = period
+        self.trade_conditions = None
+        self.graphs = dict()
 
     def execute(self):
-        # TODO
         downloader = DownloadModule(self.start_date, self.end_date, self.interval, self.period)
         df = downloader.download_ticker(self.ticker)
 
-        evaluated_conditions_df = TradeConditions(
+        self.trade_conditions = TradeConditions(
             buy_condition=self.buy_condition,
             sell_condition=self.sell_condition,
             downloader=downloader
-        ).evaluate_conditions(df)
+        )
 
-        # Create Trades
+        evaluated_conditions_df = self.trade_conditions.evaluate_conditions(df)
+
         # Create Graphs
-        # Create Stats
+        self.graphs = self.trade_conditions.get_graphs()
+
+        # TODO Create trades
+        # TODO Create Stats
         return evaluated_conditions_df
 
     def get_trades(self):
         # TODO
         pass
 
-    def get_graphs(self):
-        # TODO
-        pass
+    def get_graphs(self) -> dict:
+        return self.graphs
 
     def get_statistics(self):
         # TODO
