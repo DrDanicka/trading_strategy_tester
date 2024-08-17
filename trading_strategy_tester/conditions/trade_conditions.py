@@ -1,7 +1,7 @@
 import pandas as pd
-
 from .condition import Condition
 from ..download.download_module import DownloadModule
+from ..trading_plot.trading_plot import TradingPlot
 
 
 class TradeConditions:
@@ -11,6 +11,14 @@ class TradeConditions:
         self.downloader = downloader
 
     def evaluate_conditions(self, df: pd.DataFrame) -> pd.DataFrame:
-        df['BUY'] = self.buy_condition.evaluate(self.downloader)
-        df['SELL'] = self.sell_condition.evaluate(self.downloader)
+        df['BUY'] = self.buy_condition.evaluate(self.downloader, df)
+        df['SELL'] = self.sell_condition.evaluate(self.downloader, df)
         return df
+
+    def get_graphs(self) -> dict[str, [TradingPlot]]:
+        graphs = {}
+
+        graphs['BUY'] = self.buy_condition.get_graphs(self.downloader)
+        graphs['SELL'] = self.sell_condition.get_graphs(self.downloader)
+
+        return graphs
