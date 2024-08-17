@@ -5,7 +5,7 @@ from trading_strategy_tester.enums.interval_enum import Interval
 from trading_strategy_tester.enums.period_enum import Period
 
 class DownloadModule:
-    def __init__(self, start_date:datetime, end_date:datetime, interval: Interval, period: Period):
+    def __init__(self, start_date:datetime, end_date:datetime, interval: Interval, period: Period=Period.NOT_PASSED):
         self.start_date = start_date
         self.end_date = end_date
         self.interval = interval.value
