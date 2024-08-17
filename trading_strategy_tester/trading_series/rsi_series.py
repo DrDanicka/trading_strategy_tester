@@ -18,4 +18,7 @@ class RSI(TradingSeries):
     def get_data(self, downloader: DownloadModule) -> pd.Series:
         df = downloader.download_ticker(self._ticker)
 
-        return rsi(series=df[self.target], length=self.length)
+        rsi_series = rsi(series=df[self.target], length=self.length)
+        rsi_series.name = f'{self._ticker}_{rsi_series.name}'
+
+        return rsi_series

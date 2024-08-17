@@ -19,4 +19,7 @@ class SMA(TradingSeries):
     def get_data(self, downloader: DownloadModule) -> pd.Series:
         df = downloader.download_ticker(self._ticker)
 
-        return sma(series=df[self.target], length=self.length, offset=self.offset)
+        sma_series = sma(series=df[self.target], length=self.length, offset=self.offset)
+        sma_series.name = f'{self._ticker}_{sma_series.name}'
+
+        return sma_series
