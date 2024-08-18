@@ -13,7 +13,7 @@ class SMA(TradingSeries):
         self.offset = offset
 
     @property
-    def ticker(self):
+    def ticker(self) -> str:
         return self._ticker
 
     def get_data(self, downloader: DownloadModule) -> pd.Series:
