@@ -12,7 +12,7 @@ class RSI(TradingSeries):
         self.length = length
 
     @property
-    def ticker(self):
+    def ticker(self) -> str:
         return self._ticker
 
     def get_data(self, downloader: DownloadModule) -> pd.Series:

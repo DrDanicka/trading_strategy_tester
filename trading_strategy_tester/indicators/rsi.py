@@ -2,7 +2,7 @@ import pandas as pd
 
 def rsi(series: pd.Series, length: int = 14) -> pd.Series:
     """
-    Calculate the Relative Strength Index (RSI) for a given series.
+    Calculate the Relative Strength Index (RSI) of a given series using Wilder's Moving Average.
 
     The RSI is a momentum oscillator that measures the speed and change of price movements.
     It oscillates between 0 and 100 and is typically used to identify overbought or oversold conditions in a market.
@@ -19,8 +19,18 @@ def rsi(series: pd.Series, length: int = 14) -> pd.Series:
     pd.Series
         A pandas Series containing the RSI values for the input time series, with the same index as the input series.
     """
+
     delta = series.diff()
-    gain = (delta.where(delta > 0, 0)).rolling(window=length).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(window=length).mean()
-    rs = gain / loss
-    return pd.Series(100 - (100 / (1 + rs)), name=f'RSI_{length}')
+
+    # Calculate gains and losses
+    gain = delta.where(delta > 0, 0)
+    loss = -delta.where(delta < 0, 0)
+
+    # Use Wilder's Moving Average (RMA) for gains and losses
+    avg_gain = gain.ewm(alpha=1 / length, min_periods=length, adjust=False).mean()
+    avg_loss = loss.ewm(alpha=1 / length, min_periods=length, adjust=False).mean()
+
+    rs = avg_gain / avg_loss
+    rsi_ser = 100 - (100 / (1 + rs))
+
+    return pd.Series(rsi_ser, name=f'RSI_{length}')
