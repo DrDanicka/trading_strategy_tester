@@ -3,3 +3,4 @@ docs/specifikace.docx
 .idea/
 **/__pycache__/
 test.ipynb
+data/
