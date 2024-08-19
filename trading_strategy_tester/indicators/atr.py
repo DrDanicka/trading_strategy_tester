@@ -1,6 +1,10 @@
 import pandas as pd
 
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
+from trading_strategy_tester.smoothings.rma_smoothing import rma_smoothing
+from trading_strategy_tester.smoothings.sma_smoothing import sma_smoothing
+from trading_strategy_tester.smoothings.ema_smoothing import ema_smoothing
+from trading_strategy_tester.smoothings.wma_smoothing import wma_smoothing
 
 
 def atr(high: pd.Series, low: pd.Series, close: pd.Series, length: int = 14,
@@ -40,14 +44,13 @@ def atr(high: pd.Series, low: pd.Series, close: pd.Series, length: int = 14,
 
     # Calculate ATR based on the specified smoothing method
     if smoothing == SmoothingType.RMA:
-        atr_series = true_range.ewm(alpha=1/length, adjust=False).mean()
+        atr_series = rma_smoothing(true_range, length)
     elif smoothing == SmoothingType.SMA:
-        atr_series = true_range.rolling(window=length).mean()
+        atr_series = sma_smoothing(true_range, length)
     elif smoothing == SmoothingType.EMA:
-        atr_series = true_range.ewm(span=length, adjust=False).mean()
+        atr_series = ema_smoothing(true_range, length)
     elif smoothing == SmoothingType.WMA:
-        weights = pd.Series(range(1, length + 1))
-        atr_series = true_range.rolling(window=length).apply(lambda x: (x * weights).sum() / weights.sum(), raw=True)
+        atr_series = wma_smoothing(true_range, length)
     else:
         raise ValueError("Invalid smoothing method. Choose from SmoothingType enum.")
 
