@@ -1,4 +1,6 @@
 import pandas as pd
+from trading_strategy_tester.indicators.atr import atr
+from trading_strategy_tester.smoothings.rma_smoothing import rma_smoothing
 
 def adx(high: pd.Series, low: pd.Series, close: pd.Series, adx_smoothing: int = 14, DI_length: int = 14) -> pd.Series:
     """
@@ -26,32 +28,26 @@ def adx(high: pd.Series, low: pd.Series, close: pd.Series, adx_smoothing: int = 
         The ADX indicator of the given series.
     """
 
-    # Calculate True Range (TR)
-    tr1 = high - low
-    tr2 = (high - close.shift(1)).abs()
-    tr3 = (low - close.shift(1)).abs()
-    true_range = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+    atr_series = atr(high, low, close, DI_length)
 
     # Calculate Directional Movement (+DM and -DM)
     plus_dm = high.diff()
-    minus_dm = low.diff()
+    minus_dm = -low.diff()
 
     plus_dm = plus_dm.where((plus_dm > minus_dm) & (plus_dm > 0), 0.0)
     minus_dm = minus_dm.where((minus_dm > plus_dm) & (minus_dm > 0), 0.0)
 
-    # Use Wilder's Moving Average (RMA) for smoothing True Range and Directional Movements
-    tr_smoothed = true_range.ewm(alpha=1/DI_length, min_periods=DI_length, adjust=False).mean()
-    plus_dm_smoothed = plus_dm.ewm(alpha=1/DI_length, min_periods=DI_length, adjust=False).mean()
-    minus_dm_smoothed = minus_dm.ewm(alpha=1/DI_length, min_periods=DI_length, adjust=False).mean()
+    plus_dm_smoothed = rma_smoothing(plus_dm, DI_length)
+    minus_dm_smoothed = rma_smoothing(minus_dm, DI_length)
 
     # Calculate Directional Indicators (+DI and -DI)
-    plus_di = 100 * (plus_dm_smoothed / tr_smoothed)
-    minus_di = 100 * (minus_dm_smoothed / tr_smoothed)
+    plus_di = 100 * (plus_dm_smoothed / atr_series)
+    minus_di = 100 * (minus_dm_smoothed / atr_series)
 
     # Calculate the Directional Index (DX)
     dx = 100 * (abs(plus_di - minus_di) / (plus_di + minus_di))
 
     # Calculate the ADX (Average Directional Index) using Wilder's Moving Average
-    adx_series = dx.ewm(alpha=1/adx_smoothing, min_periods=adx_smoothing, adjust=False).mean()
+    adx_series = rma_smoothing(dx, adx_smoothing)
 
     return pd.Series(adx_series, name=f'ADX_{adx_smoothing}_{DI_length}')
