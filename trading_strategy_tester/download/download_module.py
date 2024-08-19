@@ -112,7 +112,7 @@ class DownloadModule:
         filepath = os.path.join(self.data_path, filename)
 
         if os.path.isfile(filepath):
-            return pd.read_csv(filepath)
+            return pd.read_csv(filepath, index_col='Date', parse_dates=True)
         else:
             return self.download_save_and_return_ticker(ticker, filepath, True)
 
@@ -136,7 +136,7 @@ class DownloadModule:
         filepath = os.path.join(self.data_path, filename)
 
         if os.path.isfile(filepath):
-            return pd.read_csv(filepath)
+            return pd.read_csv(filepath, index_col='Date', parse_dates=True)
         else:
             return self.download_save_and_return_ticker(ticker, filepath, False)
 
