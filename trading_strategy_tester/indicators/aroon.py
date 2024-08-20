@@ -25,7 +25,7 @@ def aroon_up(series: pd.Series, length: int = 14) -> pd.Series:
     # Aroon Up calculation
     aroon_up_series = 100 * (length - rolling_high_idx) / length
 
-    return pd.Series(aroon_up_series, name=f'AROON_UP_{length}')
+    return pd.Series(aroon_up_series, name=f'AROONUP_{length}')
 
 def aroon_down(series: pd.Series, length: int = 14) -> pd.Series:
     """
@@ -52,4 +52,4 @@ def aroon_down(series: pd.Series, length: int = 14) -> pd.Series:
     # Aroon Up calculation
     aroon_down_series = 100 * (length - rolling_low_idx) / length
 
-    return pd.Series(aroon_down_series, name=f'AROON_DOWN_{length}')
+    return pd.Series(aroon_down_series, name=f'AROONDOWN_{length}')
