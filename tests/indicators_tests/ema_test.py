@@ -1,6 +1,11 @@
+import os.path
 import unittest
 import pandas as pd
+from datetime import datetime
+
+from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.indicators.ema import ema
+from trading_strategy_tester.trading_series.ema_series import EMA
 
 class TestEMA(unittest.TestCase):
 
@@ -9,7 +14,12 @@ class TestEMA(unittest.TestCase):
         Testing on AAPL stock from 2020-1-1 until 2024-1-1
         """
         # Create a sample series to test
-        self.data = pd.read_csv('AAPL_testing_data.csv')
+        self.data = pd.read_csv('../testing_data/AAPL_testing_data.csv')
+        # Create downloader for series testing
+        self.downloader = DownloadModule(
+            start_date=datetime(2020, 1, 1),
+            end_date=datetime(2024, 1, 1)
+        )
 
     def test_ema_close_length_9_offset_0_tradingview_data(self):
         """
@@ -49,3 +59,23 @@ class TestEMA(unittest.TestCase):
         ], name='EMA_21_5').reset_index(drop=True)
         calculated_ema = ema(self.data['Open'], 21, 5).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_ema, trading_view_ema)
+
+    def test_ema_series_close_length_9_offset_0_tradingview_data(self):
+        """
+        Test EMA series with default length of 9 days and offset 0.
+        Expected data are from TradingView and the test tests last 20 days of indicators data.
+        The data is rounded to 2 decimal places, and we use Close price to calculate EMA.
+        """
+        ticker = 'AAPL'
+
+        trading_view_ema = pd.Series([
+            189.75, 189.69, 190.43, 190.81, 191.50, 192.34, 192.51, 192.95, 193.95, 194.78,
+            195.34, 195.45, 195.75, 195.57, 195.39, 195.03, 194.63, 194.34, 194.19, 193.85
+        ], name=f'{ticker}_EMA_9_0').reset_index(drop=True)
+        ema_series = EMA(ticker, 'Close', 9, 0)
+        calculated_ema = ema_series.get_data(self.downloader).tail(20).reset_index(drop=True).round(2)
+        pd.testing.assert_series_equal(calculated_ema, trading_view_ema)
+
+
+if __name__ == '__main__':
+    unittest.main()
