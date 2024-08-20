@@ -59,9 +59,8 @@ class DownloadModule:
         self.period = period.value  # String value representing the period
 
         script_dir = os.path.dirname(__file__)
-        os.chdir(script_dir)
 
-        self.data_path = os.path.join('..', '..', 'data')
+        self.data_path = os.path.join(script_dir, '..', '..' ,'data')
 
     def download_save_and_return_ticker(self, ticker: str, filepath: str, datetime_type: bool) -> pd.DataFrame:
         """
