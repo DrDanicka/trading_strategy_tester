@@ -5,7 +5,7 @@ from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.indicators.aroon import aroon_down
 
 
-class AroonUp(TradingSeries):
+class AroonDown(TradingSeries):
     def __init__(self, ticker: str, target: str = 'Low', length: int = 14):
         super().__init__(ticker)
         self.target = target
