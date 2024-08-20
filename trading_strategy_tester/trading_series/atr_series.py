@@ -13,7 +13,7 @@ class ATR(TradingSeries):
 
     @property
     def ticker(self) -> str:
-        return self.ticker
+        return self._ticker
 
     def get_data(self, downloader: DownloadModule) -> pd.Series:
         df = downloader.download_ticker(self._ticker)

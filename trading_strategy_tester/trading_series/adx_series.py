@@ -13,13 +13,13 @@ class ADX(TradingSeries):
 
     @property
     def ticker(self) -> str:
-        return self.ticker
+        return self._ticker
 
     def get_data(self, downloader: DownloadModule) -> pd.Series:
-        df = downloader.download_ticker(self.ticker)
+        df = downloader.download_ticker(self._ticker)
 
         adx_series = adx(high=df['High'], low=df['Low'], close=df['Close'], adx_smoothing=self.adx_smoothing,
                          DI_length=self.DI_length)
-        adx_series.name = f'{self.ticker}_{adx_series.name}'
+        adx_series.name = f'{self._ticker}_{adx_series.name}'
 
         return adx_series
