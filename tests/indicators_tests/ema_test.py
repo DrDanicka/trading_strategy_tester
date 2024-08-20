@@ -14,7 +14,7 @@ class TestEMA(unittest.TestCase):
         Testing on AAPL stock from 2020-1-1 until 2024-1-1
         """
         # Create a sample series to test
-        self.data = pd.read_csv('../testing_data/AAPL_testing_data.csv')
+        self.data = pd.read_csv(os.path.join('..', 'testing_data', 'AAPL_testing_data.csv'))
         # Create downloader for series testing
         self.downloader = DownloadModule(
             start_date=datetime(2020, 1, 1),
@@ -75,6 +75,7 @@ class TestEMA(unittest.TestCase):
         ema_series = EMA(ticker, 'Close', 9, 0)
         calculated_ema = ema_series.get_data(self.downloader).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_ema, trading_view_ema)
+
 
 
 if __name__ == '__main__':
