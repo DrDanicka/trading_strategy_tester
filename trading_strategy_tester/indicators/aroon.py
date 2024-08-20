@@ -20,7 +20,7 @@ def aroon_up(series: pd.Series, length: int = 14) -> pd.Series:
         The Aroon Up indicator of the given series.
     """
     # Calculate rolling window's highest high index
-    rolling_high_idx = series.rolling(window=length).apply(lambda x: x[::-1].argmax(), raw=True)
+    rolling_high_idx = series.rolling(window=length+1).apply(lambda x: x[::-1].argmax(), raw=True)
 
     # Aroon Up calculation
     aroon_up_series = 100 * (length - rolling_high_idx) / length
@@ -47,7 +47,7 @@ def aroon_down(series: pd.Series, length: int = 14) -> pd.Series:
         The Aroon Down indicator of the given series.
     """
     # Calculate rolling window's lowest low index
-    rolling_low_idx = series.rolling(window=length).apply(lambda x: x[::-1].argmin(), raw=True)
+    rolling_low_idx = series.rolling(window=length+1).apply(lambda x: x[::-1].argmin(), raw=True)
 
     # Aroon Up calculation
     aroon_down_series = 100 * (length - rolling_low_idx) / length
