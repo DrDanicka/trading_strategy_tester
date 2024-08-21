@@ -38,7 +38,7 @@ class Strategy():
         evaluated_conditions_df = self.trade_conditions.evaluate_conditions(df)
 
         # Create Graphs
-        self.graphs = self.trade_conditions.get_graphs()
+        self.graphs = self.trade_conditions.get_graphs(df)
 
         # TODO Create trades
         # TODO Create Stats
