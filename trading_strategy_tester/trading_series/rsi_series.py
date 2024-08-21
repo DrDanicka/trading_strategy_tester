@@ -1,5 +1,4 @@
 import pandas as pd
-from numpy.lib.recfunctions import get_names
 
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
@@ -18,13 +17,11 @@ class RSI(TradingSeries):
         return self._ticker
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
-        if self.name in df.columns:
-            return pd.Series(df[self.name], name=self.name)
-        else:
+        if self.name not in df.columns:
             new_df = downloader.download_ticker(self._ticker)
             rsi_series = rsi(series=new_df[self.target], length=self.length)
 
-            # Adding indicators to global DataFrame
+            # Adding indicator to global DataFrame
             df[self.name] = rsi_series
 
-            return rsi_series
+        return pd.Series(df[self.name], name=self.name)

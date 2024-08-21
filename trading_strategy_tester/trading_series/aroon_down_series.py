@@ -16,13 +16,11 @@ class AroonDown(TradingSeries):
         return self._ticker
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
-        if self.name in df.columns:
-            return pd.Series(df[self.name], name=self.name)
-        else:
+        if self.name not in df.columns:
             new_df = downloader.download_ticker(self._ticker)
-            aroon_down_series = aroon_down(new_df['High'], self.length)
+            aroon_down_series = aroon_down(new_df['Low'], self.length)
 
-            # Adding indicators to global DataFrame
+            # Adding indicator to global DataFrame
             df[self.name] = aroon_down_series
 
-            return aroon_down_series
+        return pd.Series(df[self.name], name=self.name)

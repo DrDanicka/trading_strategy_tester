@@ -18,13 +18,11 @@ class SMA(TradingSeries):
         return self._ticker
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
-        if self.name in df.columns:
-            return pd.Series(df[self.name], name=self.name)
-        else:
+        if self.name not in df.columns:
             new_df = downloader.download_ticker(self._ticker)
             sma_series = sma(series=new_df[self.target], length=self.length, offset=self.offset)
 
-            # Adding indicators to global DataFrame
+            # Adding indicator to global DataFrame
             df[self.name] = sma_series
 
-            return sma_series
+        return pd.Series(df[self.name], name=self.name)

@@ -17,14 +17,12 @@ class ATR(TradingSeries):
         return self._ticker
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
-        if self.name in df.columns:
-            return pd.Series(df[self.name], name=self.name)
-        else:
+        if self.name not in df.columns:
             new_df = downloader.download_ticker(self._ticker)
             atr_series = atr(high=new_df['High'], low=new_df['Low'], close=new_df['Close'],
                              length=self.length, smoothing=self.smoothing)
 
-            # Adding indicators to global DataFrame
+            # Adding indicator to global DataFrame
             df[self.name] = atr_series
 
-            return atr_series
+        return pd.Series(df[self.name], name=self.name)
