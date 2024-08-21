@@ -87,7 +87,7 @@ class TestAroon(unittest.TestCase):
             92.86, 85.71, 78.57, 71.43, 64.29, 57.14, 50.00, 42.86, 35.71, 28.57
         ], name=f'{ticker}_AROONUP_14').reset_index(drop=True)
         aroon_up_series = AroonUp(ticker, 14)
-        calculated_aroon_up = aroon_up_series.get_data(self.downloader).tail(20).reset_index(drop=True).round(2)
+        calculated_aroon_up = aroon_up_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_aroon_up, trading_view_aroon_up)
 
     def test_aroon_down_series_length_14_tradingview_data(self):
@@ -103,7 +103,7 @@ class TestAroon(unittest.TestCase):
             28.57, 21.43, 14.29, 7.14, 0.00, 0.00, 100.00, 92.86, 85.71
         ], name=f'{ticker}_AROONDOWN_14').reset_index(drop=True)
         aroon_down_series = AroonDown(ticker, 14)
-        calculated_aroon_down = aroon_down_series.get_data(self.downloader).tail(20).reset_index(drop=True).round(2)
+        calculated_aroon_down = aroon_down_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_aroon_down, trading_view_aroon_down)
 
 

@@ -75,7 +75,7 @@ class TestSMA(unittest.TestCase):
             195.25, 195.52, 196.04, 196.10, 195.99, 196.03, 195.85, 195.31, 194.81, 194.25
         ], name=f'{ticker}_SMA_Close_9_0').reset_index(drop=True)
         sma_series = SMA(ticker, 'Close', 9, 0)
-        calculated_sma = sma_series.get_data(self.downloader).tail(20).reset_index(drop=True).round(2)
+        calculated_sma = sma_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_sma, trading_view_sma)
 
 if __name__ == '__main__':

@@ -78,7 +78,7 @@ class TestADX(unittest.TestCase):
             36.09, 35.58, 35.20, 34.34, 32.93, 31.39, 29.89, 27.78, 26.24, 24.53
         ], name=f'{ticker}_ADX_14_14').reset_index(drop=True)
         adx_series = ADX(ticker, 14, 14)
-        calculated_adx = adx_series.get_data(self.downloader).tail(20).reset_index(drop=True).round(2)
+        calculated_adx = adx_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_adx, trading_view_adx)
 
 

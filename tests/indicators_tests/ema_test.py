@@ -73,7 +73,7 @@ class TestEMA(unittest.TestCase):
             195.34, 195.45, 195.75, 195.57, 195.39, 195.03, 194.63, 194.34, 194.19, 193.85
         ], name=f'{ticker}_EMA_Close_9_0').reset_index(drop=True)
         ema_series = EMA(ticker, 'Close', 9, 0)
-        calculated_ema = ema_series.get_data(self.downloader).tail(20).reset_index(drop=True).round(2)
+        calculated_ema = ema_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_ema, trading_view_ema)
 
 

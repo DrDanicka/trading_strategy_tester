@@ -91,7 +91,7 @@ class TestATR(unittest.TestCase):
             2.86, 2.88, 2.75, 2.76, 2.82, 2.79, 2.67, 2.65, 2.57, 2.57
         ], name=f'{ticker}_ATR_14_RMA').reset_index(drop=True)
         atr_series = ATR(ticker, 14, SmoothingType.RMA)
-        calculated_atr = atr_series.get_data(self.downloader).tail(20).reset_index(drop=True).round(2)
+        calculated_atr = atr_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_atr, trading_view_atr)
 
 

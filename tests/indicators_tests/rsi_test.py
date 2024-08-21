@@ -74,7 +74,7 @@ class TestRSI(unittest.TestCase):
             67.93, 62.61, 64.48, 58.18, 57.75, 54.61, 53.03, 53.29, 54.48, 51.06
         ], name=f'{ticker}_RSI_Close_14').reset_index(drop=True)
         rsi_series = RSI(ticker, 'Close', 14)
-        calculated_rsi = rsi_series.get_data(self.downloader).tail(20).reset_index(drop=True).round(2)
+        calculated_rsi = rsi_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_rsi, trading_view_rsi)
 
 
