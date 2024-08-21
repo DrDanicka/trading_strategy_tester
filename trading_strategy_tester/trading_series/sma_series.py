@@ -11,15 +11,20 @@ class SMA(TradingSeries):
         self.target = target
         self.length = length
         self.offset = offset
+        self.name = f'{self._ticker}_SMA_{self.target}_{self.length}_{self.offset}'
 
     @property
     def ticker(self) -> str:
         return self._ticker
 
-    def get_data(self, downloader: DownloadModule) -> pd.Series:
-        df = downloader.download_ticker(self._ticker)
+    def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
+        if self.name in df.columns:
+            return pd.Series(df[self.name], name=self.name)
+        else:
+            new_df = downloader.download_ticker(self._ticker)
+            sma_series = sma(series=new_df[self.target], length=self.length, offset=self.offset)
 
-        sma_series = sma(series=df[self.target], length=self.length, offset=self.offset)
-        sma_series.name = f'{self._ticker}_{sma_series.name}'
+            # Adding indicators to global DataFrame
+            df[self.name] = sma_series
 
-        return sma_series
+            return sma_series

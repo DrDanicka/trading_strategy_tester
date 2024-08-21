@@ -10,16 +10,21 @@ class ADX(TradingSeries):
         super().__init__(ticker)
         self.adx_smoothing = adx_smoothing
         self.DI_length = DI_length
+        self.name = f'{self._ticker}_ADX_{self.adx_smoothing}_{self.DI_length}'
 
     @property
     def ticker(self) -> str:
         return self._ticker
 
-    def get_data(self, downloader: DownloadModule) -> pd.Series:
-        df = downloader.download_ticker(self._ticker)
+    def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
+        if self.name in df.columns:
+            return pd.Series(df[self.name], name=self.name)
+        else:
+            new_df = downloader.download_ticker(self._ticker)
+            adx_series = adx(high=new_df['High'], low=new_df['Low'], close=new_df['Close'],
+                             adx_smoothing=self.adx_smoothing, DI_length=self.DI_length)
 
-        adx_series = adx(high=df['High'], low=df['Low'], close=df['Close'], adx_smoothing=self.adx_smoothing,
-                         DI_length=self.DI_length)
-        adx_series.name = f'{self._ticker}_{adx_series.name}'
+            # Adding indicators to global DataFrame
+            df[self.name] = adx_series
 
-        return adx_series
+            return adx_series

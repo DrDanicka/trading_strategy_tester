@@ -10,15 +10,21 @@ class ATR(TradingSeries):
         super().__init__(ticker)
         self.length = length
         self.smoothing = smoothing
+        self.name = f'{self._ticker}_ATR_{self.length}_{self.smoothing.value}'
 
     @property
     def ticker(self) -> str:
         return self._ticker
 
-    def get_data(self, downloader: DownloadModule) -> pd.Series:
-        df = downloader.download_ticker(self._ticker)
+    def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
+        if self.name in df.columns:
+            return pd.Series(df[self.name], name=self.name)
+        else:
+            new_df = downloader.download_ticker(self._ticker)
+            atr_series = atr(high=new_df['High'], low=new_df['Low'], close=new_df['Close'],
+                             length=self.length, smoothing=self.smoothing)
 
-        atr_series = atr(high=df['High'], low=df['Low'], close=df['Close'], length=self.length, smoothing=self.smoothing)
-        atr_series.name = f'{self._ticker}_{atr_series.name}'
+            # Adding indicators to global DataFrame
+            df[self.name] = atr_series
 
-        return atr_series
+            return atr_series

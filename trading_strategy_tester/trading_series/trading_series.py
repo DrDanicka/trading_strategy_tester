@@ -13,5 +13,5 @@ class TradingSeries(ABC):
         pass
 
     @abstractmethod
-    def get_data(self, downloader: DownloadModule) -> pd.Series:
+    def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
         pass
