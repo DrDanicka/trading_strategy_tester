@@ -16,11 +16,11 @@ class AndCondition(Condition):
 
         return result
 
-    def get_graphs(self, downloader: DownloadModule) -> [TradingPlot]:
+    def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         graphs = []
 
         for condition in self.conditions:
-            graphs += condition.get_graphs(downloader)
+            graphs += condition.get_graphs(downloader, df)
 
         return graphs
 
@@ -37,11 +37,11 @@ class OrCondition(Condition):
 
         return result
 
-    def get_graphs(self, downloader: DownloadModule) -> [TradingPlot]:
+    def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         graphs = []
 
         for condition in self.conditions:
-            graphs += condition.get_graphs(downloader)
+            graphs += condition.get_graphs(downloader, df)
 
         return graphs
 
@@ -56,10 +56,10 @@ class IfThenElseCondition(Condition):
 
         return result
 
-    def get_graphs(self, downloader: DownloadModule) -> [TradingPlot]:
+    def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         graphs = []
 
         for condition in [self.if_condition, self.else_condition]:
-            graphs += condition.get_graphs(downloader)
+            graphs += condition.get_graphs(downloader, df)
 
         return graphs

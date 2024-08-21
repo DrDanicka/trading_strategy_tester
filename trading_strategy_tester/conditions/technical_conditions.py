@@ -1,4 +1,5 @@
 import pandas as pd
+
 from .condition import Condition
 from ..download.download_module import DownloadModule
 from ..trading_plot.cross_over_plot import CrossOverPlot
@@ -12,21 +13,17 @@ class CrossOverCondition(Condition):
         self.second_series = second_series
 
     def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
-        series1 : pd.Series = self.first_series.get_data(downloader)
-        series2 : pd.Series = self.second_series.get_data(downloader)
-
-        # Add series1, series2 to DataFrame
-        df[series1.name] = series1
-        df[series2.name] = series2
+        series1 : pd.Series = self.first_series.get_data(downloader, df)
+        series2 : pd.Series = self.second_series.get_data(downloader, df)
 
         crossover = (series1.shift(1) < series2.shift(1)) & (series1 > series2)
 
         return crossover.fillna(False)
 
-    def get_graphs(self, downloader: DownloadModule) -> [TradingPlot]:
+    def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         return [CrossOverPlot(
-            self.first_series.get_data(downloader),
-            self.second_series.get_data(downloader)
+            self.first_series.get_data(downloader, df),
+            self.second_series.get_data(downloader, df)
         )]
 
 
@@ -36,16 +33,12 @@ class GreaterThanCondition(Condition):
         self.second_series = second_series
 
     def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
-        series1 = self.first_series.get_data(downloader)
-        series2 = self.second_series.get_data(downloader)
-
-        # Add series1, series2 to DataFrame
-        df[series1.name] = series1
-        df[series2.name] = series2
+        series1 = self.first_series.get_data(downloader, df)
+        series2 = self.second_series.get_data(downloader, df)
 
         return series1 > series2
 
-    def get_graphs(self, downloader: DownloadModule) -> [TradingPlot]:
+    def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         # TODO create greaterThanCondition graph method
         return []
 
@@ -55,15 +48,11 @@ class LessThanCondition(Condition):
         self.second_series = second_series
 
     def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
-        series1 = self.first_series.get_data(downloader)
-        series2 = self.second_series.get_data(downloader)
-
-        # Add series1, series2 to DataFrame
-        df[series1.name] = series1
-        df[series2.name] = series2
+        series1 = self.first_series.get_data(downloader, df)
+        series2 = self.second_series.get_data(downloader, df)
 
         return series1 < series2
 
-    def get_graphs(self, downloader: DownloadModule) -> [TradingPlot]:
+    def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         # TODO create greaterThanCondition graph
         return []

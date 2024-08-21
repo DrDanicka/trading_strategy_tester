@@ -15,10 +15,10 @@ class TradeConditions:
         df['SELL'] = self.sell_condition.evaluate(self.downloader, df)
         return df
 
-    def get_graphs(self) -> dict[str, [TradingPlot]]:
+    def get_graphs(self, df: pd.DataFrame) -> dict[str, [TradingPlot]]:
         graphs = {}
 
-        graphs['BUY'] = self.buy_condition.get_graphs(self.downloader)
-        graphs['SELL'] = self.sell_condition.get_graphs(self.downloader)
+        graphs['BUY'] = self.buy_condition.get_graphs(self.downloader, df)
+        graphs['SELL'] = self.sell_condition.get_graphs(self.downloader, df)
 
         return graphs

@@ -10,5 +10,5 @@ class Condition(ABC):
         pass
 
     @abstractmethod
-    def get_graphs(self, downloader: DownloadModule) -> [TradingPlot]:
+    def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         pass
