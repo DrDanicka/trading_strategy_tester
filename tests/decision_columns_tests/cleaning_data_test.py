@@ -230,5 +230,27 @@ class TestCleaningData(unittest.TestCase):
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
 
+    def test_multiple_trades(self):
+        # Arrange
+        df = pd.DataFrame(
+            {
+                'BUY': [True, False, False, True, False],
+                'SELL': [False, True, True, False, True]
+            }
+        )
+
+        df_expected = pd.DataFrame(
+            {
+                'BUY': [True, False, False, True, False],
+                'SELL': [False, True, False, False, True]
+            }
+        )
+
+        # Act
+        self.trade_condition.clean_BUY_SELL_columns(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
 if __name__ == '__main__':
     unittest.main()
