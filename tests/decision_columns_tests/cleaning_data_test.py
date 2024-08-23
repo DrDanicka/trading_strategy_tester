@@ -252,5 +252,27 @@ class TestCleaningData(unittest.TestCase):
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
 
+    def test_buy_sell_on_the_same_day_in_the_middle(self):
+        # Arrange
+        df = pd.DataFrame(
+            {
+                'BUY': [True, False, True, False, False],
+                'SELL': [False, False, True, False, True]
+            }
+        )
+
+        df_expected = pd.DataFrame(
+            {
+                'BUY': [True, False, False, False, False],
+                'SELL': [False, False, True, False, False]
+            }
+        )
+
+        # Act
+        self.trade_condition.clean_BUY_SELL_columns(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
 if __name__ == '__main__':
     unittest.main()

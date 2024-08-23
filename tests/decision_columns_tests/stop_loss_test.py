@@ -44,7 +44,7 @@ class TestStopLoss(unittest.TestCase):
         df_expected = pd.DataFrame({
             'Close': [50, 54, 47, 53, 51],
             'BUY': [True, False, False, False, False],
-            'SELL': [False, False, True, False, False],
+            'SELL': [False, False, True, False, True],
         })
 
         # Act
@@ -89,6 +89,51 @@ class TestStopLoss(unittest.TestCase):
             'Close': [50, 54, 50, 53, 51],
             'BUY': [True, False, False, True, False],
             'SELL': [False, True, False, False, True],
+        })
+
+        # Act
+        stop_loss.set_normal_stop_loss(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
+    def test_normal_stop_loss_5_percent_with_more_buys(self):
+        # Arrange
+        stop_loss = StopLoss(5)
+
+        df = pd.DataFrame({
+            'Close': [50, 30, 50, 48, 45],
+            'BUY': [True, False, True, False, False],
+            'SELL': [False, False, False, False, False],
+        })
+
+        df_expected = pd.DataFrame({
+            'Close': [50, 30, 50, 48, 45],
+            'BUY': [True, False, True, False, False],
+            'SELL': [False, True, False, False, True],
+        })
+
+        # Act
+        stop_loss.set_normal_stop_loss(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
+
+    def test_normal_stop_loss_5_percent_stop_loss_hit_on_buy_day(self):
+        # Arrange
+        stop_loss = StopLoss(5)
+
+        df = pd.DataFrame({
+            'Close': [50, 49, 43, 48, 26],
+            'BUY': [True, False, True, False, False],
+            'SELL': [False, False, False, False, False],
+        })
+
+        df_expected = pd.DataFrame({
+            'Close': [50, 49, 43, 48, 26],
+            'BUY': [True, False, True, False, False],
+            'SELL': [False, False, True, False, True],
         })
 
         # Act
