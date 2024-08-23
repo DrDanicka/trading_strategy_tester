@@ -25,12 +25,12 @@ class TradeConditions:
                 row['BUY'] = False
                 row['SELL'] = False
 
-        if bought and not df.loc[df.index[-1], 'BUY']:
-            df.loc[df.index[-1], 'SELL'] = True
-        else:
-            # Set both last indexes of BUY and SELL to False
-            df.loc[df.index[-1], 'BUY'] = False
-            df.loc[df.index[-1], 'SELL'] = False
+        if bought:
+            if not df.loc[df.index[-1], 'BUY']:
+                df.loc[df.index[-1], 'SELL'] = True
+            else:
+                # Set  last index of BUY to False
+                df.loc[df.index[-1], 'BUY'] = False
 
 
     def evaluate_conditions(self, df: pd.DataFrame) -> pd.DataFrame:
