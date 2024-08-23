@@ -20,10 +20,10 @@ class TradeConditions:
             # If there is True value to SELL
             elif bought and row['SELL']:
                 bought = False
-                row['BUY'] = False
+                df.at[index, 'BUY'] = False
             else:
-                row['BUY'] = False
-                row['SELL'] = False
+                df.at[index, 'BUY'] = False
+                df.at[index, 'SELL'] = False
 
         if bought:
             if not df.loc[df.index[-1], 'BUY']:
