@@ -34,11 +34,11 @@ class StopLoss():
         """
         Adjusts the 'SELL' signals in the DataFrame based on a stop-loss strategy.
 
-        This method iterates over the provided DataFrame and sets the 'SELL' signals
-        based on a calculated stop-loss threshold. The stop-loss is determined as a percentage
-        of the buying price. If the current price falls below the threshold, a 'SELL' signal is set.
-        Additionally, it handles cases where multiple 'SELL' signals occur in a row by deleting
-        the next 'SELL' signal after the stop-loss is triggered.
+        This method iterates over the DataFrame and sets 'SELL' signals based on a calculated
+        stop-loss threshold. The stop-loss is determined as a percentage of the buying price.
+        When a 'BUY' signal is encountered, the buying price is recorded, and the stop-loss
+        threshold is calculated. If the current price drops below the threshold, a 'SELL' signal
+        is set, and the trade is considered closed.
 
         Parameters:
         -----------
@@ -55,29 +55,50 @@ class StopLoss():
         """
 
         bought = False
-        delete_next_sell = False
         buying_price = 0
-        # This represents how much many can the trade go down until it hits percentage stop-loos
+        # This represents how much can the trade go down until it hits percentage stop-loos
         value_threshold = 0
 
         for index, row in df.iterrows():
             current_price = row['Close']
 
-            if bought:
-                if row['SELL']:
-                    if delete_next_sell:
-                        df.at[index, 'SELL'] = False
-                        delete_next_sell = False
-                    bought = False
-                else:
-                    if current_price <= buying_price - value_threshold:
-                        df.at[index, 'SELL'] = True
-                        delete_next_sell = True
-            else:
-                if row['BUY']:
-                    bought = True
-                    buying_price = row['Close']
-                    value_threshold = (buying_price * self.percentage) / 100
+            if bought and current_price <= buying_price - value_threshold:
+                df.at[index, 'SELL'] = True
+                bought = False
+
+            if row['BUY']:
+                buying_price = current_price
+                value_threshold = (buying_price * self.percentage) / 100
+                bought = True
 
 
-    #def set_trailing_stop_loss(self, df: pd.DataFrame):
+    def set_trailing_stop_loss(self, df: pd.DataFrame):
+        # TODO
+        pass
+
+
+    def set_stop_loss(self, df: pd.DataFrame):
+        """
+        Applies the appropriate stop-loss strategy to the DataFrame based on the selected stop-loss type.
+
+        This method checks the stop-loss type and applies the corresponding stop-loss strategy
+        (either 'NORMAL' or 'TRAILING') to adjust the 'SELL' signals in the DataFrame.
+
+        Parameters:
+        -----------
+        df : pd.DataFrame
+            A DataFrame containing columns 'Close', 'BUY', and 'SELL'.
+            'Close' represents the closing price of the asset.
+            'BUY' indicates where buying actions occurred.
+            'SELL' will be modified by the selected stop-loss method to indicate where sell actions should occur.
+
+        Returns:
+        --------
+        None
+            The DataFrame is modified in place.
+        """
+
+        if self.stop_loss_type == StopLossType.NORMAL:
+            self.set_normal_stop_loss(df)
+        elif self.stop_loss_type == StopLossType.TRAILING:
+            self.set_trailing_stop_loss(df)

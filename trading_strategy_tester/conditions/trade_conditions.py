@@ -37,8 +37,6 @@ class TradeConditions:
         df['BUY'] = self.buy_condition.evaluate(self.downloader, df)
         df['SELL'] = self.sell_condition.evaluate(self.downloader, df)
 
-        self.clean_BUY_SELL_columns(df)
-
         return df
 
     def get_graphs(self, df: pd.DataFrame) -> dict[str, [TradingPlot]]:
