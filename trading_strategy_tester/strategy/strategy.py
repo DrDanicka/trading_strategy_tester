@@ -1,5 +1,7 @@
 from datetime import datetime
 from trading_strategy_tester.conditions.condition import Condition
+from trading_strategy_tester.conditions.stop_loss import StopLoss
+from trading_strategy_tester.conditions.take_profit import TakeProfit
 from trading_strategy_tester.conditions.trade_conditions import TradeConditions
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.interval_enum import Interval
@@ -11,6 +13,8 @@ class Strategy():
                  ticker:str,
                  buy_condition: Condition,
                  sell_condition: Condition,
+                 stop_loss: StopLoss,
+                 take_profit: TakeProfit,
                  start_date: datetime,
                  end_date: datetime,
                  interval: Interval,
@@ -18,6 +22,8 @@ class Strategy():
         self.ticker = ticker
         self.buy_condition = buy_condition
         self.sell_condition = sell_condition
+        self.stop_loss = stop_loss
+        self.take_profit = take_profit
         self.start_date = start_date
         self.end_date = end_date
         self.interval = interval
@@ -36,6 +42,13 @@ class Strategy():
         )
 
         evaluated_conditions_df = self.trade_conditions.evaluate_conditions(df)
+
+        # Sets stop losses and take profits
+        self.take_profit.set_take_profit(evaluated_conditions_df)
+        self.stop_loss.set_stop_loss(evaluated_conditions_df)
+
+        # Clean the BUY and SELL columns to have only one SELL to every BUY
+        self.trade_conditions.clean_BUY_SELL_columns(evaluated_conditions_df)
 
         # Create Graphs
         self.graphs = self.trade_conditions.get_graphs(df)
