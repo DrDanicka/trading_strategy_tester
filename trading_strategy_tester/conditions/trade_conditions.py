@@ -10,9 +10,35 @@ class TradeConditions:
         self.sell_condition = sell_condition
         self.downloader = downloader
 
+    def clean_BUY_SELL_columns(self, df: pd.DataFrame):
+        bought = False
+
+        for index, row in df.iterrows():
+            # If there is only True value to BUY
+            if not bought and row['BUY'] and not row['SELL']:
+                bought = True
+            # If there is True value to SELL
+            elif bought and row['SELL']:
+                bought = False
+                row['BUY'] = False
+            else:
+                row['BUY'] = False
+                row['SELL'] = False
+
+        if bought and not df.loc[df.index[-1], 'BUY']:
+            df.loc[df.index[-1], 'SELL'] = True
+        else:
+            # Set both last indexes of BUY and SELL to False
+            df.loc[df.index[-1], 'BUY'] = False
+            df.loc[df.index[-1], 'SELL'] = False
+
+
     def evaluate_conditions(self, df: pd.DataFrame) -> pd.DataFrame:
         df['BUY'] = self.buy_condition.evaluate(self.downloader, df)
         df['SELL'] = self.sell_condition.evaluate(self.downloader, df)
+
+        self.clean_BUY_SELL_columns(df)
+
         return df
 
     def get_graphs(self, df: pd.DataFrame) -> dict[str, [TradingPlot]]:
