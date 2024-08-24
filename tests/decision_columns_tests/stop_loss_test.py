@@ -142,5 +142,71 @@ class TestStopLoss(unittest.TestCase):
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
 
+    def test_trailing_stop_loss_5_percent_without_recalculating_threshold(self):
+        # Arrange
+        stop_loss = StopLoss(5)
+
+        df = pd.DataFrame({
+            'Close': [50, 49, 47, 48, 26],
+            'BUY': [True, False, False, False, False],
+            'SELL': [False, False, False, False, False],
+        })
+
+        df_expected = pd.DataFrame({
+            'Close': [50, 49, 47, 48, 26],
+            'BUY': [True, False, False, False, False],
+            'SELL': [False, False, True, False, False],
+        })
+
+        # Act
+        stop_loss.set_trailing_stop_loss(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
+    def test_trailing_stop_loss_5_percent_with_recalculating_threshold(self):
+        # Arrange
+        stop_loss = StopLoss(5)
+
+        df = pd.DataFrame({
+            'Close': [50, 60, 58, 57, 26],
+            'BUY': [True, False, False, False, False],
+            'SELL': [False, False, False, False, False],
+        })
+
+        df_expected = pd.DataFrame({
+            'Close': [50, 60, 58, 57, 26],
+            'BUY': [True, False, False, False, False],
+            'SELL': [False, False, False, True, False],
+        })
+
+        # Act
+        stop_loss.set_trailing_stop_loss(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
+    def test_trailing_stop_loss_5_percent_with_recalculating_threshold_no_trade(self):
+        # Arrange
+        stop_loss = StopLoss(5)
+
+        df = pd.DataFrame({
+            'Close': [50, 60, 58, 57.5, 60],
+            'BUY': [True, False, False, False, False],
+            'SELL': [False, False, False, False, False],
+        })
+
+        df_expected = pd.DataFrame({
+            'Close': [50, 60, 58, 57.5, 60],
+            'BUY': [True, False, False, False, False],
+            'SELL': [False, False, False, False, False],
+        })
+
+        # Act
+        stop_loss.set_trailing_stop_loss(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
 if __name__ == '__main__':
     unittest.main()

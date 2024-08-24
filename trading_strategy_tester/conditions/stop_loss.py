@@ -4,7 +4,7 @@ from trading_strategy_tester.enums.stoploss_enum import StopLossType
 
 
 class StopLoss():
-    def __init__(self, percentage: float, stop_loss_type: StopLossType = StopLossType.NORMAL):
+    def __init__(self, percentage: float, stop_loss_type: StopLossType = StopLossType.NORMAL, ):
         """
         Initializes the stop-loss with the specified parameters.
 
@@ -73,8 +73,27 @@ class StopLoss():
 
 
     def set_trailing_stop_loss(self, df: pd.DataFrame):
-        # TODO
-        pass
+        bought = False
+        buying_price = 0
+        # This represents how much can the trade go down until it hits percentage stop-loos
+        value_threshold = 0
+
+        for index, row in df.iterrows():
+            current_price = row['Close']
+
+            if bought:
+                if current_price > buying_price:
+                    buying_price = current_price
+                    value_threshold = (buying_price * self.percentage) / 100
+                if current_price <= buying_price - value_threshold:
+                    df.at[index, 'SELL'] = True
+                    bought = False
+
+            if row['BUY']:
+                buying_price = current_price
+                value_threshold = (buying_price * self.percentage) / 100
+                bought = True
+
 
 
     def set_stop_loss(self, df: pd.DataFrame):
