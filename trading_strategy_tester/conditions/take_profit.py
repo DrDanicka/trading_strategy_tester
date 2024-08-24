@@ -25,7 +25,7 @@ class TakeProfit():
         Adjusts the 'SELL' signals in the DataFrame based on the take-profit strategy.
 
         This method iterates over the DataFrame and sets 'SELL' signals when the current price
-        rises to or above a calculated take-profit threshold. The threshold is determined as a
+        rises to or above a calculated take-profit threshold. The threshold is determined as a 
         percentage increase from the buying price.
 
         Parameters:
@@ -41,7 +41,7 @@ class TakeProfit():
         None
             The DataFrame is modified in place.
         """
-        
+
         bought = False
         buying_price = 0
         # This represents how much can the trade go down until it hits percentage stop-loos
