@@ -25,3 +25,6 @@ class CrossOverCondition(Condition):
             self.second_series.get_data(downloader, df)
         )]
 
+
+    def to_string(self) -> str:
+        return f'CrossSignal({self.first_series.get_name()}, {self.second_series.get_name()})'

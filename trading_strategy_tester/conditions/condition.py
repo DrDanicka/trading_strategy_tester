@@ -12,3 +12,7 @@ class Condition(ABC):
     @abstractmethod
     def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         pass
+
+    @abstractmethod
+    def to_string(self) -> str:
+        pass

@@ -19,3 +19,6 @@ class AfterXDaysCondition(Condition):
         # TODO shift graphs
 
         return graphs
+
+    def get_string(self):
+        return f'After{self.number_of_days}DaysSignal({self.condition.to_string()})'

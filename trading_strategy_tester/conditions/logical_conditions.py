@@ -24,6 +24,8 @@ class AndCondition(Condition):
 
         return graphs
 
+    
+
 
 class OrCondition(Condition):
     def __init__(self, *conditions: Condition):

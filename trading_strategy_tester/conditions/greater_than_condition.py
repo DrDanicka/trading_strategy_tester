@@ -19,3 +19,6 @@ class GreaterThanCondition(Condition):
     def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         # TODO create greaterThanCondition graph method
         return []
+
+    def to_string(self) -> str:
+        return f'GreaterThanSignal({self.first_series.get_name()}, {self.second_series.get_name()})'
