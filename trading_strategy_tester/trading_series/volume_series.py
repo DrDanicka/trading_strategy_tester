@@ -20,6 +20,7 @@ class Volume(TradingSeries):
             The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
         """
         super().__init__(ticker)
+        self.name = f'{self._ticker}_Volume'
 
 
     @property
@@ -61,4 +62,10 @@ class Volume(TradingSeries):
         new_df = downloader.download_ticker(self._ticker)
 
         # Extract the 'Volume' column and return it as a pandas Series
-        return pd.Series(new_df['Volume'], name=f'{self._ticker}_Volume')
+        return pd.Series(new_df['Volume'], name=self.name)
+
+    def get_name(self) -> str:
+        """
+        Returns the name of the series
+        """
+        return self.name

@@ -77,3 +77,9 @@ class RSI(TradingSeries):
 
         # Return the RSI series as a pandas Series
         return pd.Series(df[self.name], name=self.name)
+
+    def get_name(self) -> str:
+        """
+        Returns the name of the series
+        """
+        return self.name

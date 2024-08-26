@@ -20,6 +20,7 @@ class Close(TradingSeries):
             The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
         """
         super().__init__(ticker)
+        self.name = f'{self._ticker}_Close'
 
     @property
     def ticker(self) -> str:
@@ -60,4 +61,10 @@ class Close(TradingSeries):
         new_df = downloader.download_ticker(self._ticker)
 
         # Extract the 'Close' column and return it as a pandas Series
-        return pd.Series(new_df['Close'], name=f'{self._ticker}_Close')
+        return pd.Series(new_df['Close'], name=self.name)
+
+    def get_name(self) -> str:
+        """
+        Returns the name of the series
+        """
+        return self.name

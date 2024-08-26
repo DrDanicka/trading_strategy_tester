@@ -19,6 +19,7 @@ class Open(TradingSeries):
             The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
+        self.name = f'{self._ticker}_Open'
 
     @property
     def ticker(self) -> str:
@@ -58,4 +59,10 @@ class Open(TradingSeries):
         new_df = downloader.download_ticker(self._ticker)
 
         # Extract the 'Open' column and return it as a pandas Series
-        return pd.Series(new_df['Open'], name=f'{self._ticker}_Open')
+        return pd.Series(new_df['Open'], name=self.name)
+
+    def get_name(self) -> str:
+        """
+        Returns the name of the series
+        """
+        return self.name
