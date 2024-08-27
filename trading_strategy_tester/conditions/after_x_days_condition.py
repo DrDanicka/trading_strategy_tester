@@ -10,8 +10,17 @@ class AfterXDaysCondition(Condition):
         self.condition = condition
         self.number_of_days = number_of_days
 
-    def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
-        return self.condition.evaluate(downloader, df).shift(self.number_of_days).fillna(False).astype(bool)
+    def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> (pd.Series, pd.Series):
+        after_x_days, signal_series = self.condition.evaluate(downloader, df)
+
+        after_x_days = pd.Series(after_x_days.shift(self.number_of_days).fillna(False))
+        after_x_days.name = None
+
+        signal_series = pd.Series(signal_series.shift(self.number_of_days))
+        signal_series.name = None
+        signal_series = signal_series.apply(lambda x: f'AfterXDaysSignal({self.number_of_days}, {x})' if x is not None else None)
+
+        return after_x_days, signal_series
 
     def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         graphs = self.condition.get_graphs(downloader, df)
@@ -20,5 +29,5 @@ class AfterXDaysCondition(Condition):
 
         return graphs
 
-    def get_string(self):
-        return f'After{self.number_of_days}DaysSignal({self.condition.to_string()})'
+    def to_string(self):
+        return f'AfterXDaysCondition({self.number_of_days}, {self.condition.to_string()})'

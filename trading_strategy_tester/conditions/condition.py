@@ -6,7 +6,7 @@ from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
 
 class Condition(ABC):
     @abstractmethod
-    def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
+    def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> (pd.Series, pd.Series):
         pass
 
     @abstractmethod

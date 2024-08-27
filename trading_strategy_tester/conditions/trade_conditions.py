@@ -34,8 +34,13 @@ class TradeConditions:
 
 
     def evaluate_conditions(self, df: pd.DataFrame) -> pd.DataFrame:
-        df['BUY'] = self.buy_condition.evaluate(self.downloader, df)
-        df['SELL'] = self.sell_condition.evaluate(self.downloader, df)
+        buy, buy_signal_series = self.buy_condition.evaluate(self.downloader, df)
+        df['BUY'] = buy
+        df['BUY_Signals'] = buy_signal_series
+
+        sell, sell_signal_series = self.sell_condition.evaluate(self.downloader, df)
+        df['SELL'] = sell
+        df['SELL_Signals'] = sell_signal_series
 
         return df
 

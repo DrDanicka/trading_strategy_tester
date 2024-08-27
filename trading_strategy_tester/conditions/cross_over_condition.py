@@ -11,13 +11,18 @@ class CrossOverCondition(Condition):
         self.first_series = first_series
         self.second_series = second_series
 
-    def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
+    def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> (pd.Series, pd.Series):
         series1 : pd.Series = self.first_series.get_data(downloader, df)
         series2 : pd.Series = self.second_series.get_data(downloader, df)
 
-        crossover = (series1.shift(1) < series2.shift(1)) & (series1 > series2)
+        # Calculate crossover: True if series1 crosses from under series2 else False
+        crossover = pd.Series((series1.shift(1) < series2.shift(1)) & (series1 > series2))
+        crossover.fillna(False, inplace=True)
 
-        return crossover.fillna(False)
+        signal_series = crossover.apply(
+            lambda x: f'CrossOverSignal({self.first_series.get_name()}, {self.second_series.get_name()})' if x else None)
+
+        return crossover, signal_series
 
     def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
         return [CrossOverPlot(
@@ -27,4 +32,4 @@ class CrossOverCondition(Condition):
 
 
     def to_string(self) -> str:
-        return f'CrossSignal({self.first_series.get_name()}, {self.second_series.get_name()})'
+        return f'CrossOverCondition({self.first_series.get_name()}, {self.second_series.get_name()})'
