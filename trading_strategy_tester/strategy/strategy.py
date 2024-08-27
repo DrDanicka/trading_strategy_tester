@@ -57,6 +57,10 @@ class Strategy():
 
         # TODO Create trades
         # TODO Create Stats
+
+        # Delete temp downloaded files
+        downloader.delete_temp_files()
+
         return evaluated_conditions_df
 
     def get_trades(self):

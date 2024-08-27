@@ -158,3 +158,31 @@ class DownloadModule:
             return self.return_cached_or_download_date(ticker=ticker)
         else:
             return self.return_cached_or_download_period(ticker=ticker)
+
+    def delete_temp_files(self):
+        """
+        Deletes all files in the directory specified by self.data_path.
+
+        Raises:
+        -------
+        FileNotFoundError:
+            If self.data_path does not exist.
+        IsADirectoryError:
+            If self.data_path is not a directory.
+        """
+
+        # Check if the directory exists
+        if not os.path.exists(self.data_path):
+            raise FileNotFoundError(f"The directory '{self.data_path}' does not exist.")
+
+        # Check if the path is a directory
+        if not os.path.isdir(self.data_path):
+            raise IsADirectoryError(f"The path '{self.data_path}' is not a directory.")
+
+        # Loop through all files in the directory and delete them
+        for filename in os.listdir(self.data_path):
+            file_path = os.path.join(self.data_path, filename)
+
+            # Check if it's a file before attempting to delete it
+            if os.path.isfile(file_path):
+                os.remove(file_path)
