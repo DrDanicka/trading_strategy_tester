@@ -58,3 +58,7 @@ class TradingSeries(ABC):
             A pandas Series containing the specific trading data.
         """
         pass
+
+    @abstractmethod
+    def get_name(self) -> str:
+        pass
