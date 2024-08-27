@@ -13,11 +13,11 @@ class Strategy():
                  ticker:str,
                  buy_condition: Condition,
                  sell_condition: Condition,
-                 stop_loss: StopLoss,
-                 take_profit: TakeProfit,
-                 start_date: datetime,
-                 end_date: datetime,
-                 interval: Interval,
+                 stop_loss: StopLoss = None,
+                 take_profit: TakeProfit = None,
+                 start_date: datetime = datetime(2024, 1, 1),
+                 end_date: datetime = datetime.today(),
+                 interval: Interval = Interval.ONE_DAY,
                  period: Period = Period.NOT_PASSED):
         self.ticker = ticker
         self.buy_condition = buy_condition
@@ -44,8 +44,10 @@ class Strategy():
         evaluated_conditions_df = self.trade_conditions.evaluate_conditions(df)
 
         # Sets stop losses and take profits
-        self.take_profit.set_take_profit(evaluated_conditions_df)
-        self.stop_loss.set_stop_loss(evaluated_conditions_df)
+        if self.take_profit is not None:
+            self.take_profit.set_take_profit(evaluated_conditions_df)
+        if self.stop_loss is not None:
+            self.stop_loss.set_stop_loss(evaluated_conditions_df)
 
         # Clean the BUY and SELL columns to have only one SELL to every BUY
         self.trade_conditions.clean_BUY_SELL_columns(evaluated_conditions_df)
