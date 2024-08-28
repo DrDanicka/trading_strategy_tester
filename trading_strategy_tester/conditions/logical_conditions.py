@@ -9,8 +9,8 @@ class AndCondition(Condition):
         self.conditions = conditions
 
     def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> (pd.Series, pd.Series):
-        result = pd.Series([True] * len(df))
-        signal_series = pd.Series([''] * len(df))
+        result = pd.Series([True] * len(df), index=df.index)
+        signal_series = pd.Series([''] * len(df), index=df.index)
 
         for i, condition in enumerate(self.conditions):
             cond_result, signal_result = condition.evaluate(downloader, df)
@@ -20,7 +20,7 @@ class AndCondition(Condition):
             signal_series += signal_result.astype(str)
 
             if i != len(self.conditions) - 1:
-                signal_series += pd.Series([', '] * len(df))
+                signal_series += pd.Series([', '] * len(df), index=df.index)
 
         # If the result is False then put None in place of the strings
         signal_series = signal_series.where(result, None)
@@ -51,8 +51,8 @@ class OrCondition(Condition):
         self.conditions = conditions
 
     def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> (pd.Series, pd.Series):
-        result = pd.Series([False] * len(df))
-        signal_series = pd.Series([None] * len(df)).astype(object)
+        result = pd.Series([False] * len(df), index=df.index)
+        signal_series = pd.Series([None] * len(df), index=df.index).astype(object)
 
         for condition in self.conditions:
             cond_result, signal_result = condition.evaluate(downloader, df)
@@ -84,8 +84,8 @@ class IfThenElseCondition(Condition):
         self.else_condition = else_condition
 
     def evaluate(self, downloader: DownloadModule, df: pd.DataFrame) -> (pd.Series, pd.Series):
-        result = pd.Series([True] * len(df))
-        signal_series = pd.Series([None] * len(df))
+        result = pd.Series([True] * len(df), index=df.index)
+        signal_series = pd.Series([None] * len(df), index=df.index)
 
         # Evaluate conditions
         if_cond_result, if_signal_result = self.if_condition.evaluate(downloader, df)
