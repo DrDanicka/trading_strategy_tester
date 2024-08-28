@@ -1,6 +1,6 @@
 import pandas as pd
 
-class TakeProfit():
+class TakeProfit:
     """
     A class to apply a take-profit strategy to trading data.
 
@@ -52,6 +52,7 @@ class TakeProfit():
 
             if bought and current_price >= buying_price + value_threshold:
                 df.at[index, 'SELL'] = True
+                df.at[index, 'SELL_Signals'] = f'TakeProfit({self.percentage})'
                 bought = False
 
             if row['BUY']:

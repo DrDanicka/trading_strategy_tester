@@ -64,6 +64,7 @@ class StopLoss():
 
             if bought and current_price <= buying_price - value_threshold:
                 df.at[index, 'SELL'] = True
+                df.at[index, 'SELL_Signals'] = f'StopLossNormal({self.percentage})'
                 bought = False
 
             if row['BUY']:
@@ -87,6 +88,7 @@ class StopLoss():
                     value_threshold = (buying_price * self.percentage) / 100
                 if current_price <= buying_price - value_threshold:
                     df.at[index, 'SELL'] = True
+                    df.at[index, 'SELL_Signals'] = f'StopLossTrailing({self.percentage})'
                     bought = False
 
             if row['BUY']:
