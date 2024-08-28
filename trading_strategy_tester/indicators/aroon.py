@@ -1,5 +1,8 @@
 import pandas as pd
 
+from trading_strategy_tester.utils.validations import get_length
+
+
 def aroon_up(series: pd.Series, length: int = 14) -> pd.Series:
     """
     Calculate the Aroon Up indicator of a given series.
@@ -19,6 +22,10 @@ def aroon_up(series: pd.Series, length: int = 14) -> pd.Series:
     pd.Series
         The Aroon Up indicator of the given series.
     """
+
+    # Validate arguments
+    length = get_length(length=length, default=14)
+
     # Calculate rolling window's highest high index
     rolling_high_idx = series.rolling(window=length+1).apply(lambda x: x[::-1].argmax(), raw=True)
 
@@ -46,6 +53,10 @@ def aroon_down(series: pd.Series, length: int = 14) -> pd.Series:
     pd.Series
         The Aroon Down indicator of the given series.
     """
+
+    # Validate arguments
+    length = get_length(length=length, default=14)
+
     # Calculate rolling window's lowest low index
     rolling_low_idx = series.rolling(window=length+1).apply(lambda x: x[::-1].argmin(), raw=True)
 

@@ -1,4 +1,6 @@
 import pandas as pd
+from trading_strategy_tester.utils.validations import get_length
+
 
 def rsi(series: pd.Series, length: int = 14) -> pd.Series:
     """
@@ -19,6 +21,9 @@ def rsi(series: pd.Series, length: int = 14) -> pd.Series:
     pd.Series
         A pandas Series containing the RSI values for the input time series, with the same index as the input series.
     """
+
+    # Validate arguments
+    length = get_length(length=length, default=14)
 
     delta = series.diff()
 

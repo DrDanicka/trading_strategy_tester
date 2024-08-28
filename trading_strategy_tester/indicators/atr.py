@@ -5,6 +5,7 @@ from trading_strategy_tester.smoothings.rma_smoothing import rma_smoothing
 from trading_strategy_tester.smoothings.sma_smoothing import sma_smoothing
 from trading_strategy_tester.smoothings.ema_smoothing import ema_smoothing
 from trading_strategy_tester.smoothings.wma_smoothing import wma_smoothing
+from trading_strategy_tester.utils.validations import get_length
 
 
 def atr(high: pd.Series, low: pd.Series, close: pd.Series, length: int = 14,
@@ -36,6 +37,9 @@ def atr(high: pd.Series, low: pd.Series, close: pd.Series, length: int = 14,
         The ATR of the given series.
     """
 
+    # Validate arguments
+    length = get_length(length=length, default=14)
+
     # Calculate True Range (TR)
     tr1 = high - low
     tr2 = (high - close.shift(1)).abs()
@@ -49,9 +53,7 @@ def atr(high: pd.Series, low: pd.Series, close: pd.Series, length: int = 14,
         atr_series = sma_smoothing(true_range, length)
     elif smoothing == SmoothingType.EMA:
         atr_series = ema_smoothing(true_range, length)
-    elif smoothing == SmoothingType.WMA:
-        atr_series = wma_smoothing(true_range, length)
     else:
-        raise ValueError("Invalid smoothing method. Choose from SmoothingType enum.")
+        atr_series = wma_smoothing(true_range, length)
 
     return pd.Series(atr_series, name=f'ATR_{length}_{smoothing.value}')

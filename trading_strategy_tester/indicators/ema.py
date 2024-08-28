@@ -1,7 +1,9 @@
 import pandas as pd
 
+from trading_strategy_tester.utils.validations import get_length, get_offset
 
-def ema(series: pd.Series, length: int = 14, offset: int = 0) -> pd.Series:
+
+def ema(series: pd.Series, length: int = 9, offset: int = 0) -> pd.Series:
     """
     Calculate the Exponential Moving Average (EMA) of a given series.
 
@@ -23,6 +25,11 @@ def ema(series: pd.Series, length: int = 14, offset: int = 0) -> pd.Series:
     pd.Series
         The EMA of the given series.
     """
+
+    # Validate arguments
+    length = get_length(length=length, default=9)
+    offset = get_offset(offset=offset)
+
     ema_series = series.ewm(span=length, adjust=False).mean()
 
     if offset != 0:

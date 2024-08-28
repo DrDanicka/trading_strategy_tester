@@ -5,8 +5,10 @@ from trading_strategy_tester.smoothings.rma_smoothing import rma_smoothing
 from trading_strategy_tester.smoothings.sma_smoothing import sma_smoothing
 from trading_strategy_tester.smoothings.ema_smoothing import ema_smoothing
 from trading_strategy_tester.smoothings.wma_smoothing import wma_smoothing
+from trading_strategy_tester.utils.validations import get_length, get_std_dev, get_offset
 
-def bb_middle(series: pd.Series, length: int = 20, ma_type: SmoothingType = SmoothingType.SMA, std_dev: int = 2, offset: int = 0) -> pd.Series:
+
+def bb_middle(series: pd.Series, length: int = 20, ma_type: SmoothingType = SmoothingType.SMA, std_dev: float = 2, offset: int = 0) -> pd.Series:
     """
     Calculate the middle band (moving average) for Bollinger Bands.
 
@@ -29,6 +31,11 @@ def bb_middle(series: pd.Series, length: int = 20, ma_type: SmoothingType = Smoo
         A pandas Series containing the middle band (moving average) with the specified offset.
     """
 
+    # Validate arguments
+    length = get_length(length=length, default=20)
+    std_dev = get_std_dev(std_dev=std_dev, default=2)
+    offset = get_offset(offset=offset)
+
     # Calculate the middle band (moving average) using the selected smoothing method
     if ma_type == SmoothingType.SMA:
         middle_band = sma_smoothing(series, length)
@@ -36,10 +43,8 @@ def bb_middle(series: pd.Series, length: int = 20, ma_type: SmoothingType = Smoo
         middle_band = ema_smoothing(series, length)
     elif ma_type == SmoothingType.WMA:
         middle_band = wma_smoothing(series, length)
-    elif ma_type == SmoothingType.RMA:
-        middle_band = rma_smoothing(series, length)
     else:
-        raise ValueError("Invalid moving average type selected.")
+        middle_band = rma_smoothing(series, length)
 
     # Apply the offset
     if offset != 0:
@@ -47,7 +52,7 @@ def bb_middle(series: pd.Series, length: int = 20, ma_type: SmoothingType = Smoo
 
     return pd.Series(middle_band, name=f'BBMIDDLE_{length}_{ma_type.value}_{std_dev}_{offset}')
 
-def bb_upper(series: pd.Series, length: int = 20, ma_type: SmoothingType = SmoothingType.SMA, std_dev: int = 2, offset: int = 0) -> pd.Series:
+def bb_upper(series: pd.Series, length: int = 20, ma_type: SmoothingType = SmoothingType.SMA, std_dev: float = 2, offset: int = 0) -> pd.Series:
     """
     Calculate the upper band for Bollinger Bands.
 
@@ -70,6 +75,11 @@ def bb_upper(series: pd.Series, length: int = 20, ma_type: SmoothingType = Smoot
         A pandas Series containing the upper band with the specified offset.
     """
 
+    # Validate arguments
+    length = get_length(length=length, default=20)
+    std_dev = get_std_dev(std_dev=std_dev, default=2)
+    offset = get_offset(offset=offset)
+
     # Calculate the standard deviation of the series
     rolling_std = series.rolling(window=length).std(ddof=0)
 
@@ -83,7 +93,7 @@ def bb_upper(series: pd.Series, length: int = 20, ma_type: SmoothingType = Smoot
     return pd.Series(upper_band, name=f'BBUPPER_{length}_{ma_type.value}_{std_dev}_{offset}')
 
 
-def bb_lower(series: pd.Series, length: int = 20, ma_type: SmoothingType = SmoothingType.SMA, std_dev: int = 2, offset: int = 0) -> pd.Series:
+def bb_lower(series: pd.Series, length: int = 20, ma_type: SmoothingType = SmoothingType.SMA, std_dev: float = 2, offset: int = 0) -> pd.Series:
     """
     Calculate the lower band for Bollinger Bands.
 
@@ -105,6 +115,11 @@ def bb_lower(series: pd.Series, length: int = 20, ma_type: SmoothingType = Smoot
     pd.Series
         A pandas Series containing the lower band with the specified offset.
     """
+
+    # Validate arguments
+    length = get_length(length=length, default=20)
+    std_dev = get_std_dev(std_dev=std_dev, default=2)
+    offset = get_offset(offset=offset)
 
     # Calculate the standard deviation of the series
     rolling_std = series.rolling(window=length).std(ddof=0)

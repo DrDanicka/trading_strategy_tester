@@ -1,6 +1,8 @@
 import pandas as pd
 from trading_strategy_tester.indicators.atr import atr
 from trading_strategy_tester.smoothings.rma_smoothing import rma_smoothing
+from trading_strategy_tester.utils.validations import get_length
+
 
 def adx(high: pd.Series, low: pd.Series, close: pd.Series, adx_smoothing: int = 14, DI_length: int = 14) -> pd.Series:
     """
@@ -27,6 +29,10 @@ def adx(high: pd.Series, low: pd.Series, close: pd.Series, adx_smoothing: int = 
     pd.Series
         The ADX indicator of the given series.
     """
+
+    # Validate arguments
+    adx_smoothing = get_length(length=adx_smoothing, default=14)
+    DI_length = get_length(length=DI_length, default=14)
 
     atr_series = atr(high, low, close, DI_length)
 

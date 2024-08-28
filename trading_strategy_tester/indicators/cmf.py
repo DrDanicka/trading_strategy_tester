@@ -1,5 +1,8 @@
 import pandas as pd
 
+from trading_strategy_tester.utils.validations import get_length
+
+
 def cmf(high: pd.Series, low: pd.Series, close: pd.Series, volume: pd.Series, length: int = 20) -> pd.Series:
     """
     Calculates the Chaikin Money Flow (CMF) indicator for a given period.
@@ -29,6 +32,10 @@ def cmf(high: pd.Series, low: pd.Series, close: pd.Series, volume: pd.Series, le
     pd.Series
         A pandas Series representing the Chaikin Money Flow (CMF) values for the given period.
     """
+
+    # Validate arguments
+    length = get_length(length=length, default=20)
+
     # Calculate the Money Flow Multiplier
     # The multiplier measures the position of the close price relative to the high-low range
     money_flow_multiplier = ((close - low) - (high - close)) / (high - low)

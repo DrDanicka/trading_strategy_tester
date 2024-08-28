@@ -1,7 +1,9 @@
 import pandas as pd
 
+from trading_strategy_tester.utils.validations import get_length, get_offset
 
-def sma(series: pd.Series, length: int = 14, offset: int = 0) -> pd.Series:
+
+def sma(series: pd.Series, length: int = 9, offset: int = 0) -> pd.Series:
     """
     Calculate the Simple Moving Average (SMA) of a given series.
 
@@ -23,6 +25,11 @@ def sma(series: pd.Series, length: int = 14, offset: int = 0) -> pd.Series:
     pd.Series
         The SMA of the given series.
     """
+
+    # Validate arguments
+    length = get_length(length=length, default=9)
+    offset = get_offset(offset=offset)
+
     sma_series = series.rolling(window=length).mean()
 
     if offset != 0:
