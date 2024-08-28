@@ -13,7 +13,7 @@ class BBUpper(TradingSeries):
     """
 
     def __init__(self, ticker: str, target: str = 'Close', length: int = 20, ma_type: SmoothingType = SmoothingType.SMA,
-                 std_dev: int = 2, offset: int = 0):
+                 std_dev: float = 2, offset: int = 0):
         """
         Initializes the BBUpper series with the specified parameters.
 
@@ -42,7 +42,7 @@ class BBUpper(TradingSeries):
         self.target = target  # Set the target column for the Bollinger Band calculation
         self.length = length  # Set the length (number of periods) for the moving average
         self.ma_type = ma_type  # Set the type of moving average (e.g., SMA)
-        self.std_dev = std_dev  # Set the number of standard deviations for the Bollinger Band
+        self.std_dev = float(std_dev)  # Set the number of standard deviations for the Bollinger Band
         self.offset = offset  # Set the offset for the calculation
         self.name = f'{self._ticker}_BBUPPER_{self.target}_{self.length}_{self.ma_type.value}_{self.std_dev}_{self.offset}'
         # Define the name for the BBUpper series
