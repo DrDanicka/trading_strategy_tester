@@ -2,18 +2,13 @@ import pandas as pd
 
 def sma_smoothing(series: pd.Series, length: int) -> pd.Series:
     """
-    Calculate the Simple Moving Average (SMA) of a given series.
+    Calculates the Simple Moving Average (SMA) of a given series.
 
-    Parameters:
-    -----------
-    series : pd.Series
-        The data series to calculate the SMA on.
-    length : int
-        The window length to calculate the SMA.
-
-    Returns:
-    --------
-    pd.Series
-        The SMA of the given series.
+    :param series: The pandas Series representing the data to smooth.
+    :type series: pd.Series
+    :param length: The window length to use for the SMA calculation.
+    :type length: int
+    :return: A pandas Series containing the SMA of the given series.
+    :rtype: pd.Series
     """
     return series.rolling(window=length).mean()

@@ -2,18 +2,13 @@ import pandas as pd
 
 def ema_smoothing(series: pd.Series, length: int) -> pd.Series:
     """
-    Calculate the Exponential Moving Average (EMA) of a given series.
+    Calculates the Exponential Moving Average (EMA) for a given series.
 
-    Parameters:
-    -----------
-    series : pd.Series
-        The data series to calculate the EMA on.
-    length : int
-        The smoothing period for the EMA.
-
-    Returns:
-    --------
-    pd.Series
-        The EMA of the given series.
+    :param series: The pandas Series representing the data to smooth.
+    :type series: pd.Series
+    :param length: The smoothing period for the EMA.
+    :type length: int
+    :return: A pandas Series containing the EMA of the given series.
+    :rtype: pd.Series
     """
     return series.ewm(span=length, adjust=False).mean()
