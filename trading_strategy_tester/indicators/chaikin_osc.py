@@ -3,36 +3,29 @@ import pandas as pd
 from trading_strategy_tester.utils.validations import get_length
 from trading_strategy_tester.indicators.ema import ema
 
-
 def chaikin_osc(high: pd.Series, low: pd.Series, close: pd.Series, volume: pd.Series, fast_length: int = 3, slow_length: int = 10) -> pd.Series:
     """
-    Calculates the Chaikin Oscillator, which measures the difference between fast and slow EMAs
-    of the Accumulation/Distribution line to gauge the market momentum.
+    Calculate the Chaikin Oscillator, which measures the difference between fast and slow EMAs
+    of the Accumulation/Distribution line to gauge market momentum.
 
-    Parameters:
-    -----------
-    high : pd.Series
-        A pandas Series containing the high prices for each period.
+    The Chaikin Oscillator is derived from the Accumulation/Distribution (A/D) line, which represents
+    the cumulative sum of money flow volumes. The oscillator compares the short-term and long-term EMAs
+    of the A/D line to provide insights into the momentum and potential direction of the market.
 
-    low : pd.Series
-        A pandas Series containing the low prices for each period.
-
-    close : pd.Series
-        A pandas Series containing the closing prices for each period.
-
-    volume : pd.Series
-        A pandas Series containing the volume data for each period.
-
-    fast_length : int, optional
-        The period for the fast EMA. Default is 3.
-
-    slow_length : int, optional
-        The period for the slow EMA. Default is 10.
-
-    Returns:
-    --------
-    pd.Series
-        A pandas Series representing the Chaikin Oscillator values.
+    :param high: A pandas Series containing the high prices for each period.
+    :type high: pd.Series
+    :param low: A pandas Series containing the low prices for each period.
+    :type low: pd.Series
+    :param close: A pandas Series containing the closing prices for each period.
+    :type close: pd.Series
+    :param volume: A pandas Series containing the volume data for each period.
+    :type volume: pd.Series
+    :param fast_length: The period for the fast EMA. Default is 3.
+    :type fast_length: int, optional
+    :param slow_length: The period for the slow EMA. Default is 10.
+    :type slow_length: int, optional
+    :return: A pandas Series representing the Chaikin Oscillator values.
+    :rtype: pd.Series
     """
 
     # Validate arguments
@@ -59,5 +52,4 @@ def chaikin_osc(high: pd.Series, low: pd.Series, close: pd.Series, volume: pd.Se
     # Calculate Chaikin Oscillator
     chaikin_osc = fast_ema - slow_ema
 
-    # Return the Chaikin Oscillator as a pandas Series
     return pd.Series(chaikin_osc, name=f'CHAIKINOSC_{fast_length}_{slow_length}')

@@ -2,7 +2,6 @@ import pandas as pd
 
 from trading_strategy_tester.utils.validations import get_length, get_offset
 
-
 def ema(series: pd.Series, length: int = 9, offset: int = 0) -> pd.Series:
     """
     Calculate the Exponential Moving Average (EMA) of a given series.
@@ -11,19 +10,14 @@ def ema(series: pd.Series, length: int = 9, offset: int = 0) -> pd.Series:
     making it more responsive to new information compared to the Simple Moving Average (SMA). It is commonly used
     in technical analysis to identify trends and to smooth out price data.
 
-    Parameters:
-    -----------
-    series : pd.Series
-        A pandas Series representing the series data (e.g., closing prices) for which the EMA is to be calculated.
-    length : int
-        The window length to calculate the EMA.
-    offset : int
-        The number of periods by which to offset the EMA.
-
-    Returns:
-    --------
-    pd.Series
-        The EMA of the given series.
+    :param series: A pandas Series representing the series data (e.g., closing prices) for which the EMA is to be calculated.
+    :type series: pd.Series
+    :param length: The window length to calculate the EMA. Default is 9.
+    :type length: int, optional
+    :param offset: The number of periods by which to offset the EMA. Default is 0.
+    :type offset: int, optional
+    :return: A pandas Series containing the EMA of the given series.
+    :rtype: pd.Series
     """
 
     # Validate arguments

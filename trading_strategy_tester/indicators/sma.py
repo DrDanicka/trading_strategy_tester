@@ -2,7 +2,6 @@ import pandas as pd
 
 from trading_strategy_tester.utils.validations import get_length, get_offset
 
-
 def sma(series: pd.Series, length: int = 9, offset: int = 0) -> pd.Series:
     """
     Calculate the Simple Moving Average (SMA) of a given series.
@@ -11,19 +10,14 @@ def sma(series: pd.Series, length: int = 9, offset: int = 0) -> pd.Series:
     a constantly updated average price over a specified number of periods. It is commonly used to identify
     trends in the data by filtering out the "noise" of short-term fluctuations.
 
-    Parameters:
-    -----------
-    series : pd.Series
-        A pandas Series representing the series data (e.g., closing prices) for which the SMA is to be calculated.
-    length : int
-        The window length to calculate the SMA.
-    offset : int
-        The number of periods by which to offset the SMA.
-
-    Returns:
-    --------
-    pd.Series
-        The SMA of the given series.
+    :param series: A pandas Series representing the series data (e.g., closing prices) for which the SMA is to be calculated.
+    :type series: pd.Series
+    :param length: The window length to calculate the SMA. Default is 9.
+    :type length: int, optional
+    :param offset: The number of periods by which to offset the SMA. Default is 0.
+    :type offset: int, optional
+    :return: A pandas Series containing the SMA of the given series.
+    :rtype: pd.Series
     """
 
     # Validate arguments

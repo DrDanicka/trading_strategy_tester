@@ -9,33 +9,32 @@ def rsi(series: pd.Series, length: int = 14) -> pd.Series:
     The RSI is a momentum oscillator that measures the speed and change of price movements.
     It oscillates between 0 and 100 and is typically used to identify overbought or oversold conditions in a market.
 
-    Parameters:
-    -----------
-    series : pd.Series
-        A pandas Series representing the series data (e.g., closing prices) for which the RSI is to be calculated.
-    length : int, optional, default=14
-        The number of periods to use for calculating the RSI. The default is 14 periods, which is a common standard.
-
-    Returns:
-    --------
-    pd.Series
-        A pandas Series containing the RSI values for the input time series, with the same index as the input series.
+    :param series: A pandas Series representing the series data (e.g., closing prices) for which the RSI is to be calculated.
+    :type series: pd.Series
+    :param length: The number of periods to use for calculating the RSI. Default is 14, which is a common standard.
+    :type length: int, optional
+    :return: A pandas Series containing the RSI values for the input series, with the same index as the input series.
+    :rtype: pd.Series
     """
 
     # Validate arguments
     length = get_length(length=length, default=14)
 
+    # Calculate the difference between consecutive prices
     delta = series.diff()
 
     # Calculate gains and losses
     gain = delta.where(delta > 0, 0)
     loss = -delta.where(delta < 0, 0)
 
-    # Use Wilder's Moving Average (RMA) for gains and losses
+    # Compute the average gain and loss using Wilder's Moving Average (RMA)
     avg_gain = gain.ewm(alpha=1 / length, min_periods=length, adjust=False).mean()
     avg_loss = loss.ewm(alpha=1 / length, min_periods=length, adjust=False).mean()
 
+    # Calculate the Relative Strength (RS)
     rs = avg_gain / avg_loss
+
+    # Calculate RSI
     rsi_ser = 100 - (100 / (1 + rs))
 
     return pd.Series(rsi_ser, name=f'RSI_{length}')

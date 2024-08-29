@@ -2,28 +2,22 @@ import pandas as pd
 
 from trading_strategy_tester.utils.validations import get_length
 
-
-def cmo(series: pd.Series, length: int = 9):
+def cmo(series: pd.Series, length: int = 9) -> pd.Series:
     """
-   Calculates the Chande Momentum Oscillator (CMO) for a given price series.
+    Calculate the Chande Momentum Oscillator (CMO) for a given price series.
 
-   The Chande Momentum Oscillator is a technical indicator that measures the difference
-   between the sum of all recent gains and the sum of all recent losses over a specified period,
-   divided by the total sum of all price movements during the same period.
+    The Chande Momentum Oscillator (CMO) is a technical indicator that measures the difference
+    between the sum of all recent gains and the sum of all recent losses over a specified period,
+    divided by the total sum of all price movements during the same period.
 
-   Parameters:
-   -----------
-   series : pd.Series
-       The price series (e.g., 'Close') for which the CMO is calculated.
+    :param series: The price series (e.g., 'Close') for which the CMO is calculated.
+    :type series: pd.Series
+    :param length: The number of periods over which to calculate the CMO. Default is 9.
+    :type length: int, optional
+    :return: A pandas Series containing the CMO values for the specified price series and length.
+    :rtype: pd.Series
+    """
 
-   length : int, optional
-       The number of periods over which to calculate the CMO. Default is 9.
-
-   Returns:
-   --------
-   pd.Series
-       A pandas Series containing the CMO values for the specified price series and length.
-   """
     # Validate arguments
     length = get_length(length=length, default=9)
 
