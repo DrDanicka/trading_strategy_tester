@@ -4,6 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 from trading_strategy_tester.download.download_module import DownloadModule
+from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.ema import ema
 from trading_strategy_tester.trading_series.ema_series import EMA
 
@@ -72,7 +73,7 @@ class TestEMA(unittest.TestCase):
             189.75, 189.69, 190.43, 190.81, 191.50, 192.34, 192.51, 192.95, 193.95, 194.78,
             195.34, 195.45, 195.75, 195.57, 195.39, 195.03, 194.63, 194.34, 194.19, 193.85
         ], name=f'{ticker}_EMA_Close_9_0').reset_index(drop=True)
-        ema_series = EMA(ticker, 'Close', 9, 0)
+        ema_series = EMA(ticker, SourceType.CLOSE, 9, 0)
         calculated_ema = ema_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_ema, trading_view_ema)
 

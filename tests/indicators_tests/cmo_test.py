@@ -4,6 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 from trading_strategy_tester.download.download_module import DownloadModule
+from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.cmo import cmo
 from trading_strategy_tester.trading_series.cmo_series import CMO
 
@@ -72,7 +73,7 @@ class TestCMO(unittest.TestCase):
             18.74, -24.28, 24.17, 8.47, 34.29, 42.90, 17.68, 32.92, 42.40, 38.70,
             49.39, 17.43, 32.72, 3.92, -7.93, 3.64, -15.72, -64.91, -58.91, -61.46
         ], name=f'{ticker}_CMO_Close_9').reset_index(drop=True)
-        cmo_series = CMO(ticker, 'Close', 9)
+        cmo_series = CMO(ticker, SourceType.CLOSE, 9)
         calculated_cmo = cmo_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_cmo, trading_view_cmo)
 
