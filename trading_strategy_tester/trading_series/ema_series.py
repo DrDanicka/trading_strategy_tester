@@ -1,7 +1,10 @@
 import pandas as pd
+
 from trading_strategy_tester.download.download_module import DownloadModule
+from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.indicators.ema import ema
+from trading_strategy_tester.utils.validations import get_base_sources
 
 
 class EMA(TradingSeries):
@@ -10,7 +13,7 @@ class EMA(TradingSeries):
     Moving Average (EMA) calculation based on the specified length and offset.
     """
 
-    def __init__(self, ticker: str, target: str = 'Close', length: int = 9, offset: int = 0):
+    def __init__(self, ticker: str, source: SourceType = SourceType.CLOSE, length: int = 9, offset: int = 0):
         """
         Initializes the EMA series with the specified ticker symbol, target column, EMA length, and offset.
 
@@ -19,7 +22,7 @@ class EMA(TradingSeries):
         ticker : str
             The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
 
-        target : str, optional
+        source : str, optional
             The column in the DataFrame on which the EMA is calculated (e.g., 'Close'). Default is 'Close'.
 
         length : int, optional
@@ -29,10 +32,11 @@ class EMA(TradingSeries):
             The number of periods by which to shift the EMA. Default is 0.
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
-        self.target = target  # Set the target column for the EMA calculation
+        # Validate source
+        self.source = get_base_sources(source=source, default=SourceType.CLOSE).value
         self.length = length  # Set the length (number of periods) for the EMA calculation
         self.offset = offset  # Set the offset (number of periods to shift the EMA)
-        self.name = f'{self._ticker}_EMA_{self.target}_{self.length}_{self.offset}'  # Define the name for the EMA series
+        self.name = f'{self._ticker}_EMA_{self.source}_{self.length}_{self.offset}'  # Define the name for the EMA series
 
     @property
     def ticker(self) -> str:
@@ -69,12 +73,13 @@ class EMA(TradingSeries):
         pd.Series
             A pandas Series containing the EMA values for the specified ticker and configuration, labeled with the appropriate name.
         """
+
         # Check if the EMA series already exists in the DataFrame
         if self.name not in df.columns:
             # Download the latest data for the ticker using the downloader
             new_df = downloader.download_ticker(self._ticker)
             # Calculate the EMA using the specified target column, length, and offset
-            ema_series = ema(series=new_df[self.target], length=self.length, offset=self.offset)
+            ema_series = ema(series=new_df[self.source], length=self.length, offset=self.offset)
 
             # Add the EMA series to the DataFrame
             df[self.name] = ema_series

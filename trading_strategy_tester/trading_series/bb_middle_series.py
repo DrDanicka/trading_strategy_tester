@@ -2,8 +2,10 @@ import pandas as pd
 
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
+from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.indicators.bb import bb_middle
+from trading_strategy_tester.utils.validations import get_base_sources
 
 
 class BBMiddle(TradingSeries):
@@ -12,7 +14,7 @@ class BBMiddle(TradingSeries):
     Bollinger Band middle calculation based on the specified parameters.
     """
 
-    def __init__(self, ticker: str, target: str = 'Close', length: int = 20, ma_type: SmoothingType = SmoothingType.SMA,
+    def __init__(self, ticker: str, source: SourceType = SourceType.CLOSE, length: int = 20, ma_type: SmoothingType = SmoothingType.SMA,
                  std_dev: float = 2, offset: int = 0):
         """
         Initializes the BBMiddle series with the specified parameters.
@@ -22,7 +24,7 @@ class BBMiddle(TradingSeries):
         ticker : str
             The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
 
-        target : str, optional
+        source : str, optional
             The column in the DataFrame on which the middle Bollinger Band is calculated (e.g., 'Close').
             Default is 'Close'.
 
@@ -39,12 +41,13 @@ class BBMiddle(TradingSeries):
             The number of periods to offset the calculation. Default is 0.
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
-        self.target = target  # Set the target column for the Bollinger Band calculation
+        # Validate source
+        self.source = get_base_sources(source=source, default=SourceType.CLOSE).value
         self.length = length  # Set the length (number of periods) for the moving average
         self.ma_type = ma_type  # Set the type of moving average (e.g., SMA)
         self.std_dev = float(std_dev)  # Set the number of standard deviations for the Bollinger Band
         self.offset = offset  # Set the offset for the calculation
-        self.name = f'{self._ticker}_BBMIDDLE_{self.target}_{self.length}_{self.ma_type.value}_{self.std_dev}_{self.offset}'
+        self.name = f'{self._ticker}_BBMIDDLE_{self.source}_{self.length}_{self.ma_type.value}_{self.std_dev}_{self.offset}'
         # Define the name for the BBMiddle series
 
     @property
@@ -84,13 +87,14 @@ class BBMiddle(TradingSeries):
             A pandas Series containing the middle Bollinger Band values for the specified ticker and configuration,
             labeled with the appropriate name.
         """
+
         # Check if the BBMiddle series already exists in the DataFrame
         if self.name not in df.columns:
             # Download the latest data for the ticker using the downloader
             new_df = downloader.download_ticker(self._ticker)
             # Calculate the BBMiddle using the specified parameters
             bb_middle_series = bb_middle(
-                series=new_df[self.target],
+                series=new_df[self.source],
                 length=self.length,
                 ma_type=self.ma_type,
                 std_dev=self.std_dev,

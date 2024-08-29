@@ -1,7 +1,9 @@
 import pandas as pd
 from trading_strategy_tester.download.download_module import DownloadModule
+from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.indicators.rsi import rsi
+from trading_strategy_tester.utils.validations import get_base_sources
 
 
 class RSI(TradingSeries):
@@ -10,7 +12,7 @@ class RSI(TradingSeries):
     calculation based on the specified length.
     """
 
-    def __init__(self, ticker: str, target: str = 'Close', length: int = 14):
+    def __init__(self, ticker: str, source: SourceType = SourceType.CLOSE, length: int = 14):
         """
         Initializes the RSI series with the specified ticker symbol, target column, and RSI length.
 
@@ -19,16 +21,17 @@ class RSI(TradingSeries):
         ticker : str
             The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
 
-        target : str, optional
+        source : str, optional
             The column in the DataFrame on which the RSI is calculated (e.g., 'Close'). Default is 'Close'.
 
         length : int, optional
             The number of periods over which to calculate the RSI. Default is 14.
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
-        self.target = target  # Set the target column for the RSI calculation
+        # Validate source
+        self.source = get_base_sources(source=source, default=SourceType.CLOSE).value
         self.length = length  # Set the length (number of periods) for the RSI calculation
-        self.name = f'{self._ticker}_RSI_{self.target}_{self.length}'  # Define the name for the RSI series
+        self.name = f'{self._ticker}_RSI_{self.source}_{self.length}'  # Define the name for the RSI series
 
     @property
     def ticker(self) -> str:
@@ -70,7 +73,7 @@ class RSI(TradingSeries):
             # Download the latest data for the ticker using the downloader
             new_df = downloader.download_ticker(self._ticker)
             # Calculate the RSI using the specified target column and length
-            rsi_series = rsi(series=new_df[self.target], length=self.length)
+            rsi_series = rsi(series=new_df[self.source], length=self.length)
 
             # Add the RSI series to the DataFrame
             df[self.name] = rsi_series
