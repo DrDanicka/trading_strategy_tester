@@ -75,3 +75,6 @@ class TestCMO(unittest.TestCase):
         cmo_series = CMO(ticker, 'Close', 9)
         calculated_cmo = cmo_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_cmo, trading_view_cmo)
+
+if __name__ == '__main__':
+    unittest.main()
