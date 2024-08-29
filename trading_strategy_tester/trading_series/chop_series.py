@@ -18,16 +18,12 @@ class CHOP(TradingSeries):
         """
         Initializes the CHOP series with the specified ticker symbol, length, and offset.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
-
-        length : int, optional
-            The number of periods over which to calculate the Choppiness Index. Default is 14.
-
-        offset : int, optional
-            The number of periods to shift the resulting series. Default is 0.
+        :param ticker: The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
+        :type ticker: str
+        :param length: The number of periods over which to calculate the Choppiness Index. Default is 14.
+        :type length: int
+        :param offset: The number of periods to shift the resulting series. Default is 0.
+        :type offset: int
         """
         super().__init__(ticker)
         self.length = length
@@ -41,10 +37,8 @@ class CHOP(TradingSeries):
 
         This property provides access to the ticker symbol that was specified when the CHOP instance was created.
 
-        Returns:
-        --------
-        str
-            The ticker symbol for the financial instrument.
+        :return: The ticker symbol for the financial instrument.
+        :rtype: str
         """
         return self._ticker
 
@@ -57,20 +51,14 @@ class CHOP(TradingSeries):
         the Choppiness Index, and adds it to the DataFrame. It returns a pandas Series containing the
         Choppiness Index values.
 
-        Parameters:
-        -----------
-        downloader : DownloadModule
-            An instance of DownloadModule used to download the latest data for the ticker.
-
-        df : pd.DataFrame
-            A DataFrame that may contain existing trading data. If the Choppiness Index does not exist in
-            this DataFrame, it will be calculated and added.
-
-        Returns:
-        --------
-        pd.Series
-            A pandas Series containing the Choppiness Index values for the specified ticker and configuration,
-            labeled with the appropriate name.
+        :param downloader: An instance of DownloadModule used to download the latest data for the ticker.
+        :type downloader: DownloadModule
+        :param df: A DataFrame that may contain existing trading data. If the Choppiness Index does not exist in
+                   this DataFrame, it will be calculated and added.
+        :type df: pd.DataFrame
+        :return: A pandas Series containing the Choppiness Index values for the specified ticker and configuration,
+                 labeled with the appropriate name.
+        :rtype: pd.Series
         """
         # Check if the CHOP series already exists in the DataFrame
         if self.name not in df.columns:
@@ -98,9 +86,7 @@ class CHOP(TradingSeries):
         This method returns a string that includes the ticker symbol, length, and offset, which uniquely
         identifies the Choppiness Index series.
 
-        Returns:
-        --------
-        str
-            The name of the Choppiness Index series.
+        :return: The name of the Choppiness Index series.
+        :rtype: str
         """
         return self.name
