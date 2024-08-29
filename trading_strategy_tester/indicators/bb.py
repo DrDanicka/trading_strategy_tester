@@ -4,6 +4,7 @@ from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.smoothings.rma_smoothing import rma_smoothing
 from trading_strategy_tester.smoothings.sma_smoothing import sma_smoothing
 from trading_strategy_tester.smoothings.ema_smoothing import ema_smoothing
+from trading_strategy_tester.smoothings.smooth import smooth
 from trading_strategy_tester.smoothings.wma_smoothing import wma_smoothing
 from trading_strategy_tester.utils.validations import get_length, get_std_dev, get_offset
 
@@ -37,14 +38,7 @@ def bb_middle(series: pd.Series, length: int = 20, ma_type: SmoothingType = Smoo
     offset = get_offset(offset=offset)
 
     # Calculate the middle band (moving average) using the selected smoothing method
-    if ma_type == SmoothingType.SMA:
-        middle_band = sma_smoothing(series, length)
-    elif ma_type == SmoothingType.EMA:
-        middle_band = ema_smoothing(series, length)
-    elif ma_type == SmoothingType.WMA:
-        middle_band = wma_smoothing(series, length)
-    else:
-        middle_band = rma_smoothing(series, length)
+    middle_band = smooth(series, length, ma_type)
 
     # Apply the offset
     if offset != 0:

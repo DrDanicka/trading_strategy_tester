@@ -4,6 +4,7 @@ from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.smoothings.rma_smoothing import rma_smoothing
 from trading_strategy_tester.smoothings.sma_smoothing import sma_smoothing
 from trading_strategy_tester.smoothings.ema_smoothing import ema_smoothing
+from trading_strategy_tester.smoothings.smooth import smooth
 from trading_strategy_tester.smoothings.wma_smoothing import wma_smoothing
 from trading_strategy_tester.utils.validations import get_length
 
@@ -47,13 +48,6 @@ def atr(high: pd.Series, low: pd.Series, close: pd.Series, length: int = 14,
     true_range = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
 
     # Calculate ATR based on the specified smoothing method
-    if smoothing == SmoothingType.RMA:
-        atr_series = rma_smoothing(true_range, length)
-    elif smoothing == SmoothingType.SMA:
-        atr_series = sma_smoothing(true_range, length)
-    elif smoothing == SmoothingType.EMA:
-        atr_series = ema_smoothing(true_range, length)
-    else:
-        atr_series = wma_smoothing(true_range, length)
+    atr_series = smooth(true_range, length, smoothing)
 
     return pd.Series(atr_series, name=f'ATR_{length}_{smoothing.value}')
