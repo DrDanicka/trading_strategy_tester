@@ -14,19 +14,16 @@ class RSI(TradingSeries):
 
     def __init__(self, ticker: str, source: SourceType = SourceType.CLOSE, length: int = 14):
         """
-        Initializes the RSI series with the specified ticker symbol, target column, and RSI length.
+        Initialize the RSI series with the specified ticker symbol, target column, and RSI length.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
-
-        source : str, optional
-            The column in the DataFrame on which the RSI is calculated (e.g., 'Close'). Default is 'Close'.
-
-        length : int, optional
-            The number of periods over which to calculate the RSI. Default is 14.
+        :param ticker: The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
+        :type ticker: str
+        :param source: The column in the DataFrame on which the RSI is calculated (e.g., 'Close'). Default is 'Close'.
+        :type source: SourceType, optional
+        :param length: The number of periods over which to calculate the RSI. Default is 14.
+        :type length: int, optional
         """
+
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
         # Validate source
         self.source = get_base_sources(source=source, default=SourceType.CLOSE).value
@@ -36,38 +33,29 @@ class RSI(TradingSeries):
     @property
     def ticker(self) -> str:
         """
-        Returns the ticker symbol associated with this RSI series.
+        Get the ticker symbol associated with this RSI series.
 
-        This property provides access to the ticker symbol that was specified when the RSI instance was created.
-
-        Returns:
-        --------
-        str
-            The ticker symbol for the financial instrument.
+        :return: The ticker symbol for the financial instrument.
+        :rtype: str
         """
         return self._ticker  # Return the ticker symbol stored in the parent class
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
         """
-        Retrieves or calculates the RSI data series for the specified ticker.
+        Retrieve or calculate the RSI data series for the specified ticker.
 
         This method checks if the RSI for the given ticker and configuration (target, length) already exists
         in the provided DataFrame. If it does not exist, it downloads the data, calculates the RSI, and adds it to
-        the DataFrame. It returns a pandas Series containing the RSI values.
+        the DataFrame.
 
-        Parameters:
-        -----------
-        downloader : DownloadModule
-            An instance of DownloadModule used to download the latest data for the ticker.
-
-        df : pd.DataFrame
-            A DataFrame that may contain existing trading data. If the RSI does not exist in this DataFrame, it will be calculated and added.
-
-        Returns:
-        --------
-        pd.Series
-            A pandas Series containing the RSI values for the specified ticker and configuration, labeled with the appropriate name.
+        :param downloader: An instance of DownloadModule used to download the latest data for the ticker.
+        :type downloader: DownloadModule
+        :param df: A DataFrame that may contain existing trading data. If the RSI does not exist in this DataFrame, it will be calculated and added.
+        :type df: pd.DataFrame
+        :return: A pandas Series containing the RSI values for the specified ticker and configuration, labeled with the appropriate name.
+        :rtype: pd.Series
         """
+
         # Check if the RSI series already exists in the DataFrame
         if self.name not in df.columns:
             # Download the latest data for the ticker using the downloader
@@ -83,6 +71,9 @@ class RSI(TradingSeries):
 
     def get_name(self) -> str:
         """
-        Returns the name of the series
+        Get the name of the RSI series.
+
+        :return: The name of the series.
+        :rtype: str
         """
         return self.name
