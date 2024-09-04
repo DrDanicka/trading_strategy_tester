@@ -1,4 +1,7 @@
 import pandas as pd
+
+from trading_strategy_tester.enums.smoothing_enum import SmoothingType
+from trading_strategy_tester.smoothings.smooth import smooth
 from trading_strategy_tester.utils.validations import get_length
 
 
@@ -28,8 +31,8 @@ def rsi(series: pd.Series, length: int = 14) -> pd.Series:
     loss = -delta.where(delta < 0, 0)
 
     # Compute the average gain and loss using Wilder's Moving Average (RMA)
-    avg_gain = gain.ewm(alpha=1 / length, min_periods=length, adjust=False).mean()
-    avg_loss = loss.ewm(alpha=1 / length, min_periods=length, adjust=False).mean()
+    avg_gain = smooth(gain, length, SmoothingType.RMA)
+    avg_loss = smooth(loss, length, SmoothingType.RMA)
 
     # Calculate the Relative Strength (RS)
     rs = avg_gain / avg_loss
