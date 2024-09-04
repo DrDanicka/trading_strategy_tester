@@ -79,7 +79,7 @@ class ADX(TradingSeries):
                 low=new_df['Low'],
                 close=new_df['Close'],
                 adx_smoothing=self.adx_smoothing,
-                DI_length=self.DI_length
+                di_length=self.DI_length
             )
 
             # Add the ADX series to the DataFrame
