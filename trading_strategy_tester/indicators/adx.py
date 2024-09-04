@@ -1,10 +1,11 @@
 import pandas as pd
 from trading_strategy_tester.indicators.atr import atr
+from trading_strategy_tester.indicators.dmi import di_plus, di_minus
 from trading_strategy_tester.smoothings.rma_smoothing import rma_smoothing
 from trading_strategy_tester.utils.validations import get_length
 
 
-def adx(high: pd.Series, low: pd.Series, close: pd.Series, adx_smoothing: int = 14, DI_length: int = 14) -> pd.Series:
+def adx(high: pd.Series, low: pd.Series, close: pd.Series, adx_smoothing: int = 14, di_length: int = 14) -> pd.Series:
     """
     Calculate the Average Directional Index (ADX) and the Directional Indicators (+DI and -DI).
 
@@ -20,32 +21,19 @@ def adx(high: pd.Series, low: pd.Series, close: pd.Series, adx_smoothing: int = 
     :type close: pd.Series
     :param adx_smoothing: The period for smoothing the ADX calculation. Default is 14.
     :type adx_smoothing: int, optional
-    :param DI_length: The period for calculating the Directional Indicators (+DI and -DI). Default is 14.
-    :type DI_length: int, optional
+    :param di_length: The period for calculating the Directional Indicators (+DI and -DI). Default is 14.
+    :type di_length: int, optional
     :return: A pandas Series containing the ADX values.
     :rtype: pd.Series
     """
 
     # Validate arguments
     adx_smoothing = get_length(length=adx_smoothing, default=14)
-    DI_length = get_length(length=DI_length, default=14)
-
-    # Calculate Average True Range (ATR)
-    atr_series = atr(high, low, close, DI_length)
-
-    # Calculate Directional Movement (+DM and -DM)
-    plus_dm = high.diff()
-    minus_dm = -low.diff()
-
-    plus_dm = plus_dm.where((plus_dm > minus_dm) & (plus_dm > 0), 0.0)
-    minus_dm = minus_dm.where((minus_dm > plus_dm) & (minus_dm > 0), 0.0)
-
-    plus_dm_smoothed = rma_smoothing(plus_dm, DI_length)
-    minus_dm_smoothed = rma_smoothing(minus_dm, DI_length)
+    di_length = get_length(length=di_length, default=14)
 
     # Calculate Directional Indicators (+DI and -DI)
-    plus_di = 100 * (plus_dm_smoothed / atr_series)
-    minus_di = 100 * (minus_dm_smoothed / atr_series)
+    plus_di = di_plus(high=high, low=low, close=close, di_length=di_length)
+    minus_di = di_minus(high=high, low=low, close=close, di_length=di_length)
 
     # Calculate the Directional Index (DX)
     dx = 100 * (abs(plus_di - minus_di) / (plus_di + minus_di))
@@ -53,4 +41,4 @@ def adx(high: pd.Series, low: pd.Series, close: pd.Series, adx_smoothing: int = 
     # Calculate the ADX (Average Directional Index) using Wilder's Moving Average
     adx_series = rma_smoothing(dx, adx_smoothing)
 
-    return pd.Series(adx_series, name=f'ADX_{adx_smoothing}_{DI_length}')
+    return pd.Series(adx_series, name=f'ADX_{adx_smoothing}_{di_length}')
