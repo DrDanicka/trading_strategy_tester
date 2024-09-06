@@ -10,7 +10,7 @@ from trading_strategy_tester.trading_series.di_plus_series import DI_PLUS
 from trading_strategy_tester.trading_series.di_minus_series import DI_MINUS
 
 
-class TestRSI(unittest.TestCase):
+class TestDMI(unittest.TestCase):
 
     def setUp(self):
         """
