@@ -3,7 +3,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 
-class Const(TradingSeries):
+class CONST(TradingSeries):
     """
     The Const class represents a constant data series that generates a series of a fixed numeric value
     (const_number) for a given DataFrame.

@@ -3,7 +3,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 
-class Low(TradingSeries):
+class LOW(TradingSeries):
     """
     The Low class inherits from TradingSeries and provides a specific implementation for retrieving the
     lowest prices (daily lows) associated with a given ticker symbol.

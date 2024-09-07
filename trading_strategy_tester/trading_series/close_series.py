@@ -4,7 +4,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 
-class Close(TradingSeries):
+class CLOSE(TradingSeries):
     """
     The Close class inherits from TradingSeries and provides a specific implementation for retrieving the
     closing prices associated with a given ticker symbol.

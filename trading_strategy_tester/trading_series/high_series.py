@@ -3,7 +3,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 
-class High(TradingSeries):
+class HIGH(TradingSeries):
     """
     The High class inherits from TradingSeries and provides a specific implementation for retrieving the
     highest prices (daily highs) associated with a given ticker symbol.

@@ -3,7 +3,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 
-class Open(TradingSeries):
+class OPEN(TradingSeries):
     """
     The Open class inherits from TradingSeries and provides a specific implementation for retrieving the
     opening prices associated with a given ticker symbol.

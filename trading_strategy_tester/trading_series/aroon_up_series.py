@@ -5,7 +5,7 @@ from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.indicators.aroon import aroon_up
 
 
-class AroonUp(TradingSeries):
+class AROON_UP(TradingSeries):
     """
     The Aroon Up indicator measures the number of periods since the highest high over a specified period.
     It is used to identify trends and potential reversal points by analyzing the strength of the uptrend.

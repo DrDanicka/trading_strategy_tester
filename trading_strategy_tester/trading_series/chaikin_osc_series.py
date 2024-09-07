@@ -5,7 +5,7 @@ from trading_strategy_tester.indicators.chaikin_osc import chaikin_osc
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 
-class ChaikinOsc(TradingSeries):
+class CHAIKIN_OSC(TradingSeries):
     """
     ChaikinOsc class represents the Chaikin Oscillator, a volume-based indicator that measures the accumulation/distribution
     of an asset over a specified period.

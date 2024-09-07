@@ -7,9 +7,9 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.bb import bb_lower, bb_upper, bb_middle
-from trading_strategy_tester.trading_series.bb_lower_series import BBLower
-from trading_strategy_tester.trading_series.bb_upper_series import BBUpper
-from trading_strategy_tester.trading_series.bb_middle_series import BBMiddle
+from trading_strategy_tester.trading_series.bb_lower_series import BB_LOWER
+from trading_strategy_tester.trading_series.bb_upper_series import BB_UPPER
+from trading_strategy_tester.trading_series.bb_middle_series import BB_MIDDLE
 
 class TestBB(unittest.TestCase):
 
@@ -208,7 +208,7 @@ class TestBB(unittest.TestCase):
             178.62, 180.71, 182.19, 183.31, 184.18, 185.29, 185.81, 186.78, 186.70, 186.74,
             186.76, 187.05, 187.10, 187.37, 187.59, 187.99, 188.43, 188.79, 189.44, 189.91
         ], name=f'{ticker}_BBLOWER_Close_20_SMA_2.0_0').reset_index(drop=True)
-        bb_lower_series = BBLower(ticker, SourceType.CLOSE, 20, SmoothingType.SMA, 2, 0)
+        bb_lower_series = BB_LOWER(ticker, SourceType.CLOSE, 20, SmoothingType.SMA, 2, 0)
         calculated_bb_lower = bb_lower_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_bb_lower, trading_view_bb_lower)
 
@@ -224,7 +224,7 @@ class TestBB(unittest.TestCase):
             195.70, 194.89, 194.82, 194.76, 195.03, 195.24, 195.40, 195.42, 196.56, 197.52,
             198.29, 198.62, 199.12, 199.26, 199.39, 199.34, 199.23, 199.15, 198.92, 198.71
         ], name=f'{ticker}_BBUPPER_Close_20_SMA_2.0_0').reset_index(drop=True)
-        bb_upper_series = BBUpper(ticker, SourceType.CLOSE, 20, SmoothingType.SMA, 2, 0)
+        bb_upper_series = BB_UPPER(ticker, SourceType.CLOSE, 20, SmoothingType.SMA, 2, 0)
         calculated_bb_upper = bb_upper_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_bb_upper, trading_view_bb_upper)
 
@@ -240,7 +240,7 @@ class TestBB(unittest.TestCase):
             187.16, 187.80, 188.51, 189.03, 189.60, 190.27, 190.60, 191.10, 191.63, 192.13,
             192.52, 192.83, 193.11, 193.32, 193.49, 193.67, 193.83, 193.97, 194.18, 194.31
         ], name=f'{ticker}_BBMIDDLE_Close_20_SMA_2.0_0').reset_index(drop=True)
-        bb_middle_series = BBMiddle(ticker, SourceType.CLOSE, 20, SmoothingType.SMA, 2, 0)
+        bb_middle_series = BB_MIDDLE(ticker, SourceType.CLOSE, 20, SmoothingType.SMA, 2, 0)
         calculated_bb_middle = bb_middle_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_bb_middle, trading_view_bb_middle)
 
@@ -257,7 +257,7 @@ class TestBB(unittest.TestCase):
             183.11, 183.99, 184.65, 185.46, 185.95, 186.31, 186.61, 186.93, 187.25, 187.59,
             187.76, 187.99, 188.42, 188.88, 189.29, 189.93, 190.49, 191.31, 191.33, 191.26
         ], name=f'{ticker}_BBLOWER_High_14_RMA_1.0_2').reset_index(drop=True)
-        bb_lower_series = BBLower(ticker, SourceType.HIGH, 14, SmoothingType.RMA, 1, 2)
+        bb_lower_series = BB_LOWER(ticker, SourceType.HIGH, 14, SmoothingType.RMA, 1, 2)
         calculated_bb_lower = bb_lower_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_bb_lower, trading_view_bb_lower)
 
@@ -273,7 +273,7 @@ class TestBB(unittest.TestCase):
             188.11, 187.89, 188.04, 187.76, 188.38, 189.11, 189.85, 190.64, 190.99, 191.45,
             192.49, 193.62, 194.27, 194.57, 194.90, 195.06, 195.16, 194.71, 194.81, 194.95
         ], name=f'{ticker}_BBUPPER_High_14_RMA_1.0_2').reset_index(drop=True)
-        bb_upper_series = BBUpper(ticker, SourceType.HIGH, 14, SmoothingType.RMA, 1, 2)
+        bb_upper_series = BB_UPPER(ticker, SourceType.HIGH, 14, SmoothingType.RMA, 1, 2)
         calculated_bb_upper = bb_upper_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_bb_upper, trading_view_bb_upper)
 

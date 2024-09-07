@@ -7,7 +7,7 @@ from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.utils.sources import get_source_series
 from trading_strategy_tester.indicators.cci import cci
 
-class CCISmoothened(TradingSeries):
+class CCI_SMOOTHENED(TradingSeries):
     """
     A class to represent the smoothened Commodity Channel Index (CCI) for a given financial instrument.
 

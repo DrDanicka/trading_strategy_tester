@@ -8,7 +8,7 @@ from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.cci import cci
 from trading_strategy_tester.trading_series.cci_series import CCI
-from trading_strategy_tester.trading_series.cci_smoothened_series import CCISmoothened
+from trading_strategy_tester.trading_series.cci_smoothened_series import CCI_SMOOTHENED
 from trading_strategy_tester.utils.sources import get_source_series
 
 class TestCCI(unittest.TestCase):
@@ -141,7 +141,7 @@ class TestCCI(unittest.TestCase):
             46.01, 21.46, 50.47, 77.56, 112.91, 134.40, 159.68, 135.93, 131.41, 125.01,
             115.57, 116.54, 115.02, 91.91, 62.95, 27.88, -1.80, -40.09, -60.08, -79.20
         ], name=f'{ticker}_CCISmoothened_{source.value}_{length}_{smoothing_type.value}_{smoothing_length}').reset_index(drop=True)
-        cci_series = CCISmoothened(ticker, source, length, smoothing_type, smoothing_length)
+        cci_series = CCI_SMOOTHENED(ticker, source, length, smoothing_type, smoothing_length)
         calculated_cci = cci_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_cci, trading_view_cci)
 
@@ -163,7 +163,7 @@ class TestCCI(unittest.TestCase):
         ],
             name=f'{ticker}_CCISmoothened_{source.value}_{length}_{smoothing_type.value}_{smoothing_length}').reset_index(
             drop=True)
-        cci_series = CCISmoothened(ticker, source, length, smoothing_type, smoothing_length)
+        cci_series = CCI_SMOOTHENED(ticker, source, length, smoothing_type, smoothing_length)
         calculated_cci = cci_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_cci, trading_view_cci)
 
