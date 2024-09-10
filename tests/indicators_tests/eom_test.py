@@ -70,7 +70,7 @@ class TestEOM(unittest.TestCase):
 
     def test_eom_series_length_14_divisor_10000_tradingview_data(self):
         """
-        Test EOM with the default length of 14 days and divisor of 10_000_000.
+        Test EOM series with the default length of 14 days and divisor of 10_000.
         Expected data are from TradingView and the test tests last 20 days of indicator data.
         The data is rounded to 6 decimal places.
         """
