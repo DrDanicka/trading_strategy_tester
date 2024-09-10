@@ -28,7 +28,7 @@ class EOM(TradingSeries):
         super().__init__(ticker)
         self.length = length
         self.divisor = divisor
-        self.name = f'{self.ticker}_EOM_{self.length}_{self.divisor}'
+        self.name = f'{self._ticker}_EOM_{self.length}_{self.divisor}'
 
     @property
     def ticker(self) -> str:
