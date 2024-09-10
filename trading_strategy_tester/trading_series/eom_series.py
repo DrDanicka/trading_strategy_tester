@@ -28,7 +28,7 @@ class EOM(TradingSeries):
         super().__init__(ticker)
         self.length = length
         self.divisor = divisor
-        self.name = f'{self._ticker}_EOM_{self.length}_{self.divisor}'
+        self.name = f'{self._ticker}_EOM_{self.length}_{self.divisor}' # Define the name for the EOM series
 
     @property
     def ticker(self) -> str:
@@ -57,6 +57,7 @@ class EOM(TradingSeries):
         if self.name not in df.columns:
             # Download the latest data for the ticker using the downloader
             new_df = downloader.download_ticker(self._ticker)
+            # Calculate the EOM using the specified target column and length
             eom_series = eom(
                 high=new_df[SourceType.HIGH.value],
                 low=new_df[SourceType.LOW.value],
@@ -65,8 +66,10 @@ class EOM(TradingSeries):
                 divisor=self.divisor
             )
 
+            # Add the EOM series to the DataFrame
             df[self.name] = eom_series
 
+        # Return the EOM series as a pandas Series
         return pd.Series(df[self.name], name=self.name)
 
     def get_name(self) -> str:
