@@ -8,7 +8,7 @@ from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.eom import eom
 from trading_strategy_tester.trading_series.eom_series import EOM
 
-class TestRSI(unittest.TestCase):
+class TestEOM(unittest.TestCase):
 
     def setUp(self):
         """
