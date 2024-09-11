@@ -1,13 +1,13 @@
 import unittest
 import pandas as pd
 
-from trading_strategy_tester.conditions.trade_conditions import TradeConditions
+from trading_strategy_tester.position_types.long import Long
 
 
 class TestCleaningData(unittest.TestCase):
 
     def setUp(self):
-        self.trade_condition = TradeConditions(None, None, None)
+        self.long_position = Long()
 
     def test_multiple_sells(self):
         # Arrange
@@ -21,12 +21,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [False, True, False, False, False],
-                'SELL': [False, False, False, True, False]
+                'SELL': [False, False, False, True, False],
+                'Long': [None, 'LongEntry', None, 'LongExit', None],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -44,11 +46,13 @@ class TestCleaningData(unittest.TestCase):
             {
                 'BUY': [True, False, False, False, False],
                 'SELL': [False, False, False, True, False],
+                'Long': ['LongEntry', None, None, 'LongExit', None],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -65,12 +69,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [False, True, False, False, False],
-                'SELL': [False, False, False, True, False]
+                'SELL': [False, False, False, True, False],
+                'Long': [None, 'LongEntry', None, 'LongExit', None],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -87,12 +93,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [False, True, False, False, False],
-                'SELL': [False, False, False, True, False]
+                'SELL': [False, False, False, True, False],
+                'Long': [None, 'LongEntry', None, 'LongExit', None],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -109,12 +117,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [False, False, False, False, False],
-                'SELL': [False, False, False, False, False]
+                'SELL': [False, False, False, False, False],
+                'Long': [None, None, None, None, None],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -131,12 +141,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [False, False, False, True, False],
-                'SELL': [False, False, False, False, True]
+                'SELL': [False, False, False, False, True],
+                'Long': [None, None, None, 'LongEntry', 'LongExit'],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -153,12 +165,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [False, False, True, False, False],
-                'SELL': [False, False, False, False, True]
+                'SELL': [False, False, False, False, True],
+                'Long': [None, None, 'LongEntry', None, 'LongExit'],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -176,12 +190,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [False, False, True, False, False],
-                'SELL': [False, False, False, False, True]
+                'SELL': [False, False, False, False, True],
+                'Long': [None, None, 'LongEntry', None, 'LongExit'],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -198,12 +214,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [False, False, False, False, False],
-                'SELL': [False, False, False, False, False]
+                'SELL': [False, False, False, False, False],
+                'Long': [None, None, None, None, None],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -220,12 +238,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [True, False, False, False, False],
-                'SELL': [False, False, True, False, False]
+                'SELL': [False, False, True, False, False],
+                'Long': ['LongEntry', None, 'LongExit', None, None],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -242,12 +262,14 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [True, False, False, True, False],
-                'SELL': [False, True, False, False, True]
+                'SELL': [False, True, False, False, True],
+                'Long': ['LongEntry', 'LongExit', None, 'LongEntry', 'LongExit'],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
@@ -264,12 +286,38 @@ class TestCleaningData(unittest.TestCase):
         df_expected = pd.DataFrame(
             {
                 'BUY': [True, False, False, False, False],
-                'SELL': [False, False, True, False, False]
+                'SELL': [False, False, True, False, False],
+                'Long': ['LongEntry', None, 'LongExit', None, None],
+                'Short': [None, None, None, None, None]
             }
         )
 
         # Act
-        self.trade_condition.clean_BUY_SELL_columns(df)
+        self.long_position.clean_buy_sell_columns(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
+    def test_buys_in_row(self):
+        # Arrange
+        df = pd.DataFrame(
+            {
+                'BUY': [False, False, True, True, True],
+                'SELL': [False, False, False, False, False]
+            }
+        )
+
+        df_expected = pd.DataFrame(
+            {
+                'BUY': [False, False, True, False, False],
+                'SELL': [False, False, False, False, True],
+                'Long': [None, None, 'LongEntry', None, 'LongExit'],
+                'Short': [None, None, None, None, None]
+            }
+        )
+
+        # Act
+        self.long_position.clean_buy_sell_columns(df)
 
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
