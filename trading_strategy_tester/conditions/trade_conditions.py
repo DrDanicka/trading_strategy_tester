@@ -10,28 +10,6 @@ class TradeConditions:
         self.sell_condition = sell_condition
         self.downloader = downloader
 
-    def clean_BUY_SELL_columns(self, df: pd.DataFrame):
-        bought = False
-
-        for index, row in df.iterrows():
-            # If there is only True value to BUY
-            if not bought and row['BUY'] and not row['SELL']:
-                bought = True
-            # If there is True value to SELL
-            elif bought and row['SELL']:
-                bought = False
-                df.at[index, 'BUY'] = False
-            else:
-                df.at[index, 'BUY'] = False
-                df.at[index, 'SELL'] = False
-
-        if bought:
-            if not df.loc[df.index[-1], 'BUY']:
-                df.loc[df.index[-1], 'SELL'] = True
-            else:
-                # Set  last index of BUY to False
-                df.loc[df.index[-1], 'BUY'] = False
-
 
     def evaluate_conditions(self, df: pd.DataFrame) -> pd.DataFrame:
         buy, buy_signal_series = self.buy_condition.evaluate(self.downloader, df)
