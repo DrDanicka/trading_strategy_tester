@@ -4,7 +4,7 @@ import pandas as pd
 from trading_strategy_tester.position_types.short import Short
 
 
-class TestCleaningData(unittest.TestCase):
+class TestCleaningDataShort(unittest.TestCase):
 
     def setUp(self):
         self.long_position = Short()

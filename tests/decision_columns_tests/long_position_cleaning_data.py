@@ -4,7 +4,7 @@ import pandas as pd
 from trading_strategy_tester.position_types.long import Long
 
 
-class TestCleaningData(unittest.TestCase):
+class TestCleaningDataLong(unittest.TestCase):
 
     def setUp(self):
         self.long_position = Long()
