@@ -158,5 +158,79 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         # Assert
         pd.testing.assert_frame_equal(df, df_expected)
 
+
+    def test_multiple_sell_buy(self):
+        # Arrange
+        df = pd.DataFrame(
+            {
+                'BUY': [False, False, True, False, False],
+                'SELL': [True, False, False, False, False]
+            }
+        )
+
+        df_expected = pd.DataFrame(
+            {
+                'BUY': [False, False, True, False, False],
+                'SELL': [True, False, False, False, True],
+                'Long': [None, None, 'LongEntry', None, 'LongExit'],
+                'Short': ['ShortEntry', None, 'ShortExit', None, None]
+            }
+        )
+
+        # Act
+        self.long_short_position.clean_buy_sell_columns(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
+
+    def test_duplicate_buys(self):
+        # Arrange
+        df = pd.DataFrame(
+            {
+                'BUY': [False, False, True, True, False],
+                'SELL': [True, False, False, False, False]
+            }
+        )
+
+        df_expected = pd.DataFrame(
+            {
+                'BUY': [False, False, True, False, False],
+                'SELL': [True, False, False, False, True],
+                'Long': [None, None, 'LongEntry', None, 'LongExit'],
+                'Short': ['ShortEntry', None, 'ShortExit', None, None]
+            }
+        )
+
+        # Act
+        self.long_short_position.clean_buy_sell_columns(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
+    def test_duplicate_sells(self):
+        # Arrange
+        df = pd.DataFrame(
+            {
+                'BUY': [False, False, True, True, False],
+                'SELL': [True, True, False, False, False]
+            }
+        )
+
+        df_expected = pd.DataFrame(
+            {
+                'BUY': [False, False, True, False, False],
+                'SELL': [True, False, False, False, True],
+                'Long': [None, None, 'LongEntry', None, 'LongExit'],
+                'Short': ['ShortEntry', None, 'ShortExit', None, None]
+            }
+        )
+
+        # Act
+        self.long_short_position.clean_buy_sell_columns(df)
+
+        # Assert
+        pd.testing.assert_frame_equal(df, df_expected)
+
 if __name__ == '__main__':
     unittest.main()
