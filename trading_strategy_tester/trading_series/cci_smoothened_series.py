@@ -5,7 +5,7 @@ from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.utils.sources import get_source_series
-from trading_strategy_tester.indicators.cci import cci
+from trading_strategy_tester.indicators.momentum.cci import cci
 
 class CCI_SMOOTHENED(TradingSeries):
     """

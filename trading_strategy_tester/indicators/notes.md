@@ -24,3 +24,7 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 * Bull signal: Power is positive
 * Bear signal: Power is negative
 * Note: watch reversals in trend
+
+## CCI (Commodity Channel Index)
+* Long if CCI turns up from below -100
+* Short if CCI turns down from above 100
