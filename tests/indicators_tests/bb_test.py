@@ -6,7 +6,7 @@ from datetime import datetime
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.enums.source_enum import SourceType
-from trading_strategy_tester.indicators.bb import bb_lower, bb_upper, bb_middle
+from trading_strategy_tester.indicators.volatility.bb import bb_lower, bb_upper, bb_middle
 from trading_strategy_tester.trading_series.bb_lower_series import BB_LOWER
 from trading_strategy_tester.trading_series.bb_upper_series import BB_UPPER
 from trading_strategy_tester.trading_series.bb_middle_series import BB_MIDDLE

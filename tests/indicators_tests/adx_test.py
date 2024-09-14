@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 from trading_strategy_tester.download.download_module import DownloadModule
-from trading_strategy_tester.indicators.adx import adx
+from trading_strategy_tester.indicators.trend.adx import adx
 from trading_strategy_tester.trading_series.adx_series import ADX
 
 
