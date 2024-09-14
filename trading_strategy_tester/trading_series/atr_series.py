@@ -3,7 +3,7 @@ import pandas as pd
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
-from trading_strategy_tester.indicators.atr import atr
+from trading_strategy_tester.indicators.volatility.atr import atr
 
 
 class ATR(TradingSeries):

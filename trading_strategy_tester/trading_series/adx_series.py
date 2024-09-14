@@ -2,7 +2,7 @@ import pandas as pd
 
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
-from trading_strategy_tester.indicators.adx import adx
+from trading_strategy_tester.indicators.trend.adx import adx
 
 
 class ADX(TradingSeries):
