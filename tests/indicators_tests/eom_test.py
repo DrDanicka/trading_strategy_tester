@@ -5,7 +5,7 @@ from datetime import datetime
 
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
-from trading_strategy_tester.indicators.eom import eom
+from trading_strategy_tester.indicators.volume.eom import eom
 from trading_strategy_tester.trading_series.eom_series import EOM
 
 class TestEOM(unittest.TestCase):
