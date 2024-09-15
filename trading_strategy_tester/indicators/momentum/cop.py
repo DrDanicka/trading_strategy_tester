@@ -1,7 +1,7 @@
 import pandas as pd
 
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
-from trading_strategy_tester.indicators.roc import roc
+from trading_strategy_tester.indicators.momentum.roc import roc
 from trading_strategy_tester.smoothings.smooth import smooth
 from trading_strategy_tester.utils.validations import get_length
 
