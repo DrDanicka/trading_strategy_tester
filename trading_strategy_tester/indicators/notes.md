@@ -28,3 +28,53 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 ## CCI (Commodity Channel Index)
 * Long if CCI turns up from below -100
 * Short if CCI turns down from above 100
+
+## Chaikin Oscillator
+* go long on a bullish divergence
+* go short on a bearish divergence
+
+## CHOP (Choppiness Index)
+* value below 38.2 indicate trend
+* values above 61.8 signal consolidation
+
+## CMF (Chaikin Money Flow)
+* above and below zero
+
+## CMO (Chande Momentum Oscillator)
+* short when values above 50
+* long when values below -50
+
+## COP (Coppock Curve Indicator)
+* indicates bull market when values turn up from below zero
+
+## DC (Donchain Channels)
+* long when price crosses upper DC
+* short when price crosses the lower DC
+
+## DMI (Directional Movement Index)
+* long when +DI is above -DI
+* short when -DI is above +DI
+* Use ADX with DMI
+
+## DPO (Detrend Price Oscillator)
+* long when DPO crosses below and then back above the oversold level
+* short when DPO crosses above and then back below the overbought level
+* TODO pozriet tieto podmienky
+
+## EFI (Elder Force Index)
+* long when EFI below zero and bullish divergence
+* short when EFI above zero and bearish divergence
+
+## EOM (Ease of Movement)
+* long when crosses above zero
+* short when crosses below zero
+
+## ROC (Rate of Change)
+* long when ROC crosses to below the oversold level and rises back above it
+* long on bull divergence
+* short when ROC crosses to above the overbought level and falls back bellow it
+* short on bear divergence
+
+## RSI (Relative Strength Index)
+* long when value crosses 30 from below
+* short when value crosses 70 from above
