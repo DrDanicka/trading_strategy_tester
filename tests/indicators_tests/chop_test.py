@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 from trading_strategy_tester.download.download_module import DownloadModule
-from trading_strategy_tester.indicators.chop import chop
+from trading_strategy_tester.indicators.volatility.chop import chop
 from trading_strategy_tester.trading_series.chop_series import CHOP
 
 
