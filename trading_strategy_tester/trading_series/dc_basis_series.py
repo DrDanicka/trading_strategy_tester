@@ -2,7 +2,7 @@ import pandas as pd
 
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
-from trading_strategy_tester.indicators.dc import dc_basis
+from trading_strategy_tester.indicators.volatility.dc import dc_basis
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 

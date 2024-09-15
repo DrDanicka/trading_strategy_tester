@@ -5,7 +5,7 @@ from datetime import datetime
 
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
-from trading_strategy_tester.indicators.dc import dc_upper, dc_lower, dc_basis
+from trading_strategy_tester.indicators.volatility.dc import dc_upper, dc_lower, dc_basis
 from trading_strategy_tester.trading_series.dc_upper_series import DC_UPPER
 from trading_strategy_tester.trading_series.dc_lower_series import DC_LOWER
 from trading_strategy_tester.trading_series.dc_basis_series import DC_BASIS
