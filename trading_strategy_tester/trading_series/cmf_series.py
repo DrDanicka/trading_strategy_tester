@@ -1,7 +1,7 @@
 import pandas as pd
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
-from trading_strategy_tester.indicators.cmf import cmf
+from trading_strategy_tester.indicators.volume.cmf import cmf
 
 class CMF(TradingSeries):
     """

@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 from trading_strategy_tester.download.download_module import DownloadModule
-from trading_strategy_tester.indicators.cmf import cmf
+from trading_strategy_tester.indicators.volume.cmf import cmf
 from trading_strategy_tester.trading_series.cmf_series import CMF
 
 
