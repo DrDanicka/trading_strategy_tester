@@ -5,7 +5,7 @@ from datetime import datetime
 
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
-from trading_strategy_tester.indicators.dmi import di_plus, di_minus
+from trading_strategy_tester.indicators.momentum.dmi import di_plus, di_minus
 from trading_strategy_tester.trading_series.di_plus_series import DI_PLUS
 from trading_strategy_tester.trading_series.di_minus_series import DI_MINUS
 
