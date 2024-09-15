@@ -1,7 +1,7 @@
 import pandas as pd
 
 from trading_strategy_tester.utils.validations import get_length
-from trading_strategy_tester.indicators.ema import ema
+from trading_strategy_tester.indicators.trend.ema import ema
 
 def chaikin_osc(high: pd.Series, low: pd.Series, close: pd.Series, volume: pd.Series, fast_length: int = 3, slow_length: int = 10) -> pd.Series:
     """
