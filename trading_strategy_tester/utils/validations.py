@@ -1,4 +1,10 @@
+from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
 from trading_strategy_tester.enums.source_enum import SourceType
+from trading_strategy_tester.position_types.long import Long
+from trading_strategy_tester.position_types.long_short_combination import LongShortCombination
+from trading_strategy_tester.position_types.position_type import PositionType
+from trading_strategy_tester.position_types.short import Short
+
 
 def get_length(length: int, default: int) -> int:
     """
@@ -63,3 +69,30 @@ def get_base_sources(source: SourceType, default: SourceType) -> SourceType:
         SourceType.HIGH,
         SourceType.LOW,
     ] else default
+
+
+def get_position_type_from_enum(position_type_enum: PositionTypeEnum) -> PositionType:
+    """
+    Converts a position type enumeration into its corresponding PositionType object.
+
+    :param position_type_enum: The enum value representing the position type.
+    :type position_type_enum: PositionTypeEnum
+
+    :return: The corresponding PositionType object:
+        - Long() for a LONG position.
+        - Short() for a SHORT position.
+        - LongShortCombination() for a combination of LONG and SHORT positions.
+    :rtype: PositionType
+    """
+
+    # Check if the enum is LONG, and return an instance of the Long class if so
+    if position_type_enum == PositionTypeEnum.LONG:
+        return Long()
+
+    # Check if the enum is SHORT, and return an instance of the Short class if so
+    elif position_type_enum == PositionTypeEnum.SHORT:
+        return Short()
+
+    # For any other value (including a combined position type), return a LongShortCombination
+    else:
+        return LongShortCombination()
