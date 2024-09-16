@@ -11,4 +11,4 @@ def ema_smoothing(series: pd.Series, length: int) -> pd.Series:
     :return: A pandas Series containing the EMA of the given series.
     :rtype: pd.Series
     """
-    return series.ewm(span=length, adjust=False).mean()
+    return series.ewm(span=length, adjust=False, min_periods=length).mean()

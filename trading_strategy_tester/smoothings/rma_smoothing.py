@@ -11,4 +11,4 @@ def rma_smoothing(series: pd.Series, length: int) -> pd.Series:
     :return: A pandas Series containing the RMA of the given series.
     :rtype: pd.Series
     """
-    return series.ewm(alpha=1 / length, adjust=False).mean()
+    return series.ewm(alpha=1 / length, adjust=False, min_periods=length).mean()
