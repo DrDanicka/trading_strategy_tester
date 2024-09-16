@@ -6,7 +6,7 @@ from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 
-class ChangeOfXPercentOnYDaysCondition(Condition):
+class ChangeOfXPercentPerYDaysCondition(Condition):
     def __init__(self, series: TradingSeries, percent: float, number_of_days: int):
         self.series = series
         self.percent = percent
@@ -30,7 +30,7 @@ class ChangeOfXPercentOnYDaysCondition(Condition):
         result.name = None
 
         signal_series = result.apply(
-            lambda x: f'ChangeOfXPercentOnYDaysSignal({self.percent}, {self.number_of_days}, {self.series.get_name()})' if x else None
+            lambda x: f'ChangeOfXPercentPerYDaysSignal({self.percent}, {self.number_of_days}, {self.series.get_name()})' if x else None
         )
 
         return result, signal_series
@@ -41,5 +41,5 @@ class ChangeOfXPercentOnYDaysCondition(Condition):
         return None
 
     def to_string(self) -> str:
-        return f'ChangeOfXPercentOnYDaysCondition({self.percent}, {self.number_of_days}, {self.series.get_name()})'
+        return f'ChangeOfXPercentPerYDaysCondition({self.percent}, {self.number_of_days}, {self.series.get_name()})'
 
