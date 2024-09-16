@@ -23,7 +23,7 @@ class CONST(TradingSeries):
         """
         super().__init__('')  # Initialize the parent TradingSeries class without a specific ticker symbol
         self.const_number = const_number  # Store the constant numeric value
-        self.name = f'__Const_{const_number}'  # Define the name for the constant series
+        self.name = f'_Const_{const_number}'  # Define the name for the constant series
 
     @property
     def ticker(self) -> str:
