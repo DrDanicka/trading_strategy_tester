@@ -6,13 +6,14 @@ from trading_strategy_tester.conditions.trade_conditions import TradeConditions
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.interval_enum import Interval
 from trading_strategy_tester.enums.period_enum import Period
-from trading_strategy_tester.position_types.position_type import PositionType
+from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
+from trading_strategy_tester.utils.validations import get_position_type_from_enum
 
 
 class Strategy():
     def __init__(self,
                  ticker:str,
-                 position_type: PositionType,
+                 position_type: PositionTypeEnum,
                  buy_condition: Condition,
                  sell_condition: Condition,
                  stop_loss: StopLoss = None,
@@ -22,7 +23,7 @@ class Strategy():
                  interval: Interval = Interval.ONE_DAY,
                  period: Period = Period.NOT_PASSED):
         self.ticker = ticker
-        self.position_type = position_type
+        self.position_type = get_position_type_from_enum(position_type)
         self.buy_condition = buy_condition
         self.sell_condition = sell_condition
         self.stop_loss = stop_loss
