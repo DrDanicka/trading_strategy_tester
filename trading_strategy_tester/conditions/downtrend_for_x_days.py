@@ -32,4 +32,4 @@ class DowntrendForXDaysCondition(Condition):
         return None
 
     def to_string(self) -> str:
-        return f'DowntrendForXDaysCondition({self.series.get_name()}, {self.number_of_days})'
+        return f'DowntrendForXDaysCondition({self.number_of_days}, {self.series.get_name()})'
