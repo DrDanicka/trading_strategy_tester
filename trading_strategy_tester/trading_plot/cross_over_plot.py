@@ -1,6 +1,7 @@
 import pandas as pd
 import plotly.graph_objects as go
 
+from trading_strategy_tester.enums.line_colors_enum import LineColor
 from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
 from trading_strategy_tester.utils.plot_utils import create_plot_series_name, add_trace_to_fig, plot_dark_mode_graph, \
     plot_light_mode_graph, set_x_axis_range, set_y_axis_range
@@ -36,11 +37,11 @@ class CrossOverPlot(TradingPlot):
 
         # Add the first series (series1)
         series1_name = create_plot_series_name(str(self.series1.name))
-        add_trace_to_fig(fig, x=self.series1.index, y=self.series1, name=series1_name)
+        add_trace_to_fig(fig, x=self.series1.index, y=self.series1, name=series1_name, color=LineColor.PURPLE)
 
         # Add the second series (series2)
         series2_name = create_plot_series_name(str(self.series2.name))
-        add_trace_to_fig(fig, x=self.series2.index, y=self.series2, name=series2_name)
+        add_trace_to_fig(fig, x=self.series2.index, y=self.series2, name=series2_name, color=LineColor.YELLOW)
 
         # Iterate through the series to detect crossovers and draw rectangles
         for i in range(1, len(self.series1)):
