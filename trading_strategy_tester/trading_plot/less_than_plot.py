@@ -20,6 +20,7 @@ class LessThanPlot(TradingPlot):
         """
         self.series1: pd.Series = series1
         self.series2: pd.Series = series2
+        self.number_of_days = 0
 
 
     def get_plot(self, dark: bool = True) -> go.Figure:
@@ -69,7 +70,7 @@ class LessThanPlot(TradingPlot):
         set_y_axis_range(fig, self.series1, self.series2)
 
         # Define the plot title
-        title = f"{series1_name} and {series2_name} LessThan Plot"
+        title = f"{series1_name} and {series2_name} LessThan Plot Shifted" if self.number_of_days > 0 else f"{series1_name} and {series2_name} LessThan Plot"
 
         # Apply dark or light theme based on the dark flag
         if dark:
@@ -80,12 +81,20 @@ class LessThanPlot(TradingPlot):
         return fig
 
 
-    def show_plot(self, dark: bool = True):
+    def shift(self, number_of_days: int):
         """
-        Display the Plotly plot and remove the mode bar for a cleaner view.
+        Shifts both series (series1 and series2) by a specified number of days.
 
-        :param dark: If True, the plot will use a dark theme. Defaults to True.
-        :type dark: bool
+        :param number_of_days: The number of days to shift the series by. If the number is within
+                               the valid range (0 to len(series1)), the series will be shifted.
+        :type number_of_days: int
         """
-        fig = self.get_plot(dark=dark)
-        fig.show(config={'displayModeBar': False, 'scrollZoom': True})
+        # Ensure the number_of_days is within the valid range before shifting
+        if 0 <= number_of_days < len(self.series1):
+            self.number_of_days = number_of_days
+
+        # Shift both series1 and series2 by the specified number of days if number_of_days is positive
+        if self.number_of_days > 0:
+            self.series1 = self.series1.shift(self.number_of_days)
+            self.series2 = self.series2.shift(self.number_of_days)
+
