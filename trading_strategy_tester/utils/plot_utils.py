@@ -46,3 +46,68 @@ def add_trace_to_fig(fig: go.Figure, x: pd.Series, y: pd.Series, name: str):
         fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name=name, line=dict(color='gray', dash='dash')))
     else:
         fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name=name))
+
+
+import plotly.graph_objects as go
+
+def plot_light_mode_graph(fig: go.Figure, title: str):
+    """
+    Apply a light mode theme to a Plotly figure with customized title, hover mode, drag mode, and legend style.
+
+    :param fig: The Plotly figure to update.
+    :type fig: go.Figure
+    :param title: The title of the plot, which will be centered at the top.
+    :type title: str
+    """
+    fig.update_layout(
+        title={
+            'text': title,
+            'x': 0.5,  # Centers the title
+            'xanchor': 'center',
+            'yanchor': 'top'
+        },
+        template='plotly_white',
+        hovermode="x unified",
+        dragmode="pan",
+        legend=dict(
+            x=0.02,  # Position from the left (small margin)
+            y=0.98,  # Position from the top (small margin)
+            traceorder="normal",
+            bgcolor="rgba(255, 255, 255, 0.5)",  # Transparent white background for legend
+            bordercolor="gray",
+            borderwidth=1
+        )
+    )
+
+
+def plot_dark_mode_graph(fig: go.Figure, title: str):
+    """
+    Apply a dark mode theme to a Plotly figure with customized title, hover mode, drag mode, background color, and legend style.
+
+    :param fig: The Plotly figure to update.
+    :type fig: go.Figure
+    :param title: The title of the plot, which will be centered at the top.
+    :type title: str
+    """
+    fig.update_layout(
+        title={
+            'text': title,
+            'x': 0.5,  # Centers the title
+            'xanchor': 'center',
+            'yanchor': 'top'
+        },
+        template='plotly_dark',
+        hovermode="x unified",
+        dragmode="pan",
+        paper_bgcolor="rgba(19, 24, 34, 255)",  # Set background to custom dark color
+        plot_bgcolor="rgba(19, 24, 34, 255)",  # Set plot background to custom dark color
+        font=dict(color="gray"),
+        legend=dict(
+            x=0.02,  # Position from the left (small margin)
+            y=0.98,  # Position from the top (small margin)
+            traceorder="normal",
+            bgcolor="rgba(0, 0, 0, 0.5)",  # Transparent black background for legend
+            bordercolor="gray",
+            borderwidth=1
+        )
+    )
