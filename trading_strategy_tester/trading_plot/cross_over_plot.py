@@ -2,7 +2,8 @@ import pandas as pd
 import plotly.graph_objects as go
 
 from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
-from trading_strategy_tester.utils.plot_utils import create_plot_series_name, add_trace_to_fig
+from trading_strategy_tester.utils.plot_utils import create_plot_series_name, add_trace_to_fig, plot_dark_mode_graph, \
+    plot_light_mode_graph
 
 
 class CrossOverPlot(TradingPlot):
@@ -70,6 +71,7 @@ class CrossOverPlot(TradingPlot):
                 )
 
 
+        # Set range on x-axis
         x_min = self.series1.index.min()
         x_max = self.series1.index.max()
 
@@ -79,6 +81,7 @@ class CrossOverPlot(TradingPlot):
             maxallowed=x_max
         )
 
+        # Set range on y-axis
         min_value = min(self.series1.min(), self.series2.min())
         max_value = max(self.series1.max(), self.series2.max())
 
@@ -92,40 +95,12 @@ class CrossOverPlot(TradingPlot):
             fixedrange=True
         )
 
-        # Update layout for better readability and interactivity
-        fig.update_layout(
-            title={
-                'text': f"{series1_name} and {series2_name} Crossover Plot",
-                'x': 0.5,  # Centers the title
-                'xanchor': 'center',
-                'yanchor': 'top'
-            },
-            template='plotly_white',
-            xaxis_title="Date",
-            yaxis_title="Value",
-            hovermode="x unified",
-            dragmode="pan",
-            legend=dict(
-                x=0.02,  # Position from the left (small margin)
-                y=0.98,  # Position from the top (small margin)
-                traceorder="normal",
-                bgcolor="rgba(255, 255, 255, 0.5)",  # Transparent white background for legend
-                bordercolor="gray",
-                borderwidth=1
-            )
-        )
+        title = f"{series1_name} and {series2_name} Crossover Plot"
 
-        # Apply custom dark mode styling if dark=True
         if dark:
-            fig.update_layout(
-                template="plotly_dark",
-                paper_bgcolor="rgba(19, 24, 34, 255)",  # Set background to custom dark color
-                plot_bgcolor="rgba(19, 24, 34, 255)",  # Set plot background to custom dark color
-                font=dict(color="gray"),
-                legend=dict(
-                    bgcolor="rgba(0, 0, 0, 0.5)",  # Transparent black background for legend
-                )
-            )
+            plot_dark_mode_graph(fig, title)
+        else:
+            plot_light_mode_graph(fig, title)
 
         return fig
 
