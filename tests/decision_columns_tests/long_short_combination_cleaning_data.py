@@ -14,7 +14,9 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         df = pd.DataFrame(
             {
                 'BUY': [True, False, False, False, False],
-                'SELL': [False, False, True, False, False]
+                'SELL': [False, False, True, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
             }
         )
 
@@ -22,6 +24,8 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
             {
                 'BUY': [True, False, False, False, True],
                 'SELL': [False, False, True, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
                 'Long': ['LongEntry', None, 'LongExit', None, None],
                 'Short': [None, None, 'ShortEntry', None, 'ShortExit']
             }
@@ -39,7 +43,9 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         df = pd.DataFrame(
             {
                 'BUY': [True, False, False, False, False],
-                'SELL': [True, False, True, False, False]
+                'SELL': [True, False, True, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
             }
         )
 
@@ -47,6 +53,8 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
             {
                 'BUY': [False, False, False, False, True],
                 'SELL': [False, False, True, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
                 'Long': [None, None, None, None, None],
                 'Short': [None, None, 'ShortEntry', None, 'ShortExit']
             }
@@ -64,7 +72,9 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         df = pd.DataFrame(
             {
                 'BUY': [True, True, False, False, False],
-                'SELL': [False, True, True, False, False]
+                'SELL': [False, True, True, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
             }
         )
 
@@ -72,6 +82,8 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
             {
                 'BUY': [True, False, False, False, True],
                 'SELL': [False, False, True, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
                 'Long': ['LongEntry', None, 'LongExit', None, None],
                 'Short': [None, None, 'ShortEntry', None, 'ShortExit']
             }
@@ -89,7 +101,9 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         df = pd.DataFrame(
             {
                 'BUY': [True, False, False, True, False],
-                'SELL': [False, False, True, True, False]
+                'SELL': [False, False, True, True, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
             }
         )
 
@@ -97,6 +111,8 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
             {
                 'BUY': [True, False, False, False, True],
                 'SELL': [False, False, True, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
                 'Long': ['LongEntry', None, 'LongExit', None, None],
                 'Short': [None, None, 'ShortEntry', None, 'ShortExit']
             }
@@ -114,7 +130,9 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         df = pd.DataFrame(
             {
                 'BUY': [True, False, False, False, True],
-                'SELL': [False, False, True, False, True]
+                'SELL': [False, False, True, False, True],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
             }
         )
 
@@ -122,6 +140,8 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
             {
                 'BUY': [True, False, False, False, True],
                 'SELL': [False, False, True, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
                 'Long': ['LongEntry', None, 'LongExit', None, None],
                 'Short': [None, None, 'ShortEntry', None, 'ShortExit']
             }
@@ -139,7 +159,9 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         df = pd.DataFrame(
             {
                 'BUY': [True, False, False, False, True],
-                'SELL': [False, False, False, False, True]
+                'SELL': [False, False, False, False, True],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
             }
         )
 
@@ -147,6 +169,8 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
             {
                 'BUY': [True, False, False, False, False],
                 'SELL': [False, False, False, False, True],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
                 'Long': ['LongEntry', None, None, None, 'LongExit'],
                 'Short': [None, None, None, None, None]
             }
@@ -164,7 +188,9 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         df = pd.DataFrame(
             {
                 'BUY': [False, False, True, False, False],
-                'SELL': [True, False, False, False, False]
+                'SELL': [True, False, False, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
             }
         )
 
@@ -172,6 +198,8 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
             {
                 'BUY': [False, False, True, False, False],
                 'SELL': [True, False, False, False, True],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
                 'Long': [None, None, 'LongEntry', None, 'LongExit'],
                 'Short': ['ShortEntry', None, 'ShortExit', None, None]
             }
@@ -189,7 +217,9 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         df = pd.DataFrame(
             {
                 'BUY': [False, False, True, True, False],
-                'SELL': [True, False, False, False, False]
+                'SELL': [True, False, False, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
             }
         )
 
@@ -197,6 +227,8 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
             {
                 'BUY': [False, False, True, False, False],
                 'SELL': [True, False, False, False, True],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
                 'Long': [None, None, 'LongEntry', None, 'LongExit'],
                 'Short': ['ShortEntry', None, 'ShortExit', None, None]
             }
@@ -213,7 +245,9 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
         df = pd.DataFrame(
             {
                 'BUY': [False, False, True, True, False],
-                'SELL': [True, True, False, False, False]
+                'SELL': [True, True, False, False, False],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
             }
         )
 
@@ -221,6 +255,8 @@ class TestCleaningDataLongShortCombination(unittest.TestCase):
             {
                 'BUY': [False, False, True, False, False],
                 'SELL': [True, False, False, False, True],
+                'BUY_Signals': [None, None, None, None, None],
+                'SELL_Signals': [None, None, None, None, None],
                 'Long': [None, None, 'LongEntry', None, 'LongExit'],
                 'Short': ['ShortEntry', None, 'ShortExit', None, None]
             }

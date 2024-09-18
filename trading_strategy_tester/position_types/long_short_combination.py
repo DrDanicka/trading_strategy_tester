@@ -120,7 +120,10 @@ class LongShortCombination(PositionType):
         :return: True if the 'SELL_Signals' or 'BUY_Signals' start with 'TakeProfit' or 'StopLoss', otherwise False.
         :rtype: bool
         """
-        if sell:
-            return row['SELL_Signals'].startswith('TakeProfit') or row['SELL_Signals'].startswith('StopLoss')
+        if row['SELL_Signals'] is not None:
+            if sell:
+                return row['SELL_Signals'].startswith('TakeProfit') or row['SELL_Signals'].startswith('StopLoss')
+            else:
+                return row['BUY_Signals'].startswith('TakeProfit') or row['BUY_Signals'].startswith('StopLoss')
         else:
-            return row['BUY_Signals'].startswith('TakeProfit') or row['BUY_Signals'].startswith('StopLoss')
+            return False
