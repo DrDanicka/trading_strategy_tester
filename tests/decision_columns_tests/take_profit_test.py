@@ -1,6 +1,6 @@
 import unittest
 import pandas as pd
-from trading_strategy_tester.conditions.take_profit import TakeProfit
+from trading_strategy_tester.conditions.stoploss_takeprofit.take_profit import TakeProfit
 
 class TestTakeProfit(unittest.TestCase):
 

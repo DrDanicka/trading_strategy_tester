@@ -1,7 +1,6 @@
 import unittest
 import pandas as pd
-from trading_strategy_tester.conditions.stop_loss import StopLoss
-from trading_strategy_tester.enums.stoploss_enum import StopLossType
+from trading_strategy_tester.conditions.stoploss_takeprofit.stop_loss import StopLoss
 
 
 class TestStopLoss(unittest.TestCase):
