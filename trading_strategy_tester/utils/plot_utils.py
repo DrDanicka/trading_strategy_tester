@@ -80,7 +80,8 @@ def plot_light_mode_graph(fig: go.Figure, title: str):
             bgcolor="rgba(255, 255, 255, 0.5)",  # Transparent white background for legend
             bordercolor="gray",
             borderwidth=1
-        )
+        ),
+        showlegend=True
     )
 
 
@@ -113,7 +114,8 @@ def plot_dark_mode_graph(fig: go.Figure, title: str):
             bgcolor="rgba(0, 0, 0, 0.5)",  # Transparent black background for legend
             bordercolor="gray",
             borderwidth=1
-        )
+        ),
+        showlegend=True
     )
 
 
