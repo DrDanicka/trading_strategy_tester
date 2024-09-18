@@ -3,7 +3,7 @@ import unittest
 
 import pandas as pd
 
-from trading_strategy_tester.conditions.uptrend_for_x_days import UptrendForXDaysCondition
+from trading_strategy_tester.conditions.trend_conditions.uptrend_for_x_days import UptrendForXDaysCondition
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.testing_series import TestingSeries
 
