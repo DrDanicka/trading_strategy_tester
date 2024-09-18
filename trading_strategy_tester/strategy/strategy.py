@@ -1,7 +1,7 @@
 from datetime import datetime
 from trading_strategy_tester.conditions.condition import Condition
-from trading_strategy_tester.conditions.stop_loss import StopLoss
-from trading_strategy_tester.conditions.take_profit import TakeProfit
+from trading_strategy_tester.conditions.stoploss_takeprofit.stop_loss import StopLoss
+from trading_strategy_tester.conditions.stoploss_takeprofit.take_profit import TakeProfit
 from trading_strategy_tester.conditions.trade_conditions import TradeConditions
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.interval_enum import Interval
@@ -23,6 +23,7 @@ class Strategy():
                  interval: Interval = Interval.ONE_DAY,
                  period: Period = Period.NOT_PASSED):
         self.ticker = ticker
+        self.position_type_enum = position_type
         self.position_type = get_position_type_from_enum(position_type)
         self.buy_condition = buy_condition
         self.sell_condition = sell_condition
@@ -49,9 +50,9 @@ class Strategy():
 
         # Sets stop losses and take profits
         if self.take_profit is not None:
-            self.take_profit.set_take_profit(evaluated_conditions_df)
+            self.take_profit.set_take_profit(evaluated_conditions_df, self.position_type_enum)
         if self.stop_loss is not None:
-            self.stop_loss.set_stop_loss(evaluated_conditions_df)
+            self.stop_loss.set_stop_loss(evaluated_conditions_df, self.position_type_enum)
 
         # Clean the BUY and SELL columns based of the position type
         self.position_type.clean_buy_sell_columns(evaluated_conditions_df)
