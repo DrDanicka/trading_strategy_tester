@@ -2,6 +2,7 @@ import pandas as pd
 
 from trading_strategy_tester.conditions.condition import Condition
 from trading_strategy_tester.download.download_module import DownloadModule
+from trading_strategy_tester.trading_plot.downtrend_plot import DowntrendPlot
 from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
@@ -27,9 +28,10 @@ class DowntrendForXDaysCondition(Condition):
         return is_downtrend, signal_series
 
     def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
-        # TODO ploting
-
-        return None
+        return [DowntrendPlot(
+            self.series.get_data(downloader, df),
+            self.number_of_days
+        )]
 
     def to_string(self) -> str:
         return f'DowntrendForXDaysCondition({self.number_of_days}, {self.series.get_name()})'
