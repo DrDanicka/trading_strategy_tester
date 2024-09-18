@@ -19,7 +19,7 @@ class CrossOverPlot(TradingPlot):
         """
         self.series1 = series1
         self.series2 = series2
-        self.number_of_days = 0
+        self.days_to_shift = 0
 
 
     def get_plot(self, dark: bool = True) -> go.Figure:
@@ -79,7 +79,7 @@ class CrossOverPlot(TradingPlot):
         set_y_axis_range(fig, self.series1, self.series2)
 
 
-        title = f"{series1_name} and {series2_name} Crossover Plot Shifted" if self.number_of_days > 0 else f"{series1_name} and {series2_name} Crossover Plot"
+        title = f"{series1_name} and {series2_name} Crossover Plot Shifted" if self.days_to_shift > 0 else f"{series1_name} and {series2_name} Crossover Plot"
 
         if dark:
             plot_dark_mode_graph(fig, title)
@@ -88,19 +88,19 @@ class CrossOverPlot(TradingPlot):
 
         return fig
 
-    def shift(self, number_of_days: int):
+    def shift(self, days_to_shift: int):
         """
         Shifts both series (series1 and series2) by a specified number of days.
 
-        :param number_of_days: The number of days to shift the series by. If the number is within
+        :param days_to_shift: The number of days to shift the series by. If the number is within
                                the valid range (0 to len(series1)), the series will be shifted.
-        :type number_of_days: int
+        :type days_to_shift: int
         """
         # Ensure the number_of_days is within the valid range before shifting
-        if 0 <= number_of_days < len(self.series1):
-            self.number_of_days = number_of_days
+        if 0 <= days_to_shift < len(self.series1):
+            self.days_to_shift = days_to_shift
 
         # Shift both series1 and series2 by the specified number of days if number_of_days is positive
-        if self.number_of_days > 0:
-            self.series1 = self.series1.shift(self.number_of_days)
-            self.series2 = self.series2.shift(self.number_of_days)
+        if self.days_to_shift > 0:
+            self.series1 = self.series1.shift(self.days_to_shift)
+            self.series2 = self.series2.shift(self.days_to_shift)
