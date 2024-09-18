@@ -26,15 +26,15 @@ class TradingPlot(ABC):
 
 
     @abstractmethod
-    def shift(self, number_of_days: int):
+    def shift(self, days_to_shift: int):
         """
         Abstract method to shift the series by a given number of days.
 
         Subclasses must implement this method to handle the shifting of data in
         the plot, which could be useful for time-based analysis.
 
-        :param number_of_days: The number of days by which to shift the data.
-        :type number_of_days: int
+        :param days_to_shift: The number of days by which to shift the data.
+        :type days_to_shift: int
         """
         pass
 
