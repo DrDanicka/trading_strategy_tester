@@ -74,7 +74,7 @@ class UptrendPlot(TradingPlot):
         Shifts both series by a specified number of days.
 
         :param days_to_shift: The number of days to shift the series by. If the number is within
-                               the valid range (0 to len(series1)), the series will be shifted.
+                               the valid range (0 to len(series)), the series will be shifted.
         :type days_to_shift: int
         """
         # Ensure the number_of_days is within the valid range before shifting
