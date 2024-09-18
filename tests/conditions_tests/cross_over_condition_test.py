@@ -2,7 +2,7 @@ import unittest
 
 import pandas as pd
 
-from trading_strategy_tester.conditions.cross_over_condition import CrossOverCondition
+from trading_strategy_tester.conditions.threshold_conditions.cross_over_condition import CrossOverCondition
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.testing_series import TestingSeries
 

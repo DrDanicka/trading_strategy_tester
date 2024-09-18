@@ -1,10 +1,9 @@
 import unittest
 
-import numpy as np
 import pandas as pd
 
 from trading_strategy_tester.trading_series.testing_series import TestingSeries
-from trading_strategy_tester.conditions.greater_than_condition import GreaterThanCondition
+from trading_strategy_tester.conditions.threshold_conditions.greater_than_condition import GreaterThanCondition
 from trading_strategy_tester.download.download_module import DownloadModule
 
 class TestGreaterThanCondition(unittest.TestCase):

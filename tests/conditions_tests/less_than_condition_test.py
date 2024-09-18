@@ -3,7 +3,7 @@ import unittest
 import pandas as pd
 
 from trading_strategy_tester.trading_series.testing_series import TestingSeries
-from trading_strategy_tester.conditions.less_than_condition import LessThanCondition
+from trading_strategy_tester.conditions.threshold_conditions.less_than_condition import LessThanCondition
 from trading_strategy_tester.download.download_module import DownloadModule
 
 class TestLessThanCondition(unittest.TestCase):
