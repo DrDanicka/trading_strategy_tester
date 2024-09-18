@@ -46,7 +46,7 @@ class GreaterThanPlot(TradingPlot):
 
         # Highlight parts where series1 is greater than series2
         bool_colors: pd.Series = self.series1 > self.series2
-        colors = bool_colors.replace({True: LineColor.GREEN.value, False: LineColor.TRANSPARENT.value})
+        colors = bool_colors.replace({True: LineColor.LIGHT_GREEN.value, False: LineColor.TRANSPARENT.value})
 
         # Create sequences of x and y values for the line segments
         x_pairs = it.pairwise(self.series1.index)
