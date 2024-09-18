@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from trading_strategy_tester.conditions.parameterized_conditions.change_of_x_percent_per_y_days import ChangeOfXPercentPerYDaysCondition
+from trading_strategy_tester.conditions.parameterized_conditions.change_of_x_percent_per_y_days_condition import ChangeOfXPercentPerYDaysCondition
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.testing_series import TestingSeries
 
