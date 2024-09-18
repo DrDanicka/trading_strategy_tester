@@ -3,7 +3,7 @@ import unittest
 
 import pandas as pd
 
-from trading_strategy_tester.conditions.after_x_days_condition import AfterXDaysCondition
+from trading_strategy_tester.conditions.parameterized_conditions.after_x_days_condition import AfterXDaysCondition
 from trading_strategy_tester.conditions.test_condition import TestCondition
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.testing_series import TestingSeries

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from trading_strategy_tester.conditions.change_of_x_percent_per_y_days import ChangeOfXPercentPerYDaysCondition
+from trading_strategy_tester.conditions.parameterized_conditions.change_of_x_percent_per_y_days import ChangeOfXPercentPerYDaysCondition
 from trading_strategy_tester.conditions.condition import Condition
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
