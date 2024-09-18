@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from trading_strategy_tester.conditions.logical_conditions import IfThenElseCondition
+from trading_strategy_tester.conditions.logical_conditions.if_then_else_condition import IfThenElseCondition
 from trading_strategy_tester.conditions.test_condition import TestCondition
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.testing_series import TestingSeries
