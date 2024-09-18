@@ -27,9 +27,8 @@ class UptrendForXDaysCondition(Condition):
         return is_uptrend, signal_series
 
     def get_graphs(self, downloader: DownloadModule, df: pd.DataFrame) -> [TradingPlot]:
-        # TODO ploting
-
-        return None
+        
+        return
 
     def to_string(self) -> str:
         return f'UptrendForXDaysCondition({self.number_of_days}, {self.series.get_name()})'
