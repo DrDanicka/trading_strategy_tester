@@ -81,7 +81,7 @@ def plot_light_mode_graph(fig: go.Figure, title: str):
             bordercolor="gray",
             borderwidth=1
         ),
-        showlegend=True
+        showlegend=True if title != 'Price' else False
     )
 
 
@@ -115,7 +115,7 @@ def plot_dark_mode_graph(fig: go.Figure, title: str):
             bordercolor="gray",
             borderwidth=1
         ),
-        showlegend=True
+        showlegend=True if title != 'Price' else False
     )
 
 
