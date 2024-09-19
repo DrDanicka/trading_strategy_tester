@@ -4,7 +4,7 @@ from trading_strategy_tester.conditions.stoploss_takeprofit.stop_loss import Sto
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
 
 
-class TestStopLoss(unittest.TestCase):j
+class TestStopLoss(unittest.TestCase):
 
     def setUp(self):
         pass
