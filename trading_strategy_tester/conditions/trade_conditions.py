@@ -1,6 +1,7 @@
 import pandas as pd
 from .condition import Condition
 from ..download.download_module import DownloadModule
+from ..trading_plot.price_plot import PricePlot
 from ..trading_plot.trading_plot import TradingPlot
 
 
@@ -23,9 +24,11 @@ class TradeConditions:
         return df
 
     def get_graphs(self, df: pd.DataFrame) -> dict[str, [TradingPlot]]:
-        graphs = {}
+        graphs = dict()
 
         graphs['BUY'] = self.buy_condition.get_graphs(self.downloader, df)
         graphs['SELL'] = self.sell_condition.get_graphs(self.downloader, df)
+
+        graphs['PRICE'] = PricePlot(df)
 
         return graphs
