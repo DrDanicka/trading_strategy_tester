@@ -7,7 +7,7 @@ from datetime import datetime
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.overlap.sma import sma
-from trading_strategy_tester.trading_series.sma_series import SMA
+from trading_strategy_tester.trading_series.ma_series.sma_series import SMA
 
 class TestSMA(unittest.TestCase):
 

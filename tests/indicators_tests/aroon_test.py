@@ -5,8 +5,8 @@ from datetime import datetime
 
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.indicators.trend.aroon import aroon_up, aroon_down
-from trading_strategy_tester.trading_series.aroon_up_series import AROON_UP
-from trading_strategy_tester.trading_series.aroon_down_series import AROON_DOWN
+from trading_strategy_tester.trading_series.aroon_series.aroon_up_series import AROON_UP
+from trading_strategy_tester.trading_series.aroon_series.aroon_down_series import AROON_DOWN
 
 class TestAroon(unittest.TestCase):
 

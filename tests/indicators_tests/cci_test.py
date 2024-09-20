@@ -8,7 +8,7 @@ from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.momentum.cci import cci
 from trading_strategy_tester.trading_series.cci_series import CCI
-from trading_strategy_tester.trading_series.cci_smoothened_series import CCI_SMOOTHENED
+from trading_strategy_tester.trading_series.cci_series.cci_smoothened_series import CCI_SMOOTHENED
 from trading_strategy_tester.utils.sources import get_source_series
 
 class TestCCI(unittest.TestCase):
