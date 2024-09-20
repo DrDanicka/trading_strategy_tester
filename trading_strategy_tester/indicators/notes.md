@@ -69,6 +69,17 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 * long when crosses above zero
 * short when crosses below zero
 
+## ICHIMOKU (Ichimoku cloud)
+* trend is upward when price is above the Cloud
+* trend is downward when price is below the Cloud
+* trend is flat when price is in the Cloud
+
+* **long** when price crosses above Kijun-sen or whem tenkan-sen crosses above kijun-sen
+* exit when price crosses below kijun-sen or tenkan-sen crosses below kijun-sen
+
+* **short** when price crosses below kijun-sen or when tenkan-sen crosses below kijun-sen
+* exit when price crosses above kijun-sen or when tenkan-sen crosses above kijun-sen
+
 ## ROC (Rate of Change)
 * long when ROC crosses to below the oversold level and rises back above it
 * long on bull divergence
