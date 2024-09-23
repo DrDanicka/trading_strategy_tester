@@ -80,6 +80,12 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 * **short** when price crosses below kijun-sen or when tenkan-sen crosses below kijun-sen
 * exit when price crosses above kijun-sen or when tenkan-sen crosses above kijun-sen
 
+## KC (Keltner Channels)
+* **long** when price turns up or below the lower band
+* close if price crosses upper band or crosses to below the moving average
+* **short** when price turns up or above the upper band
+* close if price turns up near the lower band or crosses to above the moving average
+
 ## ROC (Rate of Change)
 * long when ROC crosses to below the oversold level and rises back above it
 * long on bull divergence
