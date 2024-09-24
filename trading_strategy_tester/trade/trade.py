@@ -7,7 +7,7 @@ class Trade:
     and calculations for performance metrics like profit and loss, and drawdown.
     """
 
-    def __init__(self, df_slice: pd.DataFrame, trade_commissions: TradeCommissions, long: bool = True):
+    def __init__(self, df_slice: pd.DataFrame, trade_id: int, trade_commissions: TradeCommissions, long: bool = True):
         """
         Initializes the Trade object with the provided DataFrame slice and trade details.
 
@@ -19,6 +19,7 @@ class Trade:
         :type long: bool, optional
         """
         self.data = df_slice
+        self.trade_id = trade_id
         self.trade_commissions = trade_commissions
         self.long = long
         self.open_date, self.close_date = self.get_dates()
@@ -98,6 +99,7 @@ class Trade:
         :rtype: dict
         """
         return {
+            'ID': self.trade_id,
             'Type': 'Long' if self.long else 'Short',
             'Open Date': self.open_date,
             'Close Date': self.close_date,
@@ -125,20 +127,23 @@ def create_all_trades(df: pd.DataFrame, trade_commissions: TradeCommissions) -> 
     trades = []
     buy_index = 0
     sell_index = 0
+    counter = 1
 
     for i, (_, row) in enumerate(df.iterrows()):
         if row['BUY'] and row['Long'] == 'LongEntry':
             buy_index = i
 
         if row['SELL'] and row['Long'] == 'LongExit':
-            long_trade = Trade(df.iloc[buy_index:i + 1], trade_commissions, True)
+            long_trade = Trade(df.iloc[buy_index:i + 1], counter, trade_commissions, True)
+            counter += 1
             trades.append(long_trade)
 
         if row['SELL'] and row['Short'] == 'ShortEntry':
             sell_index = i
 
         if row['BUY'] and row['Short'] == 'ShortExit':
-            short_trade = Trade(df.iloc[sell_index:i + 1], trade_commissions, False)
+            short_trade = Trade(df.iloc[sell_index:i + 1], counter, trade_commissions, False)
+            counter += 1
             trades.append(short_trade)
 
     return trades
