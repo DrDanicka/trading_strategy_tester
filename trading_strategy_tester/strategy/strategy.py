@@ -7,10 +7,13 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.interval_enum import Interval
 from trading_strategy_tester.enums.period_enum import Period
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
+from trading_strategy_tester.trade.trade import create_all_trades
+from trading_strategy_tester.trade.trade_commissions.money_commissions import MoneyCommissions
+from trading_strategy_tester.trade.trade_commissions.trade_commissions import TradeCommissions
 from trading_strategy_tester.utils.validations import get_position_type_from_enum
 
 
-class Strategy():
+class Strategy:
     def __init__(self,
                  ticker:str,
                  position_type: PositionTypeEnum,
@@ -21,7 +24,9 @@ class Strategy():
                  start_date: datetime = datetime(2024, 1, 1),
                  end_date: datetime = datetime.today(),
                  interval: Interval = Interval.ONE_DAY,
-                 period: Period = Period.NOT_PASSED):
+                 period: Period = Period.NOT_PASSED,
+                 trade_commissions: TradeCommissions = MoneyCommissions(0)
+                 ):
         self.ticker = ticker
         self.position_type_enum = position_type
         self.position_type = get_position_type_from_enum(position_type)
@@ -33,8 +38,11 @@ class Strategy():
         self.end_date = end_date
         self.interval = interval
         self.period = period
+        self.trade_commissions = trade_commissions
         self.trade_conditions = None
         self.graphs = dict()
+        self.trades = list()
+        self.stats = dict()
 
     def execute(self):
         downloader = DownloadModule(self.start_date, self.end_date, self.interval, self.period)
@@ -60,8 +68,11 @@ class Strategy():
         # Create Graphs
         self.graphs = self.trade_conditions.get_graphs(df)
 
-        # TODO Create trades
-        # TODO Create Stats
+        # Create list of trades
+        self.trades = create_all_trades(df, self.trade_commissions)
+
+        # Create stats of the strategy
+        #self.stats =
 
         # Delete temp downloaded files
         downloader.delete_temp_files()
@@ -69,8 +80,7 @@ class Strategy():
         return evaluated_conditions_df
 
     def get_trades(self):
-        # TODO
-        pass
+        return self.trades
 
     def get_graphs(self) -> dict:
         return self.graphs
