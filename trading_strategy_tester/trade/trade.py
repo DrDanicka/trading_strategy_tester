@@ -108,7 +108,7 @@ class Trade:
             'Exit Price': self.exit_price,
             'Entry Signal': self.entry_signal,
             'Exit Signal': self.exit_signal,
-            'Commissinos Paid': self.commissions,
+            'Commissions Paid': self.commissions,
             'Max Drawdown': self.max_drawdown,
             'Max Drawdown Percentage': self.max_drawdown_percentage,
             'P&L': self.p_and_l,
