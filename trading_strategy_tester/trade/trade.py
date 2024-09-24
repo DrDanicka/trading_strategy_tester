@@ -1,4 +1,6 @@
 import pandas as pd
+
+from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trade.trade_commissions.trade_commissions import TradeCommissions
 
 class Trade:
@@ -46,8 +48,8 @@ class Trade:
         :return: A tuple containing the entry price (first 'Close' price) and exit price (last 'Close' price).
         :rtype: tuple
         """
-        entry_price = self.data['Close'].iloc[0]  # First 'Close' price
-        exit_price = self.data['Close'].iloc[-1]  # Last 'Close' price
+        entry_price = self.data[SourceType.CLOSE.value].iloc[0]  # First 'Close' price
+        exit_price = self.data[SourceType.CLOSE.value].iloc[-1]  # Last 'Close' price
         return entry_price, exit_price
 
     def get_signals(self) -> tuple:
@@ -69,11 +71,11 @@ class Trade:
         :rtype: tuple
         """
         if self.long:
-            peak = self.data['Close'].max()
-            trough = self.data['Close'].min()
+            peak = self.data[SourceType.CLOSE.value].max()
+            trough = self.data[SourceType.CLOSE.value].min()
         else:
-            peak = self.data['Close'].min()
-            trough = self.data['Close'].max()
+            peak = self.data[SourceType.CLOSE.value].min()
+            trough = self.data[SourceType.CLOSE.value].max()
 
         max_drawdown = peak - trough
         max_drawdown_percentage = (max_drawdown / peak) * 100 if peak != 0 else 0
@@ -114,6 +116,19 @@ class Trade:
             'P&L': self.p_and_l,
             'Percentage P&L': self.percentage_p_and_l,
         }
+
+    def __repr__(self) -> str:
+        """
+        Provides a string representation of the Trade object.
+
+        :return: A string representation of the Trade object.
+        :rtype: str
+        """
+        return (f"Trade(ID={self.trade_id}, Type={'Long' if self.long else 'Short'}, "
+                f"Open Date={self.open_date}, Close Date={self.close_date}, "
+                f"Entry Price={self.entry_price}, Exit Price={self.exit_price}, "
+                f"P&L={self.p_and_l:.2f}, Percentage P&L={self.percentage_p_and_l:.2f}%)")
+
 
 def create_all_trades(df: pd.DataFrame, trade_commissions: TradeCommissions) -> list[Trade]:
     """
