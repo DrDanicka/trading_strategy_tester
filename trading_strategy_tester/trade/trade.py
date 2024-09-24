@@ -26,7 +26,7 @@ class Trade:
         self.entry_price, self.exit_price = self.get_prices()
         self.entry_signal, self.exit_signal = self.get_signals()
         self.max_drawdown, self.max_drawdown_percentage = self.get_max_drawdown()
-        self.p_and_l, self.percentage_p_and_l = self.get_p_and_l()
+        self.p_and_l, self.percentage_p_and_l, self.commissions = self.get_p_and_l()
 
     def get_dates(self) -> tuple:
         """
@@ -87,9 +87,10 @@ class Trade:
         :rtype: tuple
         """
         p_and_l = self.exit_price - self.entry_price if self.long else self.entry_price - self.exit_price
-        p_and_l -= self.trade_commissions.get_commission(self.entry_price)
+        commissions = self.trade_commissions.get_commission(self.entry_price)
+        p_and_l -= commissions
         p_and_l_percentage = (p_and_l * 100) / self.entry_price
-        return p_and_l, p_and_l_percentage
+        return p_and_l, p_and_l_percentage, commissions
 
     def get_summary(self) -> dict:
         """
@@ -107,6 +108,7 @@ class Trade:
             'Exit Price': self.exit_price,
             'Entry Signal': self.entry_signal,
             'Exit Signal': self.exit_signal,
+            'Commissinos Paid': self.commissions,
             'Max Drawdown': self.max_drawdown,
             'Max Drawdown Percentage': self.max_drawdown_percentage,
             'P&L': self.p_and_l,
