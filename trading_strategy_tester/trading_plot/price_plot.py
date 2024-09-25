@@ -48,7 +48,7 @@ class PricePlot(TradingPlot):
         buy_points = self.df[self.df['BUY'] == True]  # Filter rows where BUY is True
         fig.add_trace(go.Scatter(
             x=buy_points.index,
-            y=buy_points['Low'] - 0.05 * average_price,
+            y=buy_points[SourceType.LOW.value] - 0.05 * average_price,
             mode='markers',
             marker=dict(symbol='triangle-up', color='blue', size=12),
             name='BUY',
@@ -60,12 +60,28 @@ class PricePlot(TradingPlot):
         sell_points = self.df[self.df['SELL'] == True]  # Filter rows where SELL is True
         fig.add_trace(go.Scatter(
             x=sell_points.index,
-            y=sell_points['High'] + 0.05 * average_price,
+            y=sell_points[SourceType.HIGH.value] + 0.05 * average_price,
             mode='markers',
             marker=dict(symbol='triangle-down', color='orange', size=12),
             name='SELL',
             hovertemplate='<b>%{customdata:.2f}</b>',
             customdata=buy_points['Close']
+        ))
+
+        # Determine volume bar colors based on whether the Close price increased or decreased
+        volume_colors = [
+            LineColor.GREEN.value if self.df[SourceType.CLOSE.value][i] >= self.df[SourceType.OPEN.value][i]
+            else LineColor.RED.value for i in range(len(self.df))
+        ]
+
+        # Add volume bars as a secondary y-axis
+        fig.add_trace(go.Bar(
+            x=self.df.index,
+            y=self.df['Volume'],
+            name='Volume',
+            marker=dict(color=volume_colors),  # Use the dynamically set colors
+            yaxis='y2',  # Plot on secondary y-axis
+            opacity=0.2  # Make the bars slightly transparent
         ))
 
         # Set the x-axis range
@@ -82,6 +98,17 @@ class PricePlot(TradingPlot):
             plot_dark_mode_graph(fig, title)
         else:
             plot_light_mode_graph(fig, title)
+
+        # Update the layout to add a secondary y-axis for volume
+        fig.update_layout(
+            yaxis2=dict(
+                title="Volume",
+                overlaying='y',  # Overlaying the same x-axis
+                side='right',  # Volume axis on the right side
+                showgrid=False
+            ),
+            yaxis=dict(title="Price")
+        )
 
         return fig
 
