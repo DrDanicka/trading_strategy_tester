@@ -10,19 +10,8 @@ class DownloadModule:
     """
     A module for downloading and caching financial data from Yahoo Finance.
 
-    Attributes:
-    -----------
-    start_date : datetime
-        The start date for the data download.
-    end_date : datetime:
-        The end date for the data download.
-    interval : str:
-        The interval between data points (e.g., daily, weekly).
-    period : str:
-        The period over which to fetch data (e.g., 1mo, 1y).
-
     Methods:
-    -------
+    --------
     download_save_and_return_ticker(ticker, filepath, datetime_type):
         Downloads data for a given ticker, saves it to a CSV file, and returns a DataFrame.
     return_cached_or_download_date(ticker):
@@ -34,23 +23,21 @@ class DownloadModule:
     """
 
     def __init__(self,
-                 start_date:datetime=datetime(2024, 1, 1),
-                 end_date:datetime=datetime.today(),
-                 interval: Interval=Interval.ONE_DAY,
-                 period: Period=Period.NOT_PASSED):
+                 start_date: datetime = datetime(2024, 1, 1),
+                 end_date: datetime = datetime.today(),
+                 interval: Interval = Interval.ONE_DAY,
+                 period: Period = Period.NOT_PASSED):
         """
         Initializes the DownloadModule with the given parameters.
 
-        Parameters:
-        -----------
-        start_date : datetime
-            The start date for the data download.
-        end_date : datetime
-            The end date for the data download.
-        interval : Interval
-            The interval between data points.
-        period : Period
-            The period over which to fetch data.
+        :param start_date: The start date for the data download.
+        :type start_date: datetime
+        :param end_date: The end date for the data download.
+        :type end_date: datetime
+        :param interval: The interval between data points.
+        :type interval: Interval
+        :param period: The period over which to fetch data.
+        :type period: Period
         """
 
         self.start_date = start_date
@@ -69,19 +56,14 @@ class DownloadModule:
         """
         Downloads data for a given ticker and saves it to a CSV file. Returns the data as a DataFrame.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the data to be downloaded.
-        filepath : str
-            The file path where the data should be saved.
-        datetime_type : bool
-            If True, uses start_date and end_date for downloading; otherwise, uses period.
-
-        Returns:
-        --------
-        pd.DataFrame
-            The DataFrame containing the downloaded data.
+        :param ticker: The ticker symbol for the data to be downloaded.
+        :type ticker: str
+        :param filepath: The file path where the data should be saved.
+        :type filepath: str
+        :param datetime_type: If True, uses start_date and end_date for downloading; otherwise, uses period.
+        :type datetime_type: bool
+        :return: The DataFrame containing the downloaded data.
+        :rtype: pd.DataFrame
         """
 
         if datetime_type:
@@ -90,26 +72,18 @@ class DownloadModule:
             df = yf.download(ticker, interval=self.interval, period=self.period)
 
         df.to_csv(filepath)
-
         return df
-
 
     def return_cached_or_download_date(self, ticker: str) -> pd.DataFrame:
         """
         Returns cached data for the given ticker if available; otherwise, downloads it using a date range.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the data to be retrieved or downloaded.
-
-        Returns:
-        --------
-        pd.DataFrame
-            The DataFrame containing the cached or newly downloaded data.
+        :param ticker: The ticker symbol for the data to be retrieved or downloaded.
+        :type ticker: str
+        :return: The DataFrame containing the cached or newly downloaded data.
+        :rtype: pd.DataFrame
         """
 
-        # Filename format consists of Ticker, start date, end date and interval separated by '_'
         filename = f'{ticker}_{self.start_date.date()}_{self.end_date.date()}_{self.interval}.csv'
         filepath = os.path.join(self.data_path, filename)
 
@@ -122,18 +96,12 @@ class DownloadModule:
         """
        Returns cached data for the given ticker if available; otherwise, downloads it using period.
 
-       Parameters:
-       -----------
-       ticker : str
-           The ticker symbol for the data to be retrieved or downloaded.
-
-       Returns:
-       --------
-       pd.DataFrame
-           The DataFrame containing the cached or newly downloaded data.
+       :param ticker: The ticker symbol for the data to be retrieved or downloaded.
+       :type ticker: str
+       :return: The DataFrame containing the cached or newly downloaded data.
+       :rtype: pd.DataFrame
        """
 
-        # Filename consists of Ticker, today's date, period and interval separated by '_'
         filename = f'{ticker}_{datetime.today().date()}_{self.period}_{self.interval}.csv'
         filepath = os.path.join(self.data_path, filename)
 
@@ -146,15 +114,10 @@ class DownloadModule:
         """
         Determines the appropriate method to fetch data based on the period attribute and returns the DataFrame.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the data to be downloaded.
-
-        Returns:
-        --------
-        pd.DataFrame
-            The DataFrame containing the data for the given ticker.
+        :param ticker: The ticker symbol for the data to be downloaded.
+        :type ticker: str
+        :return: The DataFrame containing the data for the given ticker.
+        :rtype: pd.DataFrame
         """
 
         if self.period == 'not_passed':
@@ -166,26 +129,17 @@ class DownloadModule:
         """
         Deletes all files in the directory specified by self.data_path.
 
-        Raises:
-        -------
-        FileNotFoundError:
-            If self.data_path does not exist.
-        IsADirectoryError:
-            If self.data_path is not a directory.
+        :raises FileNotFoundError: If self.data_path does not exist.
+        :raises IsADirectoryError: If self.data_path is not a directory.
         """
 
-        # Check if the directory exists
         if not os.path.exists(self.data_path):
             raise FileNotFoundError(f"The directory '{self.data_path}' does not exist.")
 
-        # Check if the path is a directory
         if not os.path.isdir(self.data_path):
             raise IsADirectoryError(f"The path '{self.data_path}' is not a directory.")
 
-        # Loop through all files in the directory and delete them
         for filename in os.listdir(self.data_path):
             file_path = os.path.join(self.data_path, filename)
-
-            # Check if it's a file before attempting to delete it
             if os.path.isfile(file_path):
                 os.remove(file_path)
