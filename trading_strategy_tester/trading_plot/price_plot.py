@@ -30,16 +30,43 @@ class PricePlot(TradingPlot):
         # Create a candlestick chart
         candlestick = go.Candlestick(
             x=self.df.index,  # X-axis: date/time or index
-            open=self.df['Open'],  # Opening price
-            high=self.df['High'],  # Highest price
-            low=self.df['Low'],  # Lowest price
-            close=self.df['Close'],  # Closing price
+            open=self.df[SourceType.OPEN.value],
+            high=self.df[SourceType.HIGH.value],
+            low=self.df[SourceType.LOW.value],
+            close=self.df[SourceType.CLOSE.value],
             increasing_line_color=LineColor.GREEN.value,  # Color for increasing candles
             decreasing_line_color=LineColor.RED.value  # Color for decreasing candles
         )
 
         # Initialize the figure
         fig = go.Figure(data=[candlestick])
+
+        # Calculate average price for offset on BUYs and SELLs
+        average_price = self.df[SourceType.CLOSE.value].mean()
+
+        # Add BUY points to the plot
+        buy_points = self.df[self.df['BUY'] == True]  # Filter rows where BUY is True
+        fig.add_trace(go.Scatter(
+            x=buy_points.index,
+            y=buy_points['Low'] - 0.05 * average_price,
+            mode='markers',
+            marker=dict(symbol='triangle-up', color='blue', size=12),
+            name='BUY',
+            hovertemplate='<b>%{customdata:.2f}</b>',
+            customdata=buy_points['Close']
+        ))
+
+        # Add SELL points to the plot
+        sell_points = self.df[self.df['SELL'] == True]  # Filter rows where SELL is True
+        fig.add_trace(go.Scatter(
+            x=sell_points.index,
+            y=sell_points['High'] + 0.05 * average_price,
+            mode='markers',
+            marker=dict(symbol='triangle-down', color='orange', size=12),
+            name='SELL',
+            hovertemplate='<b>%{customdata:.2f}</b>',
+            customdata=buy_points['Close']
+        ))
 
         # Set the x-axis range
         set_x_axis_range(fig, self.df[SourceType.CLOSE.value])
