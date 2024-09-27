@@ -70,7 +70,7 @@ class PricePlot(TradingPlot):
 
         # Determine volume bar colors based on whether the Close price increased or decreased
         volume_colors = [
-            LineColor.GREEN.value if self.df[SourceType.CLOSE.value][i] >= self.df[SourceType.OPEN.value][i]
+            LineColor.GREEN.value if self.df[SourceType.CLOSE.value].iloc[i] >= self.df[SourceType.OPEN.value].iloc[i]
             else LineColor.RED.value for i in range(len(self.df))
         ]
 
