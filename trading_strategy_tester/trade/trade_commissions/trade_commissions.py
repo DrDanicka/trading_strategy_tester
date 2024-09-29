@@ -16,13 +16,15 @@ class TradeCommissions(ABC):
         self.value = value
 
     @abstractmethod
-    def get_commission(self, price: float) -> float:
+    def get_commission(self, invested: float, contracts: float) -> float:
         """
         Abstract method to calculate the commission based on the given price.
         This method must be implemented by subclasses.
 
-        :param price: The price of the trade on which the commission is to be calculated.
-        :type price: float
+        :param contracts: The amount of contracts in trade.
+        :type contracts: float
+        :param invested: The invested amount on which the commission is calculated.
+        :type invested: float
         :return: The commission amount for the given price.
         :rtype: float
         """

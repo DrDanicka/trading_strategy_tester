@@ -16,13 +16,15 @@ class PercentageCommissions(TradeCommissions):
         """
         super().__init__(value)
 
-    def get_commission(self, price: float) -> float:
+    def get_commission(self, invested: float, contracts: float) -> float:
         """
         Calculates the commission as a percentage of the provided trade price.
 
-        :param price: The price of the trade on which the commission is calculated.
-        :type price: float
+        :param contracts: The amount of contracts in trade.
+        :type contracts: float
+        :param invested: The invested amount on which the commission is calculated.
+        :type invested: float
         :return: The calculated commission amount.
         :rtype: float
         """
-        return self.value * price
+        return (self.value / 100) * invested

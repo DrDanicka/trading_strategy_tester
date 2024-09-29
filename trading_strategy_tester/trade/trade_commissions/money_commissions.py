@@ -15,13 +15,15 @@ class MoneyCommissions(TradeCommissions):
         """
         super().__init__(value)
 
-    def get_commission(self, price: float) -> float:
+    def get_commission(self, invested: float, contracts: float) -> float:
         """
         Returns the fixed commission amount.
 
-        :param price: The price of the trade (not used in calculation for fixed commission).
-        :type price: float
+        :param contracts: The amount of contracts in trade.
+        :type contracts: float
+        :param invested: The invested amount on which the commission is calculated.
+        :type invested: float
         :return: The fixed commission amount.
         :rtype: float
         """
-        return self.value
+        return self.value * contracts
