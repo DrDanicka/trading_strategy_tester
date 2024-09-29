@@ -46,7 +46,7 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, investing_type) -> dic
             gross_loss += trade_summary['P&L']
             largest_losing_trade = min(largest_losing_trade, trade_summary['Percentage P&L'])
 
-        max_drawdown = max(max_drawdown, trade_summary['Max Drawdown'])
+        max_drawdown = max(max_drawdown, trade_summary['Drawdown'])
 
     average_trade = sum(trade_p_and_l) / total_trades
 
