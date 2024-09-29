@@ -11,6 +11,8 @@ from trading_strategy_tester.enums.interval_enum import Interval
 from trading_strategy_tester.enums.period_enum import Period
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
 from trading_strategy_tester.statistics.statistics import get_strategy_stats
+from trading_strategy_tester.trade.order_size.contracts import Contracts
+from trading_strategy_tester.trade.order_size.order_size import OrderSize
 from trading_strategy_tester.trade.trade import create_all_trades
 from trading_strategy_tester.trade.trade_commissions.money_commissions import MoneyCommissions
 from trading_strategy_tester.trade.trade_commissions.trade_commissions import TradeCommissions
@@ -46,6 +48,8 @@ class Strategy:
                  end_date: datetime = datetime.today(),
                  interval: Interval = Interval.ONE_DAY,
                  period: Period = Period.NOT_PASSED,
+                 initial_capital: float = 1_000_000,
+                 order_size: OrderSize = Contracts(1),
                  trade_commissions: TradeCommissions = MoneyCommissions(0)
                  ):
         self.ticker = ticker
@@ -60,6 +64,8 @@ class Strategy:
         self.interval = interval
         self.period = period
         self.trade_commissions = trade_commissions
+        self.initial_capital = initial_capital
+        self.order_size = order_size
         self.trade_conditions = None
         self.graphs = dict()
         self.trades = list()
@@ -98,7 +104,7 @@ class Strategy:
         self.graphs = self.trade_conditions.get_graphs(df)
 
         # Create list of trades
-        self.trades = create_all_trades(df, self.trade_commissions)
+        self.trades = create_all_trades(df, self.order_size, self.initial_capital, self.trade_commissions)
 
         # Create stats of the strategy
         self.stats = get_strategy_stats(self.trades, evaluated_conditions_df, None)
