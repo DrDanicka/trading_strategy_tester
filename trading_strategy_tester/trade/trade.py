@@ -31,7 +31,7 @@ class Trade:
         self.entry_price, self.exit_price = self.get_prices()
         self.entry_signal, self.exit_signal = self.get_signals()
         self.invested, self.contracts = order_size.get_invested_amount(self.entry_price, self.current_capital)
-        self.max_drawdown, self.max_drawdown_percentage = self.get_max_drawdown()
+        self.drawdown, self.drawdown_percentage = self.get_drawdown()
         self.p_and_l, self.percentage_p_and_l, self.commissions = self.get_p_and_l()
         self.current_capital = current_capital + self.p_and_l
 
@@ -68,23 +68,22 @@ class Trade:
         exit_signal = self.data['SELL_Signals'].iloc[-2] if self.long else self.data['BUY_Signals'].iloc[-2]
         return entry_signal, exit_signal
 
-    def get_max_drawdown(self) -> tuple:
+    def get_drawdown(self) -> tuple:
         """
         Calculates the maximum drawdown and its percentage during the trade period.
 
         :return: A tuple containing the maximum drawdown and the maximum drawdown percentage.
         :rtype: tuple
         """
+        # Calculating trough without first and last value
         if self.long:
-            peak = self.data[SourceType.HIGH.value].max()
-            trough = self.data[SourceType.LOW.value].min()
+            trough = self.data[SourceType.LOW.value].iloc[1:-1].min()
         else:
-            peak = self.data[SourceType.LOW.value].min()
-            trough = self.data[SourceType.HIGH.value].max()
+            trough = self.data[SourceType.HIGH.value].iloc[1:-1].max()
 
-        max_drawdown = peak - trough
-        max_drawdown_percentage = (max_drawdown / peak) * 100 if peak != 0 else 0
-        return self.contracts * max_drawdown, max_drawdown_percentage
+        drawdown = self.entry_price - trough
+        drawdown_percentage = (drawdown / self.entry_price) * 100 if self.entry_price != 0 else 0
+        return self.contracts * drawdown, drawdown_percentage
 
     def get_p_and_l(self) -> tuple:
         """
@@ -118,8 +117,8 @@ class Trade:
             'Entry Signal': self.entry_signal,
             'Exit Signal': self.exit_signal,
             'Commissions Paid': self.commissions,
-            'Max Drawdown': self.max_drawdown,
-            'Max Drawdown Percentage': self.max_drawdown_percentage,
+            'Drawdown': self.drawdown,
+            'Drawdown Percentage': self.drawdown_percentage,
             'P&L': self.p_and_l,
             'Percentage P&L': self.percentage_p_and_l,
             'Current Capital': self.current_capital,
@@ -140,7 +139,9 @@ class Trade:
         return (f"Trade(ID={self.trade_id}, Type={'Long' if self.long else 'Short'}, "
                 f"Open Date={self.open_date}, Close Date={self.close_date}, "
                 f"Entry Price={self.entry_price}, Exit Price={self.exit_price}, "
-                f"P&L={self.p_and_l:.2f}, Percentage P&L={self.percentage_p_and_l:.2f}%)")
+                f"P&L={self.p_and_l:.2f}, Percentage P&L={self.percentage_p_and_l:.2f}%, "
+                f"Drawdown={self.drawdown:.2f}, Drawdown Percentage={self.drawdown_percentage:.2f}%, "
+                f"Contracts={self.contracts:.2f} ,Current Capital={self.current_capital:.2f})")
 
 
 def create_all_trades(df: pd.DataFrame, order_size: OrderSize, initial_capital: float, trade_commissions: TradeCommissions) -> list[Trade]:
