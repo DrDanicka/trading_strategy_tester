@@ -10,7 +10,7 @@ class Trade:
     and calculations for performance metrics like profit and loss, and drawdown.
     """
 
-    def __init__(self, df_slice: pd.DataFrame, trade_id: int, order_size: OrderSize, current_capital: float, trade_commissions: TradeCommissions, long: bool = True):
+    def __init__(self, df_slice: pd.DataFrame, trade_id: int, order_size: OrderSize, current_capital: float, initial_capital:float, trade_commissions: TradeCommissions, long: bool = True):
         """
         Initializes the Trade object with the provided DataFrame slice and trade details.
 
@@ -25,15 +25,20 @@ class Trade:
         self.trade_id = trade_id
         self.order_size = order_size
         self.current_capital = current_capital
+        self.initial_capital = initial_capital
         self.trade_commissions = trade_commissions
         self.long = long
-        self.open_date, self.close_date = self.get_dates()
+        self.entry_date, self.exit_date = self.get_dates()
         self.entry_price, self.exit_price = self.get_prices()
         self.entry_signal, self.exit_signal = self.get_signals()
         self.invested, self.contracts = order_size.get_invested_amount(self.entry_price, self.current_capital)
         self.drawdown, self.drawdown_percentage = self.get_drawdown()
+        self.run_up, self.run_up_percentage = self.get_run_up()
         self.p_and_l, self.percentage_p_and_l, self.commissions = self.get_p_and_l()
         self.current_capital = current_capital + self.p_and_l
+        self.cumulative_p_and_l = self.current_capital - self.initial_capital
+        self.cumulative_p_and_l_percentage = (self.cumulative_p_and_l * 100) / self.initial_capital
+
 
     def get_dates(self) -> tuple:
         """
@@ -42,9 +47,9 @@ class Trade:
         :return: A tuple containing the first and last dates.
         :rtype: tuple
         """
-        first_date = self.data.index[1]  # First date of the trade period
-        last_date = self.data.index.max()  # Last date of the trade period
-        return first_date, last_date
+        entry_date = self.data.index[1]  # First date of the trade period
+        exit_date = self.data.index.max()  # Last date of the trade period
+        return entry_date, exit_date
 
     def get_prices(self) -> tuple:
         """
@@ -85,6 +90,16 @@ class Trade:
         drawdown_percentage = (drawdown / self.entry_price) * 100 if self.entry_price != 0 else 0
         return self.contracts * drawdown, drawdown_percentage
 
+    def get_run_up(self) -> tuple:
+        if self.long:
+            run_up = self.data[SourceType.HIGH.value].iloc[1:-1].max() - self.entry_price
+        else:
+            run_up = self.entry_price - self.data[SourceType.LOW.value].iloc[1:-1].min()
+
+        run_up_percentage = (run_up / self.entry_price) * 100
+
+        return run_up, run_up_percentage
+
     def get_p_and_l(self) -> tuple:
         """
         Calculates the profit or loss (P&L) of the trade and the P&L percentage.
@@ -108,8 +123,8 @@ class Trade:
         return {
             'ID': self.trade_id,
             'Type': 'Long' if self.long else 'Short',
-            'Open Date': self.open_date,
-            'Close Date': self.close_date,
+            'Entry Date': self.entry_date,
+            'Exit Date': self.exit_date,
             'Entry Price': self.entry_price,
             'Exit Price': self.exit_price,
             'Invested': self.invested,
@@ -117,10 +132,14 @@ class Trade:
             'Entry Signal': self.entry_signal,
             'Exit Signal': self.exit_signal,
             'Commissions Paid': self.commissions,
-            'Drawdown': self.drawdown,
-            'Drawdown Percentage': self.drawdown_percentage,
             'P&L': self.p_and_l,
             'Percentage P&L': self.percentage_p_and_l,
+            'Cumulative P&L': self.cumulative_p_and_l,
+            'Percentage Cumulative P&L': self.cumulative_p_and_l_percentage,
+            'Run-up': self.run_up,
+            'Percentage Run-up': self.run_up_percentage,
+            'Drawdown': self.drawdown,
+            'Drawdown Percentage': self.drawdown_percentage,
             'Current Capital': self.current_capital,
         }
 
@@ -136,12 +155,29 @@ class Trade:
         :return: A string representation of the Trade object.
         :rtype: str
         """
-        return (f"Trade(ID={self.trade_id}, Type={'Long' if self.long else 'Short'}, "
-                f"Open Date={self.open_date}, Close Date={self.close_date}, "
-                f"Entry Price={self.entry_price}, Exit Price={self.exit_price}, "
-                f"P&L={self.p_and_l:.2f}, Percentage P&L={self.percentage_p_and_l:.2f}%, "
-                f"Drawdown={self.drawdown:.2f}, Drawdown Percentage={self.drawdown_percentage:.2f}%, "
-                f"Contracts={self.contracts:.2f} ,Current Capital={self.current_capital:.2f})")
+        return (f"Trade(\n"
+                f"  ID={self.trade_id},\n"
+                f"  Type={'Long' if self.long else 'Short'},\n"
+                f"  Entry Date={self.entry_date},\n"
+                f"  Exit Date={self.exit_date},\n"
+                f"  Entry Price={self.entry_price:.2f} USD,\n"
+                f"  Exit Price={self.exit_price:.2f} USD,\n"
+                f"  Invested={self.invested:.2f} USD,\n"
+                f"  Contracts={self.contracts:.2f}\n"
+                f"  Entry Signal={self.entry_signal},\n"
+                f"  Exit Signal={self.exit_signal},\n"
+                f"  Commissions Paid={self.commissions:.2f} USD,\n"
+                f"  P&L={self.p_and_l:.2f} USD,\n"
+                f"  Percentage P&L={self.percentage_p_and_l:.2f}%,\n"
+                f"  Cumulative P&L={self.cumulative_p_and_l:.2f} USD,\n"
+                f"  Percentage Cumulative P&L={self.cumulative_p_and_l_percentage:.2f}%\n"
+                f"  Run-up={self.run_up:.2f} USD,\n"
+                f"  Percentage Run-up={self.run_up_percentage:.2f}%,\n"
+                f"  Drawdown={self.drawdown:.2f} USD,\n"
+                f"  Percentage Drawdown={self.drawdown_percentage:.2f}%,\n"
+                f"  Current Capital={self.current_capital:.2f}\n"
+                f")"
+                )
 
 
 def create_all_trades(df: pd.DataFrame, order_size: OrderSize, initial_capital: float, trade_commissions: TradeCommissions) -> list[Trade]:
@@ -172,6 +208,7 @@ def create_all_trades(df: pd.DataFrame, order_size: OrderSize, initial_capital: 
                 trade_id=counter,
                 order_size=order_size,
                 current_capital=current_capital,
+                initial_capital=initial_capital,
                 trade_commissions=trade_commissions,
                 long=True
             )
@@ -189,6 +226,7 @@ def create_all_trades(df: pd.DataFrame, order_size: OrderSize, initial_capital: 
                 trade_id=counter,
                 order_size=order_size,
                 current_capital=current_capital,
+                initial_capital=initial_capital,
                 trade_commissions=trade_commissions,
                 long=False
             )
