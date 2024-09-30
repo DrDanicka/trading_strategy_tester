@@ -41,11 +41,11 @@ class LongShortCombination(PositionType):
                 # If no position is currently open (neither bought nor sold)
                 if not bought and not sold:
                     # If it is a 'BUY' signal
-                    if row['BUY'] and not row['SELL']:
+                    if row['BUY'] and not row['SELL'] and not self._is_takeprofit_or_stoploss(row, False):
                         bought = True
                         df.at[index, 'Long'] = 'LongEntry'  # Mark entry for a long position
                     # If it is a 'SELL' signal
-                    elif row['SELL'] and not row['BUY']:
+                    elif row['SELL'] and not row['BUY'] and not self._is_takeprofit_or_stoploss(row, True):
                         sold = True
                         df.at[index, 'Short'] = 'ShortEntry'  # Mark entry for a short position
                     else:
@@ -102,28 +102,26 @@ class LongShortCombination(PositionType):
                 # If the last entry is 'SELL', clear it as no exit was recorded
                 df.at[df.index[-1], 'Short'] = None
 
-
     def _is_takeprofit_or_stoploss(self, row, sell: bool = True) -> bool:
         """
-        Checks if the signal in the given row corresponds to either a 'TakeProfit' or 'StopLoss' signal.
+        Checks if the given row contains a 'TakeProfit' or 'StopLoss' signal, based on whether it is a buy or sell signal.
 
         :param row: A row from a DataFrame, typically representing a single trading day or period.
-                    The row is expected to contain columns 'SELL_Signals' and 'BUY_Signals', which indicate
-                    the type of signal (e.g., 'TakeProfit' or 'StopLoss').
+                    The row is expected to contain columns 'SELL_Signals' and 'BUY_Signals' which indicate trading signals.
         :type row: pd.Series
 
-        :param sell: A boolean flag indicating whether to check for 'SELL_Signals' (if True) or 'BUY_Signals' (if False).
-                     - If True, it checks if the 'SELL_Signals' contain 'TakeProfit' or 'StopLoss'.
-                     - If False, it checks if the 'BUY_Signals' contain 'TakeProfit' or 'StopLoss'.
+        :param sell: A boolean flag to determine whether to check for a sell or buy signal.
+                     - If True (default), it checks the 'SELL_Signals' column for 'TakeProfit' or 'StopLoss'.
+                     - If False, it checks the 'BUY_Signals' column instead.
         :type sell: bool
 
-        :return: True if the 'SELL_Signals' or 'BUY_Signals' start with 'TakeProfit' or 'StopLoss', otherwise False.
+        :return: True if the respective 'SELL_Signals' or 'BUY_Signals' column contains a signal that starts with
+                 'TakeProfit' or 'StopLoss'. False otherwise.
         :rtype: bool
         """
-        if row['SELL_Signals'] is not None:
-            if sell:
-                return row['SELL_Signals'].startswith('TakeProfit') or row['SELL_Signals'].startswith('StopLoss')
-            else:
-                return row['BUY_Signals'].startswith('TakeProfit') or row['BUY_Signals'].startswith('StopLoss')
+        if sell:
+            return row['SELL_Signals'] is not None and (
+                        row['SELL_Signals'].startswith('TakeProfit') or row['SELL_Signals'].startswith('StopLoss'))
         else:
-            return False
+            return row['BUY_Signals'] is not None and (
+                        row['BUY_Signals'].startswith('TakeProfit') or row['BUY_Signals'].startswith('StopLoss'))
