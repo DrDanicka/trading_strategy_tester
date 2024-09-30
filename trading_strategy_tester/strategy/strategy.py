@@ -25,16 +25,31 @@ class Strategy:
     a financial instrument, with optional stop loss and take profit features.
 
     :param ticker: The financial instrument to trade.
+    :type ticker: str
     :param position_type: The type of position to take (e.g., long or short).
+    :type position_type: PositionType
     :param buy_condition: The condition that must be met to execute a buy.
+    :type buy_condition: Condition
     :param sell_condition: The condition that must be met to execute a sell.
+    :type sell_condition: Condition
     :param stop_loss: Optional stop loss condition.
+    :type stop_loss: StopLoss
     :param take_profit: Optional take profit condition.
+    :type take_profit: TakeProfit, optional
     :param start_date: The start date for backtesting (default is 2024-01-01).
+    :type start_date: datetime, optional
     :param end_date: The end date for backtesting (default is today).
+    :type end_date: datetime, optional
     :param interval: The time interval for the trading data (default is daily).
+    :type interval: Interval
     :param period: The period for which to evaluate the conditions (default is not passed).
+    :type period: Period
+    :param initial_capital: The initial capital available for trading (default is 1,000,000).
+    :type initial_capital: float
+    :param order_size: The order size used for each trade (default is 1 contract).
+    :type order_size: OrderSize, optional
     :param trade_commissions: The commissions associated with trades (default is zero commission).
+    :type trade_commissions: TradeCommissions
     """
 
     def __init__(self,
