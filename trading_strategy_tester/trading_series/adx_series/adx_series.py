@@ -11,7 +11,7 @@ class ADX(TradingSeries):
     It is derived from the Directional Indicators (DI) and is commonly used in trend-following strategies.
     """
 
-    def __init__(self, ticker: str, adx_smoothing: int = 14, DI_length: int = 14):
+    def __init__(self, ticker: str, adx_smoothing: int = 14, length: int = 14):
         """
         Initializes the ADX indicator with the specified parameters.
 
@@ -28,7 +28,7 @@ class ADX(TradingSeries):
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
         self.adx_smoothing = adx_smoothing  # Set the ADX smoothing period
-        self.DI_length = DI_length  # Set the period length for Directional Indicators
+        self.DI_length = length  # Set the period length for Directional Indicators
         self.name = f'{self._ticker}_ADX_{self.adx_smoothing}_{self.DI_length}'
         # Define the name for the ADX series
 
