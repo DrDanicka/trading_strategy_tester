@@ -16,11 +16,11 @@ This is example of simple RSI strategy that:
 There is also stop loss at 5% and take profit at 10%
 """
 
-ticker = 'MSFT' # Microsoft ticker
+ticker = 'META' # Microsoft ticker
 
 strat = Strategy(
     ticker=ticker,
-    position_type= PositionTypeEnum.LONG,
+    position_type= PositionTypeEnum.LONG_SHORT_COMBINED,
     buy_condition= CrossOverCondition(
         RSI(ticker=ticker),
         CONST(30)
