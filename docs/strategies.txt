@@ -1,0 +1,14 @@
+1. 
+Please create strategy that buys Google stock when Exponential moving average of length 21 below the Close line and average directional index is above 30. Sell the stock when -DI is above +DI or when fibonacci downtrend level reaches 61.8. Use long and short combination on this strategy. Also I want you to set takeprofit at 15% and stoploss at 7%. In the end I want to go with 3 contracts in every trade and i have starting budget of 100k dollars.
+
+2.
+Please create long strategy where I buy the stock when CCI indicator crosses line 20 from the bottom and I sell the stock when CCI indicator crosses line 80 from upper. Execute this strategy on time interval from 2018 until 2020 on Tesla stock. Please also set 10 percent stoploss.
+
+3. 
+Please create short strategy that sells Logitech stock when Close price crosses below ATR and then it buys the stock when Close price crosses above the ATR stock. You can also buy the stock when Close is above the Upper Bollinger band and sell the stock when Close is below the Lower Bollinger Band. Do this on Weekly timeframe and from 2015 until 2023. Set stoploss at 10%.
+
+4. 
+Please create long strategy that buys Apple stock when High price is above Kijun-sen or when tenkan-sen crossses above kijun-sen. Sell the stock when Low price is below kijun-sen or tenkan-sen crosses below kijun-sen. Do this strategy from 2020 until now on daily timeframe. I want to start with budget of 9500$ and I want to invest 100 USD per trade.
+
+5.
+Create trading strategy on max period of META stock. Buy the stock when RSI crosses line 30 from below and sell the stock when RSI crosses line 70 from above. Dont use any stoploss or take profit. You can use both long and short trades and go into each trade with 10 shares.

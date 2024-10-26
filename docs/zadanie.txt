@@ -1,0 +1,15 @@
+-----------------
+
+Názov: "Rozhranie prirodzeného jazyka pre obchodné stratégie: Prístup pomocou DSL a LLM"
+
+-----------------
+
+Veľké jazykové modely (LLMs) môžu byť použité na poskytovanie prístupného rozhrania pre interakciu s mnohými komplexnými systémami vrátane finančného obchodovania [3]. Cieľom tejto práce je preskúmať potenciál použitia LLMs a prirodzeného jazyka na špecifikáciu a hodnotenie obchodných stratégií.
+
+Práca bude postavená okolo doménovo-špecifického jazyka (DSL) [4] pre špecifikáciu obchodných stratégií, inšpirovaného existujúcimi doménovo-špecifickými jazykmi vo finančnom sektore [1, 2]. Prvá časť práce bude zameraná na navrhnutie tohto doménovo-špecifického jazyka. Autor navrhne vnorený DSL a vyvinie nástroje na vizualizáciu a testovanie obchodných stratégií, popísaných pomocou tohto DSL, na historických dátach. Druhá časť práce sa bude zaoberať použiteľnosťou LLMs na špecifikáciu obchodných stratégií v prirodzenom jazyku. Študent preskúma vhodné prístupy, ako napríklad použitie vhodných metód prompt engineeringu s existujúcim LLM systémom na preklad popisu obchodnej stratégie v prirodzenom jazyku do popisu v uvedenom DSL.
+
+[1] Lamela Seijas, Pablo, and Simon Thompson. "Marlowe: Financial contracts on blockchain." International symposium on leveraging applications of formal methods. Cham: Springer International Publishing, 2018.
+[2] Peyton Jones, Simon, Jean-Marc Eber, and Julian Seward. "Composing contracts: an adventure in financial engineering (functional pearl)." Proceedings of the fifth ACM SIGPLAN international conference on Functional programming. 2000.
+[3] Ding, Han, et al. "Large Language Model Agent in Financial Trading: A Survey." arXiv preprint arXiv:2408.06361 (2024). Online: https://arxiv.org/abs/2408.06361
+[4] Fowler, Martin. Domain-specific languages. Pearson Education, 2010.
+[5] White, Jules, et al. "A prompt pattern catalog to enhance prompt engineering with chatgpt." arXiv preprint arXiv:2302.11382 (2023). Online: https://arxiv.org/abs/2302.11382
