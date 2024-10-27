@@ -23,12 +23,12 @@ class TradeConditions:
 
         return df
 
-    def get_graphs(self, df: pd.DataFrame) -> dict[str, [TradingPlot]]:
+    def get_graphs(self, df: pd.DataFrame, trades: list) -> dict[str, [TradingPlot]]:
         graphs = dict()
 
         graphs['BUY'] = self.buy_condition.get_graphs(self.downloader, df)
         graphs['SELL'] = self.sell_condition.get_graphs(self.downloader, df)
 
-        graphs['PRICE'] = PricePlot(df)
+        graphs['PRICE'] = PricePlot(df, trades)
 
         return graphs

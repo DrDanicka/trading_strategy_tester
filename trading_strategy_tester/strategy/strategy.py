@@ -115,11 +115,11 @@ class Strategy:
         # Clean the BUY and SELL columns based on the position type
         self.position_type.clean_buy_sell_columns(evaluated_conditions_df)
 
-        # Create Graphs
-        self.graphs = self.trade_conditions.get_graphs(df)
-
         # Create list of trades
         self.trades = create_all_trades(df, self.order_size, self.initial_capital, self.trade_commissions)
+
+        # Create Graphs
+        self.graphs = self.trade_conditions.get_graphs(df, self.trades)
 
         # Create stats of the strategy
         self.stats = get_strategy_stats(self.trades, evaluated_conditions_df, None)
@@ -147,7 +147,7 @@ class Strategy:
         """
         return self.graphs
 
-    def get_statistics(self) -> dict:
+    def get_statistics(self) -> dict: 
         """
         Returns the statistics of the trading strategy.
 
