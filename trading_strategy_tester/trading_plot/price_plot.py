@@ -9,7 +9,7 @@ from trading_strategy_tester.utils.plot_utils import set_x_axis_range, set_y_axi
 
 
 class PricePlot(TradingPlot):
-    def __init__(self, df: pd.DataFrame):
+    def __init__(self, df: pd.DataFrame, trades: list):
         """
         Initialize the PricePlot class.
 
@@ -17,6 +17,7 @@ class PricePlot(TradingPlot):
         :type df: pd.DataFrame
         """
         self.df = df
+        self.trades = trades
 
     def get_plot(self, dark: bool = False) -> go.Figure:
         """
@@ -44,8 +45,14 @@ class PricePlot(TradingPlot):
         # Calculate average price for offset on BUYs and SELLs
         average_price = self.df[SourceType.CLOSE.value].mean()
 
+        # Get entry dates from the trades
+        buy_dates = []
+        for trade in self.trades:
+            buy_dates.append(trade.entry_date)
+
+        buy_points = self.df[self.df.index.isin(buy_dates)]
+
         # Add BUY points to the plot
-        buy_points = self.df[self.df['BUY'] == True]  # Filter rows where BUY is True
         fig.add_trace(go.Scatter(
             x=buy_points.index,
             y=buy_points[SourceType.LOW.value] - 0.05 * average_price,
@@ -53,11 +60,17 @@ class PricePlot(TradingPlot):
             marker=dict(symbol='triangle-up', color='blue', size=12),
             name='BUY',
             hovertemplate='<b>%{customdata:.2f}</b>',
-            customdata=buy_points['Close']
+            customdata=buy_points[SourceType.OPEN.value]
         ))
 
+        # Get entry dates from the trades
+        sell_dates = []
+        for trade in self.trades:
+            sell_dates.append(trade.exit_date)
+
+        sell_points = self.df[self.df.index.isin(sell_dates)]
+
         # Add SELL points to the plot
-        sell_points = self.df[self.df['SELL'] == True]  # Filter rows where SELL is True
         fig.add_trace(go.Scatter(
             x=sell_points.index,
             y=sell_points[SourceType.HIGH.value] + 0.05 * average_price,
@@ -65,7 +78,7 @@ class PricePlot(TradingPlot):
             marker=dict(symbol='triangle-down', color='orange', size=12),
             name='SELL',
             hovertemplate='<b>%{customdata:.2f}</b>',
-            customdata=buy_points['Close']
+            customdata=sell_points[SourceType.OPEN.value]
         ))
 
         # Determine volume bar colors based on whether the Close price increased or decreased
