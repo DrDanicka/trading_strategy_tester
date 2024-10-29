@@ -86,6 +86,10 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 * **short** when price turns up or above the upper band
 * close if price turns up near the lower band or crosses to above the moving average
 
+## KST (Know Sure Thing)
+* go **long** when KST crosses above its signal line from below
+* go **short** when KST crosses below its signal line from above
+
 ## ROC (Rate of Change)
 * long when ROC crosses to below the oversold level and rises back above it
 * long on bull divergence
