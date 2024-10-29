@@ -7,7 +7,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.momentum.kst import kst, kst_signal
 from trading_strategy_tester.trading_series.kst_series.kst_signal_series import KST_SIGNAL
-from trading_strategy_tester.trading_series.kst_series.kst_line_series import KST
+from trading_strategy_tester.trading_series.kst_series.kst_series import KST
 
 
 class TestKST(unittest.TestCase):
