@@ -22,13 +22,13 @@ def get_source_series(df: pd.DataFrame, source: SourceType) -> pd.Series:
         # Compute the derived price series based on the selected source type
         if source == SourceType.HLC3:
             # Typical Price: (High + Low + Close) / 3
-            return (df['High'] + df['Low'] + df['Close']) / 3.0
+            return (df[SourceType.HIGH.value] + df[SourceType.LOW.value] + df[SourceType.CLOSE.value]) / 3.0
         elif source == SourceType.HL2:
             # Median Price: (High + Low) / 2
-            return (df['High'] + df['Low']) / 2.0
+            return (df[SourceType.HIGH.value] + df[SourceType.LOW.value]) / 2.0
         elif source == SourceType.HLCC4:
             # Weighted Close Price: (High + Low + Close + Close) / 4
-            return (df['High'] + df['Low'] + df['Close'] + df['Close']) / 4.0
+            return (df[SourceType.HIGH.value] + df[SourceType.LOW.value] + df[SourceType.CLOSE.value] + df[SourceType.CLOSE.value]) / 4.0
         else:
             # Default to OHLC4 (Open + High + Low + Close) / 4
-            return (df['Open'] + df['High'] + df['Low'] + df['Close']) / 4.0
+            return (df[SourceType.OPEN.value] + df[SourceType.HIGH.value] + df[SourceType.LOW.value] + df[SourceType.CLOSE.value]) / 4.0
