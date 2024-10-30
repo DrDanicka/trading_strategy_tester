@@ -255,3 +255,6 @@ class TestKST(unittest.TestCase):
         )
         calculated_kst_signal = kst_signal_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_kst_signal, trading_view_kst_signal)
+
+if __name__ == '__main__':
+    unittest.main()
