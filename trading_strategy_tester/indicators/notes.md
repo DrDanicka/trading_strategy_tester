@@ -90,6 +90,10 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 * go **long** when KST crosses above its signal line from below
 * go **short** when KST crosses below its signal line from above
 
+## MACD (Moving Average Convergence Divergence)
+* go long when MACD crosses its signal line from below
+* go short when MACD crosses its signal line from above
+
 ## ROC (Rate of Change)
 * long when ROC crosses to below the oversold level and rises back above it
 * long on bull divergence
