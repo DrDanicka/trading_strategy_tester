@@ -91,8 +91,12 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 * go **short** when KST crosses below its signal line from above
 
 ## MACD (Moving Average Convergence Divergence)
-* go long when MACD crosses its signal line from below
-* go short when MACD crosses its signal line from above
+* go **long** when MACD crosses its signal line from below
+* go **short** when MACD crosses its signal line from above
+
+## MASS INDEX
+* go **long** if there is a reversal and EMA points downward
+* go **short** if there is a reversal and EMA points upward
 
 ## ROC (Rate of Change)
 * long when ROC crosses to below the oversold level and rises back above it
