@@ -98,6 +98,10 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 * go **long** if there is a reversal and EMA points downward
 * go **short** if there is a reversal and EMA points upward
 
+# MFI (Money Flow Index)
+* go **long** on bullish divergence
+* go **short** no bearish divergence
+
 ## ROC (Rate of Change)
 * long when ROC crosses to below the oversold level and rises back above it
 * long on bull divergence
