@@ -10,7 +10,7 @@ from trading_strategy_tester.trading_series.mfi_series.mfi_series import MFI
 from trading_strategy_tester.utils.sources import get_source_series
 
 
-class TestMASS(unittest.TestCase):
+class TestMFI(unittest.TestCase):
 
     def setUp(self):
         """
@@ -83,3 +83,7 @@ class TestMASS(unittest.TestCase):
         mfi_series = MFI(ticker, length)
         calculated_mfi = mfi_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(trading_view_mfi, calculated_mfi)
+
+
+if __name__ == '__main__':
+    unittest.main()
