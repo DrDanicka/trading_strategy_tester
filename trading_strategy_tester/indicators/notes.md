@@ -106,6 +106,10 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 * go **long** when momentum crosses to below the oversold level and then rises back above it
 * go **short** when momentum crosses to above the overbought level and then falls back below it
 
+# OBV (On Balance Volume)
+* rising OBV warns of an upward breakout
+* falling OBV warns of an downtrend breakout
+
 ## ROC (Rate of Change)
 * long when ROC crosses to below the oversold level and rises back above it
 * long on bull divergence
