@@ -83,3 +83,5 @@ class TestMASS(unittest.TestCase):
         calculated_mass_index = mass_series.get_data(self.downloader, pd.DataFrame()).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_mass_index, trading_view_mass)
 
+if __name__ == '__main__':
+    unittest.main()
