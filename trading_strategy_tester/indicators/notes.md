@@ -110,6 +110,9 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 * rising OBV warns of an upward breakout
 * falling OBV warns of an downtrend breakout
 
+# PVI (Positive Volume Index)
+* PVI crossing to below its MA confirms the approach of bear market and vice versa
+
 ## ROC (Rate of Change)
 * long when ROC crosses to below the oversold level and rises back above it
 * long on bull divergence
