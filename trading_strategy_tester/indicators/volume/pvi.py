@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 
@@ -16,7 +17,12 @@ def pvi(close: pd.Series, volume: pd.Series) -> pd.Series:
     """
     # Calculate the price change factor, multiplying percentage change in close by volume.
     # Fill missing values with 0 to handle NaNs from percentage change and use cumulative sum to get PVI.
-    vt = (close.pct_change() * volume).fillna(0).cumsum()
+    mask = volume - volume.shift(1) > 0
+
+    # Mask out only volumes where it is more than day before
+    positive_volume = np.where(mask, volume, 0)
+
+    pvi_series = (close.pct_change() * positive_volume).fillna(0).cumsum()
 
     # Return the PVI series
-    return pd.Series(vt, name='PVI')
+    return pd.Series(pvi_series, name='PVI')
