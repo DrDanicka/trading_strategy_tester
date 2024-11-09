@@ -6,7 +6,7 @@ from datetime import datetime
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.momentum.roc import roc
-from trading_strategy_tester.trading_series.roc_series import ROC
+from trading_strategy_tester.trading_series.roc_series.roc_series import ROC
 
 class TestROC(unittest.TestCase):
 
