@@ -113,6 +113,10 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 # PVI (Positive Volume Index)
 * PVI crossing to below its MA confirms the approach of bear market and vice versa
 
+# PVT (Price Volume Trend)
+* rising PVT signals an upward breakout
+* falling PVT signals a downward breakout
+
 ## ROC (Rate of Change)
 * long when ROC crosses to below the oversold level and rises back above it
 * long on bull divergence
