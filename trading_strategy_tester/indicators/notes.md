@@ -126,3 +126,7 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 ## RSI (Relative Strength Index)
 * long when value crosses 30 from below
 * short when value crosses 70 from above
+
+## STOCH (Stochastic)
+* **long** if %K or %D falls below the oversold line
+*  **short** if %K rises above the overbought line
