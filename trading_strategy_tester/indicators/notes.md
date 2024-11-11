@@ -130,3 +130,7 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 ## STOCH (Stochastic)
 * **long** if %K or %D falls below the oversold line
 *  **short** if %K rises above the overbought line
+
+## TRIX (Triple exponential average)
+* go **long** when TRIX turns up below zero
+* go **short** when TRIX turns down above zero
