@@ -134,3 +134,10 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 ## TRIX (Triple exponential average)
 * go **long** when TRIX turns up below zero
 * go **short** when TRIX turns down above zero
+
+## UO (Ultimate Oscillator)
+* Divergence between UO and Price
+
+
+
+notes from: https://www.incrediblecharts.com/indicators/technical-indicators.php
