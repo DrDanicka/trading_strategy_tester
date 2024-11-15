@@ -138,6 +138,10 @@ Crossover of AroonUp and AroonDown indicates reversal in the trend.
 ## UO (Ultimate Oscillator)
 * Divergence between UO and Price
 
+## WILLR (Williams %R)
+* go **long** when %R falls below the oversold level then rises above -50
+* go **short** when %R rises above the overbought level then falls below -50
+
 
 
 notes from: https://www.incrediblecharts.com/indicators/technical-indicators.php
