@@ -5,6 +5,8 @@ from datetime import datetime
 
 from trading_strategy_tester.enums.interval_enum import Interval
 from trading_strategy_tester.enums.period_enum import Period
+from trading_strategy_tester.enums.source_enum import SourceType
+
 
 class DownloadModule:
     """
@@ -71,6 +73,14 @@ class DownloadModule:
         else:
             df = yf.download(ticker, interval=self.interval, period=self.period)
 
+        # Automatically change columns to ensure robustness against future changes of API
+        df.columns = [
+            SourceType.CLOSE.value,
+            SourceType.HIGH.value,
+            SourceType.LOW.value,
+            SourceType.OPEN.value,
+            SourceType.VOLUME.value
+        ]
         df.to_csv(filepath)
         return df
 
