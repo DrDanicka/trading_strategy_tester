@@ -32,3 +32,4 @@ class SourceType(Enum):
     HL2 = 'HL2'
     OHLC4 = 'OHLC4'
     HLCC4 = 'HLCC4'
+    VOLUME = 'Volume'
