@@ -69,18 +69,20 @@ class DownloadModule:
         """
 
         if datetime_type:
-            df = yf.download(ticker, interval=self.interval, start=self.start_date, end=self.end_date)
+            df = yf.download(ticker, interval=self.interval, start=self.start_date, end=self.end_date, auto_adjust=False)
         else:
-            df = yf.download(ticker, interval=self.interval, period=self.period)
+            df = yf.download(ticker, interval=self.interval, period=self.period, auto_adjust=False)
 
         # Automatically change columns to ensure robustness against future changes of API
         df.columns = [
+            'Adj Close',
             SourceType.CLOSE.value,
             SourceType.HIGH.value,
             SourceType.LOW.value,
             SourceType.OPEN.value,
             SourceType.VOLUME.value
         ]
+
         df.to_csv(filepath)
         return df
 
