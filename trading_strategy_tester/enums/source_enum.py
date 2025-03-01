@@ -22,6 +22,8 @@ class SourceType(Enum):
         Represents the average of the Open, High, Low, and Close prices (OHLC/4).
     HLCC4 : str
         Represents the weighted average of the High, Low, and two times the Close price ((High + Low + 2 * Close) / 4).
+    VOLUME : str
+        Represents the volume of the instrument
     """
 
     CLOSE = 'Close'
