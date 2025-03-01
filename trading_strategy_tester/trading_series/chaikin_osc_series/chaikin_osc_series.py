@@ -13,7 +13,7 @@ class CHAIKIN_OSC(TradingSeries):
     It calculates the difference between fast and slow Exponential Moving Averages (EMAs) of the Accumulation/Distribution Line.
     """
 
-    def __init__(self, ticker: str, fast_length: int, slow_length: int):
+    def __init__(self, ticker: str, fast_length: int = 3, slow_length: int = 10):
         """
         Initializes the ChaikinOsc class with the specified ticker, fast and slow EMA lengths.
 
