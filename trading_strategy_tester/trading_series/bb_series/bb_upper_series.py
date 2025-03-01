@@ -14,31 +14,24 @@ class BBUPPER(TradingSeries):
     Bollinger Band upper calculation based on the specified parameters.
     """
 
-    def __init__(self, ticker: str, source: SourceType = SourceType.CLOSE, length: int = 20, ma_type: SmoothingType = SmoothingType.SMA,
-                 std_dev: float = 2, offset: int = 0):
+    def __init__(self, ticker: str, source: SourceType = SourceType.CLOSE, length: int = 20,
+                 ma_type: SmoothingType = SmoothingType.SMA, std_dev: float = 2, offset: int = 0):
         """
-        Initializes the BBUpper series with the specified parameters.
+        Initialize the BBUpper series with the specified parameters.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
-
-        source : str, optional
-            The column in the DataFrame on which the upper Bollinger Band is calculated (e.g., 'Close').
-            Default is 'Close'.
-
-        length : int, optional
-            The number of periods over which to calculate the moving average. Default is 20.
-
-        ma_type : SmoothingType, optional
-            The type of moving average to use (e.g., Simple Moving Average, SMA). Default is SmoothingType.SMA.
-
-        std_dev : int, optional
-            The number of standard deviations to use for the Bollinger Band calculation. Default is 2.
-
-        offset : int, optional
-            The number of periods to offset the calculation. Default is 0.
+        :param ticker: The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
+        :type ticker: str
+        :param source: The column in the DataFrame on which the upper Bollinger Band is calculated (e.g., 'Close').
+                       Default is SourceType.CLOSE.
+        :type source: SourceType, optional
+        :param length: The number of periods over which to calculate the moving average. Default is 20.
+        :type length: int, optional
+        :param ma_type: The type of moving average to use (e.g., Simple Moving Average, SMA). Default is SmoothingType.SMA.
+        :type ma_type: SmoothingType, optional
+        :param std_dev: The number of standard deviations to use for the Bollinger Band calculation. Default is 2.
+        :type std_dev: float, optional
+        :param offset: The number of periods to offset the calculation. Default is 0.
+        :type offset: int, optional
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
         # Validate source
@@ -53,44 +46,30 @@ class BBUPPER(TradingSeries):
     @property
     def ticker(self) -> str:
         """
-        Returns the ticker symbol associated with this BBUpper series.
+        Get the ticker symbol associated with this BBUpper series.
 
-        This property provides access to the ticker symbol that was specified when the BBUpper instance was created.
-
-        Returns:
-        --------
-        str
-            The ticker symbol for the financial instrument.
+        :return: The ticker symbol for the financial instrument.
+        :rtype: str
         """
         return self._ticker  # Return the ticker symbol stored in the parent class
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
         """
-        Retrieves or calculates the upper Bollinger Band (BBUpper) data series for the specified ticker.
+        Retrieve or calculate the upper Bollinger Band (BBUpper) data series for the specified ticker.
 
-        This method checks if the BBUpper for the given ticker and configuration (target, length, ma_type, std_dev, offset)
-        already exists in the provided DataFrame. If it does not exist, it downloads the data, calculates the BBUpper,
-        and adds it to the DataFrame. It returns a pandas Series containing the BBUpper values.
+        If the BBUpper data is not already present in the provided DataFrame, this method downloads the
+        latest market data for the ticker, calculates the BBUpper indicator, and adds it to the DataFrame.
 
-        Parameters:
-        -----------
-        downloader : DownloadModule
-            An instance of DownloadModule used to download the latest data for the ticker.
-
-        df : pd.DataFrame
-            A DataFrame that may contain existing trading data. If the BBUpper does not exist in this DataFrame,
-            it will be calculated and added.
-
-        Returns:
-        --------
-        pd.Series
-            A pandas Series containing the upper Bollinger Band values for the specified ticker and configuration,
-            labeled with the appropriate name.
+        :param downloader: The module responsible for downloading market data.
+        :type downloader: DownloadModule
+        :param df: DataFrame containing the existing market data.
+        :type df: pd.DataFrame
+        :return: A Pandas Series containing the upper Bollinger Band values for the specified ticker and configuration.
+        :rtype: pd.Series
         """
-
         # Check if the BBUpper series already exists in the DataFrame
         if self.name not in df.columns:
-            # Download the latest data for the ticker using the downloader
+            # Download the latest price data for the ticker using the downloader
             new_df = downloader.download_ticker(self._ticker)
             # Calculate the BBUpper using the specified parameters
             bb_upper_series = bb_upper(
@@ -109,6 +88,9 @@ class BBUPPER(TradingSeries):
 
     def get_name(self) -> str:
         """
-        Returns the name of the series
+        Get the name of the BBUpper indicator.
+
+        :return: The name of the BBUpper indicator, formatted with the ticker and configuration.
+        :rtype: str
         """
         return self.name

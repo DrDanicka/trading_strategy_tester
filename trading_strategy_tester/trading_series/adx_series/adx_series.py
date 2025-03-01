@@ -3,28 +3,26 @@ import pandas as pd
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.indicators.trend.adx import adx
+from trading_strategy_tester.enums.source_enum import SourceType
 
 
 class ADX(TradingSeries):
     """
-    The ADX indicator is used to quantify the strength of a trend, whether it is an uptrend or downtrend.
-    It is derived from the Directional Indicators (DI) and is commonly used in trend-following strategies.
+    The ADX (Average Directional Index) indicator is used to quantify the strength of a trend,
+    whether it is an uptrend or downtrend. It is derived from the Directional Indicators (DI) and
+    is commonly used in trend-following strategies.
     """
 
     def __init__(self, ticker: str, adx_smoothing: int = 14, length: int = 14):
         """
-        Initializes the ADX indicator with the specified parameters.
+        Initialize the ADX indicator with the specified parameters.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
-
-        adx_smoothing : int, optional
-            The smoothing period used in the ADX calculation. Default is 14.
-
-        DI_length : int, optional
-            The period length for calculating the Directional Indicators (DI). Default is 14.
+        :param ticker: The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
+        :type ticker: str
+        :param adx_smoothing: The smoothing period used in the ADX calculation. Default is 14.
+        :type adx_smoothing: int, optional
+        :param length: The period length for calculating the Directional Indicators (DI). Default is 14.
+        :type length: int, optional
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
         self.adx_smoothing = adx_smoothing  # Set the ADX smoothing period
@@ -35,39 +33,26 @@ class ADX(TradingSeries):
     @property
     def ticker(self) -> str:
         """
-        Returns the ticker symbol associated with this ADX indicator.
+        Get the ticker symbol associated with this ADX indicator.
 
-        This property provides access to the ticker symbol that was specified when the ADX instance was created.
-
-        Returns:
-        --------
-        str
-            The ticker symbol for the financial instrument.
+        :return: The ticker symbol for the financial instrument.
+        :rtype: str
         """
         return self._ticker  # Return the ticker symbol stored in the parent class
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
         """
-        Retrieves or calculates the ADX data series for the specified ticker.
+        Retrieve or calculate the ADX data series for the specified ticker.
 
-        This method checks if the ADX series for the given ticker and parameters already exists in the
-        provided DataFrame. If it does not exist, it downloads the necessary price data, calculates the ADX
-        values, and adds them to the DataFrame. It returns a pandas Series containing the ADX values.
+        If the ADX data is not already present in the provided DataFrame, this method downloads the
+        latest market data for the ticker, calculates the ADX indicator, and adds it to the DataFrame.
 
-        Parameters:
-        -----------
-        downloader : DownloadModule
-            An instance of DownloadModule used to download the latest price data for the ticker.
-
-        df : pd.DataFrame
-            A DataFrame that may contain existing trading data. If the ADX series does not exist in this DataFrame,
-            it will be calculated and added.
-
-        Returns:
-        --------
-        pd.Series
-            A pandas Series containing the ADX values for the specified ticker and configuration, labeled with the
-            appropriate name.
+        :param downloader: The module responsible for downloading market data.
+        :type downloader: DownloadModule
+        :param df: DataFrame containing the existing market data.
+        :type df: pd.DataFrame
+        :return: A Pandas Series containing the ADX values for the specified ticker and configuration.
+        :rtype: pd.Series
         """
         # Check if the ADX series already exists in the DataFrame
         if self.name not in df.columns:
@@ -75,9 +60,9 @@ class ADX(TradingSeries):
             new_df = downloader.download_ticker(self._ticker)
             # Calculate the ADX values using the specified parameters
             adx_series = adx(
-                high=new_df['High'],
-                low=new_df['Low'],
-                close=new_df['Close'],
+                high=new_df[SourceType.HIGH.value],
+                low=new_df[SourceType.LOW.value],
+                close=new_df[SourceType.CLOSE.value],
                 adx_smoothing=self.adx_smoothing,
                 di_length=self.DI_length
             )
@@ -90,6 +75,9 @@ class ADX(TradingSeries):
 
     def get_name(self) -> str:
         """
-        Returns the name of the series
+        Get the name of the ADX indicator.
+
+        :return: The name of the ADX indicator, formatted with the ticker and configuration.
+        :rtype: str
         """
         return self.name
