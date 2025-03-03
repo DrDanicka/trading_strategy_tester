@@ -2,11 +2,13 @@ import pandas as pd
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.indicators.volume.cmf import cmf
+from trading_strategy_tester.enums.source_enum import SourceType
+
 
 class CMF(TradingSeries):
     """
-    The CMF class retrieves the specified price data (e.g., 'High', 'Low', 'Close') and volume data for a given ticker
-    and applies the Chaikin Money Flow (CMF) calculation based on the specified length.
+    The CMF (Chaikin Money Flow) class retrieves the specified price data (e.g., 'High', 'Low', 'Close')
+    and volume data for a given ticker and applies the CMF calculation based on the specified length.
 
     The Chaikin Money Flow is a technical analysis indicator that measures the buying and selling pressure
     over a specified period.
@@ -14,15 +16,12 @@ class CMF(TradingSeries):
 
     def __init__(self, ticker: str, length: int = 20):
         """
-        Initializes the CMF series with the specified ticker symbol and CMF length.
+        Initialize the CMF series with the specified ticker symbol and CMF length.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
-
-        length : int, optional
-            The number of periods over which to calculate the CMF. Default is 20.
+        :param ticker: The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
+        :type ticker: str
+        :param length: The number of periods over which to calculate the CMF. Default is 20.
+        :type length: int, optional
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
         self.length = length  # Set the length (number of periods) for the CMF calculation
@@ -31,37 +30,26 @@ class CMF(TradingSeries):
     @property
     def ticker(self) -> str:
         """
-        Returns the ticker symbol associated with this CMF series.
+        Get the ticker symbol associated with this CMF series.
 
-        This property provides access to the ticker symbol that was specified when the CMF instance was created.
-
-        Returns:
-        --------
-        str
-            The ticker symbol for the financial instrument.
+        :return: The ticker symbol for the financial instrument.
+        :rtype: str
         """
         return self._ticker  # Return the ticker symbol stored in the parent class
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
         """
-        Retrieves or calculates the CMF data series for the specified ticker.
+        Retrieve or calculate the CMF data series for the specified ticker.
 
-        This method checks if the CMF for the given ticker and configuration (length) already exists
-        in the provided DataFrame. If it does not exist, it downloads the data, calculates the CMF, and adds it to
-        the DataFrame. It returns a pandas Series containing the CMF values.
+        If the CMF data is not already present in the provided DataFrame, this method downloads the
+        latest market data for the ticker, calculates the CMF indicator, and adds it to the DataFrame.
 
-        Parameters:
-        -----------
-        downloader : DownloadModule
-            An instance of DownloadModule used to download the latest data for the ticker.
-
-        df : pd.DataFrame
-            A DataFrame that may contain existing trading data. If the CMF does not exist in this DataFrame, it will be calculated and added.
-
-        Returns:
-        --------
-        pd.Series
-            A pandas Series containing the CMF values for the specified ticker and configuration, labeled with the appropriate name.
+        :param downloader: The module responsible for downloading market data.
+        :type downloader: DownloadModule
+        :param df: DataFrame containing the existing market data.
+        :type df: pd.DataFrame
+        :return: A Pandas Series containing the CMF values for the specified ticker and configuration.
+        :rtype: pd.Series
         """
         # Check if the CMF series already exists in the DataFrame
         if self.name not in df.columns:
@@ -69,10 +57,10 @@ class CMF(TradingSeries):
             new_df = downloader.download_ticker(self._ticker)
             # Calculate the CMF using the specified high, low, close, volume columns and length
             cmf_series = cmf(
-                high=new_df['High'],
-                low=new_df['Low'],
-                close=new_df['Close'],
-                volume=new_df['Volume'],
+                high=new_df[SourceType.HIGH.value],
+                low=new_df[SourceType.LOW.value],
+                close=new_df[SourceType.CLOSE.value],
+                volume=new_df[SourceType.VOLUME.value],
                 length=self.length
             )
 
@@ -84,13 +72,9 @@ class CMF(TradingSeries):
 
     def get_name(self) -> str:
         """
-        Returns the name of the series.
+        Get the name of the CMF series.
 
-        This method provides the name that identifies the CMF series, which is based on the ticker symbol and the CMF length.
-
-        Returns:
-        --------
-        str
-            The name of the CMF series.
+        :return: The name of the CMF series, formatted with the ticker and CMF length.
+        :rtype: str
         """
         return self.name

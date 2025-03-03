@@ -3,30 +3,28 @@ import pandas as pd
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.indicators.volume.chaikin_osc import chaikin_osc
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
+from trading_strategy_tester.enums.source_enum import SourceType
 
 
 class CHAIKIN_OSC(TradingSeries):
     """
-    ChaikinOsc class represents the Chaikin Oscillator, a volume-based indicator that measures the accumulation/distribution
-    of an asset over a specified period.
+    The CHAIKIN_OSC class represents the Chaikin Oscillator, a volume-based indicator that measures the
+    accumulation/distribution of an asset over a specified period.
 
-    It calculates the difference between fast and slow Exponential Moving Averages (EMAs) of the Accumulation/Distribution Line.
+    It calculates the difference between fast and slow Exponential Moving Averages (EMAs) of the
+    Accumulation/Distribution Line.
     """
 
     def __init__(self, ticker: str, fast_length: int = 3, slow_length: int = 10):
         """
-        Initializes the ChaikinOsc class with the specified ticker, fast and slow EMA lengths.
+        Initialize the CHAIKIN_OSC class with the specified ticker, fast EMA length, and slow EMA length.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
-
-        fast_length : int
-            The period for the fast EMA in the Chaikin Oscillator calculation.
-
-        slow_length : int
-            The period for the slow EMA in the Chaikin Oscillator calculation.
+        :param ticker: The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
+        :type ticker: str
+        :param fast_length: The period for the fast EMA in the Chaikin Oscillator calculation.
+        :type fast_length: int
+        :param slow_length: The period for the slow EMA in the Chaikin Oscillator calculation.
+        :type slow_length: int
         """
         super().__init__(ticker)
         self.fast_length = fast_length  # Set the period for the fast EMA
@@ -36,38 +34,26 @@ class CHAIKIN_OSC(TradingSeries):
     @property
     def ticker(self) -> str:
         """
-        Returns the ticker symbol associated with this ChaikinOsc series.
+        Get the ticker symbol associated with this Chaikin Oscillator series.
 
-        This property provides access to the ticker symbol that was specified when the ChaikinOsc instance was created.
-
-        Returns:
-        --------
-        str
-            The ticker symbol for the financial instrument.
+        :return: The ticker symbol for the financial instrument.
+        :rtype: str
         """
         return self._ticker
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
         """
-        Retrieves or calculates the Chaikin Oscillator series for the specified ticker.
+        Retrieve or calculate the Chaikin Oscillator series for the specified ticker.
 
-        This method checks if the Chaikin Oscillator for the given ticker and configuration (fast and slow lengths)
-        already exists in the provided DataFrame. If it does not exist, it downloads the data, calculates the Chaikin Oscillator,
-        and adds it to the DataFrame. It returns a pandas Series containing the Chaikin Oscillator values.
+        If the Chaikin Oscillator data is not already present in the provided DataFrame, this method downloads the
+        latest market data for the ticker, calculates the Chaikin Oscillator indicator, and adds it to the DataFrame.
 
-        Parameters:
-        -----------
-        downloader : DownloadModule
-            An instance of DownloadModule used to download the latest data for the ticker.
-
-        df : pd.DataFrame
-            A DataFrame that may contain existing trading data. If the Chaikin Oscillator does not exist in this DataFrame,
-            it will be calculated and added.
-
-        Returns:
-        --------
-        pd.Series
-            A pandas Series containing the Chaikin Oscillator values for the specified ticker and configuration, labeled with the appropriate name.
+        :param downloader: The module responsible for downloading market data.
+        :type downloader: DownloadModule
+        :param df: DataFrame containing the existing market data.
+        :type df: pd.DataFrame
+        :return: A Pandas Series containing the Chaikin Oscillator values for the specified ticker and configuration.
+        :rtype: pd.Series
         """
         # Check if the Chaikin Oscillator series already exists in the DataFrame
         if self.name not in df.columns:
@@ -75,10 +61,10 @@ class CHAIKIN_OSC(TradingSeries):
             new_df = downloader.download_ticker(self.ticker)
             # Calculate the Chaikin Oscillator using the specified parameters
             chaikin_osc_series = chaikin_osc(
-                high=df['High'],
-                low=df['Low'],
-                close=df['Close'],
-                volume=df['Volume'],
+                high=df[SourceType.HIGH.value],
+                low=df[SourceType.LOW.value],
+                close=df[SourceType.CLOSE.value],
+                volume=df[SourceType.VOLUME.value],
                 fast_length=self.fast_length,
                 slow_length=self.slow_length
             )
@@ -91,13 +77,9 @@ class CHAIKIN_OSC(TradingSeries):
 
     def get_name(self) -> str:
         """
-        Returns the name of the series.
+        Get the name of the Chaikin Oscillator series.
 
-        This method provides the unique name of the Chaikin Oscillator series based on the ticker, fast length, and slow length.
-
-        Returns:
-        --------
-        str
-            The name of the Chaikin Oscillator series.
+        :return: The name of the Chaikin Oscillator series, formatted with the ticker, fast length, and slow length.
+        :rtype: str
         """
         return self.name
