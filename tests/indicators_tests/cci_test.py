@@ -7,7 +7,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.momentum.cci import cci
-from trading_strategy_tester.trading_series.cci_series import CCI
+from trading_strategy_tester.trading_series.cci_series.cci_series import CCI
 from trading_strategy_tester.trading_series.cci_series.cci_smoothened_series import CCI_SMOOTHENED
 from trading_strategy_tester.utils.sources import get_source_series
 
@@ -32,13 +32,20 @@ class TestCCI(unittest.TestCase):
         The data is rounded to 2 decimal places, and we use HCL3 to calculate CCI.
         """
         length = 20
+        smoothing = SmoothingType.SMA
+        smoothing_length = 1
         hlc3_series = get_source_series(self.data, SourceType.HLC3)
 
         trading_view_cci = pd.Series([
             64.68, 28.36, 110.19, 122.75, 162.15, 183.88, 84.26, 110.55, 196.98, 191.37,
             153.25, 85.47, 99.01, 69.16, 45.96, 12.94, -13.45, -39.43, -6.84, -48.73
-        ], name=f'CCI_{length}_SMA_1').reset_index(drop=True)
-        calculated_cci = cci(hlc3_series, length).tail(20).reset_index(drop=True).round(2)
+        ], name=f'CCI_{length}_{smoothing.value}_{smoothing_length}').reset_index(drop=True)
+        calculated_cci = cci(
+            hlc3_series,
+            length,
+            smoothing,
+            smoothing_length
+        ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_cci, trading_view_cci)
 
     def test_cci_close_length_10_tradingview_data(self):
@@ -48,13 +55,20 @@ class TestCCI(unittest.TestCase):
         The data is rounded to 2 decimal places, and we use Close price to calculate CCI.
         """
         length = 10
+        smoothing = SmoothingType.SMA
+        smoothing_length = 1
         close_series = get_source_series(self.data, SourceType.CLOSE)
 
         trading_view_cci = pd.Series([
             91.34, -94.44, 217.17, 98.58, 150.94, 146.72, 45.06, 82.54, 158.43, 128.33,
             90.24, 22.15, 51.89, -52.42, -63.13, -92.52, -114.70, -94.33, -65.41, -97.71
-        ], name=f'CCI_{length}_SMA_1').reset_index(drop=True)
-        calculated_cci = cci(close_series, length).tail(20).reset_index(drop=True).round(2)
+        ], name=f'CCI_{length}_{smoothing.value}_{smoothing_length}').reset_index(drop=True)
+        calculated_cci = cci(
+            close_series,
+            length,
+            smoothing,
+            smoothing_length
+        ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_cci, trading_view_cci)
 
     def test_cci_hlc3_length_14_SMA_5_tradingview_data(self):
@@ -64,13 +78,20 @@ class TestCCI(unittest.TestCase):
         The data is rounded to 2 decimal places, and we use HLC3 to calculate CCI.
         """
         length = 14
+        smoothing = SmoothingType.SMA
+        smoothing_length = 5
         hlc3_series = get_source_series(self.data, SourceType.HLC3)
 
         trading_view_cci = pd.Series([
             46.01, 21.46, 50.47, 77.56, 112.91, 134.40, 159.68, 135.93, 131.41, 125.01,
             115.57, 116.54, 115.02, 91.91, 62.95, 27.88, -1.80, -40.09, -60.08, -79.20
-        ], name=f'CCI_{length}_SMA_5').reset_index(drop=True)
-        calculated_cci = cci(hlc3_series, length, SmoothingType.SMA, 5).tail(20).reset_index(drop=True).round(2)
+        ], name=f'CCI_{length}_{smoothing.value}_{smoothing_length}').reset_index(drop=True)
+        calculated_cci = cci(
+            hlc3_series,
+            length,
+            smoothing,
+            smoothing_length
+        ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_cci, trading_view_cci)
 
     def test_cci_hl2_length_21_RMA_10_tradingview_data(self):
@@ -80,13 +101,20 @@ class TestCCI(unittest.TestCase):
         The data is rounded to 2 decimal places, and we use HL2 to calculate CCI.
         """
         length = 21
+        smoothing = SmoothingType.RMA
+        smoothing_length = 10
         hl2_series = get_source_series(self.data, SourceType.HL2)
 
         trading_view_cci = pd.Series([
             75.36, 70.93, 73.25, 78.23, 85.17, 92.81, 91.59, 92.36, 102.00, 111.91,
             117.32, 114.59, 113.38, 110.79, 105.33, 97.20, 87.21, 74.61, 67.70, 58.14
-        ], name=f'CCI_{length}_RMA_10').reset_index(drop=True)
-        calculated_cci = cci(hl2_series, length, SmoothingType.RMA, 10).tail(20).reset_index(drop=True).round(2)
+        ], name=f'CCI_{length}_{smoothing.value}_{smoothing_length}').reset_index(drop=True)
+        calculated_cci = cci(
+            hl2_series,
+            length,
+            smoothing,
+            smoothing_length
+        ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_cci, trading_view_cci)
 
     def test_cci_series_hlc3_length_20_tradingview_data(self):
