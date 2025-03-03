@@ -15,18 +15,14 @@ class CMO(TradingSeries):
 
     def __init__(self, ticker: str, source: SourceType = SourceType.CLOSE, length: int = 9):
         """
-        Initializes the CMO series with the specified ticker symbol, target column, and CMO length.
+        Initialize the CMO series with the specified ticker symbol, target column, and CMO length.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
-
-        source : str, optional
-            The column in the DataFrame on which the CMO is calculated (e.g., 'Close'). Default is 'Close'.
-
-        length : int, optional
-            The number of periods over which to calculate the CMO. Default is 9.
+        :param ticker: The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
+        :type ticker: str
+        :param source: The column in the DataFrame on which the CMO is calculated (e.g., 'Close'). Default is 'Close'.
+        :type source: SourceType, optional
+        :param length: The number of periods over which to calculate the CMO. Default is 9.
+        :type length: int, optional
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
         # Validate source
@@ -37,41 +33,27 @@ class CMO(TradingSeries):
     @property
     def ticker(self) -> str:
         """
-        Returns the ticker symbol associated with this CMO series.
+        Get the ticker symbol associated with this CMO series.
 
-        This property provides access to the ticker symbol that was specified when the CMO instance was created.
-
-        Returns:
-        --------
-        str
-            The ticker symbol for the financial instrument.
+        :return: The ticker symbol for the financial instrument.
+        :rtype: str
         """
         return self._ticker  # Return the ticker symbol stored in the parent class
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
         """
-        Retrieves or calculates the CMO data series for the specified ticker.
+        Retrieve or calculate the CMO data series for the specified ticker.
 
-        This method checks if the CMO for the given ticker and configuration (target, length) already exists
-        in the provided DataFrame. If it does not exist, it downloads the data, calculates the CMO, and adds it to
-        the DataFrame. It returns a pandas Series containing the CMO values.
+        If the CMO data is not already present in the provided DataFrame, this method downloads the
+        latest market data for the ticker, calculates the CMO indicator, and adds it to the DataFrame.
 
-        Parameters:
-        -----------
-        downloader : DownloadModule
-            An instance of DownloadModule used to download the latest data for the ticker.
-
-        df : pd.DataFrame
-            A DataFrame that may contain existing trading data. If the CMO does not exist in this DataFrame,
-            it will be calculated and added.
-
-        Returns:
-        --------
-        pd.Series
-            A pandas Series containing the CMO values for the specified ticker and configuration, labeled with
-            the appropriate name.
+        :param downloader: The module responsible for downloading market data.
+        :type downloader: DownloadModule
+        :param df: DataFrame containing the existing market data.
+        :type df: pd.DataFrame
+        :return: A Pandas Series containing the CMO values for the specified ticker and configuration.
+        :rtype: pd.Series
         """
-
         # Check if the CMO series already exists in the DataFrame
         if self.name not in df.columns:
             # Download the latest data for the ticker using the downloader
@@ -87,14 +69,9 @@ class CMO(TradingSeries):
 
     def get_name(self) -> str:
         """
-        Returns the name of the series.
+        Get the name of the CMO series.
 
-        This method provides access to the name of the CMO series, which is formatted based on the ticker,
-        target column, and length of the CMO.
-
-        Returns:
-        --------
-        str
-            The name of the CMO series.
+        :return: The name of the CMO series, formatted with the ticker, source, and CMO length.
+        :rtype: str
         """
         return self.name

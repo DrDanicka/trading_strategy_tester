@@ -9,27 +9,22 @@ from trading_strategy_tester.utils.validations import get_base_sources
 
 class SMA(TradingSeries):
     """
-    The SMA class retrieves the specified price data (e.g., 'Close') for a given ticker and applies the Simple
-    Moving Average (SMA) calculation based on the specified length and offset.
+    The SMA (Simple Moving Average) class retrieves the specified price data (e.g., 'Close') for a given ticker
+    and applies the SMA calculation based on the specified length and offset.
     """
 
     def __init__(self, ticker: str, source: SourceType = SourceType.CLOSE, length: int = 9, offset: int = 0):
         """
-        Initializes the SMA series with the specified ticker symbol, target column, SMA length, and offset.
+        Initialize the SMA series with the specified ticker symbol, target column, SMA length, and offset.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
-
-        source : str, optional
-            The column in the DataFrame on which the SMA is calculated (e.g., 'Close'). Default is 'Close'.
-
-        length : int, optional
-            The number of periods over which to calculate the SMA. Default is 9.
-
-        offset : int, optional
-            The number of periods by which to shift the SMA. Default is 0.
+        :param ticker: The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
+        :type ticker: str
+        :param source: The column in the DataFrame on which the SMA is calculated (e.g., 'Close'). Default is 'Close'.
+        :type source: SourceType, optional
+        :param length: The number of periods over which to calculate the SMA. Default is 9.
+        :type length: int, optional
+        :param offset: The number of periods by which to shift the SMA. Default is 0.
+        :type offset: int, optional
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
         # Validate source
@@ -41,39 +36,27 @@ class SMA(TradingSeries):
     @property
     def ticker(self) -> str:
         """
-        Returns the ticker symbol associated with this SMA series.
+        Get the ticker symbol associated with this SMA series.
 
-        This property provides access to the ticker symbol that was specified when the SMA instance was created.
-
-        Returns:
-        --------
-        str
-            The ticker symbol for the financial instrument.
+        :return: The ticker symbol for the financial instrument.
+        :rtype: str
         """
         return self._ticker  # Return the ticker symbol stored in the parent class
 
     def get_data(self, downloader: DownloadModule, df: pd.DataFrame) -> pd.Series:
         """
-        Retrieves or calculates the SMA data series for the specified ticker.
+        Retrieve or calculate the SMA data series for the specified ticker.
 
-        This method checks if the SMA for the given ticker and configuration (target, length, offset) already exists
-        in the provided DataFrame. If it does not exist, it downloads the data, calculates the SMA, and adds it to
-        the DataFrame. It returns a pandas Series containing the SMA values.
+        If the SMA data is not already present in the provided DataFrame, this method downloads the
+        latest market data for the ticker, calculates the SMA indicator, and adds it to the DataFrame.
 
-        Parameters:
-        -----------
-        downloader : DownloadModule
-            An instance of DownloadModule used to download the latest data for the ticker.
-
-        df : pd.DataFrame
-            A DataFrame that may contain existing trading data. If the SMA does not exist in this DataFrame, it will be calculated and added.
-
-        Returns:
-        --------
-        pd.Series
-            A pandas Series containing the SMA values for the specified ticker and configuration, labeled with the appropriate name.
+        :param downloader: The module responsible for downloading market data.
+        :type downloader: DownloadModule
+        :param df: DataFrame containing the existing market data.
+        :type df: pd.DataFrame
+        :return: A Pandas Series containing the SMA values for the specified ticker and configuration.
+        :rtype: pd.Series
         """
-
         # Check if the SMA series already exists in the DataFrame
         if self.name not in df.columns:
             # Download the latest data for the ticker using the downloader
@@ -89,6 +72,9 @@ class SMA(TradingSeries):
 
     def get_name(self) -> str:
         """
-        Returns the name of the series
+        Get the name of the SMA series.
+
+        :return: The name of the SMA series, formatted with the ticker, source, length, and offset.
+        :rtype: str
         """
         return self.name

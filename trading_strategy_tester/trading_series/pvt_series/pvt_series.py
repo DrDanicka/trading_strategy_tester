@@ -60,7 +60,7 @@ class PVT(TradingSeries):
             # Calculate the PVT series using the close price and volume data
             pvi_series = pvt(
                 close=new_df[SourceType.CLOSE.value],  # Access the closing prices
-                volume=new_df['Volume']  # Access the volume data
+                volume=new_df[SourceType.VOLUME.value]  # Access the volume data
             )
 
             # Add the calculated PVT series to the DataFrame for persistent storage

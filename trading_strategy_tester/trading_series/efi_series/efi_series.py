@@ -59,7 +59,7 @@ class EFI(TradingSeries):
             # Calculate the EFI indicator using the downloaded data
             efi_series = efi(
                 close=new_df[SourceType.CLOSE.value],
-                volume=new_df['Volume'],
+                volume=new_df[SourceType.VOLUME.value],
                 length=self.length
             )
 

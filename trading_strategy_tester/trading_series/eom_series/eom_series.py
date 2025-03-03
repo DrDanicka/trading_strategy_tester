@@ -61,7 +61,7 @@ class EOM(TradingSeries):
             eom_series = eom(
                 high=new_df[SourceType.HIGH.value],
                 low=new_df[SourceType.LOW.value],
-                volume=new_df['Volume'],
+                volume=new_df[SourceType.VOLUME.value],
                 length=self.length,
                 divisor=self.divisor
             )

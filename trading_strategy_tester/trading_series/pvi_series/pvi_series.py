@@ -54,7 +54,7 @@ class PVI(TradingSeries):
             # Calculate the PVI series using the close price and volume data
             pvi_series = pvi(
                 close=new_df[SourceType.CLOSE.value],
-                volume=new_df['Volume']
+                volume=new_df[SourceType.VOLUME.value]
             )
 
             # Add the calculated PVI series to the DataFrame

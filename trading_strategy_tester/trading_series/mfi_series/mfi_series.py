@@ -58,7 +58,7 @@ class MFI(TradingSeries):
             # Calculate the MFI series using the typical price (HLC3) and volume data
             mfi_series = mfi(
                 hlc3=get_source_series(new_df, SourceType.HLC3),
-                volume=new_df['Volume'],
+                volume=new_df[SourceType.VOLUME.value],
                 length=self.length
             )
 
