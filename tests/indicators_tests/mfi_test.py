@@ -40,7 +40,7 @@ class TestMFI(unittest.TestCase):
         ], name=f'MFI_{length}').reset_index(drop=True)
         calculated_mfi = mfi(
             hlc3=get_source_series(self.data, SourceType.HLC3),
-            volume=self.data['Volume'],
+            volume=self.data[SourceType.VOLUME.value],
             length=length
         ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(trading_view_mfi, calculated_mfi)
@@ -60,7 +60,7 @@ class TestMFI(unittest.TestCase):
         ], name=f'MFI_{length}').reset_index(drop=True)
         calculated_mfi = mfi(
             hlc3=get_source_series(self.data, SourceType.HLC3),
-            volume=self.data['Volume'],
+            volume=self.data[SourceType.VOLUME.value],
             length=length
         ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(trading_view_mfi, calculated_mfi)

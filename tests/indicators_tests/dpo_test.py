@@ -6,7 +6,7 @@ from datetime import datetime
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.trend.dpo import dpo
-from trading_strategy_tester.trading_series.dpo_series import DPO
+from trading_strategy_tester.trading_series.dpo_series.dpo_series import DPO
 
 class TestDPO(unittest.TestCase):
 

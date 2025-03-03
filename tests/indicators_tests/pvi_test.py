@@ -36,7 +36,7 @@ class TestPVI(unittest.TestCase):
         ], name='PVI').reset_index(drop=True)
         calculated_pvi = pvi(
             close=self.data[SourceType.CLOSE.value],
-            volume=self.data['Volume']
+            volume=self.data[SourceType.VOLUME.value]
         ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_pvi, trading_view_pvi)
 

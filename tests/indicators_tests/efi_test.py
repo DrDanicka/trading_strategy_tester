@@ -6,7 +6,7 @@ from datetime import datetime
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.volume.efi import efi
-from trading_strategy_tester.trading_series.efi_series import EFI
+from trading_strategy_tester.trading_series.efi_series.efi_series import EFI
 
 class TestEFI(unittest.TestCase):
 
@@ -38,7 +38,7 @@ class TestEFI(unittest.TestCase):
         ], name=f'EFI_{length}').reset_index(drop=True)
         calculated_efi = efi(
             self.data[SourceType.CLOSE.value],
-            self.data['Volume'],
+            self.data[SourceType.VOLUME.value],
             length
         ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_efi, trading_view_efi)
@@ -60,7 +60,7 @@ class TestEFI(unittest.TestCase):
         ], name=f'EFI_{length}').reset_index(drop=True)
         calculated_efi = efi(
             self.data[SourceType.CLOSE.value],
-            self.data['Volume'],
+            self.data[SourceType.VOLUME.value],
             length
         ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_efi, trading_view_efi)

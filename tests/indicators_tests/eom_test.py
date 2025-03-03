@@ -6,7 +6,7 @@ from datetime import datetime
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.indicators.volume.eom import eom
-from trading_strategy_tester.trading_series.eom_series import EOM
+from trading_strategy_tester.trading_series.eom_series.eom_series import EOM
 
 class TestEOM(unittest.TestCase):
 
@@ -39,7 +39,7 @@ class TestEOM(unittest.TestCase):
         calculated_eom = eom(
             self.data[SourceType.HIGH.value],
             self.data[SourceType.LOW.value],
-            self.data['Volume'],
+            self.data[SourceType.VOLUME.value],
             length,
             divisor
         ).tail(20).reset_index(drop=True).round(6)
@@ -62,7 +62,7 @@ class TestEOM(unittest.TestCase):
         calculated_eom = eom(
             self.data[SourceType.HIGH.value],
             self.data[SourceType.LOW.value],
-            self.data['Volume'],
+            self.data[SourceType.VOLUME.value],
             length,
             divisor
         ).tail(20).reset_index(drop=True).round(6)

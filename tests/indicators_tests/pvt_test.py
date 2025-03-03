@@ -36,7 +36,7 @@ class TestPVT(unittest.TestCase):
         ], name='PVT').reset_index(drop=True)
         calculated_pvt = pvt(
             close=self.data[SourceType.CLOSE.value],
-            volume=self.data['Volume']
+            volume=self.data[SourceType.VOLUME.value]
         ).tail(20).reset_index(drop=True).round(2)
         pd.testing.assert_series_equal(calculated_pvt, trading_view_pvt)
 
