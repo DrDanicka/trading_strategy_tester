@@ -482,6 +482,33 @@ def create_condition(ticker: str):
 
     return body_of_condition, class_with_parameters
 
+# TODO add tests for this utility
+def build_logical_expression(ops, words):
+    and_groups = []
+    current_group = [words[0]]
+
+    for i, op in enumerate(ops):
+        if op == "and":
+            current_group.append(words[i + 1])
+        else:  # "or"
+            and_groups.append(current_group if len(current_group) > 1 else current_group[0])
+            current_group = [words[i + 1]]
+
+    and_groups.append(current_group if len(current_group) > 1 else current_group[0])
+
+    # Construct the formatted logical expression
+    if len(and_groups) == 1:
+        structured_expression = (
+            f"AND({', '.join(and_groups[0])})" if isinstance(and_groups[0], list) else and_groups[0]
+        )
+    else:
+        structured_expression = f"OR({', '.join(['AND(' + ', '.join(group) + ')' if isinstance(group, list) else group for group in and_groups])})"
+
+    # Construct the simple concatenation expression
+    simple_expression = " ".join(word if i == 0 else f"{ops[i-1]} {word}" for i, word in enumerate(words))
+
+    return structured_expression, simple_expression
+
 
 def create_training_data():
     training_data = []
@@ -490,9 +517,10 @@ def create_training_data():
     sp500_tickers = pd.read_csv('sp500.csv')
 
     # Load implemented indicators
-    implemented_indicators = pd.read_csv('indicators.csv')
+    #implemented_indicators = pd.read_csv('indicators.csv')
 
-    for i in range(1000):
+    number_of_training_data = 1
+    for i in range(number_of_training_data):
         # Ticker
         ticker_index = random.randint(0, len(sp500_tickers) - 1)
         ticker_not_company = random.choice([True, False])
@@ -502,7 +530,7 @@ def create_training_data():
         if ticker_not_company:
             chosen_ticker = ticker_parameter
         else:
-            chosen_ticker = sp500_tickers['Company'][ticker_index]
+            chosen_ticker = sp500_tickers['Company Name'][ticker_index]
 
         # Strategy type
         strategy_type = {
@@ -516,10 +544,29 @@ def create_training_data():
         strategy_type_parameter = strategy_type[chosen_strategy_type]
 
         # Buy condition
-        number_of_buy_conditions = random.randint(1, 3)
+        number_of_buy_conditions = random.randint(1, 4)
+        buy_conditions = [create_condition(ticker_parameter) for _ in range(number_of_buy_conditions)]
 
-        buy_conditions = []
-        #for i in range(number_of_buy_conditions):
+        # Sell condition
+        number_of_sell_conditions = random.randint(1, 4)
+        sell_conditions = [create_condition(ticker_parameter) for _ in range(number_of_sell_conditions)]
+
+        # Connect conditions with logical operators
+        # TODO think about if then else conditions
+        logical_operators = ['and', 'or']
+
+        # Logical operators between buy conditions
+        buy_logical_operators = random.choices(logical_operators, k=number_of_buy_conditions - 1)
+
+        # Logical operators between sell conditions
+        sell_logical_operators = random.choices(logical_operators, k=number_of_sell_conditions - 1)
+
+        # Build logical expressions
+        buy_conditions_text, buy_conditions_parameters = build_logical_expression(buy_logical_operators, [condition[0] for condition in buy_conditions])
+        sell_conditions_text, sell_conditions_parameters = build_logical_expression(sell_logical_operators, [condition[0] for condition in sell_conditions])
+
+
+
 
 
 
@@ -553,3 +600,5 @@ def create_training_data():
         })
 
     return training_data
+
+create_training_data()
