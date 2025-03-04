@@ -566,38 +566,15 @@ def create_training_data():
         sell_conditions_text, sell_conditions_parameters = build_logical_expression(sell_logical_operators, [condition[0] for condition in sell_conditions])
 
 
+        # Stop loss or take profit
+        stop_loss = random.choice([True, False])
+        take_profit = random.choice([True, False])
 
 
 
 
-        buy_sell_action_condition = random.choice(buy_sell_action_conditions)
-        crossover_condition_up = random.choice(crossover_conditions_up)
-        crossover_condition_down = random.choice(crossover_conditions_down)
-        change_of_x_percent_per_y_days_condition = random.choice(change_of_x_percent_per_y_days_conditions)
-        intra_interval_change_of_x_percent_condition = random.choice(intra_interval_change_of_x_percent_conditions)
-        greater_than_condition = random.choice(greater_than_conditions)
-        less_than_condition = random.choice(less_than_conditions)
-        downtrend_for_x_days_condition = random.choice(downtrend_for_x_days_conditions)
-        uptrend_for_x_days_condition = random.choice(uptrend_for_x_days_conditions)
-        downtrend_fibonacci_retracement_condition = random.choice(downtrend_fibonacci_retracement_conditions)
-        uptrend_fibonacci_retracement_condition = random.choice(uptrend_fibonacci_retracement_conditions)
 
-        prompt_start = random.choice(prompt_starts).format(strategy_type=strategy_type, ticker=chosen_ticker)
 
-        training_data.append({
-            'prompt_start': prompt_start,
-            'buy_sell_action_condition': buy_sell_action_condition,
-            'crossover_condition_up': crossover_condition_up,
-            'crossover_condition_down': crossover_condition_down,
-            'change_of_x_percent_per_y_days_condition': change_of_x_percent_per_y_days_condition,
-            'intra_interval_change_of_x_percent_condition': intra_interval_change_of_x_percent_condition,
-            'greater_than_condition': greater_than_condition,
-            'less_than_condition': less_than_condition,
-            'downtrend_for_x_days_condition': downtrend_for_x_days_condition,
-            'uptrend_for_x_days_condition': uptrend_for_x_days_condition,
-            'downtrend_fibonacci_retracement_condition': downtrend_fibonacci_retracement_condition,
-            'uptrend_fibonacci_retracement_condition': uptrend_fibonacci_retracement_condition
-        })
 
     return training_data
 
