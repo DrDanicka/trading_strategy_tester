@@ -1,5 +1,6 @@
 import random
 import pandas as pd
+from dataclasses import dataclass
 
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
@@ -9,26 +10,26 @@ from trading_strategy_tester.enums.fibonacci_levels_enum import FibonacciLevels
 # Create training data for the model
 
 prompt_starts = [
-    'Could you develop a {strategy_type} strategy for {ticker} that',
-    'Would you be able to create a {strategy_type} strategy for {ticker} that',
-    'Please design a strategy for {ticker} that',
-    'Can you generate a {strategy_type} strategy for {ticker} that',
-    'Would you mind crafting a {strategy_type} strategy for {ticker} that',
-    'Could you outline a {strategy_type} strategy for {ticker} that',
-    'I need a {strategy_type} strategy for {ticker} that',
-    'Can you help formulate a {strategy_type} strategy for {ticker} that',
-    'Would you kindly create a {strategy_type} strategy for {ticker} that',
-    'Can you provide a {strategy_type} strategy for {ticker} that',
-    'Might you be able to develop a {strategy_type} strategy for {ticker} that',
-    'Could you draft a {strategy_type} trading strategy for {ticker} that',
-    'Please come up with a {strategy_type} strategy for {ticker} that',
-    'I’d appreciate it if you could design a {strategy_type} strategy for {ticker} that',
-    'Can you structure a {strategy_type} strategy for {ticker} that',
-    'Would you be willing to create a {strategy_type} strategy for {ticker} that',
-    'Can you tailor a {strategy_type} strategy for {ticker} that',
-    'I’m looking for a {strategy_type} strategy for {ticker} that',
-    'Could you put together a {strategy_type} strategy for {ticker} that',
-    'Is it possible for you to create a {strategy_type} strategy for {ticker} that'
+    'Could you develop a {strategy_type} strategy for {ticker} that ',
+    'Would you be able to create a {strategy_type} strategy for {ticker} that ',
+    'Please design a strategy for {ticker} that ',
+    'Can you generate a {strategy_type} strategy for {ticker} that ',
+    'Would you mind crafting a {strategy_type} strategy for {ticker} that ',
+    'Could you outline a {strategy_type} strategy for {ticker} that ',
+    'I need a {strategy_type} strategy for {ticker} that ',
+    'Can you help formulate a {strategy_type} strategy for {ticker} that ',
+    'Would you kindly create a {strategy_type} strategy for {ticker} that ',
+    'Can you provide a {strategy_type} strategy for {ticker} that ',
+    'Might you be able to develop a {strategy_type} strategy for {ticker} that ',
+    'Could you draft a {strategy_type} trading strategy for {ticker} that ',
+    'Please come up with a {strategy_type} strategy for {ticker} that ',
+    'I’d appreciate it if you could design a {strategy_type} strategy for {ticker} that ',
+    'Can you structure a {strategy_type} strategy for {ticker} that ',
+    'Would you be willing to create a {strategy_type} strategy for {ticker} that ',
+    'Can you tailor a {strategy_type} strategy for {ticker} that ',
+    'I’m looking for a {strategy_type} strategy for {ticker} that ',
+    'Could you put together a {strategy_type} strategy for {ticker} that ',
+    'Is it possible for you to create a {strategy_type} strategy for {ticker} that '
 ]
 
 
@@ -217,6 +218,40 @@ buy_actions = ['buy', 'buys', 'purchase', 'purchases', 'acquire', 'acquires', 'o
 sell_actions = ['sell', 'sells', 'sell off', 'sells off', 'sell out', 'sells out', 'dispose', 'disposes', 'dump',
                 'dumps', 'go short', 'goes short', 'take a short position', 'takes a short position', 'shorts']
 
+stop_loss_normal = [
+    'set normal stop-loss at {percentage}%',
+    'apply normal stop-loss at {percentage}%',
+    'use normal stop-loss at {percentage}%',
+    'set stop-loss at {percentage}%',
+    'set normal stop-loss at {percentage} percent',
+    'apply normal stop-loss at {percentage} percent',
+    'use normal stop-loss at {percentage} percent',
+    'set stop-loss at {percentage} percent',
+    'apply stop-loss at {percentage}%',
+    'use stop-loss at {percentage}%',
+    'set stop-loss at {percentage}%',
+    'set normal stop-loss at {percentage} percent',
+    'apply normal stop-loss at {percentage} percent'
+]
+
+stop_loss_trailing = [
+    'set trailing stop-loss at {percentage}%',
+    'apply trailing stop-loss at {percentage}%',
+    'use trailing stop-loss at {percentage}%',
+    'set trailing stop-loss at {percentage} percent',
+    'apply trailing stop-loss at {percentage} percent',
+    'use trailing stop-loss at {percentage} percent'
+]
+
+take_profit = [
+    'set take-profit at {percentage}%',
+    'apply take-profit at {percentage}%',
+    'use take-profit at {percentage}%',
+    'set take-profit at {percentage} percent',
+    'apply take-profit at {percentage} percent',
+    'use take-profit at {percentage} percent'
+]
+
 implemented_indicators = pd.DataFrame(
     data=[['Average Directional Index', 'ADX', 'ADX', 'ticker:str adx_smoothing:int length:int'],
           ['Aroon Indicator Down', 'AROON DOWN', 'AROON_DOWN', 'ticker:str, length:int'],
@@ -317,6 +352,12 @@ conditions_dict = {
     4: conditions_with_trading_series_and_percentage,
     5: conditions_with_fib_levels
 }
+
+
+@dataclass
+class Condition:
+    text: str
+    class_with_parameters: str
 
 
 def process_one_condition(ticker: str):
@@ -562,18 +603,36 @@ def create_training_data():
         sell_logical_operators = random.choices(logical_operators, k=number_of_sell_conditions - 1)
 
         # Build logical expressions
-        buy_conditions_text, buy_conditions_parameters = build_logical_expression(buy_logical_operators, [condition[0] for condition in buy_conditions])
-        sell_conditions_text, sell_conditions_parameters = build_logical_expression(sell_logical_operators, [condition[0] for condition in sell_conditions])
+        _, buy_conditions_text = build_logical_expression(
+            buy_logical_operators,
+            [condition[0] for condition in buy_conditions]
+        )
+        _, sell_conditions_text = build_logical_expression(
+            sell_logical_operators,
+            [condition[0] for condition in sell_conditions]
+        )
 
+        buy_conditions_parameters, _ = build_logical_expression(
+            buy_logical_operators,
+            [condition[1] for condition in buy_conditions]
+        )
+        sell_conditions_parameters, _ = build_logical_expression(
+            sell_logical_operators,
+            [condition[1] for condition in sell_conditions]
+        )
 
         # Stop loss or take profit
-        stop_loss = random.choice([True, False])
-        take_profit = random.choice([True, False])
+        stop_loss_bool = random.choice([True, False])
+        stop_loss_type_bool = random.choice([True, False])
+        take_profit_bool = random.choice([True, False])
 
+        stop_loss = ''
 
+        text_prompt = random.choice(prompt_starts).format(strategy_type=chosen_strategy_type, ticker=chosen_ticker) + random.choice(buy_sell_action_conditions).format(action=random.choice(buy_actions), condition=buy_conditions_text) + ' and ' + random.choice(buy_sell_action_conditions).format(action=random.choice(sell_actions), condition=sell_conditions_text)
+        parameters_prompt = (f"Strategy(ticker='{ticker_parameter}', position_type={strategy_type_parameter}, buy_condition={buy_conditions_parameters}, sell_condition={sell_conditions_parameters})")
 
-
-
+        print(text_prompt)
+        print(parameters_prompt)
 
 
     return training_data
