@@ -156,10 +156,4 @@ class PromptBuilder:
 
         strategy_object += ')'
 
-        print(prompt)
-        print(strategy_object)
-
         return prompt, strategy_object
-
-pb = PromptBuilder()
-pb.generate_prompt()
