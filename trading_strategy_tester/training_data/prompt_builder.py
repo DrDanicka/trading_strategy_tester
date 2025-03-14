@@ -39,7 +39,7 @@ class PromptBuilder:
     def _get_random_true_false_with_weights(self, true_weight: int, false_weight: int) -> bool:
         return random.choices([True, False], weights=[true_weight, false_weight])[0]
 
-    def _regenerate_bools(self):
+    def regenerate_bools(self):
         '''
         Regenerate all boolean flags for optional parameters.
         '''
@@ -73,7 +73,7 @@ class PromptBuilder:
 
     def generate_prompt(self) -> (str, str):
         # Regenerate all boolean flags for optional parameters
-        self._regenerate_bools()
+        self.regenerate_bools()
 
         # Get random ticker
         ticker_text, ticker_param = get_random_ticker()
@@ -99,7 +99,7 @@ class PromptBuilder:
             prompt += f'{sell_condition_text} and {buy_condition_text}.'
 
         # Build start of the strategy object
-        strategy_object = f'Strategy(ticker="{ticker_param}", position_type={strategy_type_param}, buy_condition={buy_condition_param}, sell_condition={sell_condition_param}'
+        strategy_object = f"Strategy(ticker='{ticker_param}', position_type={strategy_type_param}, buy_condition={buy_condition_param}, sell_condition={sell_condition_param}"
 
         # Get stop loss condition
         if self.stop_loss_bool:
