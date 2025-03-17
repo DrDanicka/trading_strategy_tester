@@ -117,41 +117,41 @@ class PromptBuilder:
         if self.date_or_period == DateORPeriodEnum.DATE:
             if self.start_date_bool:
                 start_date_text, start_date_param = get_random_start_end_dates(start=True)
-                prompt += f' {start_date_text}'
+                prompt += f' {start_date_text}.'
                 strategy_object += f', start_date={start_date_param}'
 
             if self.end_date_bool:
                 end_date_text, end_date_param = get_random_start_end_dates(start=False)
-                prompt += f' {end_date_text}'
+                prompt += f' {end_date_text}.'
                 strategy_object += f', end_date={end_date_param}'
         # Get period
         elif self.date_or_period == DateORPeriodEnum.PERIOD:
             period_text, period_param = get_random_period()
-            prompt += f' {period_text}'
+            prompt += f' {period_text}.'
             strategy_object += f', period={period_param}'
 
         # Get interval
         if self.interval_bool:
             interval_text, interval_param = get_random_interval()
-            prompt += f' {interval_text}'
+            prompt += f' {interval_text}.'
             strategy_object += f', interval={interval_param}'
 
         # Get initial capital
         if self.initial_capital_bool:
             initial_capital_text, initial_capital_param = get_random_initial_capital()
-            prompt += f' {initial_capital_text}'
+            prompt += f' {initial_capital_text}.'
             strategy_object += f', initial_capital={initial_capital_param}'
 
         # Get order size
         if self.order_size_bool:
             order_size_text, order_size_param = get_random_order_size()
-            prompt += f' {order_size_text}'
+            prompt += f' {order_size_text}.'
             strategy_object += f', order_size={order_size_param}'
 
         # Get trade commissions
         if self.trade_commissions_bool:
             trade_commissions_text, trade_commissions_param = get_random_commission()
-            prompt += f' {trade_commissions_text}'
+            prompt += f' {trade_commissions_text}.'
             strategy_object += f', trade_commissions={trade_commissions_param}'
 
         strategy_object += ')'

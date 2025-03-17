@@ -249,33 +249,33 @@ parameter_equality_options = [
 ]
 
 dates = [
-    'Set the {type} date to {year}-{month}-{day}.',
-    'Set the {type} date as {year}-{month}-{day}.',
-    'Set the {type} date equal to {year}-{month}-{day}.',
-    'Set {type} of the strategy to {year}-{month}-{day}.',
-    'Set the {type} date to {year}-{month}-{day} for the strategy.'
+    'Set the {type} date to {year}-{month}-{day}',
+    'Set the {type} date as {year}-{month}-{day}',
+    'Set the {type} date equal to {year}-{month}-{day}',
+    'Set {type} of the strategy to {year}-{month}-{day}',
+    'Set the {type} date to {year}-{month}-{day} for the strategy'
 ]
 
 periods = [
-    'Set the period to {period}.',
-    'Set the period as {period}.',
-    'Set the period equal to {period}.',
-    'Set the period to {period} for the strategy.',
-    'Set the period as {period} for the strategy.'
-    'Set the period of the date to {period}.'
+    'Set the period to {period}',
+    'Set the period as {period}',
+    'Set the period equal to {period}',
+    'Set the period to {period} for the strategy',
+    'Set the period as {period} for the strategy'
+    'Set the period of the date to {period}'
 ]
 
 intervals = [
-    'Set the interval to {interval}.',
-    'Set the interval as {interval}.',
-    'Set the interval equal to {interval}.',
-    'Set the interval to {interval} for the data.',
+    'Set the interval to {interval}',
+    'Set the interval as {interval}',
+    'Set the interval equal to {interval}',
+    'Set the interval to {interval} for the data',
 ]
 
 initial_capital = [
-    'Set the initial capital to {capital}$.',
-    'I have {capital}$ as the initial capital.',
-    'I have {capital}$ to invest.',
+    'Set the initial capital to {capital}$',
+    'I have {capital}$ as the initial capital',
+    'I have {capital}$ to invest',
 ]
 
 order_size_uds = [
