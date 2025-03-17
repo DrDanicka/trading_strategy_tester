@@ -1,7 +1,7 @@
 from trading_strategy_tester.conditions.threshold_conditions.greater_than_condition import GreaterThanCondition
 from trading_strategy_tester.conditions.threshold_conditions.less_than_condition import LessThanCondition
-from trading_strategy_tester.conditions.logical_conditions.and_condition import AndCondition
-from trading_strategy_tester.conditions.logical_conditions.or_condition import OrCondition
+from trading_strategy_tester.conditions.logical_conditions.and_condition import AND
+from trading_strategy_tester.conditions.logical_conditions.or_condition import OR
 from trading_strategy_tester.conditions.fibonacci_retracement_levels_conditions.downtrend_fib_retracement import DowntrendFibRetracementLevelCondition
 from trading_strategy_tester.conditions.stoploss_takeprofit.stop_loss import StopLoss
 from trading_strategy_tester.conditions.stoploss_takeprofit.take_profit import TakeProfit
@@ -28,7 +28,7 @@ di_plus = DI_PLUS('GOOGL', length=14)
 di_minus = DI_MINUS('GOOGL', length=14)
 
 # Define the buy condition: EMA(21) < CLOSE and ADX > 30
-buy_condition = AndCondition(
+buy_condition = AND(
     LessThanCondition(
         first_series=ema_series,
         second_series=close_series
@@ -40,7 +40,7 @@ buy_condition = AndCondition(
 )
 
 # Define the sell condition: -DI > +DI or Downtrend Fibonacci retracement level reaches 61.8%
-sell_condition = OrCondition(
+sell_condition = OR(
     GreaterThanCondition(
         first_series=di_minus,
         second_series=di_plus

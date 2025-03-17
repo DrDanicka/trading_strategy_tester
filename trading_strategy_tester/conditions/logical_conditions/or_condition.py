@@ -5,7 +5,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
 
 
-class OrCondition(Condition):
+class OR(Condition):
     """
     A condition that combines multiple conditions with a logical OR operation.
 

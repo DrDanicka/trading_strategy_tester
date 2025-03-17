@@ -1,6 +1,6 @@
 from trading_strategy_tester.conditions.threshold_conditions.cross_over_condition import CrossOverCondition
 from trading_strategy_tester.conditions.stoploss_takeprofit.stop_loss import StopLoss
-from trading_strategy_tester.conditions.logical_conditions.or_condition import OrCondition
+from trading_strategy_tester.conditions.logical_conditions.or_condition import OR
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
 from trading_strategy_tester.enums.interval_enum import Interval
 from trading_strategy_tester.strategy.strategy import Strategy
@@ -42,10 +42,10 @@ sell_condition_2 = CrossOverCondition(
 )
 
 # Combine the buy conditions using OrCondition
-buy_condition = OrCondition(buy_condition_1, buy_condition_2)
+buy_condition = OR(buy_condition_1, buy_condition_2)
 
 # Combine the sell conditions using OrCondition
-sell_condition = OrCondition(sell_condition_1, sell_condition_2)
+sell_condition = OR(sell_condition_1, sell_condition_2)
 
 # Define the stop loss with a 10% limit
 stop_loss = StopLoss(percentage=10)

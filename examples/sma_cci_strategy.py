@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 
-from trading_strategy_tester.conditions.logical_conditions.or_condition import OrCondition
+from trading_strategy_tester.conditions.logical_conditions.or_condition import OR
 from trading_strategy_tester.conditions.stoploss_takeprofit.stop_loss import StopLoss
 from trading_strategy_tester.conditions.stoploss_takeprofit.take_profit import TakeProfit
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
@@ -31,7 +31,7 @@ ticker = 'GOOG' # Google ticker
 strat = Strategy(
     ticker=ticker,
     position_type= PositionTypeEnum.LONG_SHORT_COMBINED,
-    buy_condition= OrCondition(
+    buy_condition= OR(
         CrossOverCondition(
             CLOSE(ticker=ticker),
             SMA(ticker=ticker, source=SourceType.CLOSE, length=9, offset=0)
@@ -41,7 +41,7 @@ strat = Strategy(
             CONST(-100)
         )
     ),
-    sell_condition=OrCondition(
+    sell_condition=OR(
         CrossOverCondition(
             SMA(ticker=ticker, source=SourceType.CLOSE, length=9, offset=0),
             CLOSE(ticker=ticker)

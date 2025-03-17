@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from trading_strategy_tester.conditions.logical_conditions.and_condition import AndCondition
+from trading_strategy_tester.conditions.logical_conditions.and_condition import AND
 from trading_strategy_tester.conditions.test_condition import TestCondition
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.testing_series import TestingSeries
@@ -26,7 +26,7 @@ class TestAndCondition(unittest.TestCase):
         expected_signal_series = pd.Series([expected_signal, None, None, None, None])
 
         # Act
-        and_condition, signal_series = AndCondition(
+        and_condition, signal_series = AND(
             TestCondition(
                 TestingSeries(
                     ticker, pd.Series([True, False, False, True, False]), test_parameter
@@ -59,7 +59,7 @@ class TestAndCondition(unittest.TestCase):
         expected_signal_series = pd.Series([expected_signal, None, None, expected_signal, None])
 
         # Act
-        and_condition, signal_series = AndCondition(
+        and_condition, signal_series = AND(
             TestCondition(
                 TestingSeries(
                     ticker, pd.Series([True, False, False, True, False]), test_parameter
@@ -90,7 +90,7 @@ class TestAndCondition(unittest.TestCase):
         expected_signal_series = pd.Series([None, None, None, None, None])
 
         # Act
-        and_condition, signal_series = AndCondition(
+        and_condition, signal_series = AND(
             TestCondition(
                 TestingSeries(
                     ticker, pd.Series([False, False, False, True, False]), test_parameter

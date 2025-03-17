@@ -5,7 +5,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
 
 
-class AndCondition(Condition):
+class AND(Condition):
     """
     A condition that combines multiple conditions with a logical AND operation.
 

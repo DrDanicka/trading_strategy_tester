@@ -1,7 +1,7 @@
 from trading_strategy_tester.conditions.threshold_conditions.greater_than_condition import GreaterThanCondition
 from trading_strategy_tester.conditions.threshold_conditions.less_than_condition import LessThanCondition
 from trading_strategy_tester.conditions.threshold_conditions.cross_over_condition import CrossOverCondition
-from trading_strategy_tester.conditions.logical_conditions.or_condition import OrCondition
+from trading_strategy_tester.conditions.logical_conditions.or_condition import OR
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
 from trading_strategy_tester.enums.interval_enum import Interval
 from trading_strategy_tester.strategy.strategy import Strategy
@@ -31,7 +31,7 @@ buy_condition_2 = CrossOverCondition(
 )
 
 # Combine the buy conditions using OrCondition
-buy_condition = OrCondition(buy_condition_1, buy_condition_2)
+buy_condition = OR(buy_condition_1, buy_condition_2)
 
 # Define the sell conditions
 sell_condition_1 = LessThanCondition(
@@ -45,7 +45,7 @@ sell_condition_2 = CrossOverCondition(
 )
 
 # Combine the sell conditions using OrCondition
-sell_condition = OrCondition(sell_condition_1, sell_condition_2)
+sell_condition = OR(sell_condition_1, sell_condition_2)
 
 # Define a constant order size of $100 per trade
 order_size = USD(100)

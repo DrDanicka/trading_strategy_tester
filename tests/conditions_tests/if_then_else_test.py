@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from trading_strategy_tester.conditions.logical_conditions.if_then_else_condition import IfThenElseCondition
+from trading_strategy_tester.conditions.logical_conditions.if_then_else_condition import IfThenElse
 from trading_strategy_tester.conditions.test_condition import TestCondition
 from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.trading_series.testing_series import TestingSeries
@@ -26,7 +26,7 @@ class TestIfThenElseCondition(unittest.TestCase):
         expected_if_then_else = pd.Series([True, False, False, True, False])
         expected_signal_series = pd.Series([expected_signal1, None, None, expected_signal1, None])
 
-        if_then_else_condition, signal_series = IfThenElseCondition(
+        if_then_else_condition, signal_series = IfThenElse(
             TestCondition(
                 TestingSeries(
                     ticker, pd.Series([True, False, False, True, False]), test_parameter1
@@ -53,7 +53,7 @@ class TestIfThenElseCondition(unittest.TestCase):
         expected_if_then_else = pd.Series([True, True, False, True, False])
         expected_signal_series = pd.Series([expected_signal1, expected_signal2, None, expected_signal1, None])
 
-        if_then_else_condition, signal_series = IfThenElseCondition(
+        if_then_else_condition, signal_series = IfThenElse(
             TestCondition(
                 TestingSeries(
                     ticker, pd.Series([True, False, False, True, False]), test_parameter1
@@ -80,7 +80,7 @@ class TestIfThenElseCondition(unittest.TestCase):
         expected_if_then_else = pd.Series([False, False, False, False, False])
         expected_signal_series = pd.Series([None, None, None, None, None])
 
-        if_then_else_condition, signal_series = IfThenElseCondition(
+        if_then_else_condition, signal_series = IfThenElse(
             TestCondition(
                 TestingSeries(
                     ticker, pd.Series([False, False, False, False, False]), test_parameter1
@@ -107,7 +107,7 @@ class TestIfThenElseCondition(unittest.TestCase):
         expected_if_then_else = pd.Series([True, True, False, True, False])
         expected_signal_series = pd.Series([expected_signal1, expected_signal2, None, expected_signal1, None])
 
-        if_then_else_condition, signal_series = IfThenElseCondition(
+        if_then_else_condition, signal_series = IfThenElse(
             TestCondition(
                 TestingSeries(
                     ticker, pd.Series([True, False, False, True, False]), test_parameter1
