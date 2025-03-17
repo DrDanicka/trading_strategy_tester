@@ -61,6 +61,6 @@ def get_random_commission():
     else:
         commission = random.randint(1, 10)
         commission_text = random.choice(trade_commissions_percentage).format(commissions=commission)
-        commission_param = f'PercentageCommission(value={commission})'
+        commission_param = f'PercentageCommissions(value={commission})'
 
     return commission_text, commission_param

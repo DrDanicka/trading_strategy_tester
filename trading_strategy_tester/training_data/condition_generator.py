@@ -65,17 +65,17 @@ def process_one_trading_series(ticker: str):
                 parameter_values.append(f'smoothing type set to {parameter_value}')
             elif parameter_type == 'SourceType':
                 parameter_value = random.choice([
-                    SourceType.CLOSE.value,
-                    SourceType.OPEN.value,
-                    SourceType.HIGH.value,
-                    SourceType.LOW.value,
-                    SourceType.HLC3.value,
-                    SourceType.HL2.value,
-                    SourceType.OHLC4.value,
-                    SourceType.HLCC4.value
+                    SourceType.CLOSE,
+                    SourceType.OPEN,
+                    SourceType.HIGH,
+                    SourceType.LOW,
+                    SourceType.HLC3,
+                    SourceType.HL2,
+                    SourceType.OHLC4,
+                    SourceType.HLCC4
                 ])
-                parameter_values.append(f'source set to {parameter_value}')
-
+                parameter_values.append(f'source set to {parameter_value.value}')
+                parameter_value = str(parameter_value)
             elif parameter_type == 'bool':
                 parameter_value = random.choice([True, False])
                 parameter_values.append(
@@ -155,9 +155,10 @@ def create_condition(ticker: str):
         condition_text = condition_text.format(indicator=trading_series_text, percent=percent)
 
         # Create parameters of the class based of the condition_number
-        condition_param = f"{class_name}(series={trading_series_parameters}, percent={percent}')"
+        condition_param = f"{class_name}(series={trading_series_parameters}, percent={percent})"
     # Conditions with fibonacci levels
     elif condition_type == ConditionType.condition_with_fibonacci_levels.value:
+        # TODO opravit
         trading_series_text, trading_series_parameters = process_one_trading_series(ticker)
 
         # Create text of the prompt
@@ -173,7 +174,7 @@ def create_condition(ticker: str):
         condition_text = condition_text.format(indicator=trading_series_text, level=level.value)
 
         # Create parameters of the class based of the condition_number
-        condition_param = f"{class_name}(series={trading_series_parameters}, level={level}')"
+        condition_param = f"{class_name}(series={trading_series_parameters}, level={level})"
     else:
         raise ValueError("Invalid condition type")
 
