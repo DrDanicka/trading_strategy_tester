@@ -196,10 +196,10 @@ def build_logical_expression(ops, words, params):
     # Construct the formatted logical expression
     if len(and_groups) == 1:
         logical_condition_params = (
-            f"AND({', '.join(and_groups[0])})" if isinstance(and_groups[0], list) else and_groups[0]
+            f"AndCondition({', '.join(and_groups[0])})" if isinstance(and_groups[0], list) else and_groups[0]
         )
     else:
-        logical_condition_params = f"OR({', '.join(['AND(' + ', '.join(group) + ')' if isinstance(group, list) else group for group in and_groups])})"
+        logical_condition_params = f"OrCondition({', '.join(['AndCondition(' + ', '.join(group) + ')' if isinstance(group, list) else group for group in and_groups])})"
 
     # Construct the simple concatenation expression
     logical_condition_text = " ".join(word if i == 0 else f"{ops[i-1]} {word}" for i, word in enumerate(words))
