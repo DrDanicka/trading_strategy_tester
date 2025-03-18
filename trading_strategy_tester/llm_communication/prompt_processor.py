@@ -103,6 +103,8 @@ from trading_strategy_tester.trading_series.willr_series.willr_series import WIL
 # ----- Import strategy -----
 from trading_strategy_tester.strategy.strategy import Strategy
 
+from datetime import datetime
+
 namespace = {
     'DowntrendFibRetracementLevelCondition': DowntrendFibRetracementLevelCondition,
     'UptrendFibRetracementLevelCondition': UptrendFibRetracementLevelCondition,
@@ -188,7 +190,8 @@ namespace = {
     'TRIX': TRIX,
     'UO': UO,
     'WILLR': WILLR,
-    'Strategy': Strategy
+    'Strategy': Strategy,
+    'datetime': datetime
 }
 
 def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_1B):
@@ -208,32 +211,18 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_1B):
             prompt = prompt
         )
         result = response.response
+
+        # TODO Delete after
+        ticker = 'AAPL'
+        result = f"Strategy(ticker='{ticker}',position_type=PositionTypeEnum.LONG_SHORT_COMBINED,buy_condition=CrossOverCondition(RSI('{ticker}'),CONST(30)),sell_condition=CrossOverCondition(CONST(70),RSI('{ticker}')),start_date=datetime(2020, 1, 1),end_date=datetime(2025, 1, 1))"
     elif llm_model == LLMModel.CHAT_GPT_API:
         # Process the prompt using chat-gpt-api
         result = ...
     else:
         raise ValueError("Invalid LLM model specified")
-    return result
 
-# print(process_prompt('Can you structure a long strategy for Microsoft that sells off when the Rate of Change rocks by 13.249162676932919 percent within a interval is well-timed and take a long position when the CCI changes by 65.57259823198311 percent within a interval is seemly. Set the interval to 3 months. Go into every trade with 26 contracts'))
-# Strategy(ticker='MSFT', position_type=PositionTypeEnum.LONG, buy_condition=IntraIntervalChangeOfXPercentCondition(series=CCI('MSFT'), percent=65.57259823198311'), sell_condition=IntraIntervalChangeOfXPercentCondition(series=ROC('MSFT'), percent=13.249162676932919'), interval=Interval.THREE_MONTHS, order_size=Contracts(value=26))
-
-# print(process_prompt('Can you structure a  strategy for GS that goes long when the Exponential Moving Average spins by 35.91653823439932 percent over 22 days or price is at the 38.2% fibonacci level during an uptrend is fulfilled and sell out when the Relative Strength Index fluctuates by 25.983993531713782 percent over 11 days is to the point.'))
-# Strategy(ticker='GS', position_type=PositionTypeEnum.LONG, buy_condition=OR(ChangeOfXPercentPerYDaysCondition(series=EMA('GS'), percent=35.91653823439932, number_of_days=22), UptrendFibRetracementLevelCondition(series=KC_UPPER('GS', source=Low, use_exp_ma=False, length=18), level=FibonacciLevels.LEVEL_38_2')), sell_condition=ChangeOfXPercentPerYDaysCondition(series=RSI('GS'), percent=25.983993531713782, number_of_days=11))
-
-# print(process_prompt('Could you develop a  strategy for LVS that take a short position when the Aroon Indicator Down with length is equal to 78 crosses below CMF is right and goes long when the Williams %R with source set to High is in an ascending trend for 66 days is useful. Set the period as 1 day for the strategy.Set the period of the date to 1 day. I have 578472$ as the initial capital.'))
-# Strategy(ticker='LVS', position_type=PositionTypeEnum.LONG, buy_condition=UptrendForXDaysCondition(series=WILLR('LVS', source=High), number_of_days=66), sell_condition=CrossOverCondition(first_series=CMF('LVS'), second_series=AROON_DOWN('LVS', length=78)), period=Period.ONE_DAY, initial_capital=578472)
-
-try:
-    #result = process_prompt('Can you structure a long strategy for Microsoft that sells off when the Rate of Change rocks by 13.249162676932919 percent within a interval is well-timed and take a long position when the CCI changes by 65.57259823198311 percent within a interval is seemly. Set the interval to 3 months. Go into every trade with 26 contracts')
-    # TODO pozriet lebo division by zero
-    # result = "Strategy(ticker='MSFT', position_type=PositionTypeEnum.LONG, buy_condition=IntraIntervalChangeOfXPercentCondition(series=CCI('MSFT'), percent=65.57259823198311), sell_condition=IntraIntervalChangeOfXPercentCondition(series=ROC('MSFT'), percent=13.249162676932919), interval=Interval.THREE_MONTHS, order_size=Contracts(value=26))"
-    # TODO chyba v Fib condition
-    #result = "Strategy(ticker='GS', position_type=PositionTypeEnum.LONG, buy_condition=OR(ChangeOfXPercentPerYDaysCondition(series=EMA('GS'), percent=35.91653823439932, number_of_days=22), UptrendFibRetracementLevelCondition(series=KC_UPPER('GS', source=SourceType.LOW, use_exp_ma=False, length=18), level=FibonacciLevels.LEVEL_38_2)), sell_condition=ChangeOfXPercentPerYDaysCondition(series=RSI('GS'), percent=25.983993531713782, number_of_days=11))"
-    # TODO pozriet znova lebo division by zero
-    result = "Strategy(ticker='LVS', position_type=PositionTypeEnum.LONG, buy_condition=UptrendForXDaysCondition(series=WILLR('LVS', source=SourceType.HIGH), number_of_days=66), sell_condition=CrossOverCondition(first_series=CMF('LVS'), second_series=AROON_DOWN('LVS', length=78)), period=Period.ONE_DAY, initial_capital=578472)"
-    print(result)
-    strat = eval(result, namespace)
+    # Evaluate the result
+    strat : Strategy = eval(result, namespace)
     strat.execute()
-except Exception as e:
-    print(e)
+
+    return strat.get_trades(), strat.get_graphs(), strat.get_statistics()
