@@ -11,7 +11,7 @@ def get_random_stop_loss():
     trailing_stop_loss = random.choices([True, False], weights=[20, 80])[0]
 
     # Generate random percentage from 0.1 to 50
-    random_percentage = random.uniform(0.1, 50)
+    random_percentage = round(random.uniform(0.1, 50), 2)
 
     if not trailing_stop_loss:
         # We set normal stop loss
@@ -33,7 +33,7 @@ def get_random_take_profit():
     :rtype: tuple
     '''
     # Generate random percentage from 0.1 to 50
-    random_percentage = random.uniform(0.1, 50)
+    random_percentage = round(random.uniform(0.1, 50), 2)
 
     take_profit_text = f'{random.choice(take_profit).format(percentage=random_percentage)}'
     take_profit_param = f'TakeProfit(percentage={random_percentage})'

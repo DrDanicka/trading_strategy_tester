@@ -52,7 +52,7 @@ def process_one_trading_series(ticker: str):
                 parameter_values.append(
                     random.choice(parameter_equality_options).format(name=parameter_name, value=parameter_value))
             elif parameter_type == 'float':
-                parameter_value = random.uniform(0.1, 99.9)
+                parameter_value = round(random.uniform(0.1, 99.9), 2)
                 parameter_values.append(
                     random.choice(parameter_equality_options).format(name=parameter_name, value=parameter_value))
             elif parameter_type == 'SmoothingType':
@@ -139,7 +139,7 @@ def create_condition(ticker: str):
 
         # Create text of the prompt
         condition_text = random.choice(possible_texts)
-        percent = random.uniform(0.1, 99.9)
+        percent = round(random.uniform(0.1, 99.9), 2)
         number_of_days = random.randint(1, 99)
         condition_text = condition_text.format(indicator=trading_series_text, percent=percent, days=number_of_days)
 
@@ -151,7 +151,7 @@ def create_condition(ticker: str):
 
         # Create text of the prompt
         condition_text = random.choice(possible_texts)
-        percent = random.uniform(0.1, 99.9)
+        percent = round(random.uniform(0.1, 99.9), 2)
         condition_text = condition_text.format(indicator=trading_series_text, percent=percent)
 
         # Create parameters of the class based of the condition_number
