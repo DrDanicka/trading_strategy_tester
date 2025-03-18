@@ -48,7 +48,7 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, investing_type) -> dic
 
         max_drawdown = max(max_drawdown, trade_summary['Drawdown'])
 
-    average_trade = sum(trade_p_and_l) / total_trades
+    average_trade = sum(trade_p_and_l) / total_trades if total_trades > 0 else 0
 
     return {
         'Net Profit': float(net_profit),
