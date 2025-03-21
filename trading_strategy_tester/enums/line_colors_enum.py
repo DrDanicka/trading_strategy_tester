@@ -13,5 +13,5 @@ class LineColor(Enum):
     LIGHT_BLUE = 'rgba(153, 204, 255, 1)'
     PINK = 'rgba(255, 102, 178, 1)'
     LIGHT_GREEN = 'rgba(128, 255, 0, 1)'
-    RED = 'rgba(255, 0, 0, 1)'
-    GREEN = 'rgba(0, 255, 0, 1)'
+    RED = 'rgba(241,54,69,255)'
+    GREEN = 'rgba(39,153,129,255)'
