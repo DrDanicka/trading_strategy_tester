@@ -64,12 +64,12 @@ def plot_light_mode_graph(fig: go.Figure, title: str):
     :type title: str
     """
     fig.update_layout(
-        title={
-            'text': title,
-            'x': 0.5,  # Centers the title
-            'xanchor': 'center',
-            'yanchor': 'top'
-        },
+        # title={
+        #     'text': title,
+        #     'x': 0.5,  # Centers the title
+        #     'xanchor': 'center',
+        #     'yanchor': 'top'
+        # },
         template='plotly_white',
         hovermode="x unified",
         dragmode="pan",
@@ -81,7 +81,10 @@ def plot_light_mode_graph(fig: go.Figure, title: str):
             bordercolor="gray",
             borderwidth=1
         ),
-        showlegend=True if title != 'Price' else False
+        showlegend=True if title != 'Price' else False,
+        autosize=True,
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=None
     )
 
 
@@ -95,17 +98,17 @@ def plot_dark_mode_graph(fig: go.Figure, title: str):
     :type title: str
     """
     fig.update_layout(
-        title={
-            'text': title,
-            'x': 0.5,  # Centers the title
-            'xanchor': 'center',
-            'yanchor': 'top'
-        },
+        # title={
+        #     'text': title,
+        #     'x': 0.5,  # Centers the title
+        #     'xanchor': 'center',
+        #     'yanchor': 'top'
+        # },
         template='plotly_dark',
         hovermode="x unified",
         dragmode="pan",
-        paper_bgcolor="rgba(19, 24, 34, 255)",  # Set background to custom dark color
-        plot_bgcolor="rgba(19, 24, 34, 255)",  # Set plot background to custom dark color
+        paper_bgcolor="#121212",  # Set background to custom dark color
+        plot_bgcolor="#121212",  # Set plot background to custom dark color
         font=dict(color="gray"),
         legend=dict(
             x=0.02,  # Position from the left (small margin)
@@ -115,7 +118,10 @@ def plot_dark_mode_graph(fig: go.Figure, title: str):
             bordercolor="gray",
             borderwidth=1
         ),
-        showlegend=True if title != 'Price' else False
+        showlegend=True if title != 'Price' else False,
+        autosize=True,
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=None
     )
 
 
