@@ -2,7 +2,7 @@ import pandas as pd
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trade.trade import Trade
 
-def get_strategy_stats(trades: [Trade], df: pd.DataFrame, investing_type) -> dict:
+def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float, investing_type) -> dict:
     """
     Calculates and returns various statistics for a given trading strategy based on a list of trades and market data.
 
@@ -49,18 +49,23 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, investing_type) -> dic
         max_drawdown = max(max_drawdown, trade_summary['Drawdown'])
 
     average_trade = sum(trade_p_and_l) / total_trades if total_trades > 0 else 0
+    total_pnl = sum(trade_p_and_l)
+    total_percent_pnl = (total_pnl / initial_capital) * 100
 
     return {
-        'Net Profit': float(net_profit),
-        'Gross Profit': float(gross_profit),
-        'Gross Loss': float(gross_loss),
-        'Max Drawdown': float(max_drawdown),
-        'Buy and Hold Return': float(buy_and_hold_return),
-        'Commissions Paid': commissions_paid,
+        'Net Profit': f'{round(float(net_profit), 2)}$',
+        'Gross Profit': f'{round(float(gross_profit), 2)}$',
+        'Gross Loss': f'{round(float(gross_loss), 2)}$',
+        'Profit factor': round(float(gross_profit / gross_loss) if gross_loss != 0 else 1, 2),
+        'Max Drawdown': f'{round(float(max_drawdown), 2)}$',
+        'Buy and Hold Return': f'{round(float(buy_and_hold_return), 2)}$',
+        'Commissions Paid': f'{round(float(commissions_paid), 2)}$',
         'Total Trades': total_trades,
         'Number of Winning Trades': number_of_winning_trades,
         'Number of Losing Trades': number_of_losing_trades,
-        'Average Trade': float(average_trade),
-        'Largest Winning Trade': float(largest_winning_trade),
-        'Largest Losing Trade': float(largest_losing_trade)
+        'Average Trade': f'{round(float(average_trade), 2)}$',
+        'Largest Winning Trade': f'{round(float(largest_winning_trade), 2)}$',
+        'Largest Losing Trade': f'{round(float(largest_losing_trade), 2)}$',
+        'P&L': f'{round(total_pnl, 2)}$',
+        'Percentage P&L': f'{round(total_percent_pnl, 2)}%',
     }
