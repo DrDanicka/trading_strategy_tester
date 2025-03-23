@@ -156,8 +156,38 @@ class Trade:
             'Run-up': round(self.run_up, 2),
             'Percentage Run-up': round(self.run_up_percentage, 2),
             'Drawdown': round(self.drawdown, 2),
-            'Drawdown Percentage': round(self.drawdown_percentage, 2),
-            'Current Capital': round(self.current_capital, 2),
+            'Percentage Drawdown': round(self.drawdown_percentage, 2),
+            'Current Capital': round(self.current_capital, 2)
+        }
+
+    def get_summary_with_units(self) -> dict:
+        """
+        Returns a summary of the trade with units (USD) for all monetary values.
+
+        :return: A dictionary containing the trade summary with USD units.
+        :rtype: dict
+        """
+        return {
+            'ID': self.trade_id,
+            'Type': 'Long' if self.long else 'Short',
+            'Entry Date': self.entry_date.strftime('%b %d, %Y'),
+            'Exit Date': self.exit_date.strftime('%b %d, %Y'),
+            'Entry Price': f'{round(self.entry_price, 2)}$',
+            'Exit Price': f'{round(self.exit_price, 2)}$',
+            'Invested': f'{round(self.invested, 2)}$',
+            'Contracts': self.contracts,
+            'Entry Signal': self.entry_signal,
+            'Exit Signal': self.exit_signal,
+            'Commissions Paid': f'{round(self.commissions, 2)}$',
+            'P&L': f'{round(self.p_and_l, 2)}$',
+            'Percentage P&L': f'{round(self.percentage_p_and_l, 2)}%',
+            'Cumulative P&L': f'{round(self.cumulative_p_and_l, 2)}$',
+            'Percentage Cumulative P&L': f'{round(self.cumulative_p_and_l_percentage, 2)}%',
+            'Run-up': f'{round(self.run_up, 2)}$',
+            'Percentage Run-up': f'{round(self.run_up_percentage, 2)}%',
+            'Drawdown': f'{round(self.drawdown, 2)}$',
+            'Percentage Drawdown': f'{round(self.drawdown_percentage, 2)}%',
+            'Current Capital': f'{round(self.current_capital, 2)}$'
         }
 
     def get_capital_after_trade(self):
