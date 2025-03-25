@@ -194,6 +194,15 @@ namespace = {
     'datetime': datetime
 }
 
+'''
+Delete After strats:
+
+Strategy(ticker='AAPL',position_type=PositionTypeEnum.LONG,buy_condition=CrossOverCondition(RSI('AAPL'),CONST(30)),sell_condition=CrossOverCondition(CONST(70),RSI('AAPL')),start_date=datetime(2020, 1, 1),end_date=datetime(2025, 1, 1))
+
+Strategy(ticker='TSLA', position_type=PositionTypeEnum.LONG, buy_condition=OR( CrossOverCondition(first_series=RSI('TSLA'), second_series=CONST(30)), LessThanCondition(first_series=EMA('TSLA'), second_series=CLOSE('TSLA'))), sell_condition=OR( CrossOverCondition(first_series=CONST(70), second_series=RSI('TSLA')), IntraIntervalChangeOfXPercentCondition(series=CLOSE('TSLA'), percent=5)), stop_loss=StopLoss(percentage=5, stop_loss_type=StopLossType.NORMAL), take_profit=TakeProfit(percentage=10), start_date=datetime(2020, 1, 1), end_date=datetime(2024, 1, 1), initial_capital=1000)
+
+'''
+
 def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_1B):
     '''
     This function processes the prompt and returns the result.
@@ -211,13 +220,12 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_1B):
             prompt = prompt
         )
         result = response.response
-
-        # TODO Delete after
-        ticker = 'AAPL'
-        result = f"Strategy(ticker='{ticker}',position_type=PositionTypeEnum.LONG_SHORT_COMBINED,buy_condition=CrossOverCondition(RSI('{ticker}'),CONST(30)),sell_condition=CrossOverCondition(CONST(70),RSI('{ticker}')),start_date=datetime(2020, 1, 1),end_date=datetime(2025, 1, 1))"
     elif llm_model == LLMModel.CHAT_GPT_API:
         # Process the prompt using chat-gpt-api
         result = ...
+    elif llm_model == LLMModel.STRATEGY_OBJECT:
+        # TODO add validation
+        result = prompt
     else:
         raise ValueError("Invalid LLM model specified")
 
