@@ -14,11 +14,21 @@ class TradeConditions:
 
     def evaluate_conditions(self, df: pd.DataFrame) -> pd.DataFrame:
         buy, buy_signal_series = self.buy_condition.evaluate(self.downloader, df)
+        # Shift by one because the execution of the trade happens on the next day after the signal
+        buy = buy.astype('boolean')
+        buy = buy.shift(1).fillna(False)
         df['BUY'] = buy
+
+        buy_signal_series = buy_signal_series.shift(1)
         df['BUY_Signals'] = buy_signal_series
 
         sell, sell_signal_series = self.sell_condition.evaluate(self.downloader, df)
+        # Shift by one because the execution of the trade happens on the next day after the signal
+        sell = sell.astype('boolean')
+        sell = sell.shift(1).fillna(False)
         df['SELL'] = sell
+
+        sell_signal_series = sell_signal_series.shift(1)
         df['SELL_Signals'] = sell_signal_series
 
         return df
