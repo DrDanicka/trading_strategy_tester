@@ -56,7 +56,7 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
         'Net Profit': f'{round(float(net_profit), 2)}$',
         'Gross Profit': f'{round(float(gross_profit), 2)}$',
         'Gross Loss': f'{round(float(gross_loss), 2)}$',
-        'Profit factor': round(float(gross_profit / gross_loss) if gross_loss != 0 else 1, 2),
+        'Profit factor': round(float(gross_profit / ((-1) * gross_loss)), 2) if gross_loss != 0 else '-',
         'Max Drawdown': f'{round(float(max_drawdown), 2)}$',
         'Buy and Hold Return': f'{round(float(buy_and_hold_return), 2)}$',
         'Commissions Paid': f'{round(float(commissions_paid), 2)}$',
