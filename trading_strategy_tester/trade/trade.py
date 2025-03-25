@@ -56,9 +56,43 @@ class Trade:
         :return: A tuple containing the entry and exit dates.
         :rtype: tuple
         """
-        entry_date = self.data.index[1]  # Entry date is the second row (first after signal)
+        entry_date = self.data.index[0]  # Entry date is the first row
         exit_date = self.data.index.max()  # Exit date is the last row in the slice
         return entry_date, exit_date
+
+    def exit_is_stop_loss(self) -> (bool, float):
+        """
+        Checks if the exit was due to a stop loss. If so, it returns the percentage of the stop loss.
+
+        :return: A tuple containing a boolean indicating if the exit was due to a stop loss and the percentage of the stop loss.
+        :rtype: tuple
+        """
+        is_stop_loss : bool = False
+        percentage : float = 0
+
+        for column in ['BUY_Signals', 'SELL_Signals']:
+            if str(self.data[column].iloc[-1]).startswith('StopLoss'):
+                is_stop_loss = True
+                percentage = float(str(self.data[column].iloc[-1]).split('(')[-1].split(')')[0])
+
+        return is_stop_loss, percentage
+
+    def exit_is_take_profit(self) -> (bool, float):
+        """
+        Checks if the exit was due to a take profit. If so, it returns the percentage of the take profit.
+
+        :return: A tuple containing a boolean indicating if the exit was due to a take profit and the percentage of the take profit.
+        :rtype: tuple
+        """
+        is_take_profit : bool = False
+        percentage : float = 0
+
+        for column in ['BUY_Signals', 'SELL_Signals']:
+            if str(self.data[column].iloc[-1]).startswith('TakeProfit'):
+                is_take_profit = True
+                percentage = float(str(self.data[column].iloc[-1]).split('(')[-1].split(')')[0])
+
+        return is_take_profit, percentage
 
     def get_prices(self) -> tuple:
         """
@@ -67,8 +101,20 @@ class Trade:
         :return: A tuple containing the entry and exit prices based on the 'Open' column.
         :rtype: tuple
         """
-        entry_price = self.data[SourceType.OPEN.value].iloc[1]  # First 'Open' price after entry signal
+        entry_price = self.data[SourceType.OPEN.value].iloc[0]  # First 'Open' price after entry signal
         exit_price = self.data[SourceType.OPEN.value].iloc[-1]  # Last 'Open' price for exit
+
+        # Find you if exit was not Stop loss or Take profit
+        has_stop_loss, stop_loss_percentage = self.exit_is_stop_loss()
+        has_take_profit, take_profit_percentage = self.exit_is_take_profit()
+
+        if has_stop_loss:
+            value_threshold = (entry_price * stop_loss_percentage) / 100
+            exit_price = min(self.data[SourceType.OPEN.value].iloc[-1], entry_price - value_threshold)
+        elif has_take_profit:
+            value_threshold = (entry_price * take_profit_percentage) / 100
+            exit_price = max(self.data[SourceType.OPEN.value].iloc[-1], entry_price + value_threshold)
+
         return entry_price, exit_price
 
     def get_signals(self) -> tuple:
@@ -79,7 +125,7 @@ class Trade:
         :rtype: tuple
         """
         entry_signal = self.data['BUY_Signals'].iloc[0] if self.long else self.data['SELL_Signals'].iloc[0]
-        exit_signal = self.data['SELL_Signals'].iloc[-2] if self.long else self.data['BUY_Signals'].iloc[-2]
+        exit_signal = self.data['SELL_Signals'].iloc[-1] if self.long else self.data['BUY_Signals'].iloc[-1]
         return entry_signal, exit_signal
 
     def get_drawdown(self) -> tuple:
@@ -90,9 +136,9 @@ class Trade:
         :rtype: tuple
         """
         if self.long:
-            trough = self.data[SourceType.LOW.value].iloc[1:-1].min()  # Lowest price between entry and exit
+            trough = self.data[SourceType.LOW.value].iloc[0:-1].min()  # Lowest price between entry and exit
         else:
-            trough = self.data[SourceType.HIGH.value].iloc[1:-1].max()  # Highest price between entry and exit
+            trough = self.data[SourceType.HIGH.value].iloc[0:-1].max()  # Highest price between entry and exit
 
         drawdown = self.entry_price - trough
         drawdown_percentage = (drawdown / self.entry_price) * 100 if self.entry_price != 0 else 0
@@ -106,9 +152,9 @@ class Trade:
         :rtype: tuple
         """
         if self.long:
-            run_up = self.data[SourceType.HIGH.value].iloc[1:-1].max() - self.entry_price  # Max increase in price
+            run_up = self.data[SourceType.HIGH.value].iloc[0:-1].max() - self.entry_price  # Max increase in price
         else:
-            run_up = self.entry_price - self.data[SourceType.LOW.value].iloc[1:-1].min()  # Max decrease in price
+            run_up = self.entry_price - self.data[SourceType.LOW.value].iloc[0:-1].min()  # Max decrease in price
 
         run_up_percentage = (run_up / self.entry_price) * 100
         return run_up, run_up_percentage
@@ -275,7 +321,7 @@ def create_all_trades(df: pd.DataFrame, order_size: OrderSize, initial_capital: 
 
         # Detect long exit signal (SELL signal and 'LongExit') and execute the trade
         if row['SELL'] and row['Long'] == 'LongExit':
-            end_index = i + 2 if i + 2 <= len(df) else len(df)  # Define slice range, ensuring it's within bounds
+            end_index = i + 1 if i + 1 <= len(df) else len(df)  # Define slice range, ensuring it's within bounds
 
             # Create a long Trade object and update the capital
             long_trade = Trade(
@@ -297,7 +343,7 @@ def create_all_trades(df: pd.DataFrame, order_size: OrderSize, initial_capital: 
 
         # Detect short exit signal (BUY signal and 'ShortExit') and execute the trade
         if row['BUY'] and row['Short'] == 'ShortExit':
-            end_index = i + 2 if i + 2 <= len(df) else len(df)  # Define slice range, ensuring it's within bounds
+            end_index = i + 1 if i + 1 <= len(df) else len(df)  # Define slice range, ensuring it's within bounds
 
             # Create a short Trade object and update the capital
             short_trade = Trade(

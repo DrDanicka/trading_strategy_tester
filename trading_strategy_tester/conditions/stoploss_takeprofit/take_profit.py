@@ -57,7 +57,9 @@ class TakeProfit:
         has_short = position_type == PositionTypeEnum.SHORT or position_type == PositionTypeEnum.LONG_SHORT_COMBINED
 
         for index, row in df.iterrows():
-            current_price = row[SourceType.CLOSE.value]
+            current_open = row[SourceType.OPEN.value]
+            current_low = row[SourceType.LOW.value]
+            current_high = row[SourceType.HIGH.value]
 
             # Reset bought/sold flags if opposing signals occur (e.g., SELL after BUY)
             if bought and row['SELL']:
@@ -80,27 +82,27 @@ class TakeProfit:
 
             # Handle LONG positions: Trigger 'SELL' when take-profit is reached
             if has_long and not bought and not sold and row['BUY'] and not row['SELL']:
-                buying_price = current_price
+                buying_price = current_open
                 value_threshold = (buying_price * self.percentage) / 100
                 bought = True
                 continue
 
             # Handle SHORT positions: Trigger 'BUY' when take-profit is reached
             elif has_short and not bought and not sold and row['SELL'] and not row['BUY']:
-                selling_price = current_price
+                selling_price = current_open
                 value_threshold = (selling_price * self.percentage) / 100
                 sold = True
                 continue
 
             # Check if the take-profit threshold is reached for LONG positions
-            if has_long and bought and current_price >= buying_price + value_threshold:
+            if has_long and bought and current_high >= buying_price + value_threshold:
                 df.at[index, 'SELL'] = True
                 df.at[index, 'BUY'] = False  # Prioritize Selling
                 df.at[index, 'SELL_Signals'] = f'TakeProfit({self.percentage})'
                 bought = False
 
             # Check if the take-profit threshold is reached for SHORT positions
-            if has_short and sold and current_price <= selling_price - value_threshold:
+            if has_short and sold and current_low <= selling_price - value_threshold:
                 df.at[index, 'BUY'] = True
                 df.at[index, 'SELL'] = False  # Prioritize Buying
                 df.at[index, 'BUY_Signals'] = f'TakeProfit({self.percentage})'
