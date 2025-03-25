@@ -140,7 +140,7 @@ class Trade:
         else:
             trough = self.data[SourceType.HIGH.value].iloc[0:-1].max()  # Highest price between entry and exit
 
-        drawdown = self.entry_price - trough
+        drawdown = abs(self.entry_price - trough)
         drawdown_percentage = (drawdown / self.entry_price) * 100 if self.entry_price != 0 else 0
         return self.contracts * drawdown, drawdown_percentage
 
