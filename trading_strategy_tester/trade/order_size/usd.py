@@ -35,4 +35,7 @@ class USD(OrderSize):
                  - The number of shares or contracts that can be purchased with the invested amount.
         :rtype: tuple(float, float)
         """
+        if self.value > current_capital:
+            return current_capital, current_capital / share_price
+
         return self.value, self.value / share_price  # Return the invested amount and the number of shares

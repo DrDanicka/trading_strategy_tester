@@ -36,4 +36,8 @@ class Contracts(OrderSize):
                  - The number of contracts, which is the value of the object.
         :rtype: tuple(float, float)
         """
-        return self.value * share_price, self.value
+        want_to_invest = self.value * share_price
+        if want_to_invest > current_capital:
+            return current_capital, current_capital / share_price
+
+        return want_to_invest, self.value

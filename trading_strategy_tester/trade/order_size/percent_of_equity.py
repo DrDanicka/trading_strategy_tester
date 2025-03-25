@@ -37,4 +37,7 @@ class PercentOfEquity(OrderSize):
         :rtype: tuple(float, float)
         """
         amount_of_equity = self.value / 100 * current_capital  # Calculate the percentage of current capital to invest
+        if amount_of_equity > current_capital:
+            return current_capital, current_capital / share_price
+
         return amount_of_equity, amount_of_equity / share_price  # Return the invested amount and the number of shares

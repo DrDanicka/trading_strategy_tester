@@ -191,7 +191,7 @@ class Trade:
             'Entry Price': round(self.entry_price, 2),
             'Exit Price': round(self.exit_price, 2),
             'Invested': round(self.invested, 2),
-            'Contracts': self.contracts,
+            'Contracts': round(self.contracts, 2),
             'Entry Signal': self.entry_signal,
             'Exit Signal': self.exit_signal,
             'Commissions Paid': round(self.commissions, 2),
@@ -221,7 +221,7 @@ class Trade:
             'Entry Price': f'{round(self.entry_price, 2)}$',
             'Exit Price': f'{round(self.exit_price, 2)}$',
             'Invested': f'{round(self.invested, 2)}$',
-            'Contracts': self.contracts,
+            'Contracts': round(self.contracts, 2),
             'Entry Signal': self.entry_signal,
             'Exit Signal': self.exit_signal,
             'Commissions Paid': f'{round(self.commissions, 2)}$',
@@ -323,6 +323,13 @@ def create_all_trades(df: pd.DataFrame, order_size: OrderSize, initial_capital: 
         if row['SELL'] and row['Long'] == 'LongExit':
             end_index = i + 1 if i + 1 <= len(df) else len(df)  # Define slice range, ensuring it's within bounds
 
+            entry_price = df.iloc[buy_index][SourceType.OPEN.value]
+            invested, contracts = order_size.get_invested_amount(entry_price, current_capital)
+
+            # Split if we have no money to invest
+            if contracts == 0:
+                continue
+
             # Create a long Trade object and update the capital
             long_trade = Trade(
                 df_slice=df.iloc[buy_index:end_index],
@@ -344,6 +351,13 @@ def create_all_trades(df: pd.DataFrame, order_size: OrderSize, initial_capital: 
         # Detect short exit signal (BUY signal and 'ShortExit') and execute the trade
         if row['BUY'] and row['Short'] == 'ShortExit':
             end_index = i + 1 if i + 1 <= len(df) else len(df)  # Define slice range, ensuring it's within bounds
+
+            entry_price = df.iloc[sell_index][SourceType.OPEN.value]
+            invested, contracts = order_size.get_invested_amount(entry_price, current_capital)
+
+            # Split if we have no money to invest
+            if contracts == 0:
+                continue
 
             # Create a short Trade object and update the capital
             short_trade = Trade(
