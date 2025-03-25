@@ -1,8 +1,9 @@
 import pandas as pd
 from trading_strategy_tester.enums.source_enum import SourceType
+from trading_strategy_tester.trade.order_size.order_size import OrderSize
 from trading_strategy_tester.trade.trade import Trade
 
-def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float, investing_type) -> dict:
+def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float, order_size: OrderSize) -> dict:
     """
     Calculates and returns various statistics for a given trading strategy based on a list of trades and market data.
 
@@ -10,8 +11,6 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
     :type trades: list[Trade]
     :param df: A pandas DataFrame containing market data, including the 'Close' prices used to calculate buy-and-hold returns.
     :type df: pd.DataFrame
-    :param investing_type: The type of investing strategy (not used directly in the function but may influence other parameters).
-    :type investing_type: Any
     :return: A dictionary containing various strategy statistics, including net profit, gross profit, gross loss, max drawdown,
              buy-and-hold return, commissions paid, total trades, number of winning trades, number of losing trades,
              average trade P&L, largest winning trade, and largest losing trade.
@@ -21,7 +20,6 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
     gross_profit = 0
     gross_loss = 0
     max_drawdown = 0
-    buy_and_hold_return = (100 * df[SourceType.CLOSE.value].iloc[-1]) / df[SourceType.CLOSE.value].iloc[0]
     commissions_paid = 0
     total_trades = len(trades)
     number_of_winning_trades = 0
@@ -30,6 +28,11 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
     trade_p_and_l = []
     largest_winning_trade = 0
     largest_losing_trade = 0
+
+    # Calculate buy and hold return
+    num_of_contracts = order_size.get_invested_amount(df[SourceType.OPEN.value].iloc[0], initial_capital)[1]
+    buy_and_hold_return = num_of_contracts * df[SourceType.OPEN.value].iloc[-1] - num_of_contracts * df[SourceType.OPEN.value].iloc[0] if len(df) > 1 else 0
+    buy_and_hold_return_percentage = (100 * df[SourceType.OPEN.value].iloc[-1]) / df[SourceType.OPEN.value].iloc[0] if len(df) > 1 else 0
 
     for trade in trades:
         trade_summary = trade.get_summary()
@@ -59,6 +62,7 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
         'Profit factor': round(float(gross_profit / ((-1) * gross_loss)), 2) if gross_loss != 0 else '-',
         'Max Drawdown': f'{round(float(max_drawdown), 2)}$',
         'Buy and Hold Return': f'{round(float(buy_and_hold_return), 2)}$',
+        'Buy and Hold Return Percentage': f'{round(float(buy_and_hold_return_percentage), 2)}%',
         'Commissions Paid': f'{round(float(commissions_paid), 2)}$',
         'Total Trades': total_trades,
         'Number of Winning Trades': number_of_winning_trades,
@@ -67,5 +71,5 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
         'Largest Winning Trade': f'{round(float(largest_winning_trade), 2)}$',
         'Largest Losing Trade': f'{round(float(largest_losing_trade), 2)}$',
         'P&L': f'{round(total_pnl, 2)}$',
-        'Percentage P&L': f'{round(total_percent_pnl, 2)}%',
+        'P&L Percentage': f'{round(total_percent_pnl, 2)}%',
     }
