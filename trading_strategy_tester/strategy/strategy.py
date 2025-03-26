@@ -122,7 +122,7 @@ class Strategy:
         self.graphs = self.trade_conditions.get_graphs(df, self.trades)
 
         # Create stats of the strategy
-        self.stats = get_strategy_stats(self.trades, evaluated_conditions_df, self.initial_capital, None)
+        self.stats = get_strategy_stats(self.trades, evaluated_conditions_df, self.initial_capital, self.order_size)
 
         # Delete temp downloaded files
         downloader.delete_temp_files()
