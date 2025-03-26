@@ -30,7 +30,7 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
     largest_losing_trade = 0
 
     # Calculate buy and hold return
-    num_of_contracts = order_size.get_invested_amount(df[SourceType.OPEN.value].iloc[0], initial_capital)[1]
+    num_of_contracts = order_size.get_invested_amount(df[SourceType.OPEN.value].iloc[0], initial_capital)[1] if len(df) > 0 else 0
     buy_and_hold_return = num_of_contracts * df[SourceType.OPEN.value].iloc[-1] - num_of_contracts * df[SourceType.OPEN.value].iloc[0] if len(df) > 1 else 0
     buy_and_hold_return_percentage = (100 * df[SourceType.OPEN.value].iloc[-1]) / df[SourceType.OPEN.value].iloc[0] if len(df) > 1 else 0
 
