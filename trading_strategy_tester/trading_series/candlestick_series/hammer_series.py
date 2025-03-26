@@ -54,10 +54,10 @@ class HAMMER(TradingSeries):
             new_df = downloader.download_ticker(self._ticker)
             # Calculate the Hammer pattern detection based on OHLC data
             hammer_series = hammer(
-                high=new_df[SourceType.HIGH],
-                low=new_df[SourceType.LOW],
-                open=new_df[SourceType.OPEN],
-                close=new_df[SourceType.CLOSE]
+                high=new_df[SourceType.HIGH.value],
+                low=new_df[SourceType.LOW.value],
+                open=new_df[SourceType.OPEN.value],
+                close=new_df[SourceType.CLOSE.value]
             )
 
             # Add the Hammer pattern series to the DataFrame
