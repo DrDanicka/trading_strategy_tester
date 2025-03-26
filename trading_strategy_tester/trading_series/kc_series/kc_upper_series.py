@@ -3,6 +3,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.indicators.volatility.kc import kc
+from trading_strategy_tester.utils.sources import get_source_series
 
 
 class KC_UPPER(TradingSeries):
@@ -26,12 +27,12 @@ class KC_UPPER(TradingSeries):
     def __init__(self, ticker: str, source: SourceType = SourceType.CLOSE, length: int = 20, multiplier: int = 2,
                  use_exp_ma: bool = True, atr_length: int = 10):
         super().__init__(ticker)
-        self.source = source.value
+        self.source = source
         self.length = length
         self.multiplier = multiplier
         self.use_exp_ma = use_exp_ma
         self.atr_length = atr_length
-        self.name = f'{self._ticker}_KC-UPPER_{self.source}_{self.length}_{self.multiplier}_{self.use_exp_ma}_{self.atr_length}'
+        self.name = f'{self._ticker}_KC-UPPER_{self.source.value}_{self.length}_{self.multiplier}_{self.use_exp_ma}_{self.atr_length}'
 
     @property
     def ticker(self) -> str:
@@ -66,7 +67,7 @@ class KC_UPPER(TradingSeries):
                 high=new_df[SourceType.HIGH.value],
                 low=new_df[SourceType.LOW.value],
                 close=new_df[SourceType.CLOSE.value],
-                series=new_df[self.source],
+                series=get_source_series(new_df, self.source),
                 upper=True,
                 length=self.length,
                 multiplier=self.multiplier,
