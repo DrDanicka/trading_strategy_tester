@@ -19,6 +19,14 @@ class PercentOfEquity(OrderSize):
         :param value: The percentage of the total available equity to be invested.
         :type value: float
         """
+        # Ensure that the value is a non-negative float
+        if value < 0:
+            value = 0
+
+        # Ensure that the value does not exceed 100%
+        elif value > 100:
+            value = 100
+
         super().__init__(value)
 
     def get_invested_amount(self, share_price: float, current_capital: float) -> (float, float):
@@ -36,6 +44,10 @@ class PercentOfEquity(OrderSize):
                  - The number of shares or contracts that can be purchased with the invested amount.
         :rtype: tuple(float, float)
         """
+        # Ensure that the current capital is non-negative
+        if current_capital < 0:
+            current_capital = 0
+
         amount_of_equity = self.value / 100 * current_capital  # Calculate the percentage of current capital to invest
         if amount_of_equity > current_capital:
             return current_capital, current_capital / share_price

@@ -19,6 +19,10 @@ class USD(OrderSize):
         :param value: The fixed dollar amount to be invested in the trade.
         :type value: float
         """
+        # Ensure that the value is a non-negative float
+        if value < 0:
+            value = 0
+
         super().__init__(value)
 
     def get_invested_amount(self, share_price: float, current_capital: float) -> (float, float):
@@ -35,6 +39,10 @@ class USD(OrderSize):
                  - The number of shares or contracts that can be purchased with the invested amount.
         :rtype: tuple(float, float)
         """
+        # Ensure that the current capital is non-negative
+        if current_capital < 0:
+            current_capital = 0
+
         if self.value > current_capital:
             return current_capital, current_capital / share_price
 

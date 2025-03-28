@@ -19,6 +19,10 @@ class Contracts(OrderSize):
         :param value: The fixed number of contracts to be purchased.
         :type value: float
         """
+        # Ensure that the value is a non-negative float
+        if value < 0:
+            value = 0
+
         super().__init__(value)
 
     def get_invested_amount(self, share_price: float, current_capital: float) -> (float, float):
@@ -36,6 +40,9 @@ class Contracts(OrderSize):
                  - The number of contracts, which is the value of the object.
         :rtype: tuple(float, float)
         """
+        if current_capital < 0:
+            current_capital = 0
+
         want_to_invest = self.value * share_price
         if want_to_invest > current_capital:
             return current_capital, current_capital / share_price
