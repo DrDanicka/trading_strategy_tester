@@ -2,6 +2,7 @@ import unittest
 import pandas as pd
 from trading_strategy_tester.conditions.stoploss_takeprofit.take_profit import TakeProfit
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
+from trading_strategy_tester.enums.source_enum import SourceType
 
 
 class TestTakeProfit(unittest.TestCase):
@@ -17,7 +18,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 54, 55, 47, 51],
+            SourceType.HIGH.value: [50, 54, 55, 47, 51],
+            SourceType.OPEN.value: [50, 52, 55, 47, 51],
+            SourceType.LOW.value: [50, 52, 55, 47, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -25,7 +28,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 54, 55, 47, 51],
+            SourceType.HIGH.value: [50, 54, 55, 47, 51],
+            SourceType.OPEN.value: [50, 52, 55, 47, 51],
+            SourceType.LOW.value: [50, 52, 55, 47, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, True, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -47,7 +52,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 49, 47, 51],
+            SourceType.OPEN.value: [50, 52, 49, 47, 51],
+            SourceType.HIGH.value: [50, 52, 49, 47, 51],
+            SourceType.LOW.value: [50, 52, 49, 47, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -55,7 +62,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 49, 47, 51],
+            SourceType.OPEN.value: [50, 52, 49, 47, 51],
+            SourceType.HIGH.value: [50, 52, 49, 47, 51],
+            SourceType.LOW.value: [50, 52, 49, 47, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -77,7 +86,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 55, 47, 51],
+            SourceType.OPEN.value: [50, 52, 55, 47, 51],
+            SourceType.HIGH.value: [50, 52, 55, 47, 51],
+            SourceType.LOW.value: [50, 52, 55, 47, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -85,7 +96,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 55, 47, 51],
+            SourceType.OPEN.value: [50, 52, 55, 47, 51],
+            SourceType.HIGH.value: [50, 52, 55, 47, 51],
+            SourceType.LOW.value: [50, 52, 55, 47, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -107,7 +120,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 55, 47, 51],
+            SourceType.OPEN.value: [50, 52, 55, 47, 51],
+            SourceType.HIGH.value: [50, 52, 55, 47, 51],
+            SourceType.LOW.value: [50, 52, 55, 47, 51],
             'BUY': [True, False, True, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -115,7 +130,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 55, 47, 51],
+            SourceType.OPEN.value: [50, 52, 55, 47, 51],
+            SourceType.HIGH.value: [50, 52, 55, 47, 51],
+            SourceType.LOW.value: [50, 52, 55, 47, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -137,7 +154,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 55, 60, 51],
+            SourceType.OPEN.value: [50, 52, 55, 60, 51],
+            SourceType.HIGH.value: [50, 52, 55, 60, 51],
+            SourceType.LOW.value: [50, 52, 55, 60, 51],
             'BUY': [True, False, True, False, False],
             'SELL': [False, True, False, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -145,7 +164,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 55, 60, 51],
+            SourceType.OPEN.value: [50, 52, 55, 60, 51],
+            SourceType.HIGH.value: [50, 52, 55, 60, 51],
+            SourceType.LOW.value: [50, 52, 55, 60, 51],
             'BUY': [True, False, True, False, False],
             'SELL': [False, True, False, True, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -167,7 +188,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 48, 48, 45, 51],
+            SourceType.OPEN.value: [50, 48, 48, 45, 51],
+            SourceType.HIGH.value: [50, 48, 48, 45, 51],
+            SourceType.LOW.value: [50, 48, 48, 45, 51],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -175,7 +198,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 48, 48, 45, 51],
+            SourceType.OPEN.value: [50, 48, 48, 45, 51],
+            SourceType.HIGH.value: [50, 48, 48, 45, 51],
+            SourceType.LOW.value: [50, 48, 48, 45, 51],
             'BUY': [False, False, False, True, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, expected_signal, None],
@@ -197,7 +222,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 48, 48, 49, 51],
+            SourceType.OPEN.value: [50, 48, 48, 49, 51],
+            SourceType.HIGH.value: [50, 48, 48, 49, 51],
+            SourceType.LOW.value: [50, 48, 48, 49, 51],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -205,7 +232,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 48, 48, 49, 51],
+            SourceType.OPEN.value: [50, 48, 48, 49, 51],
+            SourceType.HIGH.value: [50, 48, 48, 49, 51],
+            SourceType.LOW.value: [50, 48, 48, 49, 51],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -227,7 +256,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 48, 47, 49, 51],
+            SourceType.OPEN.value: [50, 48, 47, 49, 51],
+            SourceType.HIGH.value: [50, 48, 47, 49, 51],
+            SourceType.LOW.value: [50, 48, 47, 49, 51],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -235,7 +266,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 48, 47, 49, 51],
+            SourceType.OPEN.value: [50, 48, 47, 49, 51],
+            SourceType.HIGH.value: [50, 48, 47, 49, 51],
+            SourceType.LOW.value: [50, 48, 47, 49, 51],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, expected_signal, None, None],
@@ -257,7 +290,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 48, 47, 49, 51],
+            SourceType.OPEN.value: [50, 48, 47, 49, 51],
+            SourceType.HIGH.value: [50, 48, 47, 49, 51],
+            SourceType.LOW.value: [50, 48, 47, 49, 51],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -265,7 +300,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 48, 47, 49, 51],
+            SourceType.OPEN.value: [50, 48, 47, 49, 51],
+            SourceType.HIGH.value: [50, 48, 47, 49, 51],
+            SourceType.LOW.value: [50, 48, 47, 49, 51],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -287,7 +324,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 48, 47, 49, 44],
+            SourceType.OPEN.value: [50, 48, 47, 49, 44],
+            SourceType.HIGH.value: [50, 48, 47, 49, 44],
+            SourceType.LOW.value: [50, 48, 47, 49, 44],
             'BUY': [False, False, False, False, True],
             'SELL': [True, True, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -295,7 +334,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 48, 47, 49, 44],
+            SourceType.OPEN.value: [50, 48, 47, 49, 44],
+            SourceType.HIGH.value: [50, 48, 47, 49, 44],
+            SourceType.LOW.value: [50, 48, 47, 49, 44],
             'BUY': [False, False, True, False, True],
             'SELL': [True, True, False, True, False],
             'BUY_Signals': [None, None, expected_signal, None, None],
@@ -317,7 +358,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -325,7 +368,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -347,7 +392,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 47, 49, 44],
+            SourceType.OPEN.value: [50, 52, 47, 49, 44],
+            SourceType.HIGH.value: [50, 52, 47, 49, 44],
+            SourceType.LOW.value: [50, 52, 47, 49, 44],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -355,7 +402,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 47, 49, 44],
+            SourceType.OPEN.value: [50, 52, 47, 49, 44],
+            SourceType.HIGH.value: [50, 52, 47, 49, 44],
+            SourceType.LOW.value: [50, 52, 47, 49, 44],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, expected_signal, None, None],
@@ -377,7 +426,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, True, False, False],
             'SELL': [False, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -385,7 +436,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, False, False, True],
             'SELL': [False, False, True, True, False],
             'BUY_Signals': [None, None, None, None, expected_signal],
@@ -407,7 +460,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -415,7 +470,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, expected_signal, None],
@@ -437,7 +494,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, True, False, False],
             'SELL': [False, False, True, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -445,7 +504,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, False, False, True],
             'SELL': [False, False, True, True, False],
             'BUY_Signals': [None, None, None, None, expected_signal],
@@ -467,7 +528,9 @@ class TestTakeProfit(unittest.TestCase):
         expected_signal = f'TakeProfit({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -475,7 +538,9 @@ class TestTakeProfit(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 52, 53, 49, 44],
+            SourceType.OPEN.value: [50, 52, 53, 49, 44],
+            SourceType.HIGH.value: [50, 52, 53, 49, 44],
+            SourceType.LOW.value: [50, 52, 53, 49, 44],
             'BUY': [True, False, False, False, True],
             'SELL': [False, False, True, True, False],
             'BUY_Signals': [None, None, None, None, expected_signal],

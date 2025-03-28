@@ -2,6 +2,7 @@ import unittest
 import pandas as pd
 from trading_strategy_tester.conditions.stoploss_takeprofit.stop_loss import StopLoss
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
+from trading_strategy_tester.enums.source_enum import SourceType
 
 
 class TestStopLoss(unittest.TestCase):
@@ -17,7 +18,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 54, 55, 47, 51],
+            SourceType.OPEN.value: [50, 54, 55, 47, 51],
+            SourceType.HIGH.value: [50, 54, 55, 47, 51],
+            SourceType.LOW.value: [50, 54, 55, 47, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -25,7 +28,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 54, 55, 47, 51],
+            SourceType.OPEN.value: [50, 54, 55, 47, 51],
+            SourceType.HIGH.value: [50, 54, 55, 47, 51],
+            SourceType.LOW.value: [50, 54, 55, 47, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -46,7 +51,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 54, 47, 53, 51],
+            SourceType.OPEN.value: [50, 54, 47, 53, 51],
+            SourceType.HIGH.value: [50, 54, 47, 53, 51],
+            SourceType.LOW.value: [50, 54, 47, 53, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -54,7 +61,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 54, 47, 53, 51],
+            SourceType.OPEN.value: [50, 54, 47, 53, 51],
+            SourceType.HIGH.value: [50, 54, 47, 53, 51],
+            SourceType.LOW.value: [50, 54, 47, 53, 51],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -75,7 +84,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 54, 47, 53, 51],
+            SourceType.OPEN.value: [50, 54, 47, 53, 51],
+            SourceType.HIGH.value: [50, 54, 47, 53, 51],
+            SourceType.LOW.value: [50, 54, 47, 53, 51],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, True, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -83,7 +94,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 54, 47, 53, 51],
+            SourceType.OPEN.value: [50, 54, 47, 53, 51],
+            SourceType.HIGH.value: [50, 54, 47, 53, 51],
+            SourceType.LOW.value: [50, 54, 47, 53, 51],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, True, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -104,7 +117,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 54, 50, 53, 51],
+            SourceType.OPEN.value: [50, 54, 50, 53, 51],
+            SourceType.HIGH.value: [50, 54, 50, 53, 51],
+            SourceType.LOW.value: [50, 54, 50, 53, 51],
             'BUY': [True, False, False, True, False],
             'SELL': [False, True, False, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -112,7 +127,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 54, 50, 53, 51],
+            SourceType.OPEN.value: [50, 54, 50, 53, 51],
+            SourceType.HIGH.value: [50, 54, 50, 53, 51],
+            SourceType.LOW.value: [50, 54, 50, 53, 51],
             'BUY': [True, False, False, True, False],
             'SELL': [False, True, False, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -133,7 +150,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 30, 50, 48, 45],
+            SourceType.OPEN.value: [50, 30, 50, 48, 45],
+            SourceType.HIGH.value: [50, 30, 50, 48, 45],
+            SourceType.LOW.value: [50, 30, 50, 48, 45],
             'BUY': [True, False, True, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -141,7 +160,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 30, 50, 48, 45],
+            SourceType.OPEN.value: [50, 30, 50, 48, 45],
+            SourceType.HIGH.value: [50, 30, 50, 48, 45],
+            SourceType.LOW.value: [50, 30, 50, 48, 45],
             'BUY': [True, False, True, False, False],
             'SELL': [False, True, False, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -163,7 +184,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 43, 48, 26],
+            SourceType.OPEN.value: [50, 49, 43, 48, 26],
+            SourceType.HIGH.value: [50, 49, 43, 48, 26],
+            SourceType.LOW.value: [50, 49, 43, 48, 26],
             'BUY': [True, False, True, True, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -171,7 +194,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 43, 48, 26],
+            SourceType.OPEN.value: [50, 49, 43, 48, 26],
+            SourceType.HIGH.value: [50, 49, 43, 48, 26],
+            SourceType.LOW.value: [50, 49, 43, 48, 26],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, True, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -193,7 +218,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 43, 48, 26],
+            SourceType.OPEN.value: [50, 49, 43, 48, 26],
+            SourceType.HIGH.value: [50, 49, 43, 48, 26],
+            SourceType.LOW.value: [50, 49, 43, 48, 26],
             'BUY': [True, False, True, True, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -201,7 +228,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 43, 48, 26],
+            SourceType.OPEN.value: [50, 49, 43, 48, 26],
+            SourceType.HIGH.value: [50, 49, 43, 48, 26],
+            SourceType.LOW.value: [50, 49, 43, 48, 26],
             'BUY': [True, False, True, True, False],
             'SELL': [False, False, True, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -223,7 +252,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 54, 48, 26],
+            SourceType.OPEN.value: [50, 49, 54, 48, 26],
+            SourceType.HIGH.value: [50, 49, 54, 48, 26],
+            SourceType.LOW.value: [50, 49, 54, 48, 26],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -231,7 +262,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 54, 48, 26],
+            SourceType.OPEN.value: [50, 49, 54, 48, 26],
+            SourceType.HIGH.value: [50, 49, 54, 48, 26],
+            SourceType.LOW.value: [50, 49, 54, 48, 26],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, expected_signal, None, None],
@@ -253,7 +286,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 54, 48, 26],
+            SourceType.OPEN.value: [50, 49, 54, 48, 26],
+            SourceType.HIGH.value: [50, 49, 54, 48, 26],
+            SourceType.LOW.value: [50, 49, 54, 48, 26],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -261,7 +296,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 54, 48, 26],
+            SourceType.OPEN.value: [50, 49, 54, 48, 26],
+            SourceType.HIGH.value: [50, 49, 54, 48, 26],
+            SourceType.LOW.value: [50, 49, 54, 48, 26],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -282,7 +319,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 54, 48, 26],
+            SourceType.OPEN.value: [50, 49, 54, 48, 26],
+            SourceType.HIGH.value: [50, 49, 54, 48, 26],
+            SourceType.LOW.value: [50, 49, 54, 48, 26],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -290,7 +329,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 54, 48, 26],
+            SourceType.OPEN.value: [50, 49, 54, 48, 26],
+            SourceType.HIGH.value: [50, 49, 54, 48, 26],
+            SourceType.LOW.value: [50, 49, 54, 48, 26],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, expected_signal, None, None],
@@ -312,7 +353,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 54, 48, 26],
+            SourceType.OPEN.value: [50, 49, 54, 48, 26],
+            SourceType.HIGH.value: [50, 49, 54, 48, 26],
+            SourceType.LOW.value: [50, 49, 54, 48, 26],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -320,7 +363,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 54, 48, 26],
+            SourceType.OPEN.value: [50, 49, 54, 48, 26],
+            SourceType.HIGH.value: [50, 49, 54, 48, 26],
+            SourceType.LOW.value: [50, 49, 54, 48, 26],
             'BUY': [False, False, True, False, False],
             'SELL': [True, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -342,7 +387,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 45, 48, 60],
+            SourceType.OPEN.value: [50, 49, 45, 48, 60],
+            SourceType.HIGH.value: [50, 49, 45, 48, 60],
+            SourceType.LOW.value: [50, 49, 45, 48, 60],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -350,7 +397,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 45, 48, 60],
+            SourceType.OPEN.value: [50, 49, 45, 48, 60],
+            SourceType.HIGH.value: [50, 49, 45, 48, 60],
+            SourceType.LOW.value: [50, 49, 45, 48, 60],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -372,7 +421,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 45, 48, 60],
+            SourceType.OPEN.value: [50, 49, 45, 48, 60],
+            SourceType.HIGH.value: [50, 49, 45, 48, 60],
+            SourceType.LOW.value: [50, 49, 45, 48, 60],
             'BUY': [True, False, True, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -380,7 +431,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 45, 48, 60],
+            SourceType.OPEN.value: [50, 49, 45, 48, 60],
+            SourceType.HIGH.value: [50, 49, 45, 48, 60],
+            SourceType.LOW.value: [50, 49, 45, 48, 60],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -402,7 +455,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 45, 48, 60],
+            SourceType.OPEN.value: [50, 49, 45, 48, 60],
+            SourceType.HIGH.value: [50, 49, 45, 48, 60],
+            SourceType.LOW.value: [50, 49, 45, 48, 60],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -410,7 +465,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 45, 48, 60],
+            SourceType.OPEN.value: [50, 49, 45, 48, 60],
+            SourceType.HIGH.value: [50, 49, 45, 48, 60],
+            SourceType.LOW.value: [50, 49, 45, 48, 60],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, expected_signal, None],
@@ -432,7 +489,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossNormal({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 49, 45, 48, 60],
+            SourceType.OPEN.value: [50, 49, 45, 48, 60],
+            SourceType.HIGH.value: [50, 49, 45, 48, 60],
+            SourceType.LOW.value: [50, 49, 45, 48, 60],
             'BUY': [True, False, True, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -440,7 +499,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 49, 45, 48, 60],
+            SourceType.OPEN.value: [50, 49, 45, 48, 60],
+            SourceType.HIGH.value: [50, 49, 45, 48, 60],
+            SourceType.LOW.value: [50, 49, 45, 48, 60],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -462,7 +523,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 60, 58, 58.5, 26],
+            SourceType.OPEN.value: [50, 60, 58, 58.5, 26],
+            SourceType.HIGH.value: [50, 60, 58, 58.5, 26],
+            SourceType.LOW.value: [50, 60, 58, 58.5, 26],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -470,7 +533,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 60, 58, 58.5, 26],
+            SourceType.OPEN.value: [50, 60, 58, 58.5, 26],
+            SourceType.HIGH.value: [50, 60, 58, 58.5, 26],
+            SourceType.LOW.value: [50, 60, 58, 58.5, 26],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, False, True],
             'BUY_Signals': [None, None, None, None, None],
@@ -491,7 +556,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 100, 96, 90, 26],
+            SourceType.OPEN.value: [50, 100, 96, 90, 26],
+            SourceType.HIGH.value: [50, 100, 96, 90, 26],
+            SourceType.LOW.value: [50, 100, 96, 90, 26],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -499,7 +566,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 100, 96, 90, 26],
+            SourceType.OPEN.value: [50, 100, 96, 90, 26],
+            SourceType.HIGH.value: [50, 100, 96, 90, 26],
+            SourceType.LOW.value: [50, 100, 96, 90, 26],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -521,7 +590,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 100, 96, 90, 26],
+            SourceType.OPEN.value: [50, 100, 96, 90, 26],
+            SourceType.HIGH.value: [50, 100, 96, 90, 26],
+            SourceType.LOW.value: [50, 100, 96, 90, 26],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -529,7 +600,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 100, 96, 90, 26],
+            SourceType.OPEN.value: [50, 100, 96, 90, 26],
+            SourceType.HIGH.value: [50, 100, 96, 90, 26],
+            SourceType.LOW.value: [50, 100, 96, 90, 26],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -551,7 +624,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 100, 96, 90, 26],
+            SourceType.OPEN.value: [50, 100, 96, 90, 26],
+            SourceType.HIGH.value: [50, 100, 96, 90, 26],
+            SourceType.LOW.value: [50, 100, 96, 90, 26],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -559,7 +634,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 100, 96, 90, 26],
+            SourceType.OPEN.value: [50, 100, 96, 90, 26],
+            SourceType.HIGH.value: [50, 100, 96, 90, 26],
+            SourceType.LOW.value: [50, 100, 96, 90, 26],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -581,7 +658,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -589,7 +668,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, True, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, expected_signal, None],
@@ -611,7 +692,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, True, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -619,7 +702,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, True, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -641,7 +726,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -649,7 +736,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, True, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, expected_signal, None],
@@ -671,7 +760,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, True, False],
             'SELL': [True, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -679,7 +770,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, True, False],
             'SELL': [True, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -701,7 +794,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, False, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -709,7 +804,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [100, 50, 51, 53, 26],
+            SourceType.OPEN.value: [100, 50, 51, 53, 26],
+            SourceType.HIGH.value: [100, 50, 51, 53, 26],
+            SourceType.LOW.value: [100, 50, 51, 53, 26],
             'BUY': [False, False, False, True, False],
             'SELL': [True, False, False, False, False],
             'BUY_Signals': [None, None, None, expected_signal, None],
@@ -730,7 +827,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 100, 97, 93, 26],
+            SourceType.OPEN.value: [50, 100, 97, 93, 26],
+            SourceType.HIGH.value: [50, 100, 97, 93, 26],
+            SourceType.LOW.value: [50, 100, 97, 93, 26],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, False, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -738,7 +837,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 100, 97, 93, 26],
+            SourceType.OPEN.value: [50, 100, 97, 93, 26],
+            SourceType.HIGH.value: [50, 100, 97, 93, 26],
+            SourceType.LOW.value: [50, 100, 97, 93, 26],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, False, True, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -760,7 +861,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 100, 93, 100, 26],
+            SourceType.OPEN.value: [50, 100, 93, 100, 26],
+            SourceType.HIGH.value: [50, 100, 93, 100, 26],
+            SourceType.LOW.value: [50, 100, 93, 100, 26],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -768,7 +871,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 100, 93, 100, 26],
+            SourceType.OPEN.value: [50, 100, 93, 100, 26],
+            SourceType.HIGH.value: [50, 100, 93, 100, 26],
+            SourceType.LOW.value: [50, 100, 93, 100, 26],
             'BUY': [True, False, False, True, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, expected_signal, None],
@@ -790,7 +895,9 @@ class TestStopLoss(unittest.TestCase):
         expected_signal = f'StopLossTrailing({percent})'
 
         df = pd.DataFrame({
-            'Close': [50, 100, 93, 100, 26],
+            SourceType.OPEN.value: [50, 100, 93, 100, 26],
+            SourceType.HIGH.value: [50, 100, 93, 100, 26],
+            SourceType.LOW.value: [50, 100, 93, 100, 26],
             'BUY': [True, False, True, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
@@ -798,7 +905,9 @@ class TestStopLoss(unittest.TestCase):
         })
 
         df_expected = pd.DataFrame({
-            'Close': [50, 100, 93, 100, 26],
+            SourceType.OPEN.value: [50, 100, 93, 100, 26],
+            SourceType.HIGH.value: [50, 100, 93, 100, 26],
+            SourceType.LOW.value: [50, 100, 93, 100, 26],
             'BUY': [True, False, False, False, False],
             'SELL': [False, False, True, False, False],
             'BUY_Signals': [None, None, None, None, None],
