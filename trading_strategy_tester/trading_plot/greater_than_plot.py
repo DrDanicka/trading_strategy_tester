@@ -37,11 +37,11 @@ class GreaterThanPlot(TradingPlot):
         fig = go.Figure()
 
         # Add the first series (series1)
-        series1_name = create_plot_series_name(str(self.series1.name))
+        series1_title, series1_name = create_plot_series_name(str(self.series1.name))
         add_trace_to_fig(fig, x=self.series1.index, y=self.series1, name=series1_name, color=LineColor.LIGHT_BLUE)
 
         # Add the second series (series2)
-        series2_name = create_plot_series_name(str(self.series2.name))
+        series2_title, series2_name = create_plot_series_name(str(self.series2.name))
         add_trace_to_fig(fig, x=self.series2.index, y=self.series2, name=series2_name, color=LineColor.PINK)
 
         # Highlight parts where series1 is greater than series2
@@ -70,7 +70,8 @@ class GreaterThanPlot(TradingPlot):
         set_y_axis_range(fig, self.series1, self.series2)
 
         # Define the plot title
-        title = f"{series1_name} and {series2_name} GreaterThan Plot Shifted" if self.days_to_shift > 0 else f"{series1_name} GreaterThan Plot"
+        title = f"{series1_title} and {series2_title} GreaterThan Plot Shifted"\
+            if self.days_to_shift > 0 else f"{series1_title} and {series2_title} GreaterThan Plot"
 
         # Apply dark or light theme based on the dark flag
         if dark:

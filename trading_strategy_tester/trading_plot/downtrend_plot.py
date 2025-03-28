@@ -34,7 +34,7 @@ class DowntrendPlot(TradingPlot):
         fig = go.Figure()
 
         # Add the series
-        series_name = create_plot_series_name(str(self.series.name))
+        series_title, series_name = create_plot_series_name(str(self.series.name))
         add_trace_to_fig(fig, x=self.series.index, y=self.series, name=series_name, color=LineColor.LIGHT_BLUE)
 
         # Identify downtrend regions where the trend is downward for at least 'number_of_days'
@@ -59,7 +59,7 @@ class DowntrendPlot(TradingPlot):
         # Set range of y-axis
         set_y_axis_range(fig, self.series, self.series)
 
-        title = f'{series_name} Downtrend Plot Shifted' if self.days_to_shift > 0 else f'{series_name} Downtrend Plot'
+        title = f'{series_title} Downtrend Plot Shifted' if self.days_to_shift > 0 else f'{series_title} Downtrend Plot'
 
         if dark:
             plot_dark_mode_graph(fig, title)

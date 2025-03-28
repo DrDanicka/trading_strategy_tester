@@ -37,11 +37,11 @@ class CrossOverPlot(TradingPlot):
         fig = go.Figure()
 
         # Add the first series (series1)
-        series1_name = create_plot_series_name(str(self.series1.name))
+        series1_title, series1_name = create_plot_series_name(str(self.series1.name))
         add_trace_to_fig(fig, x=self.series1.index, y=self.series1, name=series1_name, color=LineColor.PURPLE)
 
         # Add the second series (series2)
-        series2_name = create_plot_series_name(str(self.series2.name))
+        series2_title, series2_name = create_plot_series_name(str(self.series2.name))
         add_trace_to_fig(fig, x=self.series2.index, y=self.series2, name=series2_name, color=LineColor.YELLOW)
 
         # Iterate through the series to detect crossovers and draw rectangles
@@ -54,7 +54,7 @@ class CrossOverPlot(TradingPlot):
             prev_value2 = self.series2.iloc[i - 1]
             current_value2 = self.series2.iloc[i]
 
-            # Detect a crossover (when series1 crosses above series2 or vice versa)
+            # Detect a crossover
             if prev_value1 < prev_value2 and current_value1 > current_value2:
 
                 # Calculate the top and bottom of the rectangle (max and min values between the two series)
@@ -79,7 +79,8 @@ class CrossOverPlot(TradingPlot):
         set_y_axis_range(fig, self.series1, self.series2)
 
 
-        title = f"{series1_name} and {series2_name} Crossover Plot Shifted" if self.days_to_shift > 0 else f"{series1_name} and {series2_name} Crossover Plot"
+        title = f"{series1_title} and {series2_title} Cross-over Plot Shifted"\
+            if self.days_to_shift > 0 else f"{series1_title} and {series2_title} Cross-over Plot"
 
         if dark:
             plot_dark_mode_graph(fig, title)

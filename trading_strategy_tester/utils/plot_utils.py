@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 from trading_strategy_tester.enums.line_colors_enum import LineColor
 
 
-def create_plot_series_name(name: str) -> str:
+def create_plot_series_name(name: str) -> (str, str):
     """
     Create a formatted name for the plot series based on its components.
 
@@ -13,21 +13,25 @@ def create_plot_series_name(name: str) -> str:
 
     :param name: The original name string for the plot series.
     :type name: str
-    :return: A formatted string for the plot series name in the format source(param1, param2, ...).
-    :rtype: str
+    :return: A source as title and formatted string for the plot series name in the format source(param1, param2, ...).
+    :rtype: (str, str)
     """
     list_name = name.split('_')
 
     ticker = list_name[0]
     source = list_name[1]
     rest = list_name[2:]
+    title = source
+
+    if title == 'Const':
+        title = f'Const. {rest[0]}'
 
     if ticker != '':
         params = [ticker] + rest
     else:
         params = rest
 
-    return f'{source}({", ".join(params)})'
+    return title, f'{source}({", ".join(params)})'
 
 
 def add_trace_to_fig(fig: go.Figure, x: pd.Series, y: pd.Series, name: str, color: LineColor):
@@ -52,7 +56,29 @@ def add_trace_to_fig(fig: go.Figure, x: pd.Series, y: pd.Series, name: str, colo
         fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name=name, line=dict(color=color.value)))
 
 
-import plotly.graph_objects as go
+def plot_common_parameters_graph(fig: go.Figure, title: str):
+    """
+    Apply common parameters to a Plotly figure with customized title, hover mode, drag mode, and legend style.
+
+    :param fig: The Plotly figure to update.
+    :type fig: go.Figure
+    :param title: The title of the plot, which will be centered at the top.
+    :type title: str
+    """
+    fig.update_layout(
+        title={
+            'text': title,
+            'x': 0.5,  # Centers the title
+            'xanchor': 'center',
+            'yanchor': 'top'
+        } if not title.startswith('Price') else None,
+        hovermode="x unified",
+        dragmode="pan",
+        showlegend=True if title != 'Price' else False,
+        autosize=True,
+        margin=dict(l=0, r=0, t=10, b=0),
+        height=None
+    )
 
 def plot_light_mode_graph(fig: go.Figure, title: str):
     """
@@ -63,16 +89,10 @@ def plot_light_mode_graph(fig: go.Figure, title: str):
     :param title: The title of the plot, which will be centered at the top.
     :type title: str
     """
+    plot_common_parameters_graph(fig, title)
+
     fig.update_layout(
-        # title={
-        #     'text': title,
-        #     'x': 0.5,  # Centers the title
-        #     'xanchor': 'center',
-        #     'yanchor': 'top'
-        # },
         template='plotly_white',
-        hovermode="x unified",
-        dragmode="pan",
         legend=dict(
             x=0.02,  # Position from the left (small margin)
             y=0.98,  # Position from the top (small margin)
@@ -81,32 +101,22 @@ def plot_light_mode_graph(fig: go.Figure, title: str):
             bordercolor="gray",
             borderwidth=1
         ),
-        showlegend=True if title != 'Price' else False,
-        autosize=True,
-        margin=dict(l=0, r=0, t=0, b=0),
-        height=None
     )
 
 
 def plot_dark_mode_graph(fig: go.Figure, title: str):
     """
-    Apply a dark mode theme to a Plotly figure with customized title, hover mode, drag mode, background color, and legend style.
+    Apply a dark mode theme to a Plotly figure with customized background color, and legend style.
 
     :param fig: The Plotly figure to update.
     :type fig: go.Figure
     :param title: The title of the plot, which will be centered at the top.
     :type title: str
     """
+    plot_common_parameters_graph(fig, title)
+
     fig.update_layout(
-        # title={
-        #     'text': title,
-        #     'x': 0.5,  # Centers the title
-        #     'xanchor': 'center',
-        #     'yanchor': 'top'
-        # },
         template='plotly_dark',
-        hovermode="x unified",
-        dragmode="pan",
         paper_bgcolor="#121212",  # Set background to custom dark color
         plot_bgcolor="#121212",  # Set plot background to custom dark color
         font=dict(color="gray"),
@@ -117,11 +127,7 @@ def plot_dark_mode_graph(fig: go.Figure, title: str):
             bgcolor="rgba(0, 0, 0, 0.5)",  # Transparent black background for legend
             bordercolor="gray",
             borderwidth=1
-        ),
-        showlegend=True if title != 'Price' else False,
-        autosize=True,
-        margin=dict(l=0, r=0, t=0, b=0),
-        height=None
+        )
     )
 
 

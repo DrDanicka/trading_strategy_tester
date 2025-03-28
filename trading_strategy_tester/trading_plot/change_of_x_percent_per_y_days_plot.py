@@ -43,7 +43,7 @@ class ChangeOfXPercentPerYDaysPlot(TradingPlot):
         fig = go.Figure()
 
         # Add the series to the plot
-        series_name = create_plot_series_name(str(self.series.name))
+        series_title, series_name = create_plot_series_name(str(self.series.name))
         add_trace_to_fig(fig, x=self.series.index, y=self.series, name=series_name, color=LineColor.ORANGE)
 
         # Identify regions where the percentage change meets the criteria
@@ -69,9 +69,9 @@ class ChangeOfXPercentPerYDaysPlot(TradingPlot):
         set_y_axis_range(fig, self.series, self.series)
 
         # Set the title of the plot
-        title = f'{series_name} Change of {self.percent}% per {self.number_of_days} {'tick' if self.number_of_days == 1 else 'ticks'} Shifted' \
+        title = f'{series_title} Change of {self.percent}% per {self.number_of_days} {'tick' if self.number_of_days == 1 else 'ticks'} Shifted' \
             if self.days_to_shift > 0 else \
-            f'{series_name} Change of {self.percent}% per {self.number_of_days} {'tick' if self.number_of_days == 1 else 'ticks'}'
+            f'{series_title} Change of {self.percent}% per {self.number_of_days} {'tick' if self.number_of_days == 1 else 'ticks'}'
 
         # Apply dark or light mode theme based on parameter
         if dark:
