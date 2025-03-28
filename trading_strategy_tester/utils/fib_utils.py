@@ -41,7 +41,7 @@ def is_in_fib_interval(high: float, low: float, row: pd.Series, fib_level: Fibon
         elif fib_level == FibonacciLevels.LEVEL_61_8:
             fib_value = high - 0.618 * diff
         else:
-            fib_value = low
+            return low < row[SourceType.LOW.value]
 
         # Check if the current low price is within the Fibonacci retracement level
         return low < row[SourceType.LOW.value] < fib_value
@@ -59,7 +59,7 @@ def is_in_fib_interval(high: float, low: float, row: pd.Series, fib_level: Fibon
         elif fib_level == FibonacciLevels.LEVEL_61_8:
             fib_value = low + 0.618 * diff
         else:
-            fib_value = high
+            return high > row[SourceType.HIGH.value]
 
         # Check if the current high price is within the Fibonacci retracement level
         return high > row[SourceType.HIGH.value] > fib_value

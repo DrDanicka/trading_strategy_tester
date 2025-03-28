@@ -74,7 +74,7 @@ def plot_common_parameters_graph(fig: go.Figure, title: str):
         } if not title.startswith('Price') else None,
         hovermode="x unified",
         dragmode="pan",
-        showlegend=True if title != 'Price' else False,
+        showlegend=True if not title.startswith('Price') else False,
         autosize=True,
         margin=dict(l=0, r=0, t=10, b=0),
         height=None

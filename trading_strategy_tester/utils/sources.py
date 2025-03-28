@@ -29,6 +29,9 @@ def get_source_series(df: pd.DataFrame, source: SourceType) -> pd.Series:
         elif source == SourceType.HLCC4:
             # Weighted Close Price: (High + Low + Close + Close) / 4
             return (df[SourceType.HIGH.value] + df[SourceType.LOW.value] + df[SourceType.CLOSE.value] + df[SourceType.CLOSE.value]) / 4.0
-        else:
-            # Default to OHLC4 (Open + High + Low + Close) / 4
+        elif source == SourceType.OHLC4:
+            # OHLC4 (Open + High + Low + Close) / 4
             return (df[SourceType.OPEN.value] + df[SourceType.HIGH.value] + df[SourceType.LOW.value] + df[SourceType.CLOSE.value]) / 4.0
+        else:
+            # Default to Close
+            return df[SourceType.CLOSE.value]
