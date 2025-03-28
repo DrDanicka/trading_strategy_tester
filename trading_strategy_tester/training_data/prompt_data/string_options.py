@@ -65,7 +65,7 @@ buy_sell_action_conditions = [
     '{action} when the {condition} is well-tailored',
 ]
 
-crossover_conditions_up = [
+crossover_conditions = [
     '{indicator} crossed above {value}',
     '{indicator} rises above {value}',
     '{indicator} climbs above {value}',
@@ -81,7 +81,7 @@ crossover_conditions_up = [
     '{indicator} crosses over {value}'
 ]
 
-crossover_conditions_down = [
+crossunder_conditions = [
     '{indicator} is beneath {value}',
     '{indicator} crosses below {value}',
     '{indicator} falls below {value}',

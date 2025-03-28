@@ -3,8 +3,8 @@ from trading_strategy_tester.enums.period_enum import Period
 from trading_strategy_tester.enums.interval_enum import Interval
 
 conditions_with_2_trading_series = {
-    1: (crossover_conditions_up, 'CrossOverCondition'),
-    2: (crossover_conditions_down, 'CrossOverCondition'),
+    1: (crossover_conditions, 'CrossOverCondition'),
+    2: (crossunder_conditions, 'CrossUnderCondition'),
     3: (greater_than_conditions, 'GreaterThanCondition'),
     4: (less_than_conditions, 'LessThanCondition'),
 }

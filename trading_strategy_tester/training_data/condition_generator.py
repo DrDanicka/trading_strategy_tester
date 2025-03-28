@@ -1,4 +1,5 @@
 import random
+import numpy as np
 from enum import Enum
 
 from trading_strategy_tester.enums.fibonacci_levels_enum import FibonacciLevels
@@ -57,12 +58,12 @@ def process_one_trading_series(ticker: str):
                     random.choice(parameter_equality_options).format(name=parameter_name, value=parameter_value))
             elif parameter_type == 'SmoothingType':
                 parameter_value = random.choice([
-                    SmoothingType.SMA.value,
-                    SmoothingType.EMA.value,
-                    SmoothingType.RMA.value,
-                    SmoothingType.WMA.value
+                    SmoothingType.SMA,
+                    SmoothingType.EMA,
+                    SmoothingType.RMA,
+                    SmoothingType.WMA
                 ])
-                parameter_values.append(f'smoothing type set to {parameter_value}')
+                parameter_values.append(f'smoothing type set to {parameter_value.value}')
             elif parameter_type == 'SourceType':
                 parameter_value = random.choice([
                     SourceType.CLOSE,
@@ -115,13 +116,7 @@ def create_condition(ticker: str):
         condition_text = random.choice(possible_texts)
         condition_text = condition_text.format(indicator=trading_series1_text, value=trading_series2_text)
 
-        # Create parameters of the class based of the condition_number
-        if condition_number in [1, 3, 4]:
-            # CrossOverCondition from down to up, GreaterThanCondition, LessThanCondition
-            condition_param = f"{class_name}(first_series={trading_series1_parameters}, second_series={trading_series2_parameters})"
-        else:
-            # CrossOverCondition from up to down, we have to switch the trading series
-            condition_param = f"{class_name}(first_series={trading_series2_parameters}, second_series={trading_series1_parameters})"
+        condition_param = f"{class_name}(first_series={trading_series1_parameters}, second_series={trading_series2_parameters})"
     # Conditions with trading series and a number
     elif condition_type == ConditionType.condition_with_trading_series_and_number.value:
         trading_series_text, trading_series_parameters = process_one_trading_series(ticker)
@@ -158,9 +153,6 @@ def create_condition(ticker: str):
         condition_param = f"{class_name}(series={trading_series_parameters}, percent={percent})"
     # Conditions with fibonacci levels
     elif condition_type == ConditionType.condition_with_fibonacci_levels.value:
-        # TODO opravit
-        trading_series_text, trading_series_parameters = process_one_trading_series(ticker)
-
         # Create text of the prompt
         condition_text = random.choice(possible_texts)
         level = random.choice([
@@ -171,12 +163,19 @@ def create_condition(ticker: str):
             FibonacciLevels.LEVEL_61_8,
             FibonacciLevels.LEVEL_100
         ])
-        condition_text = condition_text.format(indicator=trading_series_text, level=level.value)
+        condition_text = condition_text.format(level=level.value)
 
         # Create parameters of the class based of the condition_number
-        condition_param = f"{class_name}(series={trading_series_parameters}, level={level})"
+        condition_param = f"{class_name}(fib_level={level})"
     else:
         raise ValueError("Invalid condition type")
+
+    # After X days condition
+    insert_after_x_days = bool(np.random.choice([True, False], p=[0.05, 0.95]))
+    if insert_after_x_days:
+        after_x_days = random.randint(1, 99)
+        condition_text = f"after {after_x_days} days, {condition_text}"
+        condition_param = f"AfterXDaysCondition(condition={condition_param}, number_of_days={after_x_days})"
 
     return condition_text, condition_param
 
