@@ -1,4 +1,4 @@
-Metadata-Version: 2.2
+Metadata-Version: 2.4
 Name: trading_strategy_tester
 Version: 0.1
 License-File: LICENSE
@@ -6,4 +6,8 @@ Requires-Dist: pandas~=2.2.2
 Requires-Dist: yfinance~=0.2.41
 Requires-Dist: plotly~=5.23.0
 Requires-Dist: numpy~=2.0.1
+Requires-Dist: ollama~=0.4.7
+Requires-Dist: setuptools~=72.2.0
+Requires-Dist: pandas_ta~=0.3.14b0
+Dynamic: license-file
 Dynamic: requires-dist

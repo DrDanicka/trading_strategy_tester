@@ -38,6 +38,7 @@ trading_strategy_tester/conditions/stoploss_takeprofit/stop_loss.py
 trading_strategy_tester/conditions/stoploss_takeprofit/take_profit.py
 trading_strategy_tester/conditions/threshold_conditions/__init__.py
 trading_strategy_tester/conditions/threshold_conditions/cross_over_condition.py
+trading_strategy_tester/conditions/threshold_conditions/cross_under_condition.py
 trading_strategy_tester/conditions/threshold_conditions/greater_than_condition.py
 trading_strategy_tester/conditions/threshold_conditions/less_than_condition.py
 trading_strategy_tester/conditions/trend_conditions/__init__.py
@@ -49,6 +50,7 @@ trading_strategy_tester/enums/__init__.py
 trading_strategy_tester/enums/fibonacci_levels_enum.py
 trading_strategy_tester/enums/interval_enum.py
 trading_strategy_tester/enums/line_colors_enum.py
+trading_strategy_tester/enums/llm_model_enum.py
 trading_strategy_tester/enums/period_enum.py
 trading_strategy_tester/enums/position_type_enum.py
 trading_strategy_tester/enums/smoothing_enum.py
@@ -96,6 +98,9 @@ trading_strategy_tester/indicators/volume/mfi.py
 trading_strategy_tester/indicators/volume/obv.py
 trading_strategy_tester/indicators/volume/pvi.py
 trading_strategy_tester/indicators/volume/pvt.py
+trading_strategy_tester/llm_communication/__init__.py
+trading_strategy_tester/llm_communication/chat_gpt_api.py
+trading_strategy_tester/llm_communication/prompt_processor.py
 trading_strategy_tester/position_types/__init__.py
 trading_strategy_tester/position_types/long.py
 trading_strategy_tester/position_types/long_short_combination.py
@@ -125,6 +130,7 @@ trading_strategy_tester/trade/trade_commissions/trade_commissions.py
 trading_strategy_tester/trading_plot/__init__.py
 trading_strategy_tester/trading_plot/change_of_x_percent_per_y_days_plot.py
 trading_strategy_tester/trading_plot/cross_over_plot.py
+trading_strategy_tester/trading_plot/cross_under_plot.py
 trading_strategy_tester/trading_plot/downtrend_plot.py
 trading_strategy_tester/trading_plot/greater_than_plot.py
 trading_strategy_tester/trading_plot/less_than_plot.py
@@ -225,6 +231,20 @@ trading_strategy_tester/trading_series/uo_series/__init__.py
 trading_strategy_tester/trading_series/uo_series/uo_series.py
 trading_strategy_tester/trading_series/willr_series/__init__.py
 trading_strategy_tester/trading_series/willr_series/willr_series.py
+trading_strategy_tester/training_data/__init__.py
+trading_strategy_tester/training_data/capital_size_commission_generator.py
+trading_strategy_tester/training_data/condition_generator.py
+trading_strategy_tester/training_data/interval_generator.py
+trading_strategy_tester/training_data/prompt_builder.py
+trading_strategy_tester/training_data/start_end_date_generator.py
+trading_strategy_tester/training_data/stop_loss_take_profit_generator.py
+trading_strategy_tester/training_data/strategy_type_generator.py
+trading_strategy_tester/training_data/ticker_generator.py
+trading_strategy_tester/training_data/training_data.py
+trading_strategy_tester/training_data/prompt_data/__init__.py
+trading_strategy_tester/training_data/prompt_data/condition_dicts.py
+trading_strategy_tester/training_data/prompt_data/implemented_indicators.py
+trading_strategy_tester/training_data/prompt_data/string_options.py
 trading_strategy_tester/utils/__init__.py
 trading_strategy_tester/utils/fib_utils.py
 trading_strategy_tester/utils/plot_utils.py
