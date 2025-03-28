@@ -13,6 +13,10 @@ class MoneyCommissions(TradeCommissions):
         :param value: The fixed amount used as the commission.
         :type value: float
         """
+        # Ensure the commission value is non-negative
+        if value < 0:
+            value = 0.0
+
         super().__init__(value)
 
     def get_commission(self, invested: float, contracts: float) -> float:

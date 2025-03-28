@@ -14,6 +14,13 @@ class PercentageCommissions(TradeCommissions):
         :param value: The percentage used to calculate the commission (e.g., 0.01 for 1%).
         :type value: float
         """
+        # Ensure value is non-negative
+        if value < 0:
+            value = 0.0
+
+        # Ensure the value does not exceed 100%
+        if value > 100:
+            value = 100.0
         super().__init__(value)
 
     def get_commission(self, invested: float, contracts: float) -> float:
