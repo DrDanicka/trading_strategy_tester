@@ -8,7 +8,7 @@ from trading_strategy_tester.indicators.volatility.bb import bb_middle
 from trading_strategy_tester.utils.validations import get_base_sources
 
 
-class BBMIDDLE(TradingSeries):
+class BB_MIDDLE(TradingSeries):
     """
     The BBMiddle class retrieves the specified price data (e.g., 'Close') for a given ticker and applies the
     Bollinger Band middle calculation based on the specified parameters.

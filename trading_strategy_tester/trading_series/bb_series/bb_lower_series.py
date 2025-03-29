@@ -8,7 +8,7 @@ from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.utils.validations import get_base_sources
 
 
-class BBLOWER(TradingSeries):
+class BB_LOWER(TradingSeries):
     """
     The BBLower class retrieves the specified price data (e.g., 'Close') for a given ticker and applies the
     Bollinger Band lower calculation based on the specified parameters.
