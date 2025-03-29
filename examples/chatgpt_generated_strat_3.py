@@ -6,16 +6,16 @@ from trading_strategy_tester.enums.interval_enum import Interval
 from trading_strategy_tester.strategy.strategy import Strategy
 from trading_strategy_tester.trading_series.default_series.close_series import CLOSE
 from trading_strategy_tester.trading_series.atr_series.atr_series import ATR
-from trading_strategy_tester.trading_series.bb_series.bb_upper_series import BBUPPER
-from trading_strategy_tester.trading_series.bb_series.bb_lower_series import BBLOWER
+from trading_strategy_tester.trading_series.bb_series.bb_upper_series import BB_UPPER
+from trading_strategy_tester.trading_series.bb_series.bb_lower_series import BB_LOWER
 from datetime import datetime
 import json
 
 # Define the series for Logitech (LOGI)
 close_series = CLOSE('LOGI')
 atr_series = ATR('LOGI', length=14)  # ATR with length 14
-bb_upper_series = BBUPPER('LOGI', length=20)  # Bollinger Bands with length 20
-bb_lower_series = BBLOWER('LOGI', length=20)
+bb_upper_series = BB_UPPER('LOGI', length=20)  # Bollinger Bands with length 20
+bb_lower_series = BB_LOWER('LOGI', length=20)
 
 # Define the sell condition: Close price crosses below ATR
 sell_condition_1 = CrossOverCondition(
