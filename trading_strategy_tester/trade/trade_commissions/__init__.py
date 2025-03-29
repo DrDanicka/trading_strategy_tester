@@ -1,2 +1,4 @@
-from money_commissions import MoneyCommissions
-from percentage_commissions import PercentageCommissions
+__all__ = [
+    'money_commissions',
+    'percentage_commissions'
+]
