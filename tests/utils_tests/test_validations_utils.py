@@ -4,7 +4,7 @@ from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.position_types.long import Long
 from trading_strategy_tester.position_types.short import Short
 from trading_strategy_tester.position_types.long_short_combination import LongShortCombination
-from trading_strategy_tester.utils.validations import (
+from trading_strategy_tester.utils.parameter_validations import (
     get_length,
     get_offset,
     get_std_dev,

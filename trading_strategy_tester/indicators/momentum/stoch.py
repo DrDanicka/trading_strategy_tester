@@ -1,7 +1,7 @@
 import pandas as pd
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.smoothings.smooth import smooth
-from trading_strategy_tester.utils.validations import get_length
+from trading_strategy_tester.utils.parameter_validations import get_length
 
 
 def percent_k(close: pd.Series, low: pd.Series, high: pd.Series, length: int = 14) -> pd.Series:

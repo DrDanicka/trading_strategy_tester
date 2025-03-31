@@ -2,7 +2,7 @@ import pandas as pd
 
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.smoothings.smooth import smooth
-from trading_strategy_tester.utils.validations import get_length
+from trading_strategy_tester.utils.parameter_validations import get_length
 
 
 def dpo(series: pd.Series, length: int = 21) -> pd.Series:

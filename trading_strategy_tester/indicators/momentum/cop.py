@@ -3,7 +3,7 @@ import pandas as pd
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.indicators.momentum.roc import roc
 from trading_strategy_tester.smoothings.smooth import smooth
-from trading_strategy_tester.utils.validations import get_length
+from trading_strategy_tester.utils.parameter_validations import get_length
 
 
 def cop(series: pd.Series, length: int = 10, long_roc_length: int = 14, short_roc_length: int = 11) -> pd.Series:

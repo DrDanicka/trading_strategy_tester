@@ -1,7 +1,7 @@
 import pandas as pd
 from trading_strategy_tester.indicators.momentum.dmi import di_plus, di_minus
 from trading_strategy_tester.smoothings.rma_smoothing import rma_smoothing
-from trading_strategy_tester.utils.validations import get_length
+from trading_strategy_tester.utils.parameter_validations import get_length
 
 
 def adx(high: pd.Series, low: pd.Series, close: pd.Series, adx_smoothing: int = 14, di_length: int = 14) -> pd.Series:

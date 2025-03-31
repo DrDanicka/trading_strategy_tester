@@ -6,7 +6,7 @@ from trading_strategy_tester.enums.fibonacci_levels_enum import FibonacciLevels
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
 from trading_strategy_tester.utils.fib_utils import is_in_fib_interval
-from trading_strategy_tester.utils.validations import get_length
+from trading_strategy_tester.utils.parameter_validations import get_length
 
 
 class DowntrendFibRetracementLevelCondition(Condition):

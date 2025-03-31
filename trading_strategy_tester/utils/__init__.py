@@ -1,1 +1,1 @@
-__all__ = ['fib_utils', 'plot_utils', 'sources', 'validations']
+__all__ = ['fib_utils', 'plot_utils', 'sources', 'parameter_validations', 'strategy_validator']

@@ -3,7 +3,7 @@ from trading_strategy_tester.download.download_module import DownloadModule
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 from trading_strategy_tester.indicators.momentum.rsi import rsi
-from trading_strategy_tester.utils.validations import get_base_sources
+from trading_strategy_tester.utils.parameter_validations import get_base_sources
 
 
 class RSI(TradingSeries):

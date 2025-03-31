@@ -4,7 +4,7 @@ import numpy as np
 from trading_strategy_tester.enums.smoothing_enum import SmoothingType
 from trading_strategy_tester.smoothings.sma_smoothing import sma_smoothing
 from trading_strategy_tester.smoothings.smooth import smooth
-from trading_strategy_tester.utils.validations import get_length
+from trading_strategy_tester.utils.parameter_validations import get_length
 
 
 def cci(series: pd.Series, length: int = 20, smoothing_type: SmoothingType = SmoothingType.SMA, smoothing_length: int = 1) -> pd.Series:

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from trading_strategy_tester.utils.validations import get_length, get_offset
+from trading_strategy_tester.utils.parameter_validations import get_length, get_offset
 
 def dc_upper(high: pd.Series, length: int = 20, offset: int = 0) -> pd.Series:
     """
