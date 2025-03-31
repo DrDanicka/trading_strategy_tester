@@ -1,6 +1,87 @@
 import ast
+import pandas as pd
 
 from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
+
+implemented_conditions = pd.DataFrame(
+    data=[
+        ['DowntrendFibRetracementLevelCondition', 'fib_level:FibonacciLevels length:int'],
+        ['UptrendFibRetracementLevelCondition', 'fib_level:FibonacciLevels length:int'],
+        ['AND', '*conditions:Condition'],
+        ['OR', '*conditions:Condition'],
+        ['AfterXDaysCondition', 'condition:Condition number_of_days:int'],
+        ['ChangeOfXPercentPerYDaysCondition', 'series:TradingSeries percent:float number_of_days:int'],
+        ['IntraIntervalChangeOfXPercentCondition', 'series:TradingSeries percent:float'],
+        ['CrossOverCondition', 'first_series:TradingSeries second_series:TradingSeries'],
+        ['CrossUnderCondition', 'first_series:TradingSeries second_series:TradingSeries'],
+        ['GreaterThanCondition', 'first_series:TradingSeries second_series:TradingSeries'],
+        ['LessThanCondition', 'first_series:TradingSeries second_series:TradingSeries'],
+        ['DowntrendForXDaysCondition', 'series:TradingSeries number_of_days:int'],
+        ['UptrendForXDaysCondition', 'series:TradingSeries number_of_days:int']
+    ],
+    columns=['Class_name', 'Parameters']
+)
+
+implemented_trading_series = pd.DataFrame(
+    data=[['ADX', 'ticker:str adx_smoothing:int length:int'],
+          ['AROON_DOWN', 'ticker:str, length:int'],
+          ['AROON_UP', 'ticker:str, length:int'],
+          ['ATR', 'ticker:str length:int smoothing:SmoothingType'],
+          ['BB_LOWER', 'ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int'],
+          ['BB_MIDDLE', 'ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int'],
+          ['BB_UPPER', 'ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int'],
+          ['BBP', 'ticker:str length:int'],
+          ['CCI', 'ticker:str source:SourceType length:int'],
+          ['CCI_SMOOTHENED', 'ticker:str source:SourceType length:int smoothing_type:SmoothingType smoothing_length:int'],
+          ['CHAIKIN_OSC', 'ticker:str fast_length:int slow_length:int'],
+          ['CHOP', 'ticker:str length:int offset:int'],
+          ['CMF', 'ticker:str length:int'],
+          ['CMO', 'ticker:str source:SourceType length:int'],
+          ['COPPOCK', 'ticker:str length:int long_roc_length:int short_roc_length:int'],
+          ['DC_BASIS', 'ticker:str length:int offset:int'],
+          ['DC_UPPER', 'ticker:str length:int offset:int'],
+          ['DC_LOWER', 'ticker:str length:int offset:int'],
+          ['CLOSE', 'ticker:str'],
+          ['CONST', 'const_number:int'],
+          ['HIGH', 'ticker:str'],
+          ['LOW', 'ticker:str'],
+          ['OPEN', 'ticker:str'],
+          ['VOLUME', 'ticker:str'],
+          ['DI_MINUS', 'ticker:str length:int'],
+          ['DI_PLUS', 'ticker:str length:int'],
+          ['DPO', 'ticker:str length:int'],
+          ['EFI', 'ticker:str length:int'],
+          ['EOM', 'ticker:str length:int divisor:int'],
+          ['HAMMER', 'ticker:str'],
+          ['ICHIMOKU_BASE', 'ticker:str length:int'],
+          ['ICHIMOKU_CONVERSION', 'ticker:str length:int'],
+          ['ICHIMOKU_LEADING_SPAN_A', 'ticker:str displacement:int'],
+          ['ICHIMOKU_LAGGING_SPAN', 'ticker:str displacement:int'],
+          ['ICHIMOKU_LEADING_SPAN_B', 'ticker:str length:int displacement:int'],
+          ['KC_LOWER', 'ticker:str source:SourceType length:int multiplier:int use_exp_ma:bool atr_length:int'],
+          ['KC_UPPER', 'ticker:str source:SourceType length:int multiplier:int use_exp_ma:bool atr_length:int'],
+          ['KST', 'ticker:str source:SourceType roc_length_1:int roc_length_2:int roc_length_3:int roc_length_4:int sma_length_1:int sma_length_2:int sma_length_3:int sma_length_4:int'],
+          ['KST_SIGNAL', 'ticker:str source:SourceType roc_length_1:int roc_length_2:int roc_length_3:int roc_length_4:int sma_length_1:int sma_length_2:int sma_length_3:int sma_length_4:int signal_length:int'],
+          ['EMA', 'ticker:str source:SourceType length:int offset:int'],
+          ['SMA', 'ticker:str source:SourceType length:int offset:int'],
+          ['MACD', 'ticker:str source:SourceType fast_length:int slow_length:int ma_type:SmoothingType'],
+          ['MACD_SIGNAL', 'ticker:str source:SourceType fast_length:int slow_length:int oscillator_ma_type:SmoothingType signal_ma_type:SmoothingType signal_length:int'],
+          ['MASS_INDEX', 'ticker:str length:int'],
+          ['MFI', 'ticker:str length:int'],
+          ['MOMENTUM', 'ticker:str source:SourceType length:int'],
+          ['OBV', 'ticker:str'],
+          ['PVI', 'ticker:str'],
+          ['PVT', 'ticker:str'],
+          ['ROC', 'ticker:str source:SourceType length:int'],
+          ['RSI', 'ticker:str source:SourceType length:int'],
+          ['STOCH_PERCENT_D', 'ticker:str length:int d_smooth_length:int'],
+          ['STOCH_PERCENT_K', 'ticker:str length:int'],
+          ['TRIX', 'ticker:str length:int'],
+          ['UO', 'ticker:str fast_length:int middle_length:int slow_length:int'],
+          ['WILLR', 'ticker:str source:SourceType length:int'],
+          ],
+    columns=['Class_name', 'Parameters']
+)
 
 
 def validate_ticker(ticker, changes: dict, logs: bool) -> (bool, str, dict):
@@ -25,7 +106,6 @@ def validate_ticker(ticker, changes: dict, logs: bool) -> (bool, str, dict):
 
         changes['ticker'] = message
 
-        # Defaults to the default ticker
         return False, default_ticker, changes
 
     return True, None, changes
@@ -33,11 +113,37 @@ def validate_ticker(ticker, changes: dict, logs: bool) -> (bool, str, dict):
 
 def validate_position_type(position_type, changes: dict, logs: bool) -> (bool, str, dict):
     default_position_type = PositionTypeEnum.LONG
+    not_valid = False
+    message = f"position_type argument should be of type PositionTypeEnum. Using default position type '{default_position_type}'."
 
-    print(position_type.attr)
-    print(position_type.value.id)
+    try:
+        pos_type_enum = position_type.value.id
+        pos_type_attr = position_type.attr
+    except Exception:
+        not_valid = True
+
+    if not not_valid:
+        if pos_type_enum != 'PositionTypeEnum':
+            not_valid = True
+        elif pos_type_attr not in PositionTypeEnum.__dict__.keys():
+            message = f"Valid PositionTypeEnums are: 'LONG', 'SHORT', 'LONG_SHORT_COMBINATION'. Using default position type '{default_position_type}'."
+            not_valid = True
+
+    if not_valid:
+        if logs:
+            print(message)
+
+        changes['position_type'] = message
+
+        return False, default_position_type, changes
 
     return True, None, changes
+
+
+def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool, str, dict):
+    print(ast.dump(condition))
+    return True, None, changes
+
 
 def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, str):
     changes = dict()
@@ -82,6 +188,27 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
                     kwarg.value = ast.Constant(value=ticker)
             if kwarg.arg == 'position_type':
                 validation_result, position_type, changes = validate_position_type(kwarg.value, changes, logs)
+
+                # If the position type is not valid, set it to the default position type
+                if not validation_result:
+                    kwarg.value = ast.Attribute(
+                        value= ast.Name(id='PositionTypeEnum', ctx=ast.Load()),
+                        attr= position_type.value,
+                        ctx=ast.Load()
+                    )
+            if kwarg.arg == 'buy_condition':
+                validation_result, condition, changes = validate_condition(kwarg.value, changes, logs, buy=True)
+
+                # If the buy condition is not valid, set it to the default buy condition
+                if not validation_result:
+                    kwarg.value = ast.Constant(value=condition)
+
+            if kwarg.arg == 'sell_condition':
+                validation_result, condition, changes = validate_condition(kwarg.value, changes, logs, buy=False)
+
+                # If the sell condition is not valid, set it to the default sell condition
+                if not validation_result:
+                    kwarg.value = ast.Constant(value=condition)
 
 
 
