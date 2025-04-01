@@ -1,9 +1,13 @@
 import ast
 import pandas as pd
-from datetime import datetime
 
-from trading_strategy_tester.enums.interval_enum import Interval
-from trading_strategy_tester.enums.position_type_enum import PositionTypeEnum
+from trading_strategy_tester.validation.parameter_validations.ticker_validator import validate_ticker
+from trading_strategy_tester.validation.parameter_validations.position_type_validator import validate_position_type
+from trading_strategy_tester.validation.parameter_validations.date_validator import validate_date
+from trading_strategy_tester.validation.parameter_validations.stop_loss_validator import validate_stop_loss
+from trading_strategy_tester.validation.parameter_validations.take_profit_validator import validate_take_profit
+from trading_strategy_tester.validation.parameter_validations.interval_validator import validate_interval
+from trading_strategy_tester.validation.parameter_validations.period_validator import validate_period
 
 implemented_conditions = pd.DataFrame(
     data=[
@@ -86,223 +90,12 @@ implemented_trading_series = pd.DataFrame(
 )
 
 
-def validate_ticker(ticker, changes: dict, logs: bool) -> (bool, str, dict):
-    default_ticker = 'AAPL'
-    not_valid = False
-    message = f"ticker argument should be a string. Using default ticker '{default_ticker}'."
-
-    # Gets the ticker value from the ticker parameter
-    try:
-        str_ticker = ticker.value
-    except Exception:
-        not_valid = True
-
-    if not not_valid and not isinstance(str_ticker, str):
-        not_valid = True
-
-    # TODO check if string is actual ticker in some database of valid tickers
-
-    if not_valid:
-        if logs:
-            print(message)
-
-        changes['ticker'] = message
-
-        return False, default_ticker, changes
-
-    return True, None, changes
-
-
-def validate_position_type(position_type, changes: dict, logs: bool) -> (bool, str, dict):
-    default_position_type = PositionTypeEnum.LONG
-    not_valid = False
-    message = f"position_type argument should be of type PositionTypeEnum. Using default position type '{default_position_type}'."
-
-    try:
-        pos_type_enum = position_type.value.id
-        pos_type_attr = position_type.attr
-    except Exception:
-        not_valid = True
-
-    if not not_valid:
-        if pos_type_enum != 'PositionTypeEnum':
-            not_valid = True
-        elif pos_type_attr not in PositionTypeEnum.__dict__.keys():
-            message = f"Valid PositionTypeEnums are: 'LONG', 'SHORT', 'LONG_SHORT_COMBINATION'. Using default position type '{default_position_type}'."
-            not_valid = True
-
-    if not_valid:
-        if logs:
-            print(message)
-
-        changes['position_type'] = message
-
-        return False, default_position_type, changes
-
-    return True, None, changes
-
-
 def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool, str, dict):
     # print(ast.dump(condition))
     return True, None, changes
 
-def validate_date(date, changes: dict, logs: bool, start: bool) -> (bool, str, dict):
-    if start:
-        default_date = datetime(2024, 1, 1)
-    else:
-        default_date = datetime.today()
-    message = f"Date argument should be of type datetime. Using default date '{default_date.strftime('%Y-%m-%d')}'."
-    not_valid = False
-
-    try:
-        str_datetime = date.func.id
-        year, month, day = [i.value for i in date.args]
-    except Exception:
-        not_valid = True
-
-    if str_datetime != 'datetime':
-        not_valid = True
-
-    if not not_valid:
-        passed_date = datetime(year, month, day)
-        if passed_date > datetime.today():
-            message = f"Date argument should be a date in the past. Using default date '{default_date.strftime('%Y-%m-%d')}'."
-            not_valid = True
-
-    if not_valid:
-        if logs:
-            print(message)
-
-        changes['start_date' if start else 'end_date'] = message
-
-        return False, default_date, changes
-
-    return True, None, changes
-
-def validate_stop_loss(stop_loss, changes: dict, logs: bool) -> (bool, str, dict):
-    default_stop_loss = None
-    message = f"stop_loss argument should be of type StopLoss. Defaulting to no stop loss."
-    not_valid = False
-
-    try:
-        stop_loss_type = stop_loss.func.id
-
-        if stop_loss_type == 'StopLoss':
-            param1 = stop_loss.keywords[0]
-            param2 = stop_loss.keywords[1]
-
-            if param1.arg == 'percentage':
-                stop_loss_percentage = param1.value
-            elif param2.arg == 'percentage':
-                stop_loss_percentage = param2.value
-            else:
-                message = f"stop_loss argument percentage is missing. Defaulting to no stop loss."
-                raise Exception("percentage not found")
-
-            if param1.arg == 'stop_loss_type':
-                stop_loss_type = param1.value
-            elif param2.arg == 'stop_loss_type':
-                stop_loss_type = param2.value
-            else:
-                message = f"stop_loss argument stop_loss_type is missing. Defaulting to no stop loss."
-                raise Exception("stop_loss_type not found")
-
-            if stop_loss_type.value.id != 'StopLossType':
-                message = f"stop_loss argument stop_loss_type should be of type StopLossType. Defaulting to no stop loss."
-                raise Exception("stop_loss_type not found")
-
-            if stop_loss_type.attr not in ['NORMAL', 'TRAILING']:
-                message = f"Valid stop_loss_types are: 'NORMAL', 'TRAILING'. Defaulting to no stop loss."
-                raise Exception("stop_loss_type not found")
-
-            # Check stop_loss_percentage.value is float
-            if not isinstance(stop_loss_percentage.value, (int, float)):
-                message = f"stop_loss argument percentage should be a number. Defaulting to no stop loss."
-                raise Exception("percentage not found")
-        else:
-            not_valid = True
-
-    except Exception:
-        not_valid = True
-
-    if not_valid:
-        if logs:
-            print(message)
-
-        changes['stop_loss'] = message
-
-        return False, default_stop_loss, changes
-
-    return True, None, changes
 
 
-def validate_take_profit(take_profit, changes: dict, logs: bool) -> (bool, str, dict):
-    default_take_profit = None
-    message = f"take_profit argument should be of type TakeProfit. Defaulting to no take profit."
-    not_valid = False
-
-    try:
-        take_profit_type = take_profit.func.id
-
-        if take_profit_type == 'TakeProfit':
-            take_profit_percentage = take_profit.keywords[0]
-
-            if take_profit_percentage.arg != 'percentage':
-                message = f"take_profit argument percentage is missing. Defaulting to no take profit."
-                raise Exception("percentage not found")
-
-            if not isinstance(take_profit_percentage.value.value, (int, float)):
-                message = f"take_profit argument percentage should be a number. Defaulting to no take profit."
-                raise Exception("percentage not found")
-
-        else:
-            not_valid = True
-    except Exception:
-        not_valid = True
-
-    if not_valid:
-        if logs:
-            print(message)
-
-        changes['take_profit'] = message
-
-        return False, default_take_profit, changes
-
-    return True, None, changes
-
-
-def validate_interval(interval, changes: dict, logs: bool) -> (bool, str, dict):
-    default_interval = Interval.ONE_DAY
-    message = f"interval argument should be of type Interval. Defaulting to {default_interval}."
-    not_valid = False
-
-    print(ast.dump(interval))
-
-    try:
-        interval_enum = interval.value.id
-        interval_attr = interval.attr
-
-        if interval_enum != 'Interval':
-            raise Exception("Invalid interval enum")
-
-        valid_intervals = ['ONE_DAY', 'FIVE_DAYS', 'ONE_WEEK', 'ONE_MONTH', 'THREE_MONTHS']
-
-        if interval_attr not in valid_intervals:
-            message = f"Valid intervals are: {', '.join(valid_intervals)}. Defaulting to {default_interval}."
-            raise Exception("Invalid interval attr")
-
-    except Exception:
-        not_valid = True
-
-    if not_valid:
-        if logs:
-            print(message)
-
-        changes['interval'] = message
-
-        return False, default_interval, changes
-
-    return True, None, changes
 
 
 def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, str):
@@ -405,6 +198,27 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
 
             if kwarg.arg == 'interval':
                 validation_result, interval, changes = validate_interval(kwarg.value, changes, logs)
+
+                # If the interval is not valid, set it to the default interval
+                if not validation_result:
+                    kwarg.value = ast.Attribute(
+                        value=ast.Name(id='Interval', ctx=ast.Load()),
+                        attr='ONE_DAY',
+                        ctx=ast.Load()
+                    )
+
+            if kwarg.arg == 'period':
+                validation_result, period, changes = validate_period(kwarg.value, changes, logs)
+
+                print(ast.dump(kwarg.value))
+                print(validation_result)
+                # If the period is not valid, set it to the default period
+                if not validation_result:
+                    kwarg.value = ast.Attribute(
+                        value=ast.Name(id='Period', ctx=ast.Load()),
+                        attr='NOT_PASSED',
+                        ctx=ast.Load()
+                    )
 
 
     except Exception as e:
