@@ -4,7 +4,7 @@ from trading_strategy_tester.enums.period_enum import Period
 
 def validate_period(period, changes: dict, logs: bool) -> (bool, str, dict):
     default_period = Period.NOT_PASSED
-    message = f"period argument should be of type Period. Defaulting to {default_period}."
+    message = f"period argument should be of type Period. Defaulting to no period."
     not_valid = False
 
     try:
@@ -18,7 +18,7 @@ def validate_period(period, changes: dict, logs: bool) -> (bool, str, dict):
                            'TWO_YEARS', 'FIVE_YEARS', 'TEN_YEARS', 'YEAR_TO_DATE', 'MAX', 'NOT_PASSED']
 
         if period_attr not in valid_periods:
-            message = f"Valid periods are: {', '.join(valid_periods)}. Defaulting to {default_period}."
+            message = f"Valid periods are: {', '.join(valid_periods)}. Defaulting to no period."
             raise Exception("Invalid period attr")
 
     except Exception:
