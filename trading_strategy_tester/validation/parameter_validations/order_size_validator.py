@@ -16,14 +16,15 @@ def validate_order_size(order_size, changes: dict, logs: bool) -> (bool, str, di
 
     try:
         order_size_id = order_size.func.id
-        order_size_value = order_size.args[0].value
 
         if order_size_id not in ['Contracts', 'USD', 'PercentOfEquity']:
-            not_valid = True
+            raise Exception("Invalid order size type")
+
+        order_size_value = order_size.args[0].value
 
         if not isinstance(order_size_value, (int, float)):
             message = f"order_size argument should be a number. Defaulting to {default_order_size}."
-            not_valid = True
+            raise Exception("Order size value not a number")
     except Exception:
         not_valid = True
 

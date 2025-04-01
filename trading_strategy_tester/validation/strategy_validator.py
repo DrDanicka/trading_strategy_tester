@@ -10,6 +10,8 @@ from trading_strategy_tester.validation.parameter_validations.stop_loss_validato
 from trading_strategy_tester.validation.parameter_validations.take_profit_validator import validate_take_profit
 from trading_strategy_tester.validation.parameter_validations.interval_validator import validate_interval
 from trading_strategy_tester.validation.parameter_validations.period_validator import validate_period
+from trading_strategy_tester.validation.parameter_validations.trade_commissions_validator import \
+    validate_trade_commissions
 
 implemented_conditions = pd.DataFrame(
     data=[
@@ -239,8 +241,15 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
                     )
 
 
+            if kwarg.arg == 'trade_commissions':
+                validation_result, trade_commission, changes = validate_trade_commissions(kwarg.value, changes, logs)
 
-
+                if not validation_result:
+                    kwarg.value = ast.Call(
+                        func=ast.Name(id='MoneyCommissions', ctx=ast.Load()),
+                        args=[ast.Constant(value=0)],
+                        keywords=[]
+                    )
 
 
     except Exception as e:
@@ -251,4 +260,4 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
     return True, 'xd'
 
 
-validate_strategy_string("Strategy(order_size=Contracts(2), order_size=USD(1000), order_size=PercentOfEquity(1), period=Period.NOT_PASSED, interval=Interval.ONE_WEEK, ticker='TSLA', position_type=PositionTypeEnum.LONG, buy_condition=OR( CrossOverCondition(first_series=RSI('TSLA'), second_series=CONST(30)), LessThanCondition(first_series=EMA('TSLA'), second_series=CLOSE('TSLA'))), sell_condition=OR( CrossOverCondition(first_series=CONST(70), second_series=RSI('TSLA')), IntraIntervalChangeOfXPercentCondition(series=CLOSE('TSLA'), percent=5)), stop_loss=StopLoss(percentage=5, stop_loss_type=StopLossType.NORMAL), take_profit=TakeProfit(percentage=10), start_date=datetime(2020, 1, 1), end_date=datetime(2024, 1, 1), initial_capital=1000)")
+validate_strategy_string("Strategy(trade_commissions=MoneyCommissions(1), order_size=Contracts(2), order_size=USD(1000), order_size=PercentOfEquity(1), period=Period.NOT_PASSED, interval=Interval.ONE_WEEK, ticker='TSLA', position_type=PositionTypeEnum.LONG, buy_condition=OR( CrossOverCondition(first_series=RSI('TSLA'), second_series=CONST(30)), LessThanCondition(first_series=EMA('TSLA'), second_series=CLOSE('TSLA'))), sell_condition=OR( CrossOverCondition(first_series=CONST(70), second_series=RSI('TSLA')), IntraIntervalChangeOfXPercentCondition(series=CLOSE('TSLA'), percent=5)), stop_loss=StopLoss(percentage=5, stop_loss_type=StopLossType.NORMAL), take_profit=TakeProfit(percentage=10), start_date=datetime(2020, 1, 1), end_date=datetime(2024, 1, 1), initial_capital=1000)")
