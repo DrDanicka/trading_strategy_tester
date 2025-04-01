@@ -11,14 +11,6 @@ def get_random_interval():
     '''
 
     random_interval = random.choice([
-        Interval.ONE_MINUTE,
-        Interval.TWO_MINUTES,
-        Interval.FIVE_MINUTES,
-        Interval.FIFTEEN_MINUTES,
-        Interval.THIRTY_MINUTES,
-        Interval.SIXTY_MINUTES,
-        Interval.NINETY_MINUTES,
-        Interval.ONE_HOUR,
         Interval.ONE_DAY,
         Interval.FIVE_DAYS,
         Interval.ONE_WEEK,
