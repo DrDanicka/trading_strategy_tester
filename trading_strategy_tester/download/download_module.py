@@ -73,6 +73,9 @@ class DownloadModule:
         else:
             df = yf.download(ticker, interval=self.interval, period=self.period, auto_adjust=False)
 
+        if len(df) == 0:
+            raise ValueError(f"No data found for ticker '{ticker}'. Please check the ticker symbol or the date range or other parameters.")
+
         # Automatically change columns to ensure robustness against future changes of API
         df.columns = [
             'Adj Close',
