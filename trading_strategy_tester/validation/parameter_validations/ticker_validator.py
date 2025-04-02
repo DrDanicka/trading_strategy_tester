@@ -6,13 +6,12 @@ def validate_ticker(ticker, changes: dict, logs: bool) -> (bool, str, dict):
     # Gets the ticker value from the ticker parameter
     try:
         str_ticker = ticker.value
+
+        if not isinstance(str_ticker, str):
+            raise Exception(message)
+
     except Exception:
         not_valid = True
-
-    if not not_valid and not isinstance(str_ticker, str):
-        not_valid = True
-
-    # TODO check if string is actual ticker in some database of valid tickers
 
     if not_valid:
         if logs:
