@@ -57,6 +57,7 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
 
                 raise Exception(message)
 
+        print(ast.dump(strategy_object))
 
         # Validate the arguments
         for kwarg in strategy_object.keywords:
@@ -191,6 +192,32 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
             parsed_strategy.body[0].value.keywords = valid_keywords
             changes['strategy'] = message
 
+        mandatory_parameters = ['ticker', 'position_type', 'buy_condition', 'sell_condition']
+
+        for mandatory_parameter in mandatory_parameters:
+            if mandatory_parameter not in valid_parameters:
+                # Defaulting to AAPL if no ticker
+                if mandatory_parameter == 'ticker':
+                    parsed_strategy.body[0].value.keywords.append(
+                        ast.keyword(
+                            arg=mandatory_parameter,
+                            value=ast.Constant(value='AAPL')
+                        )
+                    )
+                # Defaulting to LONG if no position_type
+                elif mandatory_parameter == 'position_type':
+                    parsed_strategy.body[0].value.keywords.append(
+                        ast.keyword(
+                            arg=mandatory_parameter,
+                            value=ast.Attribute(
+                                value=ast.Name(id='PositionTypeEnum', ctx=ast.Load()),
+                                attr='LONG',
+                                ctx=ast.Load()
+                            )
+                        )
+                    )
+                else:
+                    raise Exception(f"Missing mandatory buy or sell condition parameter.")
 
     except Exception as e:
         if message == '':
@@ -206,7 +233,7 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
     return True, ast.unparse(parsed_strategy), changes
 
 
-x,y,z = validate_strategy_string("Strategy(trade_commissions=MoneyCommissions(1), order_size=PercentOfEquity(1), period=Period.NOT_PASSED, interval=Interval.ONE_WEEK, ticker='TSLA', position_type=PositionTypeEnum.LONG, buy_condition=OR( CrossOverCondition(first_series=RSI('TSLA'), second_series=CONST(30)), LessThanCondition(first_series=EMA('TSLA'), second_series=CLOSE('TSLA'))), sell_condition=OR( CrossOverCondition(first_series=CONST(70), second_series=RSI('TSLA')), IntraIntervalChangeOfXPercentCondition(series=CLOSE('TSLA'), percent=5)), stop_loss=StopLoss(percentage=5, stop_loss_type=StopLossType.NORMAL), take_profit=TakeProfit(percentage=10), start_date=datetime(2020, 1, 1), end_date=datetime(2024, 1, 1), initial_capital=1000)")
+x,y,z = validate_strategy_string("Strategy(trade_commissions=MoneyCommissions(1),position_type=PositionTypeEnum.LONG, buy_condition=OR( CrossOverCondition(first_series=RSI('TSLA'), second_series=CONST(30)), LessThanCondition(first_series=EMA('TSLA'), second_series=CLOSE('TSLA'))), sell_condition=OR( CrossOverCondition(first_series=CONST(70), second_series=RSI('TSLA')), IntraIntervalChangeOfXPercentCondition(series=CLOSE('TSLA'), percent=5)), stop_loss=StopLoss(percentage=5, stop_loss_type=StopLossType.NORMAL), take_profit=TakeProfit(percentage=10), start_date=datetime(2020, 1, 1), end_date=datetime(2024, 1, 1), initial_capital=1000, order_size=Contracts(1))")
 
 print(x)
 print(y)

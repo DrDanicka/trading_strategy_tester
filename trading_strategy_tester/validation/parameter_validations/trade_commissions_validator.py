@@ -3,10 +3,15 @@ def validate_trade_commissions(trade_commissions, changes: dict, logs: bool) -> 
     Validate the trade_commissions parameter.
 
     :param trade_commissions: The trade_commissions parameter to validate.
+    :type trade_commissions: ast.Call
     :param changes: A dictionary to store changes made during validation.
+    :type changes: dict
     :param logs: A boolean indicating whether to log messages.
+    :type logs: bool
     :return: A tuple containing a boolean indicating validity, a message, and the updated changes dictionary.
+    :rtype: (bool, str, dict)
     """
+
     message = f"trade_commissions argument should be of type TradeCommissions. Available commissions are: MoneyCommissions, PercentageCommissions. Defaulting to no commissions."
     not_valid = False
 
