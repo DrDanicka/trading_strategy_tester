@@ -1,9 +1,292 @@
 import ast
 
 from trading_strategy_tester.validation.implemented_objects import implemented_conditions, implemented_trading_series
+from trading_strategy_tester.validation.parameter_validations.ticker_validator import validate_ticker
 
-def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool) -> (bool, str, dict):
-    pass
+def get_expected_type(param_name, param, param_type):
+    # Get the expected type of the parameter
+    if param_name in param:
+        index = param.index(param_name)
+        expected_type = param_type[index]
+    else:
+        expected_type = None
+
+    return expected_type
+
+def merge_dicts(dict1, dict2):
+    """
+    Merges two dictionaries, with dict2 overwriting dict1 for any matching keys.
+    """
+    merged_dict = dict1.copy()  # Start with a copy of dict1
+    merged_dict.update(dict2)  # Update with dict2, overwriting matching keys
+    return merged_dict
+
+def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+    not_valid = False
+    message = f'Invalid trading series in parameter {param_name} of {parent_name}. Using defined default value.'
+
+    keywords_res = []
+    ticker = ''
+    trading_series_id = ''
+
+    try:
+        trading_series_id = trading_series.func.id
+
+        if trading_series_id not in implemented_trading_series['Class_name'].values:
+            message = f"Trading series '{trading_series_id}' is not implemented."
+            raise Exception(message)
+
+        expected_trading_series_params = implemented_trading_series.loc[implemented_trading_series['Class_name'] == trading_series_id, 'Parameters'].values[0].split(' ')
+        param, param_type = zip(*[item.split(':') for item in expected_trading_series_params])
+
+        args = trading_series.args
+        keywords = trading_series.keywords
+
+        if len(args) > 0:
+            ticker = args[0]
+            validate_result, ticker, new_changes = validate_ticker(ticker, changes, logs)
+
+            if not validate_result:
+                message = f"Invalid ticker argument in trading series '{trading_series_id}' of {parent_name}."
+                raise Exception(message)
+        else:
+            message = f"Missing ticker argument in trading series '{trading_series_id}' of {parent_name}."
+            raise Exception(message)
+
+        used_args = []
+
+        for keyword in keywords:
+            arg_name = keyword.arg
+            arg_value = keyword.value
+
+            if arg_name in param and arg_name not in used_args:
+                used_args.append(arg_name)
+                arg_type = get_expected_type(arg_name, param, param_type)
+
+                print(ast.dump(arg_value), arg_name, arg_type)
+
+                if arg_type == 'SourceType':
+                    validation_result, _, new_changes = validate_source_type(arg_value, changes, logs, buy, arg_name, trading_series_id)
+                elif arg_type == 'SmoothingType':
+                    validation_result, _, new_changes = validate_smoothing_type(arg_value, changes, logs, buy, arg_name, trading_series_id)
+                elif arg_type == 'int':
+                    validation_result, _, new_changes = validate_int(arg_value, changes, logs, buy, arg_name, trading_series_id)
+                elif arg_type == 'float':
+                    validation_result, _, new_changes = validate_float(arg_value, changes, logs, buy, arg_name, trading_series_id)
+                elif arg_type == 'bool':
+                    validation_result, _, new_changes = validate_bool(arg_value, changes, logs, buy, arg_name, trading_series_id)
+                else:
+                    message = f"Invalid trading series parameter '{arg_name}'."
+                    raise Exception(message)
+
+                changes = merge_dicts(changes, new_changes)
+
+                # Add new condition if valid
+                if validation_result:
+                    keywords_res.append(ast.keyword(arg_name, arg_value))
+                # If not valid we obey the parameter and use the default one
+    except Exception:
+        not_valid = True
+
+    if not_valid:
+        if logs:
+            print(message)
+
+        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes[changes_name] = message
+
+        return False, None, changes
+
+    # Create new trading series with the validated arguments
+    new_trading_series = ast.Call(
+        func=ast.Name(id=trading_series_id, ctx=ast.Load()),
+        args=[ticker],
+        keywords=keywords_res
+    )
+
+    return True, new_trading_series, changes
+
+
+def validate_source_type(source_type, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+    not_valid = False
+    message = f'Invalid source type in parameter {param_name} of {parent_name}. Using defined default value.'
+
+    try:
+        value = source_type.value
+
+        if value != 'SourceType':
+            message = f'source_type should be of type SourceType in parameter {param_name} of {parent_name}. Using defined default value.'
+            raise Exception(message)
+
+        attr = source_type.attr
+
+        valid_source_types = ['CLOSE', 'OPEN', 'HIGH', 'LOW', 'HLC3', 'HL2', 'OHLC4', 'HLCC4', 'VOLUME']
+
+        if attr not in valid_source_types:
+            message += f' Valid source types are: {', '.join(valid_source_types)}.'
+            raise Exception(message)
+
+    except Exception:
+        not_valid = True
+
+    if not_valid:
+        if logs:
+            print(message)
+
+        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes[changes_name] = message
+
+        return False, None, changes
+
+    return True, None, changes
+
+
+def validate_smoothing_type(smoothing_type, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+    not_valid = False
+    message = f'Invalid smoothing type in parameter {param_name} of {parent_name}. Using defined default value.'
+
+    try:
+        value = smoothing_type.value
+
+        if value != 'SmoothingType':
+            message = f'smoothing_type should be of type SmoothingType in parameter {param_name} of {parent_name}. Using defined default value.'
+            raise Exception(message)
+
+        attr = smoothing_type.attr
+
+        valid_smoothing_types = ['RMA', 'SMA', 'EMA', 'WMA']
+
+        if attr not in valid_smoothing_types:
+            message += f' Valid smoothing types are: {', '.join(valid_smoothing_types)}.'
+            raise Exception(message)
+
+    except Exception:
+        not_valid = True
+
+    if not_valid:
+        if logs:
+            print(message)
+
+        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes[changes_name] = message
+
+        return False, None, changes
+
+    return True, None, changes
+
+def validate_bool(bool_value, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+    not_valid = False
+    message = f'Invalid boolean value in parameter {param_name} of {parent_name}. Using defined default value.'
+
+    try:
+        # Get the value of the boolean
+        bool_value = bool_value.value
+
+        if not isinstance(bool_value, bool):
+            raise Exception(message)
+
+    except Exception:
+        not_valid = True
+
+    if not_valid:
+        if logs:
+            print(message)
+
+        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes[changes_name] = message
+
+        return False, None, changes
+
+    return True, None, changes
+
+
+def validate_fibonacci_levels(fibonacci_levels, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+    not_valid = False
+    message = f'Invalid Fibonacci levels in parameter {param_name} of {parent_name}. Using defined default level 38.2%.'
+
+    try:
+        value = fibonacci_levels.value
+
+        if value != 'FibonacciLevels':
+            message = (f'fibonacci_levels should be of type FibonacciLevels in parameter {param_name} of {parent_name}. Using defined default level 38.2%.')
+            raise Exception(message)
+
+        attr = fibonacci_levels.attr
+        valid_fibonacci_levels = ['LEVEL_0', 'LEVEL_23_6', 'LEVEL_38_2', 'LEVEL_50', 'LEVEL_61_8', 'LEVEL_100']
+
+        if attr not in valid_fibonacci_levels:
+            message += f' Valid Fibonacci levels are: {', '.join(valid_fibonacci_levels)}.'
+            raise Exception(message)
+
+    except Exception:
+        not_valid = True
+
+    if not_valid:
+        if logs:
+            print(message)
+
+        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes[changes_name] = message
+
+        default_ast_attribute = ast.Attribute(
+            value=ast.Name(id='FibonacciLevels', ctx=ast.Load()),
+            attr='LEVEL_38_2',
+            ctx=ast.Load()
+        )
+
+        return False, default_ast_attribute, changes
+
+    return True, fibonacci_levels, changes
+
+def validate_int(int_value, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+    not_valid = False
+    message = f'Invalid integer value in parameter {param_name} of {parent_name}. Using defined default value.'
+
+    try:
+        # Get the value of the integer
+        int_value = int_value.value
+
+        if not isinstance(int_value, int):
+            raise Exception(message)
+    except Exception:
+        not_valid = True
+
+    if not_valid:
+        if logs:
+            print(message)
+
+        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes[changes_name] = message
+
+        return False, None, changes
+
+    return True, int_value, changes
+
+
+def validate_float(float_value, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+    not_valid = False
+    message = f'Invalid float value in parameter {param_name} of {parent_name}. Using defined default value.'
+
+    try:
+        # Get the value of the float
+        float_value = float_value.value
+
+        if not isinstance(float_value, (float, int)):
+            raise Exception(message)
+
+    except Exception:
+        not_valid = True
+
+    if not_valid:
+        if logs:
+            print(message)
+
+        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes[changes_name] = message
+
+        return False, None, changes
+
+    return True, float_value, changes
 
 def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool, str, dict):
     not_valid = False
@@ -14,44 +297,79 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
         condition_id = condition.func.id
 
         if condition_id not in implemented_conditions['Class_name'].values:
-            message = f"Condition '{condition_id}' is not implemented."
+            message = f"Condition '{condition_id}' does not exist."
             raise Exception(message)
 
-        condition_params = condition.args
-        expected_condition_params = implemented_conditions.loc[implemented_conditions['Class_name'] == condition_id, 'Parameters'].values[0].split(' ')
-
+        expected_condition_params = \
+        implemented_conditions.loc[implemented_conditions['Class_name'] == condition_id, 'Parameters'].values[0].split(
+            ' ')
         param, param_type = zip(*[item.split(':') for item in expected_condition_params])
 
-        for i, (p, pt) in enumerate(zip(param, param_type)):
-            if p.startswith('*'):
-                for p_condition in condition_params:
-                    # TODO validate recursive conditions
-                    validate_condition(p_condition, changes, logs, buy)
+        args_res = []
+        used_args = []
+
+        if condition_id in ['AND', 'OR']:
+            # Arguments are in args list
+            arguments_list = condition.args
+            for arg in arguments_list:
+                validation_result, new_condition, new_changes = validate_condition(arg, changes, logs, buy)
+
+                changes = merge_dicts(changes, new_changes)
+
+                # Add new condition if valid
+                if validation_result:
+                    args_res.append(new_condition)
+
+            if len(args_res) > 0:
+                # Create new condition with the validated arguments
+                new_condition = ast.Call(
+                    func=ast.Name(id=condition_id, ctx=ast.Load()),
+                    args=args_res,
+                    keywords=[]
+                )
+        else:
+            # Arguments are in keywords list
+            arguments_list = condition.keywords
+            for arg in arguments_list:
+                arg_name = arg.arg
+                arg_value = arg.value
+
+                if arg_name in param and arg_name not in used_args:
+                    used_args.append(arg_name)
+                    arg_type = get_expected_type(arg_name, param, param_type)
+
+                    if arg_type == 'Condition':
+                        validation_result, new_object, new_changes = validate_condition(arg_value, changes, logs, buy)
+                    elif arg_type == 'TradingSeries':
+                        validation_result, new_object, new_changes = validate_trading_series(arg_value, changes, logs, buy, arg_name, condition_id)
+                    elif arg_type == 'FibonacciLevels':
+                        validation_result, new_object, new_changes = validate_fibonacci_levels(arg_value, changes, logs, buy, arg_name, condition_id)
+                    elif arg_type == 'int':
+                        validation_result, new_object, new_changes = validate_int(arg_value, changes, logs, buy, arg_name, condition_id)
+                    elif arg_type == 'float':
+                        validation_result, new_object, new_changes = validate_float(arg_value, changes, logs, buy, arg_name, condition_id)
+                    else:
+                        message = f"Invalid condition parameter '{arg_name}'."
+                        raise Exception(message)
+
+                    changes = merge_dicts(changes, new_changes)
+
+                    # Add new condition if valid
+                    if validation_result:
+                        # Adding keyword
+                        args_res.append(ast.keyword(arg_name, new_object))
+
+            if len(args_res) == len(param):
+                # Create new condition with the validated arguments
+                new_condition = ast.Call(
+                    func=ast.Name(id=condition_id, ctx=ast.Load()),
+                    args=[],
+                    keywords=args_res
+                )
             else:
-                if pt == 'Condition':
-                    # TODO validate condition
-                    validate_condition(condition_params[i], changes, logs, buy)
-                elif pt == 'TradingSeries':
-                    # TODO validate trading series
-                    validate_trading_series(condition_params[i], changes, logs, buy)
-                elif pt == 'FibonacciLevels':
-                    # TODO validate fibonacci levels
-                    pass
-                elif pt == 'int':
-                    message = f"Parameter '{p}' should be an integer."
-                    # Check if not int
-                    if not isinstance(condition_params[i].value, int):
-                        raise Exception(message)
-                    message = 'Invalid condition'
-                elif pt == 'float':
-                    message = f"Parameter '{p}' should be a float."
-                    # Check if not float
-                    if not isinstance(condition_params[i].value, float):
-                        raise Exception(message)
-                    message = 'Invalid condition'
-                else:
-                    message = f'Invalid parameter type {pt} for parameter {p}.'
-                    raise Exception(message)
+                not_used = set(param) - set(used_args)
+                message = f"Condition '{condition_id}' is missing the following parameters: {', '.join(not_used)}."
+                raise Exception(message)
 
     except Exception:
         not_valid = True
@@ -62,6 +380,6 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
 
         changes['buy_condition' if buy else 'sell_condition'] = message
 
-        return False, message, changes
+        return False, condition, changes
 
-    return True, None, changes
+    return True, new_condition, changes
