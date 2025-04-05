@@ -77,7 +77,7 @@ def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool
                 print(ast.dump(arg_value), arg_name, arg_type)
 
                 if arg_type == 'SourceType':
-                    validation_result, _, new_changes = validate_source_type(arg_value, changes, logs, buy, arg_name, trading_series_id)
+                    validation_result, _, new_changes = validate_source(arg_value, changes, logs, buy, arg_name, trading_series_id)
                 elif arg_type == 'SmoothingType':
                     validation_result, _, new_changes = validate_smoothing_type(arg_value, changes, logs, buy, arg_name, trading_series_id)
                 elif arg_type == 'int':
@@ -118,18 +118,18 @@ def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool
     return True, new_trading_series, changes
 
 
-def validate_source_type(source_type, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+def validate_source(source, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
     not_valid = False
     message = f'Invalid source type in parameter {param_name} of {parent_name}. Using defined default value.'
 
     try:
-        value = source_type.value
+        value = source.value
 
-        if value != 'SourceType':
-            message = f'source_type should be of type SourceType in parameter {param_name} of {parent_name}. Using defined default value.'
+        if value.id != 'SourceType':
+            message = f'source should be of type SourceType in parameter {param_name} of {parent_name}. Using defined default value.'
             raise Exception(message)
 
-        attr = source_type.attr
+        attr = source.attr
 
         valid_source_types = ['CLOSE', 'OPEN', 'HIGH', 'LOW', 'HLC3', 'HL2', 'OHLC4', 'HLCC4', 'VOLUME']
 
@@ -159,7 +159,7 @@ def validate_smoothing_type(smoothing_type, changes: dict, logs: bool, buy: bool
     try:
         value = smoothing_type.value
 
-        if value != 'SmoothingType':
+        if value.id != 'SmoothingType':
             message = f'smoothing_type should be of type SmoothingType in parameter {param_name} of {parent_name}. Using defined default value.'
             raise Exception(message)
 
@@ -218,7 +218,7 @@ def validate_fibonacci_levels(fibonacci_levels, changes: dict, logs: bool, buy: 
     try:
         value = fibonacci_levels.value
 
-        if value != 'FibonacciLevels':
+        if value.id != 'FibonacciLevels':
             message = (f'fibonacci_levels should be of type FibonacciLevels in parameter {param_name} of {parent_name}. Using defined default level 38.2%.')
             raise Exception(message)
 
