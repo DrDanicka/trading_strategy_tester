@@ -43,14 +43,25 @@ def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool
         keywords = trading_series.keywords
 
         if len(args) > 0:
-            ticker = args[0]
-            validate_result, ticker, new_changes = validate_ticker(ticker, changes, logs)
+            first_arg = args[0]
+            is_const = True if trading_series_id == 'CONST' else False
+            if is_const:
+                # CONST is a special case where the first argument is an integer
+                validate_result, ticker, new_changes = validate_int(first_arg, changes, logs, buy, param_name, parent_name)
+            else:
+                # Else it's a ticker
+                validate_result, ticker, new_changes = validate_ticker(first_arg, changes, logs)
 
-            if not validate_result:
+            if not validate_result and not is_const:
                 message = f"Invalid ticker argument in trading series '{trading_series_id}' of {parent_name}."
                 raise Exception(message)
+
+            if not validate_result and is_const:
+                message = f"Invalid integer argument in trading series '{trading_series_id}' of {parent_name}."
+                raise Exception(message)
+
         else:
-            message = f"Missing ticker argument in trading series '{trading_series_id}' of {parent_name}."
+            message = f"Missing first argument in trading series '{trading_series_id}' of {parent_name}."
             raise Exception(message)
 
         used_args = []
@@ -291,6 +302,7 @@ def validate_float(float_value, changes: dict, logs: bool, buy: bool, param_name
 def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool, str, dict):
     not_valid = False
     message = 'Invalid condition.'
+    new_condition = condition
 
     try:
         # Get condition id
