@@ -80,16 +80,14 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
             elif kwarg.arg == 'buy_condition':
                 validation_result, condition, changes = validate_condition(kwarg.value, changes, logs, buy=True)
 
-                # If the buy condition is not valid, set it to the default buy condition
-                if not validation_result:
-                    kwarg.value = ast.Constant(value=condition)
+                # Always rewrite because there can be condition omit and we get True and the condition changed
+                kwarg.value = condition
 
             elif kwarg.arg == 'sell_condition':
                 validation_result, condition, changes = validate_condition(kwarg.value, changes, logs, buy=False)
 
-                # If the sell condition is not valid, set it to the default sell condition
-                if not validation_result:
-                    kwarg.value = ast.Constant(value=condition)
+                # Always rewrite because there can be condition omit and we get True and the condition changed
+                kwarg.value = condition
 
             elif kwarg.arg in ['start_date', 'end_date']:
                 validation_result, date, changes = validate_date(kwarg.value, changes, logs, start=True if kwarg.arg == 'start_date' else False)
@@ -230,10 +228,12 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
 
         return False, '', changes
 
+    print(ast.dump(parsed_strategy.body[0].value))
+
     return True, ast.unparse(parsed_strategy), changes
 
 
-x,y,z = validate_strategy_string("Strategy(trade_commissions=MoneyCommissions(1),position_type=PositionTypeEnum.LONG, buy_condition=OR( CrossOverCondition(first_series=RSI('TSLA'), second_series=CONST(30)), LessThanCondition(first_series=EMA('TSLA'), second_series=CLOSE('TSLA'))), sell_condition=OR( CrossOverCondition(first_series=CONST(70), second_series=RSI('TSLA')), IntraIntervalChangeOfXPercentCondition(series=CLOSE('TSLA'), percent=5)), stop_loss=StopLoss(percentage=5, stop_loss_type=StopLossType.NORMAL), take_profit=TakeProfit(percentage=10), start_date=datetime(2020, 1, 1), end_date=datetime(2024, 1, 1), initial_capital=1000, order_size=Contracts(1))")
+x,y,z = validate_strategy_string("Strategy(trade_commissions=MoneyCommissions(1),position_type=PositionTypeEnum.LONG, buy_condition=OR( CrossOverCondition(first_series=BB_LOWER(std_dev=3, source=SourceType.CLOSE), second_series=CONST(30)), LessThanCondition(first_series=EMA('TSLA'), second_series=CLOSE('TSLA'))), sell_condition=OR( CrossOverCondition(first_series=CONST(70), second_series=RSI('TSLA')), IntraIntervalChangeOfXPercentCondition(series=CLOSE('TSLA'), percent=5)), stop_loss=StopLoss(percentage=5, stop_loss_type=StopLossType.NORMAL), take_profit=TakeProfit(percentage=10), start_date=datetime(2020, 1, 1), end_date=datetime(2024, 1, 1), initial_capital=1000, order_size=Contracts(1))")
 
 print(x)
 print(y)

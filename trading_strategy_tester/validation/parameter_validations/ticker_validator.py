@@ -21,4 +21,4 @@ def validate_ticker(ticker, changes: dict, logs: bool) -> (bool, str, dict):
 
         return False, default_ticker, changes
 
-    return True, None, changes
+    return True, ticker, changes

@@ -22,6 +22,12 @@ def merge_dicts(dict1, dict2):
     return merged_dict
 
 def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+    '''
+    Validate the trading series parameter.
+    This function throws an exception if the name of trading series does not exist or if the first argument is not present.
+
+
+    '''
     not_valid = False
     message = f'Invalid trading series in parameter {param_name} of {parent_name}. Using defined default value.'
 
@@ -33,7 +39,8 @@ def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool
         trading_series_id = trading_series.func.id
 
         if trading_series_id not in implemented_trading_series['Class_name'].values:
-            message = f"Trading series '{trading_series_id}' is not implemented."
+            # Throws an exception if the trading series name does not exist
+            message = f"Trading series '{trading_series_id}' does not exist."
             raise Exception(message)
 
         expected_trading_series_params = implemented_trading_series.loc[implemented_trading_series['Class_name'] == trading_series_id, 'Parameters'].values[0].split(' ')
@@ -281,9 +288,9 @@ def validate_int(int_value, changes: dict, logs: bool, buy: bool, param_name, pa
 
     try:
         # Get the value of the integer
-        int_value = int_value.value
+        int_value_value = int_value.value
 
-        if not isinstance(int_value, int):
+        if not isinstance(int_value_value, int):
             raise Exception(message)
     except Exception:
         not_valid = True
@@ -306,9 +313,9 @@ def validate_float(float_value, changes: dict, logs: bool, buy: bool, param_name
 
     try:
         # Get the value of the float
-        float_value = float_value.value
+        float_value_value = float_value.value
 
-        if not isinstance(float_value, (float, int)):
+        if not isinstance(float_value_value, (float, int)):
             raise Exception(message)
 
     except Exception:
@@ -350,13 +357,13 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
             # Arguments are in args list
             arguments_list = condition.args
             for arg in arguments_list:
-                validation_result, new_condition, new_changes = validate_condition(arg, changes, logs, buy)
+                validation_result, validation_new_condition, new_changes = validate_condition(arg, changes, logs, buy)
 
                 changes = merge_dicts(changes, new_changes)
 
                 # Add new condition if valid
                 if validation_result:
-                    args_res.append(new_condition)
+                    args_res.append(validation_new_condition)
 
             if len(args_res) > 0:
                 # Create new condition with the validated arguments
@@ -396,6 +403,8 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
                     if validation_result:
                         # Adding keyword
                         args_res.append(ast.keyword(arg_name, new_object))
+                    else:
+                        not_valid = True
 
             if len(args_res) == len(param):
                 # Create new condition with the validated arguments
@@ -409,6 +418,7 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
                 not_used = list(not_used)
                 not_used.sort()
 
+                # If parameter was used and was not valid then we return False and None and in changes will be the message that occurred
                 if len(not_used) < 1:
                     return False, None, changes
 
