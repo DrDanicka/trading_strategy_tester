@@ -74,7 +74,7 @@ def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool
                 used_args.append(arg_name)
                 arg_type = get_expected_type(arg_name, param, param_type)
 
-                print(ast.dump(arg_value), arg_name, arg_type)
+                #print(ast.dump(arg_value), arg_name, arg_type)
 
                 if arg_type == 'SourceType':
                     validation_result, _, new_changes = validate_source(arg_value, changes, logs, buy, arg_name, trading_series_id)
@@ -211,7 +211,30 @@ def validate_bool(bool_value, changes: dict, logs: bool, buy: bool, param_name, 
     return True, None, changes
 
 
-def validate_fibonacci_levels(fibonacci_levels, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+def validate_fibonacci_levels(fibonacci_levels, changes: dict, logs: bool, buy: bool, param_name: str, parent_name: str) -> (bool, str, dict):
+    '''
+    Validate the Fibonacci levels parameter. This function always returns a valid Fibonacci level.
+
+    :param fibonacci_levels: The Fibonacci levels parameter to validate.
+    :type fibonacci_levels: ast.Attribute
+    :param changes: A dictionary to store any changes made during validation.
+    :type changes: dict
+    :param logs: A boolean indicating whether to log messages.
+    :type logs: bool
+    :param buy: A boolean indicating whether the condition is for buying or selling.
+    :type buy: bool
+    :param param_name: The name of the parameter being validated.
+    :type param_name: str
+    :param parent_name: The name of the parent condition.
+    :type parent_name: str
+    :return: A tuple containing a boolean indicating validity, a message, and the updated `changes` dictionary.
+    :rtype: (bool, str, dict)
+
+    1. Checks if the `fibonacci_levels` parameter is of type `FibonacciLevels`.
+    2. Validates the `attr` attribute of the `fibonacci_levels` parameter.
+    3. If the `fibonacci_levels` parameter is not valid, it logs a message and returns a default value.
+    '''
+
     not_valid = False
     message = f'Invalid Fibonacci levels in parameter {param_name} of {parent_name}. Using defined default level 38.2%.'
 
@@ -245,13 +268,16 @@ def validate_fibonacci_levels(fibonacci_levels, changes: dict, logs: bool, buy: 
             ctx=ast.Load()
         )
 
-        return False, default_ast_attribute, changes
+        return True, default_ast_attribute, changes
 
     return True, fibonacci_levels, changes
 
+
 def validate_int(int_value, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
     not_valid = False
-    message = f'Invalid integer value in parameter {param_name} of {parent_name}. Using defined default value.'
+    message = f'Invalid integer value in parameter {param_name} of {parent_name}.'
+    if not parent_name.endswith('Condition'):
+        message += f' Using defined default value.)'
 
     try:
         # Get the value of the integer
@@ -380,6 +406,12 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
                 )
             else:
                 not_used = set(param) - set(used_args)
+                not_used = list(not_used)
+                not_used.sort()
+
+                if len(not_used) < 1:
+                    return False, None, changes
+
                 message = f"Condition '{condition_id}' is missing the following parameters: {', '.join(not_used)}."
                 raise Exception(message)
 
@@ -392,6 +424,6 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
 
         changes['buy_condition' if buy else 'sell_condition'] = message
 
-        return False, condition, changes
+        return False, None, changes
 
     return True, new_condition, changes
