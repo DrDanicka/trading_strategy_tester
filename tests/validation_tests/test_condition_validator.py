@@ -1,6 +1,8 @@
 import unittest
 import ast
-from trading_strategy_tester.validation.parameter_validations.condition_validator import validate_condition
+
+from trading_strategy_tester.validation.parameter_validations.condition_validator import validate_condition, \
+    validate_trading_series
 
 
 class TestValidateCondition(unittest.TestCase):
@@ -1722,6 +1724,287 @@ class TestValidateCondition(unittest.TestCase):
         self.assertFalse(result)
         self.assertIsNone(new_condition)
         self.assertEqual(updated_changes, {changes_key: f"Condition '{condition_id}' is missing the following parameters: series."})
+
+
+    def test_trading_series_with_smoothing_type(self):
+        # Arrange
+        ticker = 'AAPL'
+        length = 14
+
+        # Create the trading series of ATR
+        trading_series = ast.Call(
+            func=ast.Name(id='ATR', ctx=ast.Load()),
+            args=[ast.Constant(value=ticker)],
+            keywords=[
+                ast.keyword(arg='length', value=ast.Constant(value=length)),
+                ast.keyword(arg='smoothing', value=ast.Attribute(
+                    value=ast.Name(id='SmoothingType', ctx=ast.Load()),
+                    attr='SMA',
+                    ctx=ast.Load()
+                ))
+            ]
+        )
+        changes = {}
+        logs = False
+        buy = True
+        param_name = 'param_name'
+        parent_name = 'parent_name'
+
+        # Act
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+
+        # Assert
+        self.assertTrue(result)
+        self.assertEqual(updated_changes, {})
+
+    def test_trading_series_with_smoothing_type_invalid_type(self):
+        # Arrange
+        ticker = 'AAPL'
+        length = 14
+
+        # Create the trading series of ATR
+        trading_series = ast.Call(
+            func=ast.Name(id='ATR', ctx=ast.Load()),
+            args=[ast.Constant(value=ticker)],
+            keywords=[
+                ast.keyword(arg='length', value=ast.Constant(value=length)),
+                ast.keyword(arg='smoothing', value=ast.Attribute(
+                    value=ast.Name(id='InvalidType', ctx=ast.Load()),
+                    attr='SMA',
+                    ctx=ast.Load()
+                ))
+            ]
+        )
+        changes = {}
+        logs = False
+        buy = True
+        param_name = 'smoothing'
+        parent_name = 'ATR'
+
+        # Act
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy,
+                                                                              param_name, parent_name)
+
+        # Assert
+        self.assertTrue(result)
+        self.assertEqual(updated_changes, {f'buy_condition_{parent_name}_{param_name}': f"smoothing_type should be of type SmoothingType in parameter {param_name} of {parent_name}. Using defined default value."})
+
+
+    def test_trading_series_with_smoothing_type_invalid_smoothing(self):
+        # Arrange
+        ticker = 'AAPL'
+        length = 14
+
+        # Create the trading series of ATR
+        trading_series = ast.Call(
+            func=ast.Name(id='ATR', ctx=ast.Load()),
+            args=[ast.Constant(value=ticker)],
+            keywords=[
+                ast.keyword(arg='length', value=ast.Constant(value=length)),
+                ast.keyword(arg='smoothing', value=ast.Attribute(
+                    value=ast.Name(id='SmoothingType', ctx=ast.Load()),
+                    attr='InvalidSmoothing',
+                    ctx=ast.Load()
+                ))
+            ]
+        )
+        changes = {}
+        logs = False
+        buy = True
+        param_name = 'smoothing'
+        parent_name = 'ATR'
+        valid_smoothing_types = ['RMA', 'SMA', 'EMA', 'WMA']
+
+        # Act
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy,
+                                                                              param_name, parent_name)
+
+        # Assert
+        self.assertTrue(result)
+        self.assertEqual(updated_changes, {f'buy_condition_{parent_name}_{param_name}': f"Invalid smoothing type in parameter {param_name} of {parent_name}. Using defined default value. Valid smoothing types are: {', '.join(valid_smoothing_types)}."})
+
+
+    def test_trading_series_with_source_type(self):
+        # Arrange
+        ticker = 'AAPL'
+        length = 14
+
+        # Create the trading series of RSI
+        trading_series = ast.Call(
+            func=ast.Name(id='RSI', ctx=ast.Load()),
+            args=[ast.Constant(value=ticker)],
+            keywords=[
+                ast.keyword(arg='length', value=ast.Constant(value=length)),
+                ast.keyword(arg='source', value=ast.Attribute(
+                    value=ast.Name(id='SourceType', ctx=ast.Load()),
+                    attr='CLOSE',
+                    ctx=ast.Load()
+                ))
+            ]
+        )
+
+        changes = {}
+        logs = False
+        buy = True
+        param_name = 'source'
+        parent_name = 'RSI'
+
+        # Act
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+
+        # Assert
+        self.assertTrue(result)
+        self.assertEqual(updated_changes, {})
+
+
+    def test_trading_series_with_source_type_invalid_type(self):
+        # Arrange
+        ticker = 'AAPL'
+        length = 14
+
+        # Create the trading series of RSI
+        trading_series = ast.Call(
+            func=ast.Name(id='RSI', ctx=ast.Load()),
+            args=[ast.Constant(value=ticker)],
+            keywords=[
+                ast.keyword(arg='length', value=ast.Constant(value=length)),
+                ast.keyword(arg='source', value=ast.Attribute(
+                    value=ast.Name(id='InvalidType', ctx=ast.Load()),
+                    attr='CLOSE',
+                    ctx=ast.Load()
+                ))
+            ]
+        )
+        changes = {}
+        logs = False
+        buy = True
+        param_name = 'source'
+        parent_name = 'RSI'
+
+        # Act
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+
+        # Assert
+        self.assertTrue(result)
+        self.assertEqual(updated_changes, {f'buy_condition_{parent_name}_{param_name}': f"source should be of type SourceType in parameter {param_name} of {parent_name}. Using defined default value."})
+
+
+    def test_trading_series_with_source_type_invalid_source(self):
+        # Arrange
+        ticker = 'AAPL'
+        length = 14
+
+        # Create the trading series of RSI
+        trading_series = ast.Call(
+            func=ast.Name(id='RSI', ctx=ast.Load()),
+            args=[ast.Constant(value=ticker)],
+            keywords=[
+                ast.keyword(arg='length', value=ast.Constant(value=length)),
+                ast.keyword(arg='source', value=ast.Attribute(
+                    value=ast.Name(id='SourceType', ctx=ast.Load()),
+                    attr='InvalidSource',
+                    ctx=ast.Load()
+                ))
+            ]
+        )
+        changes = {}
+        logs = False
+        buy = True
+        param_name = 'source'
+        parent_name = 'RSI'
+        valid_source_types = ['CLOSE', 'OPEN', 'HIGH', 'LOW', 'HLC3', 'HL2', 'OHLC4', 'HLCC4', 'VOLUME']
+
+        # Act
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+
+        # Assert
+        self.assertTrue(result)
+        self.assertEqual(updated_changes, {f'buy_condition_{parent_name}_{param_name}': f"Invalid source type in parameter {param_name} of {parent_name}. Using defined default value. Valid source types are: {', '.join(valid_source_types)}."})
+
+    def test_trading_series_with_float(self):
+        # Arrange
+        ticker = 'AAPL'
+        length = 14
+        std_dev = 2
+
+        trading_series = ast.Call(
+            func=ast.Name(id='BB_LOWER', ctx=ast.Load()),
+            args=[ast.Constant(value=ticker)],
+            keywords=[
+                ast.keyword(arg='length', value=ast.Constant(value=length)),
+                ast.keyword(arg='std_dev', value=ast.Constant(value=std_dev))
+            ]
+        )
+        changes = {}
+        logs = False
+        buy = True
+        param_name = 'param_name'
+        parent_name = 'parent_name'
+
+        # Act
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+
+        # Assert
+        self.assertTrue(result)
+        self.assertEqual(updated_changes, {})
+
+
+    def test_trading_series_with_bool(self):
+        # Arrange
+        ticker = 'AAPL'
+        length = 14
+
+        trading_series = ast.Call(
+            func=ast.Name(id='KC_UPPER', ctx=ast.Load()),
+            args=[ast.Constant(value=ticker)],
+            keywords=[
+                ast.keyword(arg='length', value=ast.Constant(value=length)),
+                ast.keyword(arg='use_exp_ma', value=ast.Constant(value=True))
+            ]
+        )
+        changes = {}
+        logs = False
+        buy = True
+        param_name = 'use_exp_ma'
+        parent_name = 'KC_UPPER'
+
+        # Act
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+
+        # Assert
+        self.assertTrue(result)
+        self.assertEqual(updated_changes, {})
+
+
+    def test_trading_series_with_bool_invalid_type(self):
+        # Arrange
+        ticker = 'AAPL'
+        length = 14
+
+        trading_series = ast.Call(
+            func=ast.Name(id='KC_UPPER', ctx=ast.Load()),
+            args=[ast.Constant(value=ticker)],
+            keywords=[
+                ast.keyword(arg='length', value=ast.Constant(value=length)),
+                ast.keyword(arg='use_exp_ma', value=ast.Attribute(
+                    value=ast.Name(id='InvalidType', ctx=ast.Load()),
+                    attr='CLOSE',
+                    ctx=ast.Load()
+                ))
+            ]
+        )
+        changes = {}
+        logs = False
+        buy = True
+        param_name = 'use_exp_ma'
+        parent_name = 'KC_UPPER'
+
+        # Act
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+
+        # Assert
+        self.assertTrue(result)
+        self.assertEqual(updated_changes, {f'buy_condition_{parent_name}_{param_name}': f"Invalid boolean value in parameter {param_name} of {parent_name}. Using defined default value."})
 
 if __name__ == '__main__':
     unittest.main()
