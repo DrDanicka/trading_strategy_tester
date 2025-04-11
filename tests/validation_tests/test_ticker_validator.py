@@ -6,7 +6,7 @@ class TestValidateTicker(unittest.TestCase):
 
     def test_valid_ticker(self):
         # Arrange
-        ticker = ast.Constant(value='TSLA')
+        ticker = ast.Constant(value='AAPL')
         changes = {}
         logs = False
 
@@ -15,7 +15,7 @@ class TestValidateTicker(unittest.TestCase):
 
         # Assert
         self.assertTrue(result)
-        self.assertIsNone(new_ticker)
+        self.assertEqual(new_ticker.value, 'AAPL')
         self.assertEqual(updated_changes, {})
 
 
