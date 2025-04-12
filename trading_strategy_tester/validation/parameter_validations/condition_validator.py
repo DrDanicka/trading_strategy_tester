@@ -21,7 +21,7 @@ def merge_dicts(dict1, dict2):
     merged_dict.update(dict2)  # Update with dict2, overwriting matching keys
     return merged_dict
 
-def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool, param_name, parent_name) -> (bool, str, dict):
+def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool, param_name, parent_name, global_ticker) -> (bool, str, dict):
     '''
     Validate the trading series parameter.
     This function throws an exception if the name of trading series does not exist or if the first argument is not present.
@@ -68,8 +68,12 @@ def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool
                 raise Exception(message)
 
         else:
-            message = f"Missing first argument in trading series '{trading_series_id}' of {parent_name}."
-            raise Exception(message)
+            if trading_series_id != 'CONST' and global_ticker != '':
+                ticker = global_ticker
+                changes[f'ticker_{parent_name}_{param_name}'] = f"Using global ticker '{global_ticker.value}' in trading series '{trading_series_id}' of {parent_name}."
+            else:
+                message = f"Missing first argument in trading series '{trading_series_id}' of {parent_name}."
+                raise Exception(message)
 
         used_args = []
 
@@ -80,8 +84,6 @@ def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool
             if arg_name in param and arg_name not in used_args:
                 used_args.append(arg_name)
                 arg_type = get_expected_type(arg_name, param, param_type)
-
-                #print(ast.dump(arg_value), arg_name, arg_type)
 
                 if arg_type == 'SourceType':
                     validation_result, _, new_changes = validate_source(arg_value, changes, logs, buy, arg_name, trading_series_id)
@@ -332,7 +334,7 @@ def validate_float(float_value, changes: dict, logs: bool, buy: bool, param_name
 
     return True, float_value, changes
 
-def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool, str, dict):
+def validate_condition(condition, changes: dict, logs: bool, buy: bool, global_ticker: str) -> (bool, str, dict):
     not_valid = False
     message = 'Invalid condition.'
     new_condition = condition
@@ -357,7 +359,7 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
             # Arguments are in args list
             arguments_list = condition.args
             for arg in arguments_list:
-                validation_result, validation_new_condition, new_changes = validate_condition(arg, changes, logs, buy)
+                validation_result, validation_new_condition, new_changes = validate_condition(arg, changes, logs, buy, global_ticker)
 
                 changes = merge_dicts(changes, new_changes)
 
@@ -372,6 +374,9 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
                     args=args_res,
                     keywords=[]
                 )
+            else:
+                message = f"Condition '{condition_id}' is missing the arguments."
+                raise Exception(message)
         else:
             # Arguments are in keywords list
             arguments_list = condition.keywords
@@ -384,9 +389,9 @@ def validate_condition(condition, changes: dict, logs: bool, buy: bool) -> (bool
                     arg_type = get_expected_type(arg_name, param, param_type)
 
                     if arg_type == 'Condition':
-                        validation_result, new_object, new_changes = validate_condition(arg_value, changes, logs, buy)
+                        validation_result, new_object, new_changes = validate_condition(arg_value, changes, logs, buy, global_ticker)
                     elif arg_type == 'TradingSeries':
-                        validation_result, new_object, new_changes = validate_trading_series(arg_value, changes, logs, buy, arg_name, condition_id)
+                        validation_result, new_object, new_changes = validate_trading_series(arg_value, changes, logs, buy, arg_name, condition_id, global_ticker)
                     elif arg_type == 'FibonacciLevels':
                         validation_result, new_object, new_changes = validate_fibonacci_levels(arg_value, changes, logs, buy, arg_name, condition_id)
                     elif arg_type == 'int':
