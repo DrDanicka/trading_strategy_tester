@@ -50,14 +50,6 @@ period_to_text = {
 }
 
 interval_to_text = {
-    Interval.ONE_MINUTE: '1 minute',
-    Interval.TWO_MINUTES: '2 minutes',
-    Interval.FIVE_MINUTES: '5 minutes',
-    Interval.FIFTEEN_MINUTES: '15 minutes',
-    Interval.THIRTY_MINUTES: '30 minutes',
-    Interval.SIXTY_MINUTES: '60 minutes',
-    Interval.NINETY_MINUTES: '90 minutes',
-    Interval.ONE_HOUR: '1 hour',
     Interval.ONE_DAY: '1 day',
     Interval.FIVE_DAYS: '5 days',
     Interval.ONE_WEEK: '1 week',
