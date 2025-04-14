@@ -156,7 +156,7 @@ class Trade:
         else:
             run_up = self.entry_price - self.data[SourceType.LOW.value].iloc[0:-1].min()  # Max decrease in price
 
-        run_up_percentage = (run_up / self.entry_price) * 100
+        run_up_percentage = (run_up / self.entry_price) * 100 if self.entry_price != 0 else 0
         return run_up, run_up_percentage
 
     def get_p_and_l(self) -> tuple:
@@ -173,7 +173,7 @@ class Trade:
 
         commissions = self.trade_commissions.get_commission(self.entry_price, self.contracts)
         p_and_l -= commissions  # Subtract commissions from P&L
-        p_and_l_percentage = (p_and_l * 100) / self.invested  # P&L as a percentage of invested capital
+        p_and_l_percentage = (p_and_l * 100) / self.invested if self.invested != 0 else 0  # P&L as a percentage of invested capital
         return p_and_l, p_and_l_percentage, commissions
 
     def get_summary(self) -> dict:

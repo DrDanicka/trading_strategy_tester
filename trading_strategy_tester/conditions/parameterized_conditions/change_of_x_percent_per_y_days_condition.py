@@ -41,7 +41,7 @@ class ChangeOfXPercentPerYDaysCondition(Condition):
         for i in range(len(series)):
             if i >= self.number_of_days:
                 # Calculate the percentage change compared to the value from 'number_of_days' ago
-                current_percent = (100 * series.iloc[i]) / series.iloc[i - self.number_of_days] - 100
+                current_percent = (100 * series.iloc[i]) / series.iloc[i - self.number_of_days] - 100 if series.iloc[i - self.number_of_days] != 0 else 0
                 # Check if the percentage change meets the criteria
                 if 0 < self.percent <= current_percent:
                     result.iloc[i] = True
