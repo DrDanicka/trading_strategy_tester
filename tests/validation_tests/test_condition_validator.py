@@ -32,7 +32,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -65,7 +65,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = False
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -98,7 +98,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -132,7 +132,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -166,7 +166,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.maxDiff = None
@@ -207,7 +207,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -240,7 +240,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -272,7 +272,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = False
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -305,7 +305,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -339,7 +339,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.maxDiff = None
@@ -392,7 +392,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -435,7 +435,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = False
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -484,7 +484,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -531,7 +531,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -575,7 +575,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = False
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -624,7 +624,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -663,7 +663,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -699,7 +699,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -737,7 +737,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -767,7 +767,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -805,7 +805,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -836,7 +836,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -866,7 +866,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = False
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -896,7 +896,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -924,7 +924,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -954,7 +954,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -983,7 +983,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1010,7 +1010,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1041,7 +1041,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1070,7 +1070,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1111,7 +1111,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1143,7 +1143,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1174,7 +1174,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1202,7 +1202,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1232,7 +1232,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1262,7 +1262,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1303,7 +1303,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1334,7 +1334,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1362,7 +1362,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1392,7 +1392,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1422,7 +1422,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1452,7 +1452,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1482,7 +1482,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1513,7 +1513,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1544,7 +1544,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1573,7 +1573,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1601,7 +1601,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = False
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1630,7 +1630,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1659,7 +1659,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = True
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1688,7 +1688,7 @@ class TestValidateCondition(unittest.TestCase):
         buy = False
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1718,7 +1718,7 @@ class TestValidateCondition(unittest.TestCase):
         changes_key = 'buy_condition' if buy else 'sell_condition'
 
         # Act
-        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy)
+        result, new_condition, updated_changes = validate_condition(condition, changes, logs, buy, ticker)
 
         # Assert
         self.assertFalse(result)
@@ -1751,7 +1751,7 @@ class TestValidateCondition(unittest.TestCase):
         parent_name = 'parent_name'
 
         # Act
-        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1783,7 +1783,7 @@ class TestValidateCondition(unittest.TestCase):
 
         # Act
         result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy,
-                                                                              param_name, parent_name)
+                                                                              param_name, parent_name, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1817,7 +1817,7 @@ class TestValidateCondition(unittest.TestCase):
 
         # Act
         result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy,
-                                                                              param_name, parent_name)
+                                                                              param_name, parent_name, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1850,7 +1850,7 @@ class TestValidateCondition(unittest.TestCase):
         parent_name = 'RSI'
 
         # Act
-        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1882,7 +1882,7 @@ class TestValidateCondition(unittest.TestCase):
         parent_name = 'RSI'
 
         # Act
-        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1915,7 +1915,7 @@ class TestValidateCondition(unittest.TestCase):
         valid_source_types = ['CLOSE', 'OPEN', 'HIGH', 'LOW', 'HLC3', 'HL2', 'OHLC4', 'HLCC4', 'VOLUME']
 
         # Act
-        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1942,7 +1942,7 @@ class TestValidateCondition(unittest.TestCase):
         parent_name = 'parent_name'
 
         # Act
-        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -1969,7 +1969,7 @@ class TestValidateCondition(unittest.TestCase):
         parent_name = 'KC_UPPER'
 
         # Act
-        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name, ticker)
 
         # Assert
         self.assertTrue(result)
@@ -2000,7 +2000,7 @@ class TestValidateCondition(unittest.TestCase):
         parent_name = 'KC_UPPER'
 
         # Act
-        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name)
+        result, new_trading_series, updated_changes = validate_trading_series(trading_series, changes, logs, buy, param_name, parent_name, ticker)
 
         # Assert
         self.assertTrue(result)
