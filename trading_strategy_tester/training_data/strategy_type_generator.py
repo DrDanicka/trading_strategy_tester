@@ -6,6 +6,8 @@ def get_random_strategy_type(rng: random.Random=None):
     This function returns a random strategy type from predefined list of strategy types.
     Default strategy type is 'long' when no strategy type is specified.
 
+    :param rng: A random number generator.
+    :type rng: random.Random
     :return: A tuple containing the chosen strategy type and its corresponding PositionTypeEnum.
     :rtype: tuple
     '''

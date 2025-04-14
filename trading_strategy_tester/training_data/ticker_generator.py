@@ -5,6 +5,8 @@ def get_random_ticker(rng: random.Random=None):
     '''
     This function returns a random ticker from a csv file containing a list of tickers.
 
+    :param rng: A random number generator.
+    :type rng: random.Random
     :return: A tuple containing the chosen ticker or campany name and its corresponding ticker.
     :rtype: tuple
     '''

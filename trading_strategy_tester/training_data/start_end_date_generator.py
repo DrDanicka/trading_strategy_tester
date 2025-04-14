@@ -7,6 +7,10 @@ def get_random_start_end_dates(rng: random.Random=None, start: bool = True):
     '''
     This function returns a random start and end date for a strategy.
 
+    :param rng: A random number generator.
+    :type rng: random.Random
+    :param start: A boolean indicating whether to generate a start date (True) or an end date (False).
+    :type start: bool
     :return: A tuple containing the start and end date.
     :rtype: tuple
     '''
@@ -33,6 +37,8 @@ def get_random_period(rng: random.Random=None):
     '''
     This function returns a random period for a strategy.
 
+    :param rng: A random number generator.
+    :type rng: random.Random
     :return: A tuple containing the period.
     :rtype: tuple
     '''

@@ -6,6 +6,9 @@ from trading_strategy_tester.training_data.prompt_data.condition_dicts import in
 def get_random_interval(rng: random.Random=None):
     '''
     This function returns a random interval for a strategy.
+
+    :param rng: A random number generator.
+    :type rng: random.Random
     :return: A tuple containing the interval.
     :rtype: tuple
     '''

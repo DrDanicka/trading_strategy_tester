@@ -5,6 +5,8 @@ def get_random_stop_loss(rng: random.Random = None):
     '''
     This function returns a random stop loss text and parameter.
 
+    :param rng: A random number generator.
+    :type rng: random.Random
     :return: A tuple containing the stop loss text and parameter.
     :rtype: tuple
     '''

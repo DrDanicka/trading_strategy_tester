@@ -12,6 +12,10 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
     :type trades: list[Trade]
     :param df: A pandas DataFrame containing market data, including the 'Close' prices used to calculate buy-and-hold returns.
     :type df: pd.DataFrame
+    :param initial_capital: The initial capital used for the trading strategy.
+    :type initial_capital: float
+    :param order_size: An instance of OrderSize that defines the size of each order in the strategy.
+    :type order_size: OrderSize
     :return: A dictionary containing various strategy statistics, including net profit, gross profit, gross loss, max drawdown,
              buy-and-hold return, commissions paid, total trades, number of winning trades, number of losing trades,
              average trade P&L, largest winning trade, and largest losing trade.

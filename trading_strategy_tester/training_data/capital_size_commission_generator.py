@@ -30,6 +30,8 @@ def get_random_order_size(rng: random.Random=None):
     '''
     This function returns a random order size.
 
+    :param rng: A random number generator.
+    :type rng: random.Random
     :return: A tuple containing the order size text and parameter.
     :rtype: tuple
     '''
