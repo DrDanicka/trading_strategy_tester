@@ -11,7 +11,7 @@ class TradeCommissions(Enum):
     MONEY = 0
     PERCENTAGE = 1
 
-def get_random_initial_capital():
+def get_random_initial_capital(rng: random.Random=None):
     '''
     This function returns a random initial capital from 1000 to 1000000.
 
@@ -19,48 +19,48 @@ def get_random_initial_capital():
     :rtype: tuple
     '''
 
-    random_initial_capital = random.randint(1000, 1000000)
+    random_initial_capital = rng.randint(1000, 1000000)
 
-    initial_capital_text = random.choice(initial_capital).format(capital=random_initial_capital)
+    initial_capital_text = rng.choice(initial_capital).format(capital=random_initial_capital)
     initial_capital_param = f'{random_initial_capital}'
 
     return initial_capital_text, initial_capital_param
 
-def get_random_order_size():
+def get_random_order_size(rng: random.Random=None):
     '''
     This function returns a random order size.
 
     :return: A tuple containing the order size text and parameter.
     :rtype: tuple
     '''
-    random_order_type = random.randint(1, 3)
+    random_order_type = rng.randint(1, 3)
 
     if random_order_type == OrderSizes.USD.value:
-        order_size = random.randint(1000, 1000000)
-        order_size_text = random.choice(order_size_uds).format(order_size=order_size)
-        order_size_param = f'USD(value={order_size})'
+        order_size = rng.randint(1000, 1000000)
+        order_size_text = rng.choice(order_size_uds).format(order_size=order_size)
+        order_size_param = f'USD({order_size})'
     elif random_order_type == OrderSizes.PERCENT_OF_EQUITY.value:
-        order_size = random.randint(1, 100)
-        order_size_text = random.choice(order_size_percent_of_equity).format(order_size=order_size)
-        order_size_param = f'PercentOfEquity(value={order_size})'
+        order_size = rng.randint(1, 100)
+        order_size_text = rng.choice(order_size_percent_of_equity).format(order_size=order_size)
+        order_size_param = f'PercentOfEquity({order_size})'
     else:
-        order_size = random.randint(1, 50)
-        order_size_text = random.choice(order_size_contracts).format(order_size=order_size)
-        order_size_param = f'Contracts(value={order_size})'
+        order_size = rng.randint(1, 50)
+        order_size_text = rng.choice(order_size_contracts).format(order_size=order_size)
+        order_size_param = f'Contracts({order_size})'
 
     return order_size_text, order_size_param
 
 
-def get_random_commission():
-    random_commission = random.randint(1, 2)
+def get_random_commission(rng: random.Random=None):
+    random_commission = rng.randint(1, 2)
 
     if random_commission == TradeCommissions.MONEY.value:
-        commission = random.randint(1, 100)
-        commission_text = random.choice(trade_commissions_money).format(commissions=commission)
-        commission_param = f'MoneyCommission(value={commission})'
+        commission = rng.randint(1, 100)
+        commission_text = rng.choice(trade_commissions_money).format(commissions=commission)
+        commission_param = f'MoneyCommission({commission})'
     else:
-        commission = random.randint(1, 10)
-        commission_text = random.choice(trade_commissions_percentage).format(commissions=commission)
-        commission_param = f'PercentageCommissions(value={commission})'
+        commission = rng.randint(1, 10)
+        commission_text = rng.choice(trade_commissions_percentage).format(commissions=commission)
+        commission_param = f'PercentageCommissions({commission})'
 
     return commission_text, commission_param

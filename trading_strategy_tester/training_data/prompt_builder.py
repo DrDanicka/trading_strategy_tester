@@ -10,6 +10,7 @@ from trading_strategy_tester.training_data.prompt_data.string_options import pro
 from trading_strategy_tester.training_data.interval_generator import get_random_interval
 from trading_strategy_tester.training_data.capital_size_commission_generator import get_random_initial_capital, get_random_commission, get_random_order_size
 
+
 class DateORPeriodEnum(Enum):
     DATE = 0
     PERIOD = 1
@@ -18,18 +19,20 @@ class DateORPeriodEnum(Enum):
 
 class PromptBuilder:
 
-    def __init__(self):
-        # Initialize all boolean flags to False
-        self.take_profit_bool : bool = False
-        self.stop_loss_bool : bool = False
-        self.date_or_period : DateORPeriodEnum = DateORPeriodEnum.NOTHING
-        self.start_date_bool : bool = False
-        self.end_date_bool : bool = False
-        self.interval_bool : bool = False
-        self.period_bool : bool = False
-        self.initial_capital_bool : bool = False
-        self.order_size_bool : bool = False
-        self.trade_commissions_bool : bool = False
+    def __init__(self, random_seed: int = 42):
+        self.random_seed = random_seed
+        self.rng = random.Random(self.random_seed)
+
+        self.take_profit_bool = False
+        self.stop_loss_bool = False
+        self.date_or_period = DateORPeriodEnum.NOTHING
+        self.start_date_bool = False
+        self.end_date_bool = False
+        self.interval_bool = False
+        self.period_bool = False
+        self.initial_capital_bool = False
+        self.order_size_bool = False
+        self.trade_commissions_bool = False
 
         self.true_weight = 40
         self.false_weight = 60
@@ -37,12 +40,9 @@ class PromptBuilder:
         self.max_number_of_conditions = 3
 
     def _get_random_true_false_with_weights(self, true_weight: int, false_weight: int) -> bool:
-        return random.choices([True, False], weights=[true_weight, false_weight])[0]
+        return self.rng.choices([True, False], weights=[true_weight, false_weight])[0]
 
     def regenerate_bools(self):
-        '''
-        Regenerate all boolean flags for optional parameters.
-        '''
         self.take_profit_bool = self._get_random_true_false_with_weights(self.true_weight, self.false_weight)
         self.stop_loss_bool = self._get_random_true_false_with_weights(self.true_weight, self.false_weight)
         self.interval_bool = self._get_random_true_false_with_weights(self.true_weight, self.false_weight)
@@ -50,14 +50,14 @@ class PromptBuilder:
         self.order_size_bool = self._get_random_true_false_with_weights(self.true_weight, self.false_weight)
         self.trade_commissions_bool = self._get_random_true_false_with_weights(self.true_weight, self.false_weight)
 
-        self.date_or_period = random.choices([DateORPeriodEnum.DATE, DateORPeriodEnum.PERIOD, DateORPeriodEnum.NOTHING],
-                                             weights=[35, 25, 40])[0]
+        self.date_or_period = self.rng.choices(
+            [DateORPeriodEnum.DATE, DateORPeriodEnum.PERIOD, DateORPeriodEnum.NOTHING],
+            weights=[35, 25, 40]
+        )[0]
 
         if self.date_or_period == DateORPeriodEnum.DATE:
-            # Randomly choose whether to include start date, end date, or both
             self.start_date_bool = self._get_random_true_false_with_weights(60, 40)
             self.end_date_bool = self._get_random_true_false_with_weights(60, 40)
-            # If neither start date nor end date is included, set date_or_period to NOTHING
             if not self.start_date_bool and not self.end_date_bool:
                 self.date_or_period = DateORPeriodEnum.NOTHING
                 self.period_bool = False
@@ -70,90 +70,68 @@ class PromptBuilder:
             self.end_date_bool = False
             self.period_bool = False
 
-
     def generate_prompt(self) -> (str, str):
-        # Regenerate all boolean flags for optional parameters
         self.regenerate_bools()
 
-        # Get random ticker
-        ticker_text, ticker_param = get_random_ticker()
+        ticker_text, ticker_param = get_random_ticker(self.rng)
+        strategy_type_text, strategy_type_param = get_random_strategy_type(self.rng)
+        buy_condition_text, buy_condition_param = get_random_condition(self.rng, up_to_n=self.max_number_of_conditions, ticker=ticker_param)
+        sell_condition_text, sell_condition_param = get_random_condition(self.rng, up_to_n=self.max_number_of_conditions, ticker=ticker_param)
 
-        # Get random strategy type
-        strategy_type_text, strategy_type_param = get_random_strategy_type()
+        prompt = f'{self.rng.choice(prompt_starts).format(strategy_type=strategy_type_text, ticker=ticker_text)}'
+        buy_condition_text = f'{self.rng.choice(buy_sell_action_conditions).format(action=self.rng.choice(buy_actions), condition=buy_condition_text)}'
+        sell_condition_text = f'{self.rng.choice(buy_sell_action_conditions).format(action=self.rng.choice(sell_actions), condition=sell_condition_text)}'
 
-        # Get buy condition
-        buy_condition_text, buy_condition_param = get_random_condition(up_to_n=self.max_number_of_conditions, ticker=ticker_param)
-
-        # Get sell condition
-        sell_condition_text, sell_condition_param = get_random_condition(up_to_n=self.max_number_of_conditions, ticker=ticker_param)
-
-        # Build first part of the prompt (first sentence)
-        prompt = f'{random.choice(prompt_starts).format(strategy_type=strategy_type_text, ticker=ticker_text)}'
-        buy_condition_text = f'{random.choice(buy_sell_action_conditions).format(action=random.choice(buy_actions), condition=buy_condition_text)}'
-        sell_condition_text = f'{random.choice(buy_sell_action_conditions).format(action=random.choice(sell_actions), condition=sell_condition_text)}'
-
-        # Mix buy and sell condition which goes first
-        if random.choice([True, False]):
+        if self.rng.choice([True, False]):
             prompt += f'{buy_condition_text} and {sell_condition_text}.'
         else:
             prompt += f'{sell_condition_text} and {buy_condition_text}.'
 
-        # Build start of the strategy object
         strategy_object = f"Strategy(ticker='{ticker_param}', position_type={strategy_type_param}, buy_condition={buy_condition_param}, sell_condition={sell_condition_param}"
 
-        # Get stop loss condition
         if self.stop_loss_bool:
-            stop_loss_text, stop_loss_param = get_random_stop_loss()
+            stop_loss_text, stop_loss_param = get_random_stop_loss(self.rng)
             prompt += f' {stop_loss_text}.'
             strategy_object += f', stop_loss={stop_loss_param}'
 
-        # Get take profit condition
         if self.take_profit_bool:
-            take_profit_text, take_profit_param = get_random_take_profit()
+            take_profit_text, take_profit_param = get_random_take_profit(self.rng)
             prompt += f' {take_profit_text}.'
             strategy_object += f', take_profit={take_profit_param}'
 
-        # Get start date
         if self.date_or_period == DateORPeriodEnum.DATE:
             if self.start_date_bool:
-                start_date_text, start_date_param = get_random_start_end_dates(start=True)
+                start_date_text, start_date_param = get_random_start_end_dates(self.rng, start=True)
                 prompt += f' {start_date_text}.'
                 strategy_object += f', start_date={start_date_param}'
-
             if self.end_date_bool:
-                end_date_text, end_date_param = get_random_start_end_dates(start=False)
+                end_date_text, end_date_param = get_random_start_end_dates(self.rng, start=False)
                 prompt += f' {end_date_text}.'
                 strategy_object += f', end_date={end_date_param}'
-        # Get period
         elif self.date_or_period == DateORPeriodEnum.PERIOD:
-            period_text, period_param = get_random_period()
+            period_text, period_param = get_random_period(self.rng)
             prompt += f' {period_text}.'
             strategy_object += f', period={period_param}'
 
-        # Get interval
         if self.interval_bool:
-            interval_text, interval_param = get_random_interval()
+            interval_text, interval_param = get_random_interval(self.rng)
             prompt += f' {interval_text}.'
             strategy_object += f', interval={interval_param}'
 
-        # Get initial capital
         if self.initial_capital_bool:
-            initial_capital_text, initial_capital_param = get_random_initial_capital()
+            initial_capital_text, initial_capital_param = get_random_initial_capital(self.rng)
             prompt += f' {initial_capital_text}.'
             strategy_object += f', initial_capital={initial_capital_param}'
 
-        # Get order size
         if self.order_size_bool:
-            order_size_text, order_size_param = get_random_order_size()
+            order_size_text, order_size_param = get_random_order_size(self.rng)
             prompt += f' {order_size_text}.'
             strategy_object += f', order_size={order_size_param}'
 
-        # Get trade commissions
         if self.trade_commissions_bool:
-            trade_commissions_text, trade_commissions_param = get_random_commission()
+            trade_commissions_text, trade_commissions_param = get_random_commission(self.rng)
             prompt += f' {trade_commissions_text}.'
             strategy_object += f', trade_commissions={trade_commissions_param}'
 
         strategy_object += ')'
-
         return prompt, strategy_object
