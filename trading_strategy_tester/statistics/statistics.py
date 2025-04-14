@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trade.order_size.order_size import OrderSize
 from trading_strategy_tester.trade.trade import Trade
@@ -32,7 +33,7 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
     # Calculate buy and hold return
     num_of_contracts = order_size.get_invested_amount(df[SourceType.OPEN.value].iloc[0], initial_capital)[1] if len(df) > 0 else 0
     buy_and_hold_return = num_of_contracts * df[SourceType.OPEN.value].iloc[-1] - num_of_contracts * df[SourceType.OPEN.value].iloc[0] if len(df) > 1 else 0
-    buy_and_hold_return_percentage = (100 * df[SourceType.OPEN.value].iloc[-1]) / df[SourceType.OPEN.value].iloc[0] if len(df) > 1 else 0
+    buy_and_hold_return_percentage = (100 * df[SourceType.OPEN.value].iloc[-1]) / df[SourceType.OPEN.value].iloc[0] if len(df) > 1 and df[SourceType.OPEN.value].iloc[0] != 0 else 0
 
     for trade in trades:
         trade_summary = trade.get_summary()
@@ -51,6 +52,14 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
 
         max_drawdown = max(max_drawdown, trade_summary['Drawdown'])
 
+    # Sharpe Ratio calculation
+    if total_trades > 1 and np.std(trade_p_and_l) != 0:
+        average_return = np.mean(trade_p_and_l)
+        std_dev = np.std(trade_p_and_l)
+        sharpe_ratio = average_return / std_dev if std_dev != 0 else None
+    else:
+        sharpe_ratio = None
+
     average_trade = sum(trade_p_and_l) / total_trades if total_trades > 0 else 0
     total_pnl = sum(trade_p_and_l)
     total_percent_pnl = (total_pnl / initial_capital) * 100
@@ -60,6 +69,7 @@ def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float
         'Gross Profit': f'{round(float(gross_profit), 2)}$',
         'Gross Loss': f'{round(float(gross_loss), 2)}$',
         'Profit factor': round(float(gross_profit / ((-1) * gross_loss)), 2) if gross_loss != 0 else '-',
+        'Sharpe Ratio': round(sharpe_ratio, 2) if sharpe_ratio is not None else '-',
         'Max Drawdown': f'{round(float(max_drawdown), 2)}$',
         'Buy and Hold Return': f'{round(float(buy_and_hold_return), 2)}$',
         'Buy and Hold Return Percentage': f'{round(float(buy_and_hold_return_percentage), 2)}%',
