@@ -20,10 +20,10 @@ implemented_conditions = pd.DataFrame(
 )
 
 implemented_indicators = pd.DataFrame(
-    data=[['Average Directional Index', 'ADX', 'ADX', 'ticker:str adx_smoothing:int length:int'],
+    data=[['Average Directional Index', 'ADX', 'ADX', 'ticker:str smoothing_length:int length:int'],
           ['Aroon Indicator Down', 'AROON DOWN', 'AROON_DOWN', 'ticker:str, length:int'],
           ['Aron Indicator Up', 'AROON UP', 'AROON_UP', 'ticker:str, length:int'],
-          ['Average True Range', 'ATR', 'ATR', 'ticker:str length:int smoothing:SmoothingType'],
+          ['Average True Range', 'ATR', 'ATR', 'ticker:str length:int smoothing_type:SmoothingType'],
           ['Bollinger Bands Lower band', 'BB LOWER', 'BB_LOWER', 'ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int'],
           ['Bollinger Bands Middle band', 'BB MIDDLE', 'BB_MIDDLE', 'ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int'],
           ['Bollinger Bands Upper band', 'BB UPPER', 'BB_UPPER', 'ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int'],
@@ -71,7 +71,7 @@ implemented_indicators = pd.DataFrame(
           ['Price Volume Trend', 'PVT', 'PVT', 'ticker:str'],
           ['Rate of Change', 'ROC', 'ROC', 'ticker:str source:SourceType length:int'],
           ['Relative Strength Index', 'RSI', 'RSI', 'ticker:str source:SourceType length:int'],
-          ['Stochastic Percent D', 'Stochastic %D', 'STOCH_PERCENT_D', 'ticker:str length:int d_smooth_length:int'],
+          ['Stochastic Percent D', 'Stochastic %D', 'STOCH_PERCENT_D', 'ticker:str length:int smoothing_length:int'],
           ['Stochastic Percent K', 'Stochastic %K', 'STOCH_PERCENT_K', 'ticker:str length:int'],
           ['Triple Exponential Average', 'TRIX', 'TRIX', 'ticker:str length:int'],
           ['Ultimate Oscillator', 'UO', 'UO', 'ticker:str fast_length:int middle_length:int slow_length:int'],

@@ -13,19 +13,19 @@ class ADX(TradingSeries):
     is commonly used in trend-following strategies.
     """
 
-    def __init__(self, ticker: str, adx_smoothing: int = 14, length: int = 14):
+    def __init__(self, ticker: str, smoothing_length: int = 14, length: int = 14):
         """
         Initialize the ADX indicator with the specified parameters.
 
         :param ticker: The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
         :type ticker: str
-        :param adx_smoothing: The smoothing period used in the ADX calculation. Default is 14.
-        :type adx_smoothing: int, optional
+        :param smoothing_length: The smoothing period used in the ADX calculation. Default is 14.
+        :type smoothing_length: int, optional
         :param length: The period length for calculating the Directional Indicators (DI). Default is 14.
         :type length: int, optional
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
-        self.adx_smoothing = adx_smoothing  # Set the ADX smoothing period
+        self.adx_smoothing = smoothing_length  # Set the ADX smoothing period
         self.DI_length = length  # Set the period length for Directional Indicators
         self.name = f'{self._ticker}_ADX_{self.adx_smoothing}_{self.DI_length}'
         # Define the name for the ADX series

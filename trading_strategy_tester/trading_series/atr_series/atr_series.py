@@ -13,7 +13,7 @@ class ATR(TradingSeries):
     and computes the ATR based on the specified parameters. ATR is used to measure market volatility.
     """
 
-    def __init__(self, ticker: str, length: int = 14, smoothing: SmoothingType = SmoothingType.RMA):
+    def __init__(self, ticker: str, length: int = 14, smoothing_type: SmoothingType = SmoothingType.RMA):
         """
         Initialize the ATR series with the specified parameters.
 
@@ -21,13 +21,13 @@ class ATR(TradingSeries):
         :type ticker: str
         :param length: The number of periods over which to calculate the ATR. Default is 14.
         :type length: int, optional
-        :param smoothing: The type of smoothing method used in ATR calculation (e.g., RMA).
+        :param smoothing_type: The type of smoothing method used in ATR calculation (e.g., RMA).
                           Default is SmoothingType.RMA.
-        :type smoothing: SmoothingType, optional
+        :type smoothing_type: SmoothingType, optional
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
         self.length = length  # Set the length (number of periods) for ATR calculation
-        self.smoothing = smoothing  # Set the smoothing method for ATR calculation
+        self.smoothing = smoothing_type  # Set the smoothing method for ATR calculation
         self.name = f'{self._ticker}_ATR_{self.length}_{self.smoothing.value}'
         # Define the name for the ATR series
 

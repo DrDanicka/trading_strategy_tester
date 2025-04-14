@@ -10,7 +10,7 @@ class STOCH_PERCENT_D(TradingSeries):
     the Stochastic %D calculation based on specified periods for %K and %D smoothing.
     """
 
-    def __init__(self, ticker: str, length: int = 14, d_smooth_length: int = 3):
+    def __init__(self, ticker: str, length: int = 14, smoothing_length: int = 3):
         """
         Initialize the STOCH_PERCENT_D series with the specified ticker symbol, %K period length,
         and %D smoothing period.
@@ -20,12 +20,12 @@ class STOCH_PERCENT_D(TradingSeries):
         :param length: The number of periods over which to calculate the %K component of the Stochastic Oscillator.
         Default is 14.
         :type length: int, optional
-        :param d_smooth_length: The number of periods over which to calculate the %D smoothing of %K. Default is 3.
-        :type d_smooth_length: int, optional
+        :param smoothing_length: The number of periods over which to calculate the %D smoothing of %K. Default is 3.
+        :type smoothing_length: int, optional
         """
         super().__init__(ticker)  # Initialize the parent TradingSeries class with the ticker symbol
         self.length = length  # Set the length (number of periods) for the %K calculation
-        self.d_smooth_length = d_smooth_length  # Set the length for %D smoothing
+        self.d_smooth_length = smoothing_length  # Set the length for %D smoothing
         self.name = f'{self._ticker}_STOCH-PERCENT-D_{self.length}_{self.d_smooth_length}'  # Define the name for the series
 
     @property
