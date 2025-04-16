@@ -31,18 +31,10 @@ class TakeProfit:
         The function iterates over the DataFrame, and when the current price rises (or falls) to or beyond
         the calculated take-profit threshold, it sets 'SELL' or 'BUY' signals accordingly.
 
-        :param df: A DataFrame containing columns 'Close', 'BUY', and 'SELL'.
-                   - 'Close' represents the closing price of the asset.
-                   - 'BUY' indicates where buy actions occurred.
-                   - 'SELL' will be modified to indicate where take-profit sell actions should occur.
+        :param df: A DataFrame containing columns 'BUY' and 'SELL' signals to be modified.
         :type df: pd.DataFrame
-
-        :param position_type: The type of position being used (LONG, SHORT, or LONG_SHORT_COMBINED).
-                              This determines how the take-profit logic is applied (whether to monitor for long, short, or both types of trades).
+        :param position_type: Indicates whether the strategy supports LONG, SHORT, or LONG_SHORT_COMBINED positions.
         :type position_type: PositionTypeEnum
-
-        :return: None
-        :rtype: None
         """
 
         # Initialize tracking variables for buy/sell state

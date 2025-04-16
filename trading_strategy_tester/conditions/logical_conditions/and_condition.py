@@ -10,7 +10,7 @@ class AND(Condition):
     A condition that combines multiple conditions with a logical AND operation.
 
     This class takes multiple conditions as input and evaluates them simultaneously, returning
-    True only when all of the conditions are True for the given data points. It also combines
+    True only when all the conditions are True for the given data points. It also combines
     the signal series from the individual conditions.
     """
 

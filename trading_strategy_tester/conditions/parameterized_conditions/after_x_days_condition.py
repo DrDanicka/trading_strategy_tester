@@ -12,11 +12,6 @@ class AfterXDaysCondition(Condition):
     This class wraps around another condition and modifies its evaluation by shifting it forward
     in time by a given number of days. It is useful when you want to check if a condition holds
     true after a certain number of days.
-
-    :param condition: The condition to be evaluated and shifted.
-    :type condition: Condition
-    :param number_of_days: The number of days to shift the condition.
-    :type number_of_days: int
     """
 
     def __init__(self, condition: Condition, number_of_days: int):

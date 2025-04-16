@@ -8,6 +8,7 @@ from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 
 class ChangeOfXPercentPerYDaysCondition(Condition):
+
     def __init__(self, series: TradingSeries, percent: float, number_of_days: int):
         """
         Initialize the ChangeOfXPercentPerYDaysCondition with a series, percentage change, and number of days.

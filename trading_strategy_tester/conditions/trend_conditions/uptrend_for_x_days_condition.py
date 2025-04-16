@@ -59,7 +59,7 @@ class UptrendForXDaysCondition(Condition):
         :param df: The dataframe containing the data to plot.
         :type df: pd.DataFrame
         :return: A list containing the UptrendPlot.
-        :rtype: list[TradingPlot]
+        :rtype: [TradingPlot]
         """
         return [UptrendPlot(
             self.series.get_data(downloader, df),

@@ -8,6 +8,7 @@ from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
 from trading_strategy_tester.trading_series.trading_series import TradingSeries
 
 class IntraIntervalChangeOfXPercentCondition(Condition):
+
     def __init__(self, series: TradingSeries, percent: float):
         """
         Initialize the IntraIntervalChangeOfXPercentCondition with the given series and percent.

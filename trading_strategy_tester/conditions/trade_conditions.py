@@ -1,8 +1,8 @@
 import pandas as pd
-from .condition import Condition
-from ..download.download_module import DownloadModule
-from ..trading_plot.price_plot import PricePlot
-from ..trading_plot.trading_plot import TradingPlot
+from trading_strategy_tester.conditions.condition import Condition
+from trading_strategy_tester.download.download_module import DownloadModule
+from trading_strategy_tester.trading_plot.price_plot import PricePlot
+from trading_strategy_tester.trading_plot.trading_plot import TradingPlot
 
 
 class TradeConditions:
