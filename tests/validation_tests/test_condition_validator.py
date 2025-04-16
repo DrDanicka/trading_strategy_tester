@@ -1768,7 +1768,7 @@ class TestValidateCondition(unittest.TestCase):
             args=[ast.Constant(value=ticker)],
             keywords=[
                 ast.keyword(arg='length', value=ast.Constant(value=length)),
-                ast.keyword(arg='smoothing', value=ast.Attribute(
+                ast.keyword(arg='smoothing_type', value=ast.Attribute(
                     value=ast.Name(id='InvalidType', ctx=ast.Load()),
                     attr='SMA',
                     ctx=ast.Load()
@@ -1778,7 +1778,7 @@ class TestValidateCondition(unittest.TestCase):
         changes = {}
         logs = False
         buy = True
-        param_name = 'smoothing'
+        param_name = 'smoothing_type'
         parent_name = 'ATR'
 
         # Act
@@ -1801,7 +1801,7 @@ class TestValidateCondition(unittest.TestCase):
             args=[ast.Constant(value=ticker)],
             keywords=[
                 ast.keyword(arg='length', value=ast.Constant(value=length)),
-                ast.keyword(arg='smoothing', value=ast.Attribute(
+                ast.keyword(arg='smoothing_type', value=ast.Attribute(
                     value=ast.Name(id='SmoothingType', ctx=ast.Load()),
                     attr='InvalidSmoothing',
                     ctx=ast.Load()
@@ -1811,7 +1811,7 @@ class TestValidateCondition(unittest.TestCase):
         changes = {}
         logs = False
         buy = True
-        param_name = 'smoothing'
+        param_name = 'smoothing_type'
         parent_name = 'ATR'
         valid_smoothing_types = ['RMA', 'SMA', 'EMA', 'WMA']
 
