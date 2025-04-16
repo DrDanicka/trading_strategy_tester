@@ -7,9 +7,6 @@ class PercentOfEquity(OrderSize):
 
     This class calculates the invested amount as a percentage of the current capital and determines how many shares
     or contracts can be purchased with that amount of equity.
-
-    :param value: The percentage of the total available equity to invest.
-    :type value: float
     """
 
     def __init__(self, value: float):

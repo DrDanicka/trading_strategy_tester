@@ -6,10 +6,6 @@ class OrderSize(ABC):
 
     This class is intended to be subclassed by specific order size calculation strategies,
     such as fixed dollar amounts, percentage-based sizing, etc.
-
-    :param value: The value representing the order size. The meaning of this value can vary depending on the strategy
-                  implemented in subclasses (e.g., it could be a percentage or a fixed amount).
-    :type value: float
     """
 
     def __init__(self, value: float):

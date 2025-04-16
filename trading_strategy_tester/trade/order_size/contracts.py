@@ -7,9 +7,6 @@ class Contracts(OrderSize):
 
     This class implements the method for calculating the invested amount by multiplying
     the number of contracts by the share price.
-
-    :param value: The number of contracts to purchase.
-    :type value: float
     """
 
     def __init__(self, value: float):

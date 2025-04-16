@@ -7,9 +7,6 @@ class USD(OrderSize):
 
     This class calculates the invested amount as a specified dollar value and determines how many shares
     or contracts can be purchased with that amount.
-
-    :param value: The fixed dollar amount to invest in the trade.
-    :type value: float
     """
 
     def __init__(self, value: float):
