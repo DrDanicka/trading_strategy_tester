@@ -33,11 +33,6 @@ def kc(high: pd.Series, low: pd.Series, close: pd.Series, series: pd.Series, upp
 
     :return: The upper or lower Keltner Channel line as a pandas Series.
     :rtype: pd.Series
-
-    :raises ValueError: If any of the input series have mismatched lengths.
-
-    The function applies either an EMA or SMA over the input series to form the basis of the channel,
-    then adds or subtracts a multiple of the ATR to the basis to calculate the upper or lower band.
     """
 
     # Validate the lookback periods
