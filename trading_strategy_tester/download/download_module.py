@@ -48,7 +48,7 @@ class DownloadModule:
         self.period = period.value  # String value representing the period
 
         script_dir = os.path.dirname(__file__)
-        self.data_path = os.path.join(script_dir, '..', '..' ,'data')
+        self.data_path = os.path.join(script_dir, '..' ,'_data')
 
         # Create the data directory if it does not exist
         if not os.path.exists(self.data_path):
@@ -66,6 +66,8 @@ class DownloadModule:
         :type datetime_type: bool
         :return: The DataFrame containing the downloaded data.
         :rtype: pd.DataFrame
+
+        :raise ValueError: If no data is found for the given ticker.
         """
 
         if datetime_type:
