@@ -171,11 +171,10 @@ def create_condition(rng: random.Random, ticker: str):
         raise ValueError("Invalid condition type")
 
     # After X days condition
-
     insert_after_x_days = rng.choices([True, False], weights=[0.05, 0.95])[0]
     if insert_after_x_days:
         after_x_days = rng.randint(1, 99)
-        condition_text = f"after {after_x_days} days, {condition_text}"
+        condition_text = f"{condition_text} after {after_x_days} days"
         condition_param = f"AfterXDaysCondition(condition={condition_param}, number_of_days={after_x_days})"
 
     return condition_text, condition_param

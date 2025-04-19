@@ -70,8 +70,21 @@ class PromptBuilder:
             self.end_date_bool = False
             self.period_bool = False
 
-    def generate_prompt(self) -> (str, str):
+    def generate_prompt(self) -> (str, str, dict):
         self.regenerate_bools()
+        strategy_object_dict = {}
+
+        # Initialize parameters
+        stop_loss_param = None
+        take_profit_param = None
+        start_date_param = None
+        end_date_param = None
+        period_param = None
+        interval_param = None
+        initial_capital_param = None
+        order_size_param = None
+        trade_commissions_param = None
+
 
         ticker_text, ticker_param = get_random_ticker(self.rng)
         strategy_type_text, strategy_type_param = get_random_strategy_type(self.rng)
@@ -104,7 +117,7 @@ class PromptBuilder:
                 start_date_text, start_date_param = get_random_start_end_dates(self.rng, start=True)
                 prompt += f' {start_date_text}.'
                 strategy_object += f', start_date={start_date_param}'
-            if self.end_date_bool:
+            if self.end_date_bool and self.start_date_bool:
                 end_date_text, end_date_param = get_random_start_end_dates(self.rng, start=False)
                 prompt += f' {end_date_text}.'
                 strategy_object += f', end_date={end_date_param}'
@@ -134,4 +147,18 @@ class PromptBuilder:
             strategy_object += f', trade_commissions={trade_commissions_param}'
 
         strategy_object += ')'
-        return prompt, strategy_object
+
+        strategy_object_dict['ticker'] = f'ticker={ticker_param}'
+        strategy_object_dict['position_type'] = f'position_type={strategy_type_param}'
+        strategy_object_dict['conditions'] = f'buy_condition={buy_condition_param}, sell_condition={sell_condition_param}'
+        strategy_object_dict['stop_loss'] = f'stop_loss={stop_loss_param}' if stop_loss_param else ''
+        strategy_object_dict['take_profit'] = f'take_profit={take_profit_param}' if take_profit_param else ''
+        strategy_object_dict['start_date'] = f'start_date={start_date_param}' if start_date_param else ''
+        strategy_object_dict['end_date'] = f'end_date={end_date_param}' if end_date_param else ''
+        strategy_object_dict['period'] = f'period={period_param}' if period_param else ''
+        strategy_object_dict['interval'] = f'interval={interval_param}' if interval_param else ''
+        strategy_object_dict['initial_capital'] = f'initial_capital={initial_capital_param}' if initial_capital_param else ''
+        strategy_object_dict['order_size'] = f'order_size={order_size_param}' if order_size_param else ''
+        strategy_object_dict['trade_commissions'] = f'trade_commissions={trade_commissions_param}' if trade_commissions_param else ''
+
+        return prompt, strategy_object, strategy_object_dict
