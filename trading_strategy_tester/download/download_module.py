@@ -71,9 +71,9 @@ class DownloadModule:
         """
 
         if datetime_type:
-            df = yf.download(ticker, interval=self.interval, start=self.start_date, end=self.end_date, auto_adjust=False)
+            df = yf.download(ticker, interval=self.interval, start=self.start_date, end=self.end_date, auto_adjust=False, progress=False)
         else:
-            df = yf.download(ticker, interval=self.interval, period=self.period, auto_adjust=False)
+            df = yf.download(ticker, interval=self.interval, period=self.period, auto_adjust=False, progress=False)
 
         if len(df) == 0:
             self.delete_temp_files()
