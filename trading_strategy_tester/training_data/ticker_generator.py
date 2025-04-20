@@ -7,16 +7,14 @@ def get_random_ticker(rng: random.Random=None):
 
     :param rng: A random number generator.
     :type rng: random.Random
-    :return: A tuple containing the chosen ticker or campany name and its corresponding ticker.
+    :return: A tuple containing the chosen ticker.
     :rtype: tuple
     '''
 
     tickers = pd.read_csv('sp500.csv')
 
     random_ticker_index = rng.randint(0, len(tickers) - 1)
-    ticker_not_company_name = rng.choice([True, False])
 
-    ticker_text = tickers.iloc[random_ticker_index]['Ticker' if ticker_not_company_name else 'Company Name']
-    ticker_param = tickers.iloc[random_ticker_index]['Ticker']
+    ticker_param_and_text = tickers.iloc[random_ticker_index]['Ticker']
 
-    return ticker_text, ticker_param
+    return ticker_param_and_text, ticker_param_and_text

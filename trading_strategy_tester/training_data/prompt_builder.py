@@ -148,7 +148,7 @@ class PromptBuilder:
 
         strategy_object += ')'
 
-        strategy_object_dict['ticker'] = f'ticker={ticker_param}'
+        strategy_object_dict['ticker'] = f"ticker='{ticker_param}'"
         strategy_object_dict['position_type'] = f'position_type={strategy_type_param}'
         strategy_object_dict['conditions'] = f'buy_condition={buy_condition_param}, sell_condition={sell_condition_param}'
         strategy_object_dict['stop_loss'] = f'stop_loss={stop_loss_param}' if stop_loss_param else ''
