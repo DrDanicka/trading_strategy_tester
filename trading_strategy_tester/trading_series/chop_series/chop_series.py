@@ -90,3 +90,20 @@ class CHOP(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Converts the CHOP series to a dictionary representation.
+
+        This method provides a dictionary representation of the CHOP series, including its type,
+        ticker symbol, length, and offset.
+
+        :return: A dictionary representation of the CHOP series.
+        :rtype: dict
+        """
+        return {
+            'type': 'CHOP',
+            'ticker': self._ticker,
+            'length': self.length,
+            'offset': self.offset
+        }

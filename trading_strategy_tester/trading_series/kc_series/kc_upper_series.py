@@ -88,3 +88,20 @@ class KC_UPPER(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the KC_UPPER series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'KC_UPPER',
+            'ticker': self._ticker,
+            'source': self.source,
+            'length': self.length,
+            'multiplier': self.multiplier,
+            'use_exp_ma': self.use_exp_ma,
+            'atr_length': self.atr_length
+        }

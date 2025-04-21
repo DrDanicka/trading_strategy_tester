@@ -76,3 +76,16 @@ class BBP(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the BBP series to a dictionary representation.
+
+        :return: A dictionary representation of the BBP series.
+        :rtype: dict
+        """
+        return {
+            'type': 'BBP',
+            'ticker': self._ticker,
+            'length': self.length
+        }

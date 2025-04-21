@@ -74,3 +74,17 @@ class CCI(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the CCI series to a dictionary representation.
+
+        :return: A dictionary representation of the CCI series.
+        :rtype: dict
+        """
+        return {
+            'type': 'CCI',
+            'ticker': self._ticker,
+            'source': self.source.value,
+            'length': self.length
+        }

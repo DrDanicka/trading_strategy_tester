@@ -57,3 +57,15 @@ class LOW(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the LOW series to a dictionary representation.
+
+        :return: A dictionary containing the name of the LOW series.
+        :rtype: dict
+        """
+        return {
+            'type': 'LOW',
+            'ticker': self._ticker
+        }

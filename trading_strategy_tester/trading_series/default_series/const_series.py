@@ -62,3 +62,17 @@ class CONST(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the constant series to a dictionary representation.
+
+        This method provides a dictionary containing the name of the constant series and its constant value.
+
+        :return: A dictionary representation of the constant series.
+        :rtype: dict
+        """
+        return {
+            'type': 'CONST',
+            'const_number': self.const_number,
+        }

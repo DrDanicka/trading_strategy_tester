@@ -78,3 +78,17 @@ class DC_LOWER(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Converts the DCLower series to a dictionary representation.
+
+        :return: A dictionary containing the DCLower series data.
+        :rtype: dict
+        """
+        return {
+            'type': 'DC_LOWER',
+            'ticker': self._ticker,
+            'length': self.length,
+            'offset': self.offset
+        }

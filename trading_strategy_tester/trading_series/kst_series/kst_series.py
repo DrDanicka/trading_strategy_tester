@@ -115,3 +115,24 @@ class KST(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the KST series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'KST',
+            'ticker': self._ticker,
+            'source': self.source,
+            'roc_length_1': self.roc_length_1,
+            'roc_length_2': self.roc_length_2,
+            'roc_length_3': self.roc_length_3,
+            'roc_length_4': self.roc_length_4,
+            'sma_length_1': self.sma_length_1,
+            'sma_length_2': self.sma_length_2,
+            'sma_length_3': self.sma_length_3,
+            'sma_length_4': self.sma_length_4,
+        }

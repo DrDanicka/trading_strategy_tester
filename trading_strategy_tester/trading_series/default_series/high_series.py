@@ -57,3 +57,15 @@ class HIGH(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the HIGH series to a dictionary representation.
+
+        :return: A dictionary containing the ticker symbol and the name of the HIGH series.
+        :rtype: dict
+        """
+        return {
+            'type': 'HIGH',
+            'ticker': self._ticker,
+        }

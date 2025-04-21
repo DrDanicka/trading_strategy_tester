@@ -81,3 +81,17 @@ class ADX(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the ADX indicator to a dictionary representation.
+
+        :return: A dictionary representation of the ADX indicator.
+        :rtype: dict
+        """
+        return {
+            "type": "ADX",
+            "ticker": self._ticker,
+            "smoothing_length": self.adx_smoothing,
+            "length": self.DI_length
+        }

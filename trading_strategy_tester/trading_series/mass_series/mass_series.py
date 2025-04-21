@@ -74,3 +74,16 @@ class MASS_INDEX(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the MASS_INDEX signal series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'MASS_INDEX',
+            'ticker': self._ticker,
+            'length': self.length
+        }

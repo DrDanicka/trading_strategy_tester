@@ -78,3 +78,17 @@ class MOMENTUM(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the MOMENTUM signal series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'MOMENTUM',
+            'ticker': self._ticker,
+            'source': self.source,
+            'length': self.length
+        }

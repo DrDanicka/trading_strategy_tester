@@ -81,3 +81,16 @@ class DI_PLUS(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the DI_PLUS series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'DI_PLUS',
+            'ticker': self._ticker,
+            'length': self.length
+        }

@@ -87,3 +87,18 @@ class UO(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the UO signal series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'UO',
+            'ticker': self._ticker,
+            'fast_length': self.fast_length,
+            'middle_length': self.middle_length,
+            'slow_length': self.slow_length
+        }

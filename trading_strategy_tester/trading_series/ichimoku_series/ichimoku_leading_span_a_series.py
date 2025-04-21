@@ -80,3 +80,16 @@ class ICHIMOKU_LEADING_SPAN_A(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the ICHIMOKU_LEADING_SPAN_A series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'ICHIMOKU_LEADING_SPAN_A',
+            'ticker': self._ticker,
+            'displacement': self.displacement
+        }

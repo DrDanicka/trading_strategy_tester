@@ -83,3 +83,17 @@ class CHAIKIN_OSC(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the Chaikin Oscillator series to a dictionary representation.
+
+        :return: A dictionary representation of the Chaikin Oscillator series.
+        :rtype: dict
+        """
+        return {
+            'type': 'CHAIKIN_OSC',
+            'ticker': self._ticker,
+            'fast_length': self.fast_length,
+            'slow_length': self.slow_length
+        }

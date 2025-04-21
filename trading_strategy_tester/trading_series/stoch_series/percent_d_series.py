@@ -84,3 +84,17 @@ class STOCH_PERCENT_D(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the STOCH_PERCENT_D signal series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'STOCH_PERCENT_D',
+            'ticker': self._ticker,
+            'length': self.length,
+            'smoothing_length': self.d_smooth_length
+        }

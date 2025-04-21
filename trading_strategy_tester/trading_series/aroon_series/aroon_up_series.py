@@ -69,3 +69,16 @@ class AROON_UP(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the Aroon Up series to a dictionary representation.
+
+        :return: A dictionary representation of the Aroon Up series.
+        :rtype: dict
+        """
+        return {
+            'type': 'AROON_UP',
+            'ticker': self._ticker,
+            'length': self.length
+        }

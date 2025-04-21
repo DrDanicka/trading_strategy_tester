@@ -75,3 +75,17 @@ class ROC(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the ROC signal series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'ROC',
+            'ticker': self._ticker,
+            'source': self.source,
+            'length': self.length
+        }

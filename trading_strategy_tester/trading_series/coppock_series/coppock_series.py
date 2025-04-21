@@ -79,3 +79,18 @@ class COPPOCK(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the COPPOCK series to a dictionary representation.
+
+        :return: A dictionary containing the series name and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'COPPOCK',
+            'ticker': self._ticker,
+            'length': self.length,
+            'long_roc_length': self.long_roc_length,
+            'short_roc_length': self.short_roc_length
+        }

@@ -83,3 +83,17 @@ class DC_BASIS(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Converts the DC_BASIS series to a dictionary representation.
+
+        :return: A dictionary containing the series name and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'DC_BASIS',
+            'ticker': self._ticker,
+            'length': self.length,
+            'offset': self.offset
+        }

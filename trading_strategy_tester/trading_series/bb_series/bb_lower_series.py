@@ -94,3 +94,20 @@ class BB_LOWER(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the BBLower series to a dictionary representation.
+
+        :return: A dictionary representation of the BBLower series.
+        :rtype: dict
+        """
+        return {
+            'type': 'BBLOWER',
+            'ticker': self._ticker,
+            'source': self.source,
+            'length': self.length,
+            'ma_type': self.ma_type,
+            'std_dev': self.std_dev,
+            'offset': self.offset
+        }

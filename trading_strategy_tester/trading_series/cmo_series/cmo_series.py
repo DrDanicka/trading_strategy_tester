@@ -75,3 +75,17 @@ class CMO(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the CMO series to a dictionary representation.
+
+        :return: A dictionary containing the CMO series data.
+        :rtype: dict
+        """
+        return {
+            'type': 'CMO',
+            'ticker': self._ticker,
+            'source': self.source,
+            'length': self.length,
+        }

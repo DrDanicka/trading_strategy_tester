@@ -88,3 +88,19 @@ class MACD(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the MACD series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'MACD',
+            'ticker': self._ticker,
+            'source': self.source,
+            'fast_length': self.fast_length,
+            'slow_length': self.slow_length,
+            'ma_type': self.ma_type
+        }

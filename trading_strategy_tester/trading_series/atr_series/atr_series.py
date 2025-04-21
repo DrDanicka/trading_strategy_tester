@@ -82,3 +82,17 @@ class ATR(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the ATR series to a dictionary representation.
+
+        :return: A dictionary representation of the ATR series.
+        :rtype: dict
+        """
+        return {
+            'type': 'ATR',
+            'ticker': self._ticker,
+            'length': self.length,
+            'smoothing_type': self.smoothing
+        }

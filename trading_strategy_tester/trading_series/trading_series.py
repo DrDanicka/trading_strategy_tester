@@ -15,10 +15,8 @@ class TradingSeries(ABC):
         """
         Initializes the TradingSeries with the specified ticker symbol.
 
-        Parameters:
-        -----------
-        ticker : str
-            The ticker symbol for the financial instrument (e.g., 'AAPL' for Apple Inc.).
+        :param ticker: The ticker symbol to retrieve data from.
+        :type ticker: str
         """
         self._ticker = ticker  # Store the ticker symbol as a protected attribute
 
@@ -30,10 +28,8 @@ class TradingSeries(ABC):
 
         Subclasses must implement this property to return the ticker symbol associated with the trading series.
 
-        Returns:
-        --------
-        str
-            The ticker symbol for the financial instrument.
+        :return: The ticker symbol associated with the trading series.
+        :rtype: str
         """
         pass
 
@@ -44,21 +40,33 @@ class TradingSeries(ABC):
 
         The method could, for example, return a series of closing prices, volume data, or any other relevant data series.
 
-        Parameters:
-        -----------
-        downloader : DownloadModule
-            An instance of DownloadModule used to download or retrieve additional data if needed.
-
-        df : pd.DataFrame
-            A DataFrame containing the trading data from which the series will be extracted.
-
-        Returns:
-        --------
-        pd.Series
-            A pandas Series containing the specific trading data.
+        :param downloader: Download module to use.
+        :type downloader: DownloadModule
+        :param df: DataFrame containing the data.
+        :type df: pd.DataFrame
+        :return: A Pandas Series containing the data for the specified ticker.
+        :rtype: pd.Series
         """
         pass
 
     @abstractmethod
     def get_name(self) -> str:
+        """
+        Abstract method to get the name of the trading series.
+
+        Subclasses must implement this method to return a string representing the name of the trading series.
+
+        :return: The name of the trading series.
+        :rtype: str
+        """
+        pass
+
+    @abstractmethod
+    def to_dict(self) -> dict:
+        """
+        Abstract method to convert the trading series to a dictionary representation.
+
+        :return: A dictionary representation of the trading series.
+        :rtype: dict
+        """
         pass

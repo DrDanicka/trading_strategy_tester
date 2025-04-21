@@ -74,3 +74,15 @@ class HAMMER(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the HAMMER series to a dictionary representation.
+
+        :return: A dictionary representation of the HAMMER series.
+        :rtype: dict
+        """
+        return {
+            'type': 'HAMMER',
+            'ticker': self._ticker
+        }

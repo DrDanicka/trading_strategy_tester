@@ -78,3 +78,18 @@ class EMA(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the EMA series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'EMA',
+            'ticker': self._ticker,
+            'source': self.source,
+            'length': self.length,
+            'offset': self.offset
+        }

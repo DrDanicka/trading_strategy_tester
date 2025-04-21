@@ -57,3 +57,15 @@ class OPEN(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the OPEN series to a dictionary representation.
+
+        :return: A dictionary containing the name and ticker symbol of the OPEN series.
+        :rtype: dict
+        """
+        return {
+            'type': 'OPEN',
+            'ticker': self._ticker,
+        }

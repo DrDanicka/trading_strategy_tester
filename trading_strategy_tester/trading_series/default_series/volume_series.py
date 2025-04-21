@@ -59,3 +59,15 @@ class VOLUME(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the VOLUME series to a dictionary representation.
+
+        :return: A dictionary containing the ticker symbol and its corresponding volume data.
+        :rtype: dict
+        """
+        return {
+            'type': 'VOLUME',
+            'ticker': self._ticker,
+        }

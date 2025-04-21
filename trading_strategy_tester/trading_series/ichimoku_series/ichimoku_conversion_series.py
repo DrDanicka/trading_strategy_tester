@@ -80,3 +80,16 @@ class ICHIMOKU_CONVERSION(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the ICHIMOKU_CONVERSION series to a dictionary representation.
+
+        :return: A dictionary containing the series type and its values.
+        :rtype: dict
+        """
+        return {
+            'type': 'ICHIMOKU_CONVERSION',
+            'ticker': self._ticker,
+            'length': self.length
+        }

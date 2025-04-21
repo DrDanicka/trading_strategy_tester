@@ -82,3 +82,19 @@ class CCI_SMOOTHENED(TradingSeries):
         :rtype: str
         """
         return self.name
+
+    def to_dict(self) -> dict:
+        """
+        Convert the smoothened CCI series to a dictionary representation.
+
+        :return: A dictionary representation of the smoothened CCI series.
+        :rtype: dict
+        """
+        return {
+            'type': 'CCISmoothened',
+            'ticker': self._ticker,
+            'source': self.source.value,
+            'length': self.length,
+            'smoothing_type': self.smoothing_type.value,
+            'smoothing_length': self.smoothing_length
+        }
