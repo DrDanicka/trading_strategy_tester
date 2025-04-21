@@ -95,3 +95,17 @@ class AND(Condition):
             signals.append(condition.to_string())
 
         return f'AndCondition({', '.join(signals)})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the AndCondition to a dictionary representation.
+
+        This method provides a way to serialize the condition for storage or transmission.
+
+        :return: A dictionary containing the type and parameters of the condition.
+        :rtype: dict
+        """
+        return {
+            'type': 'AND',
+            'conditions': [condition.to_dict() for condition in self.conditions]
+        }

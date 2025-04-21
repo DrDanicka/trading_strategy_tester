@@ -88,3 +88,18 @@ class OR(Condition):
             signals.append(condition.to_string())
 
         return f'OrCondition({', '.join(signals)})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the OR condition to a dictionary representation.
+
+        This method provides a way to serialize the condition into a dictionary format,
+        which can be useful for saving or transmitting the condition's configuration.
+
+        :return: A dictionary representation of the OR condition.
+        :rtype: dict
+        """
+        return {
+            'type': 'OR',
+            'conditions': [condition.to_dict() for condition in self.conditions]
+        }

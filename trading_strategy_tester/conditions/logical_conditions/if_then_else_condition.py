@@ -90,3 +90,18 @@ class IfThenElse(Condition):
         :rtype: str
         """
         return f'IfThenElseCondition({self.if_condition.to_string()}, {self.else_condition.to_string()})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the IfThenElseCondition to a dictionary representation.
+
+        This method provides a way to serialize the condition into a dictionary format.
+
+        :return: A dictionary containing the condition parameters.
+        :rtype: dict
+        """
+        return {
+            'type': 'IfThenElseCondition',
+            'if_condition': self.if_condition.to_dict(),
+            'else_condition': self.else_condition.to_dict()
+        }

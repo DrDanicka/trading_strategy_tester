@@ -89,3 +89,18 @@ class AfterXDaysCondition(Condition):
         :rtype: str
         """
         return f'AfterXDaysCondition({self.number_of_days}, {self.condition.to_string()})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the condition to a dictionary representation.
+
+        This method provides a way to serialize the condition into a dictionary format.
+
+        :return: A dictionary representation of the condition.
+        :rtype: dict
+        """
+        return {
+            'type': 'AfterXDaysCondition',
+            'number_of_days': self.number_of_days,
+            'condition': self.condition.to_dict()
+        }

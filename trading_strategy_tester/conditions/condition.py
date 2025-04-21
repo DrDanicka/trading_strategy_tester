@@ -63,3 +63,16 @@ class Condition(ABC):
         :rtype: str
         """
         pass
+
+    @abstractmethod
+    def to_dict(self) -> dict:
+        """
+        Convert the condition to a dictionary representation.
+
+        This method should return a dictionary that captures the essential parameters
+        and settings of the condition, which can be useful for serialization or configuration.
+
+        :return: A dictionary representing the condition.
+        :rtype: dict
+        """
+        pass

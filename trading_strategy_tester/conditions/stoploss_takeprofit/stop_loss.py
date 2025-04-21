@@ -205,3 +205,15 @@ class StopLoss:
             self.set_normal_stop_loss(df, position_type)
         elif self.stop_loss_type == StopLossType.TRAILING:
             self.set_trailing_stop_loss(df, position_type)
+
+    def to_dict(self):
+        """
+        Converts the StopLoss object to a dictionary representation.
+
+        :return: A dictionary containing the stop-loss percentage and type.
+        :rtype: dict
+        """
+        return {
+            'percentage': self.percentage,
+            'stop_loss_type': self.stop_loss_type
+        }

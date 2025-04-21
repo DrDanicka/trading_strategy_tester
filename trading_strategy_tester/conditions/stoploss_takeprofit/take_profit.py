@@ -99,3 +99,14 @@ class TakeProfit:
                 df.at[index, 'SELL'] = False  # Prioritize Buying
                 df.at[index, 'BUY_Signals'] = f'TakeProfit({self.percentage})'
                 sold = False
+
+    def to_dict(self):
+        """
+        Converts the TakeProfit instance to a dictionary representation.
+
+        :return: A dictionary containing the take-profit percentage.
+        :rtype: dict
+        """
+        return {
+            'percentage': self.percentage
+        }

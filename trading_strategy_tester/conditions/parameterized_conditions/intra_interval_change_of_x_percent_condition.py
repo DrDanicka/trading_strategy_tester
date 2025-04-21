@@ -68,3 +68,16 @@ class IntraIntervalChangeOfXPercentCondition(Condition):
         :rtype: str
         """
         return f'IntraIntervalChangeOfXPercentCondition({self.percent}, {self.series.get_name()})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the condition to a dictionary representation.
+
+        :return: A dictionary containing the condition parameters.
+        :rtype: dict
+        """
+        return {
+            'type': 'IntraIntervalChangeOfXPercentCondition',
+            'series': self.series.to_dict(),
+            'percent': self.percent,
+        }

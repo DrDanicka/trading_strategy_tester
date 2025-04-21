@@ -66,3 +66,15 @@ class TestCondition(Condition):
         :rtype: str
         """
         return f'TestCondition({self.series.get_name()})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the TestCondition to a dictionary representation.
+
+        :return: A dictionary containing the class name and series name.
+        :rtype: dict
+        """
+        return {
+            'type': 'TestCondition',
+            'series_name': self.series.get_name()
+        }

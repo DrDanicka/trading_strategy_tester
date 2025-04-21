@@ -91,3 +91,16 @@ class DowntrendFibRetracementLevelCondition(Condition):
         :rtype: str
         """
         return f'DowntrendFibRetracementLevelCondition({self.fib_level.value}, {self.length})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the condition to a dictionary representation.
+
+        :return: A dictionary containing the condition parameters.
+        :rtype: dict
+        """
+        return {
+            'type': 'DowntrendFibRetracementLevelCondition',
+            'fib_level': self.fib_level.value,
+            'length': self.length
+        }

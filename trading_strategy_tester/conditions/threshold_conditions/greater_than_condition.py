@@ -81,3 +81,18 @@ class GreaterThanCondition(Condition):
         :rtype: str
         """
         return f'GreaterThanCondition({self.first_series.get_name()}, {self.second_series.get_name()})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the condition to a dictionary representation.
+
+        This method provides a way to serialize the condition for storage or transmission.
+
+        :return: A dictionary containing the condition parameters.
+        :rtype: dict
+        """
+        return {
+            'type': 'GreaterThanCondition',
+            'first_series': self.first_series.to_dict(),
+            'second_series': self.second_series.to_dict(),
+        }

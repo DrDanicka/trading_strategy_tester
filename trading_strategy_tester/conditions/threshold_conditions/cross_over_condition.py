@@ -85,3 +85,18 @@ class CrossOverCondition(Condition):
         :rtype: str
         """
         return f'CrossOverCondition({self.first_series.get_name()}, {self.second_series.get_name()})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the crossover condition to a dictionary representation.
+
+        This method provides a structured representation of the condition, including the names of the two series.
+
+        :return: A dictionary containing the condition parameters.
+        :rtype: dict
+        """
+        return {
+            'type': 'CrossOverCondition',
+            'first_series': self.first_series.to_dict(),
+            'second_series': self.second_series.to_dict(),
+        }

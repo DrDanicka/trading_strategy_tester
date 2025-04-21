@@ -2,6 +2,7 @@ from datetime import datetime
 
 import pandas as pd
 
+from build.lib.examples.chatgpt_generated_strat_1 import take_profit
 from trading_strategy_tester.conditions.condition import Condition
 from trading_strategy_tester.conditions.stoploss_takeprofit.stop_loss import StopLoss
 from trading_strategy_tester.conditions.stoploss_takeprofit.take_profit import TakeProfit
@@ -16,7 +17,7 @@ from trading_strategy_tester.trade.order_size.order_size import OrderSize
 from trading_strategy_tester.trade.trade import create_all_trades
 from trading_strategy_tester.trade.trade_commissions.money_commissions import MoneyCommissions
 from trading_strategy_tester.trade.trade_commissions.trade_commissions import TradeCommissions
-from trading_strategy_tester.utils.validations import get_position_type_from_enum
+from trading_strategy_tester.utils.parameter_validations import get_position_type_from_enum
 
 
 class Strategy:
@@ -155,3 +156,26 @@ class Strategy:
         :rtype: dict
         """
         return self.stats
+
+    def get_dict_strategy(self) -> dict:
+        """
+        Returns a dictionary representation of the strategy.
+
+        :return: A dictionary containing the strategy parameters.
+        :rtype: dict
+        """
+        return {
+            "ticker": self.ticker,
+            "position_type": self.position_type_enum,
+            "buy_condition": self.buy_condition,
+            "sell_condition": self.sell_condition,
+            "stop_loss": self.stop_loss if self.stop_loss else None,
+            "take_profit": self.take_profit if take_profit else None,
+            "start_date": self.start_date,
+            "end_date": self.end_date,
+            "interval": self.interval,
+            "period": self.period,
+            "initial_capital": self.initial_capital,
+            "order_size": self.order_size,
+            "trade_commissions": self.trade_commissions
+        }

@@ -84,3 +84,18 @@ class CrossUnderCondition(Condition):
         :rtype: str
         """
         return f"CrossUnderCondition({self.first_series.get_name()}, {self.second_series.get_name()})"
+
+    def to_dict(self) -> dict:
+        """
+        Convert the cross-under condition to a dictionary representation.
+
+        This method provides a structured representation of the condition, including the types and names of the series.
+
+        :return: A dictionary representation of the cross-under condition.
+        :rtype: dict
+        """
+        return {
+            'type': 'CrossUnderCondition',
+            'first_series': self.first_series.to_dict(),
+            'second_series': self.second_series.to_dict(),
+        }

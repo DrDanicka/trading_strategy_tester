@@ -74,3 +74,16 @@ class DowntrendForXDaysCondition(Condition):
         :rtype: str
         """
         return f'DowntrendForXDaysCondition({self.number_of_days}, {self.series.get_name()})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the condition to a dictionary representation.
+
+        :return: A dictionary containing the condition parameters.
+        :rtype: dict
+        """
+        return {
+            'type': 'DowntrendForXDaysCondition',
+            'series': self.series.to_dict(),
+            'number_of_days': self.number_of_days,
+        }

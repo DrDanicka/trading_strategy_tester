@@ -93,3 +93,16 @@ class UptrendFibRetracementLevelCondition(Condition):
         :rtype: str
         """
         return f'UptrendFibRetracementLevelCondition({self.fib_level.value}, {self.length})'
+
+    def to_dict(self) -> dict:
+        """
+        Convert the condition to a dictionary representation.
+
+        :return: A dictionary containing the Fibonacci level and length.
+        :rtype: dict
+        """
+        return {
+            'type': 'UptrendFibRetracementLevelCondition',
+            'fib_level': self.fib_level.value,
+            'length': self.length
+        }
