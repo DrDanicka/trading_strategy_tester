@@ -29,3 +29,12 @@ class TradeCommissions(ABC):
         :rtype: float
         """
         pass
+
+    def to_dict(self):
+        """
+        Converts the TradeCommissions object to a dictionary representation.
+
+        :return: A dictionary containing the commission value.
+        :rtype: dict
+        """
+        return {'value': self.value}

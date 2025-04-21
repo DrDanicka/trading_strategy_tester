@@ -36,3 +36,12 @@ class OrderSize(ABC):
         :rtype: tuple(float, float)
         """
         pass
+
+    def to_dict(self):
+        """
+        Converts the OrderSize object to a dictionary representation.
+
+        :return: A dictionary containing the order size value.
+        :rtype: dict
+        """
+        return {'value': self.value}
