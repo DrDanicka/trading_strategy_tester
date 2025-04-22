@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def validate_date(date, changes: dict, logs: bool, start: bool) -> (bool, str, dict):
+def validate_date(date, changes: dict, logs: bool, start: bool=False) -> (bool, str, dict):
     """
     Validates the date parameter. Ensures that the date is of type datetime and that it is not a future date.
 
