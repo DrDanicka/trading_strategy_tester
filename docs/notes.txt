@@ -1,0 +1,10 @@
+Grafy pre conditions:
+    AfterXDaysCondition - iba populuje
+    ChangeOfXPercentPerYDaysCondition
+    IntraIntervalChangeOfXPercentCondition
+    CrossOverCondition
+    CrossUnderCondition
+    GreaterThanCondition
+    LessThanCondition
+    DowntrendForXDaysCondition
+    UptrendForXDaysCondition
