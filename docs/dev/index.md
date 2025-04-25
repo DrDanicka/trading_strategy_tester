@@ -10,12 +10,12 @@ This section is intended for contributors, maintainers, or anyone interested in 
 
 The project is organized into the following key modules:
 
-- **`download`**: Handles downloading and managing historical market data.
-- **`strategy`**: Defines trading strategies and how they execute trades.
-- **`conditions`**: Contains logic for entry and exit conditions used in strategies.
-- **`trading_series`**: Manages time series data used during backtesting.
+- [**`download`**](modules/download.md): Handles downloading and managing historical market data.
+- [**`strategy`**](modules/strategy.md): Defines trading strategies and how they execute trades.
+- [**`conditions`**](modules/conditions/index.md): Contains logic for entry and exit conditions used in strategies.
+- [**`trading_series`**](modules/trading_series.md): Manages time series data used during backtesting.
 - **`trading_plot`**: Provides tools for visualizing trading performance and signals.
-- **`indicators`**: Implements technical indicators commonly used in strategies.
+- [**`indicators`**](modules/indicators.md): Implements technical indicators commonly used in strategies.
 - **`trade`**: Represents individual trades and their properties.
 - **`statistics`**: Calculates performance metrics such as profit, drawdown, win rate, etc.
 
