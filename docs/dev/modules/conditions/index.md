@@ -9,8 +9,6 @@ Abstract `Condition` class has the following methods:
 
 ```python
 class Condition(ABC):
-    def __init__(self, *args, **kwargs):
-        pass
 
     @abstractmethod
     def evaluate(self, data: pd.DataFrame) -> pd.Series:

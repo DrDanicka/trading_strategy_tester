@@ -1,4 +1,3 @@
-from test import condition
 
 # Threshold Conditions
 
