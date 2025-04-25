@@ -16,7 +16,7 @@ Returns `True` if the price pulls back to a specified Fibonacci level during an 
 UptrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int)
 ```
 
-- `fib_level`: The Fibonacci level to test. Supported levels are linked [here](TODO ADD LINK TO FIB LEVELS).
+- `fib_level`: The Fibonacci level to test. Supported levels are linked [here](../enums/fibonacci_levels.md).
 - `length`: Lookback period for detecting the local swing high and low.
 
 ---
@@ -30,7 +30,7 @@ Returns `True` if the price bounces back to a specified Fibonacci level during a
 DowntrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int)
 ```
 
-- `fib_level`: The Fibonacci level to test. Supported levels are linked [here](TODO ADD LINK TO FIB LEVELS).
+- `fib_level`: The Fibonacci level to test. Supported levels are linked [here](../enums/fibonacci_levels.md).
 - `length`: Lookback period for detecting the local swing high and low.
 
 ---

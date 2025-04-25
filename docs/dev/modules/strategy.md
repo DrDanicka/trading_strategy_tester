@@ -28,14 +28,14 @@ Strategy(
 ### Parameters
 
 - **`ticker`**: The symbol of the financial instrument to trade (e.g., `"AAPL"`). It is used for downloading historical data. It supports all symbols that are supported in `yfinance`.
-- **`position_type`**: Defines the type of position to take when trading. Supported types of trades are linked [here](TODO ADD LINK TO POSITION TYPE).
+- **`position_type`**: Defines the type of position to take when trading. Supported types of trades are linked [here](enums/position_type.md).
 - **`buy_condition`**: The condition under which the strategy should enter a trade.
 - **`sell_condition`**: The condition under which the strategy should exit a trade.
 - **`stop_loss`**: Optional stop-loss logic for risk management.
 - **`take_profit`**: Optional profit-taking logic.
 - **`start_date`, `end_date`**: Range of time over which to test the strategy (ignored if `period` is used).
-- **`interval`**: Data resolution. Supported intervals are linked [here](TODO ADD LINK TO INTERVAL).
-- **`period`**: Time period on which the strategy should be tested. Supported periods are linked [here](TODO ADD LINK TO PERIOD). This has higher priority than `start_date` and `end_date`.
+- **`interval`**: Data resolution. Supported intervals are linked [here](enums/interval.md).
+- **`period`**: Time period on which the strategy should be tested. Supported periods are linked [here](enums/period.md). This has higher priority than `start_date` and `end_date`.
 - **`initial_capital`**: Starting balance for trade simulation.
 - **`order_size`**: Defines how much to allocate per trade. OrderSize module is defined [here](TODO ADD LINK TO ORDER SIZE).
 - **`trade_commissions`**: Commission model to apply to trades. Supported commission models are linked [here](TODO ADD LINK TO TRADE COMMISSIONS).
