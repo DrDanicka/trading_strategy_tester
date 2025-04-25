@@ -35,17 +35,17 @@ This abstract base class provides a consistent interface for all condition-relat
 
 The module includes specialized subclasses for various trading conditions:
 
-| File | Condition Visualization |
-|------|--------------------------|
-| `cross_over_plot.py` | CrossOverCondition |
-| `cross_under_plot.py` | CrossUnderCondition |
-| `greater_than_plot.py` | GreaterThanCondition |
-| `less_than_plot.py` | LessThanCondition |
-| `downtrend_plot.py` | DowntrendForXDaysCondition |
-| `uptrend_plot.py` | UptrendForXDaysCondition |
-| `change_of_x_percent_per_y_days_plot.py` | ChangeOfXPercentPerYDaysCondition |
-| `price_plot.py` | Generic price visualization |
+| File | Condition Visualization                |
+|------|----------------------------------------|
+| `cross_over_plot.py` | CrossOverCondition                     |
+| `cross_under_plot.py` | CrossUnderCondition                    |
+| `greater_than_plot.py` | GreaterThanCondition                   |
+| `less_than_plot.py` | LessThanCondition                      |
+| `downtrend_plot.py` | DowntrendForXDaysCondition             |
+| `uptrend_plot.py` | UptrendForXDaysCondition               |
+| `change_of_x_percent_per_y_days_plot.py` | ChangeOfXPercentPerYDaysCondition and IntraIntervalChangeOfXPercentCondition |
+| `price_plot.py` | Generic price visualization            |
 
-Logical conditions (`AND`, `OR`) are not visualized directly but they populate the `TradingPlot` objects of their child conditions.
+Logical conditions (`AND`, `OR`) and `AfterXDaysCondition` are not visualized directly but they populate the `TradingPlot` objects of their child conditions.
 
 Every strategy returns a dictionary of `TradingPlot` objects, which can be accessed via the `get_graphs` method of the condition. The dictionary keys are: `PRICE`, `BUY`, and `SELL`. 
