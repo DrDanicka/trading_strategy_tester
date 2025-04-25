@@ -3,6 +3,8 @@
 
 This module contains categorized implementations of technical indicators used across trading strategies. These indicators are grouped into submodules by type: momentum, trend, volatility, overlap, volume, and candlestick patterns.
 
+Every indicator is implemented as a function that takes a Pandas Series and some parameters needed for particular indicator and every function returns a Pandas Series with the same length as the input series. The returned series contains the calculated values of the indicator for each corresponding value in the input series.
+
 ---
 
 ## Module Structure
@@ -58,24 +60,22 @@ This module contains categorized implementations of technical indicators used ac
 ---
 
 ### 5. Volume-Based Indicators
-*Located in `indicators/volume/`*
+*Located in [`trading_strategy_tester/indicators/volume/`](../../../trading_strategy_tester/indicators/volume)*
 
-- `pvt.py` — Price Volume Trend
-- `efi.py` — Elder Force Index
-- `pvi.py` — Positive Volume Index
-- `mfi.py` — Money Flow Index
-- `obv.py` — On Balance Volume
-- `eom.py` — Ease of Movement
-- `chaikin_osc.py` — Chaikin Oscillator
-- `cmf.py` — Chaikin Money Flow
-
----
-
-### 6. 🕯️ Candlestick Patterns
-*Located in `indicators/candlestick_patterns/`*
-
-- `hammer.py` — Hammer Pattern
+- [`pvt.py`](../../../trading_strategy_tester/indicators/volume/pvt.py) — Price Volume Trend
+- [`efi.py`](../../../trading_strategy_tester/indicators/volume/efi.py) — Elder Force Index
+- [`pvi.py`](../../../trading_strategy_tester/indicators/volume/pvi.py) — Positive Volume Index
+- [`mfi.py`](../../../trading_strategy_tester/indicators/volume/mfi.py) — Money Flow Index
+- [`obv.py`](../../../trading_strategy_tester/indicators/volume/obv.py) — On Balance Volume
+- [`eom.py`](../../../trading_strategy_tester/indicators/volume/eom.py) — Ease of Movement
+- [`chaikin_osc.py`](../../../trading_strategy_tester/indicators/volume/chaikin_osc.py) — Chaikin Oscillator
+- [`cmf.py`](../../../trading_strategy_tester/indicators/volume/cmf.py) — Chaikin Money Flow
 
 ---
 
-This modular structure allows easy extension and targeted imports for strategy evaluation and indicator-based conditions.
+### 6. Candlestick Patterns
+*Located in [`trading_strategy_tester/indicators/candlestick_patterns/`](../../../trading_strategy_tester/indicators/candlestick_patterns/)*
+
+- [`hammer.py`](../../../trading_strategy_tester/indicators/candlestick_patterns/hammer.py) — Hammer Pattern
+
+---
