@@ -46,35 +46,35 @@ As a condition is evaluated over a time series, it returns a boolean series indi
 ### [2. Threshold Conditions](threshold_conditions.md)
 *Located in [`trading_strategy_tester/conditions/threshold_conditions/`](../../../../trading_strategy_tester/conditions/threshold_conditions)*
 
-- [`CrossOverCondition`](threshold_conditions.md) — Condition when one series crosses over another
-- [`CrossUnderCondition`](threshold_conditions.md) — Condition when one series crosses under another
-- [`GreaterThanCondition`](threshold_conditions.md) — Checks if one series is greater than another
-- [`LessThanCondition`](threshold_conditions.md) — Checks if one series is less than another
+- [`CrossOverCondition`](threshold_conditions.md#crossovercondition) — Condition when one series crosses over another
+- [`CrossUnderCondition`](threshold_conditions.md#crossundercondition) — Condition when one series crosses under another
+- [`GreaterThanCondition`](threshold_conditions.md#greaterthancondition) — Checks if one series is greater than another
+- [`LessThanCondition`](threshold_conditions.md#lessthancondition) — Checks if one series is less than another
 
 ---
 
 ### [3. Trend Conditions](trend_conditions.md)
 *Located in [`trading_strategy_tester/conditions/trend_conditions/`](../../../../trading_strategy_tester/conditions/trend_conditions)*
 
-- [`UptrendForXDaysCondition`](trend_conditions) — Detects uptrend over X consecutive days
-- [`DowntrendForXDaysCondition`](trend_conditions) — Detects downtrend over X consecutive days
+- [`UptrendForXDaysCondition`](trend_conditions.md#uptrendforxdayscondition) — Detects uptrend over X consecutive days
+- [`DowntrendForXDaysCondition`](trend_conditions.md#downtrendforxdayscondition) — Detects downtrend over X consecutive days
 
 ---
 
 ### [4. Fibonacci Retracement Conditions](fibonacci_retracement_levels_conditions.md)
 *Located in [`trading_strategy_tester/conditions/fibonacci_retracement_levels_conditions/`](../../../../trading_strategy_tester/conditions/fibonacci_retracement_levels_conditions)*
 
-- [`UptrendFibRetracementLevelCondition`](fibonacci_retracement_levels_conditions.md) — Uses Fibonacci levels during uptrend
-- [`DowntrendFibRetracementLevelCondition`](fibonacci_retracement_levels_conditions.md) — Uses Fibonacci levels during downtrend
+- [`UptrendFibRetracementLevelCondition`](fibonacci_retracement_levels_conditions.md#uptrendfibretracementlevelcondition) — Uses Fibonacci levels during uptrend
+- [`DowntrendFibRetracementLevelCondition`](fibonacci_retracement_levels_conditions.md#downtrendfibretracementlevelcondition) — Uses Fibonacci levels during downtrend
 
 ---
 
 ### [5. Parameterized Conditions](parameterized_conditions.md)
 *Located in [`trading_strategy_tester/conditions/parameterized_conditions/`](../../../../trading_strategy_tester/conditions/parameterized_conditions)*
 
-- [`AfterXDaysCondition`](parameterized_conditions.md) — Triggers condition after X days of another condition
-- [`ChangeOfXPercentPerYDaysCondition`](parameterized_conditions.md) — Checks percentage change over Y days
-- [`IntraIntervalChangeOfXPercentCondition`](parameterized_conditions.md) — Percentage change within a single interval chosen in the strategy definition
+- [`AfterXDaysCondition`](parameterized_conditions.md#afterxdayscondition) — Triggers condition after X days of another condition
+- [`ChangeOfXPercentPerYDaysCondition`](parameterized_conditions.md#changeofxpercentperydayscondition) — Checks percentage change over Y days
+- [`IntraIntervalChangeOfXPercentCondition`](parameterized_conditions.md#intraintervalchangeofxpercentcondition) — Percentage change within a single interval chosen in the strategy definition
 
 ---
 
