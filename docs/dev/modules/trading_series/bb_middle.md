@@ -12,7 +12,7 @@ It is built upon the [Bollinger Bands indicator](../../../../trading_strategy_te
 ```python
 BB_MIDDLE(
     ticker: str,
-    source: SourceType,
+    source: SourceType = SourceType.CLOSE,
     length: int = 20,
     ma_type: SmoothingType = SmoothingType.SMA,
     std_dev: float = 2,
@@ -21,9 +21,10 @@ BB_MIDDLE(
 ```
 
 - **`ticker`** (`str`): Asset ticker symbol (e.g., `"AAPL"`).
-- **`source`** (`SourceType`): The price type to use (Close, Open, etc.).
+- **`source`** (`SourceType`): The price type to use. Default is `SourceType.CLOSE`. Supported sources are linked [here](../enums/source.md).
 - **`length`** (`int`): Number of periods for the moving average. Default is 20.
-- **`ma_type`** (`SmoothingType`): Moving average type. Default is Simple Moving Average (SMA).
+- **`ma_type`** (`SmoothingType`): Moving average type. Default is `SmoothingType.SMA`. Supported smoothing types are linked [here](../enums/smoothing.md).
+- **`std_dev`** (`float`): Number of standard deviations for the band. Default is 2.
 - **`offset`** (`int`): Shifts the band forwards/backwards. Default is 0.
 
 ---

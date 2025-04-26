@@ -56,8 +56,8 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`BB_MIDDLE`](trading_series/bb_middle.md) - Bollinger Bands Middle Band Trading Series
 - [`BB_UPPER`](trading_series/bb_upper.md) - Bollinger Bands Upper Band Trading Series
 - [`CCI`](trading_series/cci.md) - Commodity Channel Index Trading Series
-- [`CCI_SMOOTHENED`](trading_series/cci_smoothened.md)
-- [`CHAIKIN_OSC`](trading_series/chaikin_osc.md)
+- [`CCI_SMOOTHENED`](trading_series/cci_smoothened.md) - Smoothed Commodity Channel Index Trading Series
+- [`CHAIKIN_OSC`](trading_series/chaikin_osc.md) - Chaikin Oscillator Trading Series
 - [`CHOP`](trading_series/chop.md)
 - [`CLOSE`](trading_series/close.md)
 - [`CMF`](trading_series/cmf.md)

@@ -17,14 +17,11 @@ ADX(
 )
 ```
 
-- **`ticker`** (`str`):  
-  The symbol of the asset (e.g., `"AAPL"`).
+- **`ticker`** (`str`): The symbol of the asset (e.g., `"AAPL"`).
   
-- **`smoothing_length`** (`int`):  
-  Number of periods used for smoothing the ADX line. Default is 14, which is a common setting in technical analysis.
+- **`smoothing_length`** (`int`): Number of periods used for smoothing the ADX line. Default is 14, which is a common setting in technical analysis.
   
-- **`length`** (`int`):  
-  The lookback period over which the +DI and -DI are calculated before smoothing. Default is 14, which is a common setting in technical analysis.
+- **`length`** (`int`): The lookback period over which the +DI and -DI are calculated before smoothing. Default is 14, which is a common setting in technical analysis.
 
 ---
 

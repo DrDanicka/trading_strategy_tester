@@ -16,11 +16,9 @@ BBP(
 )
 ```
 
-- **`ticker`** (`str`):  
-  The symbol of the asset (e.g., `"AAPL"`).
+- **`ticker`** (`str`): The symbol of the asset (e.g., `"AAPL"`).
 
-- **`length`** (`int`):  
-  The period used to calculate the underlying Bollinger Bands. Default is 13, which is a common setting.
+- **`length`** (`int`): The period used to calculate the underlying Bollinger Bands. Default is 13, which is a common setting.
 
 ---
 

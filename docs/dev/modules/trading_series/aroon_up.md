@@ -15,11 +15,9 @@ AROON_UP(
 )
 ```
 
-- **`ticker`** (`str`):  
-  The symbol of the asset (e.g., `"AAPL"`).
+- **`ticker`** (`str`): The symbol of the asset (e.g., `"AAPL"`).
 
-- **`length`** (`int`):  
-  The number of periods over which to calculate the Aroon Up indicator. Default is 14.
+- **`length`** (`int`): The number of periods over which to calculate the Aroon Up indicator. Default is 14.
 
 ---
 

@@ -17,14 +17,11 @@ ATR(
 )
 ```
 
-- **`ticker`** (`str`):  
-  The symbol of the asset (e.g., `"AAPL"`).
+- **`ticker`** (`str`): The symbol of the asset (e.g., `"AAPL"`).
 
-- **`length`** (`int`):  
-  The number of periods over which to calculate the ATR. Default is 14, a common setting in technical analysis.
+- **`length`** (`int`): The number of periods over which to calculate the ATR. Default is 14, a common setting in technical analysis.
 
-- **`smoothing_type`** (`SmoothingType`):  
-  The type of smoothing applied to the true range. Default is RMA (Running Moving Average), but other types like SMA, EMA or WMA can also be used.
+- **`smoothing_type`** (`SmoothingType`): The type of smoothing applied to the true range. Default is `SmoothingType.RMA`. Supported smoothing types are linked [here](../enums/smoothing.md).
 
 ---
 

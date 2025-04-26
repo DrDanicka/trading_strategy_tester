@@ -15,11 +15,8 @@ AROON_DOWN(
 )
 ```
 
-- **`ticker`** (`str`):  
-  The symbol of the asset (e.g., `"AAPL"`).
-
-- **`length`** (`int`):  
-  The number of periods over which to calculate the Aroon Down indicator. Default is 14.
+- **`ticker`** (`str`): The symbol of the asset (e.g., `"AAPL"`).
+- **`length`** (`int`): The number of periods over which to calculate the Aroon Down indicator. Default is 14.
 
 ---
 
