@@ -75,11 +75,11 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`EOM`](trading_series/eom.md) - Ease of Movement Trading Series
 - [`HAMMER`](trading_series/hammer.md) - Hammer Candlestick Pattern Trading Series
 - [`HIGH`](trading_series/default.md#high--highest-price-trading-series) - Highest Price Trading Series
-- [`ICHIMOKU_BASE`](trading_series/ichimoku_base.md)
-- [`ICHIMOKU_CONVERSION`](trading_series/ichimoku_conversion.md)
-- [`ICHIMOKU_LAGGING_SPAN`](trading_series/ichimoku_lagging_span.md)
-- [`ICHIMOKU_LEADING_SPAN_A`](trading_series/ichimoku_leading_span_a.md)
-- [`ICHIMOKU_LEADING_SPAN_B`](trading_series/ichimoku_leading_span_b.md)
+- [`ICHIMOKU_BASE`](trading_series/ichimoku_series.md#ichimoku_base--ichimoku-base-line) - Ichimoku Base Line (Kijun-sen)
+- [`ICHIMOKU_CONVERSION`](trading_series/ichimoku_series.md#ichimoku_conversion--ichimoku-conversion-line) - Ichimoku Conversion Line (Tenkan-sen)
+- [`ICHIMOKU_LAGGING_SPAN`](trading_series/ichimoku_series.md#ichimoku_lagging_span--ichimoku-lagging-span) - Ichimoku Lagging Span (Chikou Span)
+- [`ICHIMOKU_LEADING_SPAN_A`](trading_series/ichimoku_series.md#ichimoku_leading_span_a--ichimoku-leading-span-a) - Ichimoku Leading Span A (Senkou Span A)
+- [`ICHIMOKU_LEADING_SPAN_B`](trading_series/ichimoku_series.md#ichimoku_leading_span_b--ichimoku-leading-span-b) - Ichimoku Leading Span B (Senkou Span B)
 - [`KC_LOWER`](trading_series/kc_lower.md)
 - [`KC_UPPER`](trading_series/kc_upper.md)
 - [`KST`](trading_series/kst.md)
