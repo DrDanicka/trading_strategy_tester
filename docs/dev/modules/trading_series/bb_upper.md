@@ -12,7 +12,7 @@ It is built upon the [Bollinger Bands indicator](../../../../trading_strategy_te
 ```python
 BB_UPPER(
     ticker: str,
-    source: SourceType,
+    source: SourceType = SourceType.CLOSE,
     length: int = 20,
     ma_type: SmoothingType = SmoothingType.SMA,
     std_dev: float = 2,
