@@ -1,5 +1,5 @@
 
-# `conditions` — Strategy Condition Module
+# `Condition` — Strategy Condition Module
 
 This module defines the various condition classes used to create complex entry and exit logic in trading strategies. These conditions are categorized into logical, threshold-based, trend-following, Fibonacci retracement and parameterized (time/value-based) mechanisms.
 

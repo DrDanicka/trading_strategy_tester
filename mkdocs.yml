@@ -1,0 +1,47 @@
+site_name: Trading Strategy Tester
+site_url: https://DrDanicka.github.io/trading_strategy_tester/
+repo_url: https://github.com/DrDanicka/trading_strategy_tester
+theme:
+  name: material
+  features:
+    - navigation.expand
+    - navigation.tabs
+    - search.suggest
+    - content.code.copy
+nav:
+  - Home: index.md
+  - User Documentation:
+      - Overview: user/index.md
+  - Developer Documentation:
+      - Modules:
+          - Download: dev/modules/download.md
+          - Strategy:
+            - Overview: dev/modules/strategy.md
+            - Parameters:
+                - Position type: dev/modules/strategy_parameters/position_type.md
+                - Conditions:
+                  - Overview: dev/modules/conditions/index.md
+                  - Fibonacci Retracement Levels: dev/modules/conditions/fibonacci_retracement_levels_conditions.md
+                  - Logical: dev/modules/conditions/logical_conditions.md
+                  - Parameterized: dev/modules/conditions/parameterized_conditions.md
+                  - Threshold: dev/modules/conditions/threshold_conditions.md
+                  - Trend: dev/modules/conditions/trend_conditions.md
+                - Stop loss: dev/modules/strategy_parameters/stop_loss.md
+                - Take profit: dev/modules/strategy_parameters/take_profit.md
+                - Order size: dev/modules/strategy_parameters/order_size.md
+                - Commission: dev/modules/strategy_parameters/commission.md
+          - Indicators: dev/modules/indicators.md
+          - Trading series: dev/modules/trading_series.md
+          - Trading plot: dev/modules/trading_plot.md
+          - Trade: dev/modules/trade.md
+          - Statistics: dev/modules/statistics.md
+      - Enums:
+          - SourceType: dev/modules/enums/source.md
+          - SmoothingType: dev/modules/enums/smoothing.md
+          - PositionType: dev/modules/enums/position_type.md
+          - Fibonacci Levels: dev/modules/enums/fibonacci_levels.md
+          - Interval: dev/modules/enums/interval.md
+          - Period: dev/modules/enums/period.md
+      - Examples:
+          - Overview: dev/examples/index.md
+      - Testing: dev/testing.md

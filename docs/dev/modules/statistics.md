@@ -1,5 +1,5 @@
 
-# `Strategy` — Strategy Performance Metrics Calculation
+# `Statistics` — Strategy Performance Metrics Calculation
 
 The `get_strategy_stats` function calculates key performance statistics for a trading strategy based on a list of executed trades and historical market data.
 
