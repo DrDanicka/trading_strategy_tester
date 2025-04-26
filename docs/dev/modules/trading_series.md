@@ -92,14 +92,14 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`MOMENTUM`](trading_series/momentum.md) - Momentum Trading Series
 - [`OBV`](trading_series/obv.md) - On Balance Volume Trading Series
 - [`OPEN`](trading_series/default.md#open--opening-price-trading-series) - Opening Price Trading Series
-- [`PERCENT_D`](trading_series/percent_d.md)
-- [`PERCENT_K`](trading_series/percent_k.md)
+- [`PERCENT_D`](trading_series/percent_d.md) - Stochastic %D Trading Series
+- [`PERCENT_K`](trading_series/percent_k.md) - Stochastic %K Trading Series
 - [`PVI`](trading_series/pvi.md) - Positive Volume Index Trading Series
 - [`PVT`](trading_series/pvt.md) - Price Volume Trend Trading Series
-- [`ROC`](trading_series/roc.md)
-- [`RSI`](trading_series/rsi.md)
+- [`ROC`](trading_series/roc.md) - Rate of Change Trading Series
+- [`RSI`](trading_series/rsi.md) - Relative Strength Index Trading Series
 - [`SMA`](trading_series/ma.md#sma--simple-moving-average-trading-series) - Simple Moving Average Trading Series
-- [`TRIX`](trading_series/trix.md)
-- [`UO`](trading_series/uo.md)
+- [`TRIX`](trading_series/trix.md) - Triple Exponential Average Trading Series
+- [`UO`](trading_series/uo.md) - Ultimate Oscillator Trading Series
 - [`VOLUME`](trading_series/default.md#volume--volume-trading-series) - Volume Trading Series
-- [`WILLR`](trading_series/willr.md)
+- [`WILLR`](trading_series/willr.md) - Williams %R Trading Series
