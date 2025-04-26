@@ -59,10 +59,10 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`CCI_SMOOTHENED`](trading_series/cci_smoothened.md) - Smoothed Commodity Channel Index Trading Series
 - [`CHAIKIN_OSC`](trading_series/chaikin_osc.md) - Chaikin Oscillator Trading Series
 - [`CHOP`](trading_series/chop.md) - Choppiness Index Trading Series
-- [`CLOSE`](trading_series/close.md)
+- [`CLOSE`](trading_series/default.md#close--closing-price-trading-series) - Closing Price Trading Series
 - [`CMF`](trading_series/cmf.md) - Chaikin Money Flow Trading Series
 - [`CMO`](trading_series/cmo.md) - Chande Momentum Oscillator Trading Series
-- [`CONST`](trading_series/const.md)
+- [`CONST`](trading_series/default.md#const--constant-value-trading-series) - Constant Value Trading Series
 - [`COPPOCK`](trading_series/coppock.md) - Coppock Curve Trading Series
 - [`DC_BASIS`](trading_series/dc_basis.md) - Donchian Channel Basis Trading Series
 - [`DC_LOWER`](trading_series/dc_lower.md) - Donchian Channel Lower Band Trading Series
@@ -73,8 +73,8 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`EFI`](trading_series/efi.md)
 - [`EMA`](trading_series/ema.md)
 - [`EOM`](trading_series/eom.md)
-- [`HAMMER`](trading_series/hammer.md)
-- [`HIGH`](trading_series/high.md)
+- [`HAMMER`](trading_series/hammer.md) - Hammer Candlestick Pattern Trading Series
+- [`HIGH`](trading_series/default.md#high--highest-price-trading-series) - Highest Price Trading Series
 - [`ICHIMOKU_BASE`](trading_series/ichimoku_base.md)
 - [`ICHIMOKU_CONVERSION`](trading_series/ichimoku_conversion.md)
 - [`ICHIMOKU_LAGGING_SPAN`](trading_series/ichimoku_lagging_span.md)
@@ -84,14 +84,14 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`KC_UPPER`](trading_series/kc_upper.md)
 - [`KST`](trading_series/kst.md)
 - [`KST_SIGNAL`](trading_series/kst_signal.md)
-- [`LOW`](trading_series/low.md)
+- [`LOW`](trading_series/default.md#low--lowest-price-trading-series)
 - [`MACD`](trading_series/macd.md)
 - [`MACD_SIGNAL`](trading_series/macd_signal.md)
 - [`MASS`](trading_series/mass.md)
 - [`MFI`](trading_series/mfi.md)
 - [`MOMENTUM`](trading_series/momentum.md)
 - [`OBV`](trading_series/obv.md)
-- [`OPEN`](trading_series/open.md)
+- [`OPEN`](trading_series/default.md#open--opening-price-trading-series) - Opening Price Trading Series
 - [`PERCENT_D`](trading_series/percent_d.md)
 - [`PERCENT_K`](trading_series/percent_k.md)
 - [`PVI`](trading_series/pvi.md)
@@ -102,5 +102,5 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`TESTING`](trading_series/testing.md)
 - [`TRIX`](trading_series/trix.md)
 - [`UO`](trading_series/uo.md)
-- [`VOLUME`](trading_series/volume.md)
+- [`VOLUME`](trading_series/default.md#volume--volume-trading-series) - Volume Trading Series
 - [`WILLR`](trading_series/willr.md)
