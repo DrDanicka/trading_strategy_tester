@@ -71,7 +71,7 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`DI_PLUS`](trading_series/di_plus.md) - Directional Movement Index Plus Trading Series
 - [`DPO`](trading_series/dpo.md) - Detrended Price Oscillator Trading Series
 - [`EFI`](trading_series/efi.md) - Elder Force Index Trading Series
-- [`EMA`](trading_series/ma.md#ema) - Exponential Moving Average Trading Series
+- [`EMA`](trading_series/ma.md#ema--exponential-moving-average-trading-series) - Exponential Moving Average Trading Series
 - [`EOM`](trading_series/eom.md) - Ease of Movement Trading Series
 - [`HAMMER`](trading_series/hammer.md) - Hammer Candlestick Pattern Trading Series
 - [`HIGH`](trading_series/default.md#high--highest-price-trading-series) - Highest Price Trading Series
@@ -98,7 +98,7 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`PVT`](trading_series/pvt.md)
 - [`ROC`](trading_series/roc.md)
 - [`RSI`](trading_series/rsi.md)
-- [`SMA`](trading_series/sma.md)
+- [`SMA`](trading_series/ma.md#sma--simple-moving-average-trading-series) - Simple Moving Average Trading Series
 - [`TESTING`](trading_series/testing.md)
 - [`TRIX`](trading_series/trix.md)
 - [`UO`](trading_series/uo.md)
