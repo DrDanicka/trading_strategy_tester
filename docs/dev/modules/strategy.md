@@ -30,15 +30,15 @@ Strategy(
 - **`ticker`**: The symbol of the financial instrument to trade (e.g., `"AAPL"`). It is used for downloading historical data. It supports all symbols that are supported in `yfinance`.
 - **`position_type`**: Defines the type of position to take when trading. Supported types of trades are linked [here](enums/position_type.md).
 - **`buy_condition`**: The condition under which the strategy should enter a trade.
-- **`sell_condition`**: The condition under which the strategy should exit a trade.
-- **`stop_loss`**: Optional stop-loss logic for risk management.
-- **`take_profit`**: Optional profit-taking logic.
+- **`sell_condition`**: The condition under which the strategy should exit a trade. To learn more about conditions, check the [conditions module](conditions/index.md).
+- **`stop_loss`**: Optional stop-loss logic for risk management. See the [stop loss module](strategy_parameters/stop_loss.md) for more details.
+- **`take_profit`**: Optional profit-taking logic. See the [take profit module](strategy_parameters/take_profit.md) for more details.
 - **`start_date`, `end_date`**: Range of time over which to test the strategy (ignored if `period` is used).
 - **`interval`**: Data resolution. Supported intervals are linked [here](enums/interval.md).
 - **`period`**: Time period on which the strategy should be tested. Supported periods are linked [here](enums/period.md). This has higher priority than `start_date` and `end_date`.
 - **`initial_capital`**: Starting balance for trade simulation.
-- **`order_size`**: Defines how much to allocate per trade. OrderSize module is defined [here](TODO ADD LINK TO ORDER SIZE).
-- **`trade_commissions`**: Commission model to apply to trades. Supported commission models are linked [here](TODO ADD LINK TO TRADE COMMISSIONS).
+- **`order_size`**: Defines how much to allocate per trade. OrderSize module is defined [here](strategy_parameters/order_size.md).
+- **`trade_commissions`**: Commission model to apply to trades. Supported commission models are linked [here](strategy_parameters/trade_commissions.md).
 
 ---
 
