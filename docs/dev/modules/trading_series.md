@@ -64,9 +64,9 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`CMO`](trading_series/cmo.md) - Chande Momentum Oscillator Trading Series
 - [`CONST`](trading_series/const.md)
 - [`COPPOCK`](trading_series/coppock.md) - Coppock Curve Trading Series
-- [`DC_BASIS`](trading_series/dc_basis.md)
-- [`DC_LOWER`](trading_series/dc_lower.md)
-- [`DC_UPPER`](trading_series/dc_upper.md)
+- [`DC_BASIS`](trading_series/dc_basis.md) - Donchian Channel Basis Trading Series
+- [`DC_LOWER`](trading_series/dc_lower.md) - Donchian Channel Lower Band Trading Series
+- [`DC_UPPER`](trading_series/dc_upper.md) - Donchian Channel Upper Band Trading Series
 - [`DI_MINUS`](trading_series/di_minus.md)
 - [`DI_PLUS`](trading_series/di_plus.md)
 - [`DPO`](trading_series/dpo.md)
