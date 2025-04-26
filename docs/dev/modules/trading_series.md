@@ -58,12 +58,12 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`CCI`](trading_series/cci.md) - Commodity Channel Index Trading Series
 - [`CCI_SMOOTHENED`](trading_series/cci_smoothened.md) - Smoothed Commodity Channel Index Trading Series
 - [`CHAIKIN_OSC`](trading_series/chaikin_osc.md) - Chaikin Oscillator Trading Series
-- [`CHOP`](trading_series/chop.md)
+- [`CHOP`](trading_series/chop.md) - Choppiness Index Trading Series
 - [`CLOSE`](trading_series/close.md)
-- [`CMF`](trading_series/cmf.md)
-- [`CMO`](trading_series/cmo.md)
+- [`CMF`](trading_series/cmf.md) - Chaikin Money Flow Trading Series
+- [`CMO`](trading_series/cmo.md) - Chande Momentum Oscillator Trading Series
 - [`CONST`](trading_series/const.md)
-- [`COPPOCK`](trading_series/coppock.md)
+- [`COPPOCK`](trading_series/coppock.md) - Coppock Curve Trading Series
 - [`DC_BASIS`](trading_series/dc_basis.md)
 - [`DC_LOWER`](trading_series/dc_lower.md)
 - [`DC_UPPER`](trading_series/dc_upper.md)
