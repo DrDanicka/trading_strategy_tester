@@ -99,7 +99,6 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`ROC`](trading_series/roc.md)
 - [`RSI`](trading_series/rsi.md)
 - [`SMA`](trading_series/ma.md#sma--simple-moving-average-trading-series) - Simple Moving Average Trading Series
-- [`TESTING`](trading_series/testing.md)
 - [`TRIX`](trading_series/trix.md)
 - [`UO`](trading_series/uo.md)
 - [`VOLUME`](trading_series/default.md#volume--volume-trading-series) - Volume Trading Series
