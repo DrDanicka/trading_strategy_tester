@@ -85,10 +85,10 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`KST`](trading_series/kst.md) - Know Sure Thing Trading Series
 - [`KST_SIGNAL`](trading_series/kst_signal.md) - Know Sure Thing Signal Line Trading Series
 - [`LOW`](trading_series/default.md#low--lowest-price-trading-series) - Lowest Price Trading Series
-- [`MACD`](trading_series/macd.md)
-- [`MACD_SIGNAL`](trading_series/macd_signal.md)
-- [`MASS`](trading_series/mass.md)
-- [`MFI`](trading_series/mfi.md)
+- [`MACD`](trading_series/macd.md) - Moving Average Convergence Divergence Trading Series
+- [`MACD_SIGNAL`](trading_series/macd_signal.md) - Moving Average Convergence Divergence Signal Line Trading Series
+- [`MASS`](trading_series/mass.md) - Mass Index Trading Series
+- [`MFI`](trading_series/mfi.md) - Money Flow Index Trading Series
 - [`MOMENTUM`](trading_series/momentum.md)
 - [`OBV`](trading_series/obv.md)
 - [`OPEN`](trading_series/default.md#open--opening-price-trading-series) - Opening Price Trading Series
