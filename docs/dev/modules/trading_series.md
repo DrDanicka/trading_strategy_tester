@@ -89,13 +89,13 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`MACD_SIGNAL`](trading_series/macd_signal.md) - Moving Average Convergence Divergence Signal Line Trading Series
 - [`MASS`](trading_series/mass.md) - Mass Index Trading Series
 - [`MFI`](trading_series/mfi.md) - Money Flow Index Trading Series
-- [`MOMENTUM`](trading_series/momentum.md)
-- [`OBV`](trading_series/obv.md)
+- [`MOMENTUM`](trading_series/momentum.md) - Momentum Trading Series
+- [`OBV`](trading_series/obv.md) - On Balance Volume Trading Series
 - [`OPEN`](trading_series/default.md#open--opening-price-trading-series) - Opening Price Trading Series
 - [`PERCENT_D`](trading_series/percent_d.md)
 - [`PERCENT_K`](trading_series/percent_k.md)
-- [`PVI`](trading_series/pvi.md)
-- [`PVT`](trading_series/pvt.md)
+- [`PVI`](trading_series/pvi.md) - Positive Volume Index Trading Series
+- [`PVT`](trading_series/pvt.md) - Price Volume Trend Trading Series
 - [`ROC`](trading_series/roc.md)
 - [`RSI`](trading_series/rsi.md)
 - [`SMA`](trading_series/ma.md#sma--simple-moving-average-trading-series) - Simple Moving Average Trading Series
