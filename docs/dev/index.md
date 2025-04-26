@@ -17,7 +17,7 @@ The project is organized into the following key modules:
 - [**`trading_plot`**](modules/trading_plot.md): Provides tools for visualizing trading performance and signals.
 - [**`indicators`**](modules/indicators.md): Implements technical indicators commonly used in strategies.
 - [**`trade`**](modules/trade.md): Represents individual trades and their properties.
-- **`statistics`**: Calculates performance metrics such as profit, drawdown, win rate, etc.
+- [**`statistics`**](modules/statistics.md): Calculates performance metrics such as profit, drawdown, win rate, etc.
 
 ---
 
