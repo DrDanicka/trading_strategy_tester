@@ -67,12 +67,12 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`DC_BASIS`](trading_series/dc_basis.md) - Donchian Channel Basis Trading Series
 - [`DC_LOWER`](trading_series/dc_lower.md) - Donchian Channel Lower Band Trading Series
 - [`DC_UPPER`](trading_series/dc_upper.md) - Donchian Channel Upper Band Trading Series
-- [`DI_MINUS`](trading_series/di_minus.md)
-- [`DI_PLUS`](trading_series/di_plus.md)
-- [`DPO`](trading_series/dpo.md)
-- [`EFI`](trading_series/efi.md)
+- [`DI_MINUS`](trading_series/di_minus.md) - Directional Movement Index Minus Trading Series
+- [`DI_PLUS`](trading_series/di_plus.md) - Directional Movement Index Plus Trading Series
+- [`DPO`](trading_series/dpo.md) - Detrended Price Oscillator Trading Series
+- [`EFI`](trading_series/efi.md) - Elder Force Index Trading Series
 - [`EMA`](trading_series/ema.md)
-- [`EOM`](trading_series/eom.md)
+- [`EOM`](trading_series/eom.md) - Ease of Movement Trading Series
 - [`HAMMER`](trading_series/hammer.md) - Hammer Candlestick Pattern Trading Series
 - [`HIGH`](trading_series/default.md#high--highest-price-trading-series) - Highest Price Trading Series
 - [`ICHIMOKU_BASE`](trading_series/ichimoku_base.md)
