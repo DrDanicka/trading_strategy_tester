@@ -3,7 +3,7 @@
 
 The `CHAIKIN_OSC` trading series represents the Chaikin Oscillator, which measures the momentum of the Accumulation/Distribution Line of an asset.
 
-It is built upon the [Chaikin Oscillator indicator](../../../../trading_strategy_tester/indicators/volume/chaikin_osc.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Chaikin Oscillator indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volume/chaikin_osc.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

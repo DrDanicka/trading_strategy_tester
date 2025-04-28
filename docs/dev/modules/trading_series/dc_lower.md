@@ -3,7 +3,7 @@
 
 The `DC_LOWER` trading series represents the lower band of the Donchian Channel, calculated as the lowest low over a specified period.
 
-It is built upon the [Donchian Channel indicator](../../../../trading_strategy_tester/indicators/volatility/dc.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Donchian Channel indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volatility/dc.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

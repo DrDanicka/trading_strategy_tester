@@ -2,7 +2,7 @@
 
 The `MFI` trading series represents the Money Flow Index, a momentum indicator that uses price and volume to identify overbought or oversold conditions.
 
-It is built upon the [Money Flow Index indicator](../../../../trading_strategy_tester/indicators/volume/mfi.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Money Flow Index indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volume/mfi.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

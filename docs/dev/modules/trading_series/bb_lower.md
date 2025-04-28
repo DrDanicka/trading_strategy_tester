@@ -3,7 +3,7 @@
 
 The `BB_LOWER` trading series represents the Lower Bollinger Band, calculated using a specified moving average and a standard deviation multiplier. It defines the lower boundary of the expected price range.
 
-It is built upon the [Bollinger Bands indicator](../../../../trading_strategy_tester/indicators/volatility/bb.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Bollinger Bands indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volatility/bb.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

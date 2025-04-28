@@ -3,7 +3,7 @@
 
 The `DC_BASIS` trading series represents the middle line (basis) of the Donchian Channel, calculated as the average of the upper and lower bands.
 
-It is built upon the [Donchian Channel indicator](../../../../trading_strategy_tester/indicators/volatility/dc.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Donchian Channel indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volatility/dc.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

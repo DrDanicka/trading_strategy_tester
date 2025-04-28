@@ -3,7 +3,7 @@
 
 The `CHOP` trading series represents the Choppiness Index, an indicator used to determine if the market is trading sideways (choppy) or trending strongly.
 
-It is built upon the [Choppiness Index indicator](../../../../trading_strategy_tester/indicators/volatility/chop.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Choppiness Index indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volatility/chop.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

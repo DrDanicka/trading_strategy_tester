@@ -3,7 +3,7 @@
 
 The `DPO` trading series represents the Detrended Price Oscillator, used to remove long-term trends from prices and focus on short-term cycles.
 
-It is built upon the [Detrended Price Oscillator indicator](../../../../trading_strategy_tester/indicators/trend/dpo.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Detrended Price Oscillator indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/trend/dpo.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

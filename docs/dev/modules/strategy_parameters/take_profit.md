@@ -3,7 +3,7 @@
 
 The `TakeProfit` object defines a take profit mechanism for trades, used to automatically exit a position when a gain threshold is achieved.
 
-It is implemented in the [take_profit.py](../../../../trading_strategy_tester/conditions/stoploss_takeprofit/take_profit.py) file.
+It is implemented in the [take_profit.py](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/conditions/stoploss_takeprofit/take_profit.py) file.
 
 It takes into account the position type and calculates the profit level for long and short trades differently.
 

@@ -3,7 +3,7 @@
 
 The `EFI` trading series represents the Elder Force Index, a volume-based momentum indicator that quantifies buying and selling pressure.
 
-It is built upon the [Elder Force Index indicator](../../../../trading_strategy_tester/indicators/volume/efi.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Elder Force Index indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volume/efi.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

@@ -3,7 +3,7 @@
 
 The `STOCH_PERCENT_K` trading series represents the raw %K line of the Stochastic Oscillator, showing the current closing price relative to the high-low range over a set period.
 
-It is built upon the [Stochastic Oscillator %K indicator](../../../../trading_strategy_tester/indicators/momentum/stoch.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Stochastic Oscillator %K indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/stoch.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

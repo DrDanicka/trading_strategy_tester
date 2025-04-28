@@ -3,7 +3,7 @@
 
 The `BBP` trading series represents the Bull and Bear Power (BBP) indicator, which helps assess the relative positioning of the price within the Bollinger Bands. It is a measure of market momentum and volatility.
 
-It is built upon the [Bull and Bear Power indicator](../../../../trading_strategy_tester/indicators/momentum/bbp.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Bull and Bear Power indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/bbp.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

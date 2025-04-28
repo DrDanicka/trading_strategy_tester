@@ -5,7 +5,7 @@ The `Ichimoku` trading series provides various components of the Ichimoku Kinko 
 
 ---
 
-# `ICHIMOKU_BASE` — Ichimoku Base Line
+# `ICHIMOKU_BASE` - Ichimoku Base Line
 
 Represents the Base Line (Kijun-sen) — a key slower-moving line in the Ichimoku system.
 
@@ -36,7 +36,7 @@ ICHIMOKU_BASE(ticker="AAPL", length=26)
 
 ---
 
-# `ICHIMOKU_CONVERSION` — Ichimoku Conversion Line
+# `ICHIMOKU_CONVERSION` - Ichimoku Conversion Line
 
 Represents the Conversion Line (Tenkan-sen) — a faster-reacting line compared to the Base Line.
 
@@ -67,7 +67,7 @@ ICHIMOKU_CONVERSION(ticker="AAPL", length=9)
 
 ---
 
-# `ICHIMOKU_LEADING_SPAN_A` — Ichimoku Leading Span A
+# `ICHIMOKU_LEADING_SPAN_A` - Ichimoku Leading Span A
 
 Represents Senkou Span A — one of the two edges of the Kumo (cloud).
 
@@ -98,7 +98,7 @@ ICHIMOKU_LEADING_SPAN_A(ticker="AAPL", displacement=26)
 
 ---
 
-# `ICHIMOKU_LEADING_SPAN_B` — Ichimoku Leading Span B
+# `ICHIMOKU_LEADING_SPAN_B` - Ichimoku Leading Span B
 
 Represents Senkou Span B — the second edge of the Kumo.
 
@@ -132,7 +132,7 @@ ICHIMOKU_LEADING_SPAN_B(ticker="AAPL", length=52, displacement=26)
 
 ---
 
-# `ICHIMOKU_LAGGING_SPAN` — Ichimoku Lagging Span
+# `ICHIMOKU_LAGGING_SPAN` - Ichimoku Lagging Span
 
 Represents the Lagging Span (Chikou Span) — a backward-shifted closing price.
 

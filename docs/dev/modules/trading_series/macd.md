@@ -3,7 +3,7 @@
 
 The `MACD` trading series represents the classic MACD indicator, which shows the relationship between two moving averages of a security’s price.
 
-It is built upon the [MACD indicator](../../../../trading_strategy_tester/indicators/momentum/macd.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [MACD indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/macd.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

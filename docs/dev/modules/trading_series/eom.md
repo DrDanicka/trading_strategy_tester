@@ -3,7 +3,7 @@
 
 The `EOM` trading series represents the Ease of Movement indicator, which combines price and volume to measure the ease with which an asset's price moves.
 
-It is built upon the [Ease of Movement indicator](../../../../trading_strategy_tester/indicators/volume/eom.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Ease of Movement indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volume/eom.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

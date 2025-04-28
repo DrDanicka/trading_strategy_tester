@@ -21,8 +21,8 @@ DownloadModule(
 **Parameters:**
 - `start_date`: Start date for data download (used if `period` is `NOT_PASSED`)
 - `end_date`: End date for data download
-- `interval`: Granularity of data. Supported intervals are linked [here](TODO ADD LINK TO INTERVAL).
-- `period`: Predefined period. Period has higher priority than `start_date` and `end_date`. So if not `NOT_PASSED`, it will be used for the download. Supported periods are linked [here](TODO ADD LINK TO PERIOD).
+- `interval`: Granularity of data. Supported intervals are linked [here](enums/interval.md).
+- `period`: Predefined period. Period has higher priority than `start_date` and `end_date`. So if not `NOT_PASSED`, it will be used for the download. Supported periods are linked [here](enums/period.md).
 
 ---
 

@@ -59,10 +59,10 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`CCI_SMOOTHENED`](trading_series/cci_smoothened.md) - Smoothed Commodity Channel Index Trading Series
 - [`CHAIKIN_OSC`](trading_series/chaikin_osc.md) - Chaikin Oscillator Trading Series
 - [`CHOP`](trading_series/chop.md) - Choppiness Index Trading Series
-- [`CLOSE`](trading_series/default.md#close--closing-price-trading-series) - Closing Price Trading Series
+- [`CLOSE`](trading_series/default.md#close-closing-price-trading-series) - Closing Price Trading Series
 - [`CMF`](trading_series/cmf.md) - Chaikin Money Flow Trading Series
 - [`CMO`](trading_series/cmo.md) - Chande Momentum Oscillator Trading Series
-- [`CONST`](trading_series/default.md#const--constant-value-trading-series) - Constant Value Trading Series
+- [`CONST`](trading_series/default.md#const-constant-value-trading-series) - Constant Value Trading Series
 - [`COPPOCK`](trading_series/coppock.md) - Coppock Curve Trading Series
 - [`DC_BASIS`](trading_series/dc_basis.md) - Donchian Channel Basis Trading Series
 - [`DC_LOWER`](trading_series/dc_lower.md) - Donchian Channel Lower Band Trading Series
@@ -71,35 +71,35 @@ Below is a complete list of all implemented TradingSeries classes in alphabetica
 - [`DI_PLUS`](trading_series/di_plus.md) - Directional Movement Index Plus Trading Series
 - [`DPO`](trading_series/dpo.md) - Detrended Price Oscillator Trading Series
 - [`EFI`](trading_series/efi.md) - Elder Force Index Trading Series
-- [`EMA`](trading_series/ma.md#ema--exponential-moving-average-trading-series) - Exponential Moving Average Trading Series
+- [`EMA`](trading_series/ma.md#ema-exponential-moving-average-trading-series) - Exponential Moving Average Trading Series
 - [`EOM`](trading_series/eom.md) - Ease of Movement Trading Series
 - [`HAMMER`](trading_series/hammer.md) - Hammer Candlestick Pattern Trading Series
-- [`HIGH`](trading_series/default.md#high--highest-price-trading-series) - Highest Price Trading Series
-- [`ICHIMOKU_BASE`](trading_series/ichimoku_series.md#ichimoku_base--ichimoku-base-line) - Ichimoku Base Line (Kijun-sen)
-- [`ICHIMOKU_CONVERSION`](trading_series/ichimoku_series.md#ichimoku_conversion--ichimoku-conversion-line) - Ichimoku Conversion Line (Tenkan-sen)
-- [`ICHIMOKU_LAGGING_SPAN`](trading_series/ichimoku_series.md#ichimoku_lagging_span--ichimoku-lagging-span) - Ichimoku Lagging Span (Chikou Span)
-- [`ICHIMOKU_LEADING_SPAN_A`](trading_series/ichimoku_series.md#ichimoku_leading_span_a--ichimoku-leading-span-a) - Ichimoku Leading Span A (Senkou Span A)
-- [`ICHIMOKU_LEADING_SPAN_B`](trading_series/ichimoku_series.md#ichimoku_leading_span_b--ichimoku-leading-span-b) - Ichimoku Leading Span B (Senkou Span B)
+- [`HIGH`](trading_series/default.md#high-highest-price-trading-series) - Highest Price Trading Series
+- [`ICHIMOKU_BASE`](trading_series/ichimoku_series.md#ichimoku_base-ichimoku-base-line) - Ichimoku Base Line (Kijun-sen)
+- [`ICHIMOKU_CONVERSION`](trading_series/ichimoku_series.md#ichimoku_conversion-ichimoku-conversion-line) - Ichimoku Conversion Line (Tenkan-sen)
+- [`ICHIMOKU_LAGGING_SPAN`](trading_series/ichimoku_series.md#ichimoku_lagging_span-ichimoku-lagging-span) - Ichimoku Lagging Span (Chikou Span)
+- [`ICHIMOKU_LEADING_SPAN_A`](trading_series/ichimoku_series.md#ichimoku_leading_span_a-ichimoku-leading-span-a) - Ichimoku Leading Span A (Senkou Span A)
+- [`ICHIMOKU_LEADING_SPAN_B`](trading_series/ichimoku_series.md#ichimoku_leading_span_b-ichimoku-leading-span-b) - Ichimoku Leading Span B (Senkou Span B)
 - [`KC_LOWER`](trading_series/kc_lower.md) - Keltner Channel Lower Band Trading Series
 - [`KC_UPPER`](trading_series/kc_upper.md) - Keltner Channel Upper Band Trading Series
 - [`KST`](trading_series/kst.md) - Know Sure Thing Trading Series
 - [`KST_SIGNAL`](trading_series/kst_signal.md) - Know Sure Thing Signal Line Trading Series
-- [`LOW`](trading_series/default.md#low--lowest-price-trading-series) - Lowest Price Trading Series
+- [`LOW`](trading_series/default.md#low-lowest-price-trading-series) - Lowest Price Trading Series
 - [`MACD`](trading_series/macd.md) - Moving Average Convergence Divergence Trading Series
 - [`MACD_SIGNAL`](trading_series/macd_signal.md) - Moving Average Convergence Divergence Signal Line Trading Series
 - [`MASS`](trading_series/mass.md) - Mass Index Trading Series
 - [`MFI`](trading_series/mfi.md) - Money Flow Index Trading Series
 - [`MOMENTUM`](trading_series/momentum.md) - Momentum Trading Series
 - [`OBV`](trading_series/obv.md) - On Balance Volume Trading Series
-- [`OPEN`](trading_series/default.md#open--opening-price-trading-series) - Opening Price Trading Series
+- [`OPEN`](trading_series/default.md#open-opening-price-trading-series) - Opening Price Trading Series
 - [`PERCENT_D`](trading_series/percent_d.md) - Stochastic %D Trading Series
 - [`PERCENT_K`](trading_series/percent_k.md) - Stochastic %K Trading Series
 - [`PVI`](trading_series/pvi.md) - Positive Volume Index Trading Series
 - [`PVT`](trading_series/pvt.md) - Price Volume Trend Trading Series
 - [`ROC`](trading_series/roc.md) - Rate of Change Trading Series
 - [`RSI`](trading_series/rsi.md) - Relative Strength Index Trading Series
-- [`SMA`](trading_series/ma.md#sma--simple-moving-average-trading-series) - Simple Moving Average Trading Series
+- [`SMA`](trading_series/ma.md#sma-simple-moving-average-trading-series) - Simple Moving Average Trading Series
 - [`TRIX`](trading_series/trix.md) - Triple Exponential Average Trading Series
 - [`UO`](trading_series/uo.md) - Ultimate Oscillator Trading Series
-- [`VOLUME`](trading_series/default.md#volume--volume-trading-series) - Volume Trading Series
+- [`VOLUME`](trading_series/default.md#volume-volume-trading-series) - Volume Trading Series
 - [`WILLR`](trading_series/willr.md) - Williams %R Trading Series

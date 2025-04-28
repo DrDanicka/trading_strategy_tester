@@ -3,7 +3,7 @@
 
 The `TRIX` trading series represents the TRIX indicator, which is a triple-smoothed Exponential Moving Average used to identify trends and momentum changes.
 
-It is built upon the [Triple Exponential Average indicator](../../../../trading_strategy_tester/indicators/momentum/trix.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Triple Exponential Average indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/trix.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

@@ -13,6 +13,7 @@ nav:
   - User Documentation:
       - Overview: user/index.md
   - Developer Documentation:
+      - Overview: dev/index.md
       - Modules:
           - Download: dev/modules/download.md
           - Strategy:
@@ -29,7 +30,7 @@ nav:
                 - Stop loss: dev/modules/strategy_parameters/stop_loss.md
                 - Take profit: dev/modules/strategy_parameters/take_profit.md
                 - Order size: dev/modules/strategy_parameters/order_size.md
-                - Commission: dev/modules/strategy_parameters/commission.md
+                - Commission: dev/modules/strategy_parameters/trade_commissions.md
           - Indicators: dev/modules/indicators.md
           - Trading series: dev/modules/trading_series.md
           - Trading plot: dev/modules/trading_plot.md

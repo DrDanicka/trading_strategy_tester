@@ -3,7 +3,7 @@
 
 The `CCI` trading series represents the Commodity Channel Index (CCI), an oscillator that measures the variation of an asset's price from its statistical mean.
 
-It is built upon the [CCI indicator](../../../../trading_strategy_tester/indicators/momentum/cci.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [CCI indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/cci.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

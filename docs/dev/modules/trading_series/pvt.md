@@ -3,7 +3,7 @@
 
 The `PVT` trading series represents the Price Volume Trend (PVT) indicator, which combines price change and volume to identify trend strength.
 
-It is built upon the [Price Volume Trend indicator](../../../../trading_strategy_tester/indicators/volume/pvt.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Price Volume Trend indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volume/pvt.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

@@ -3,7 +3,7 @@
 
 The `UO` trading series represents the Ultimate Oscillator (UO), which combines short, medium, and long-term price movements to avoid false divergence signals.
 
-It is built upon the [Ultimate Oscillator indicator](../../../../trading_strategy_tester/indicators/momentum/uo.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Ultimate Oscillator indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/uo.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

@@ -3,7 +3,7 @@
 
 The `MOMENTUM` trading series represents a simple momentum oscillator, calculating the difference between the current price and the price `length` periods ago.
 
-It is built upon the [Momentum indicator](../../../../trading_strategy_tester/indicators/momentum/momentum.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Momentum indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/momentum.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

@@ -3,7 +3,7 @@
 
 The `ROC` trading series represents the Rate of Change (ROC) indicator, which measures the percentage change between the current price and the price `length` periods ago.
 
-It is built upon the [Rate of Change indicator](../../../../trading_strategy_tester/indicators/momentum/roc.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Rate of Change indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/roc.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

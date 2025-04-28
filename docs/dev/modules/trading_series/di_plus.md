@@ -3,7 +3,7 @@
 
 The `DI_PLUS` trading series represents the Positive Directional Indicator (+DI), a component of the ADX system that measures upward price movement strength.
 
-It is built upon the [Directional Movement Index (+DI)](../../../../trading_strategy_tester/indicators/trend/adx.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Directional Movement Index (+DI)](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/trend/adx.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

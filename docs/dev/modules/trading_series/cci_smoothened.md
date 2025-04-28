@@ -3,7 +3,7 @@
 
 The `CCI_SMOOTHENED` trading series represents a smoothed version of the Commodity Channel Index (CCI), offering a less noisy view of price movements.
 
-It is built upon the [CCI Smoothened indicator](../../../../trading_strategy_tester/indicators/momentum/cci.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [CCI Smoothened indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/cci.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

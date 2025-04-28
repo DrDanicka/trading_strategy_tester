@@ -3,7 +3,7 @@
 
 The `MACD_SIGNAL` trading series represents the signal line of the MACD indicator, which is typically a smoothed version of the MACD itself.
 
-It is built upon the [MACD Signal indicator](../../../../trading_strategy_tester/indicators/momentum/macd.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [MACD Signal indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/macd.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

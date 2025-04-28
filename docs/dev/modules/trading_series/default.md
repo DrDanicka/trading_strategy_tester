@@ -5,7 +5,7 @@ The `default_series` module provides basic fundamental trading series like Open,
 
 ---
 
-# `CLOSE` — Closing Price Trading Series
+# `CLOSE` - Closing Price Trading Series
 
 Represents the closing price of a given ticker.
 
@@ -33,7 +33,7 @@ CLOSE(ticker="AAPL")
 
 ---
 
-# `OPEN` — Opening Price Trading Series
+# `OPEN` - Opening Price Trading Series
 
 Represents the opening price of a given ticker.
 
@@ -60,7 +60,7 @@ OPEN(ticker="AAPL")
 
 ---
 
-# `HIGH` — Highest Price Trading Series
+# `HIGH` - Highest Price Trading Series
 
 Represents the highest price reached during a trading period.
 
@@ -87,7 +87,7 @@ HIGH(ticker="AAPL")
 
 ---
 
-# `LOW` — Lowest Price Trading Series
+# `LOW` - Lowest Price Trading Series
 
 Represents the lowest price reached during a trading period.
 
@@ -114,7 +114,7 @@ LOW(ticker="AAPL")
 
 ---
 
-# `VOLUME` — Volume Trading Series
+# `VOLUME` - Volume Trading Series
 
 Represents the number of shares or contracts traded during a trading period.
 
@@ -141,7 +141,7 @@ VOLUME(ticker="AAPL")
 
 ---
 
-# `CONST` — Constant Value Trading Series
+# `CONST` - Constant Value Trading Series
 
 Represents a constant value series, independent of the asset prices.
 

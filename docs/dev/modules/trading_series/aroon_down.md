@@ -2,7 +2,7 @@
 
 The `AROON_DOWN` trading series represents the Aroon Down indicator, which measures how long it has been since the lowest low during a specified period. It is primarily used to detect the strength of a downtrend.
 
-It is built upon the [Aroon Down indicator](../../../../trading_strategy_tester/indicators/trend/aroon.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Aroon Down indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/trend/aroon.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

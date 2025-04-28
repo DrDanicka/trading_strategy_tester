@@ -3,7 +3,7 @@
 
 The `ATR` trading series represents the Average True Range (ATR) indicator, which measures market volatility by decomposing the entire range of an asset price for a given period.
 
-It is built upon the [ATR indicator](../../../../trading_strategy_tester/indicators/volatility/atr.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [ATR indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volatility/atr.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

@@ -3,7 +3,7 @@
 
 The `WILLR` trading series represents Williams %R, a momentum indicator that measures overbought and oversold levels.
 
-It is built upon the [Williams %R indicator](../../../../trading_strategy_tester/indicators/momentum/willr.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Williams %R indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/willr.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

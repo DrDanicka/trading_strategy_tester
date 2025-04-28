@@ -3,7 +3,7 @@
 
 The `BB_MIDDLE` trading series represents the middle band (basis) of the Bollinger Bands, calculated as a moving average over a specified period.
 
-It is built upon the [Bollinger Bands indicator](../../../../trading_strategy_tester/indicators/volatility/bb.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Bollinger Bands indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volatility/bb.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

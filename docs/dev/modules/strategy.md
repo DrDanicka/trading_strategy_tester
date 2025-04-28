@@ -19,7 +19,7 @@ Strategy(
     end_date: datetime = None,
     interval: Interval = Interval.ONE_DAY,
     period: Period = Period.NOT_PASSED,
-    initial_capital: float = 100_000,
+    initial_capital: float = 1_000_000,
     order_size: OrderSize = Contracts(value=1),
     trade_commissions: TradeCommissions = MoneyCommissions(0.0)
 )

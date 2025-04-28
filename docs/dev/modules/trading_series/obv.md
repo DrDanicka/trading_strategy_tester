@@ -3,7 +3,7 @@
 
 The `OBV` trading series represents the On Balance Volume (OBV) indicator, which accumulates volume based on price direction to measure buying and selling pressure.
 
-It is built upon the [On Balance Volume indicator](../../../../trading_strategy_tester/indicators/volume/obv.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [On Balance Volume indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volume/obv.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

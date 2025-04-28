@@ -3,7 +3,7 @@
 
 The `KST_SIGNAL` trading series represents the signal line for the Know Sure Thing (KST) oscillator.
 
-It is built upon the [Know Sure Thing Signal indicator](../../../../trading_strategy_tester/indicators/momentum/kst.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Know Sure Thing Signal indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/kst.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

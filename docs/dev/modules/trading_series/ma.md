@@ -5,7 +5,7 @@ This module provides two core types of moving averages used widely in technical 
 
 ---
 
-# `SMA` — Simple Moving Average Trading Series
+# `SMA` - Simple Moving Average Trading Series
 
 The `SMA` trading series represents the Simple Moving Average, calculated as the unweighted mean of the previous `length` data points.
 
@@ -43,7 +43,7 @@ SMA(
 
 ---
 
-# `EMA` — Exponential Moving Average Trading Series
+# `EMA` - Exponential Moving Average Trading Series
 
 The `EMA` trading series represents the Exponential Moving Average, which applies greater weight to more recent data points.
 

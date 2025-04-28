@@ -3,7 +3,7 @@
 
 The `RSI` trading series represents the Relative Strength Index (RSI), a momentum oscillator that measures the speed and change of price movements.
 
-It is built upon the [RSI indicator](../../../../trading_strategy_tester/indicators/momentum/rsi.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [RSI indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/rsi.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

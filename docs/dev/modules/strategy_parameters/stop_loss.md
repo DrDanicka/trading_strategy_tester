@@ -3,7 +3,7 @@
 
 The `StopLoss` object defines a stop loss mechanism for trades, used to automatically exit a position when a loss threshold is breached.
 
-It is implemented in the [stop_loss.py](../../../../trading_strategy_tester/conditions/stoploss_takeprofit/stop_loss.py) module.
+It is implemented in the [stop_loss.py](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/conditions/stoploss_takeprofit/stop_loss.py) module.
 
 Stop loss takes into account the position type and calculates the loss level for long and short trades differently.
 

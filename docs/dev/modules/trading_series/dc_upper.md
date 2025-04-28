@@ -3,7 +3,7 @@
 
 The `DC_UPPER` trading series represents the upper band of the Donchian Channel, calculated as the highest high over a specified period.
 
-It is built upon the [Donchian Channel indicator](../../../../trading_strategy_tester/indicators/volatility/dc.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Donchian Channel indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volatility/dc.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

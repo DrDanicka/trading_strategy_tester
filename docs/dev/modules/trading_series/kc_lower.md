@@ -3,7 +3,7 @@
 
 The `KC_LOWER` trading series represents the lower band of the Keltner Channel, based on a moving average and the Average True Range (ATR).
 
-It is built upon the [Keltner Channel indicator](../../../../trading_strategy_tester/indicators/volatility/kc.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Keltner Channel indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/volatility/kc.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

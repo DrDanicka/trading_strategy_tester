@@ -3,7 +3,7 @@
 
 The `STOCH_PERCENT_D` trading series represents the smoothed %D line of the Stochastic Oscillator.
 
-It is built upon the [Stochastic Oscillator %D indicator](../../../../trading_strategy_tester/indicators/momentum/stoch.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Stochastic Oscillator %D indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/stoch.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

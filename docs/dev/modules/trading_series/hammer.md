@@ -3,7 +3,7 @@
 
 The `HAMMER` trading series detects the Hammer candlestick pattern, a potential bullish reversal pattern appearing after a downtrend.
 
-It is built upon the [Hammer pattern detection](../../../../trading_strategy_tester/indicators/candlestick_patterns/hammer.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Hammer pattern detection](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/candlestick_patterns/hammer.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

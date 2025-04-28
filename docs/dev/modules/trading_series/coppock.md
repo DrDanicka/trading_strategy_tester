@@ -3,7 +3,7 @@
 
 The `COPPOCK` trading series represents the Coppock Curve, a momentum indicator developed for identifying major bottoms in markets.
 
-It is built upon the [Coppock Curve indicator](../../../../trading_strategy_tester/indicators/momentum/cop.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Coppock Curve indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/cop.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

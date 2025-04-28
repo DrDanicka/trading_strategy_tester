@@ -2,7 +2,7 @@
 
 The `AROON_UP` trading series represents the Aroon Up indicator, which measures how long it has been since the highest high during a specified period. It is primarily used to detect the strength of an uptrend.
 
-It is built upon the [Aroon Up indicator](../../../../trading_strategy_tester/indicators/trend/aroon.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Aroon Up indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/trend/aroon.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

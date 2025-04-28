@@ -3,7 +3,7 @@
 
 The `CMO` trading series represents the Chande Momentum Oscillator (CMO), which measures momentum on both the upside and downside over a specified period.
 
-It is built upon the [Chande Momentum Oscillator indicator](../../../../trading_strategy_tester/indicators/momentum/cmo.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Chande Momentum Oscillator indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/cmo.py) implementation from the [indicators module](../indicators.md).
 
 ---
 

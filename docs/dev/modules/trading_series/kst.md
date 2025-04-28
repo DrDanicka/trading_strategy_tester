@@ -3,7 +3,7 @@
 
 The `KST` trading series represents the Know Sure Thing (KST) oscillator, a momentum indicator that sums smoothed rate of change values.
 
-It is built upon the [Know Sure Thing indicator](../../../../trading_strategy_tester/indicators/momentum/kst.py) implementation from the [indicators module](../indicators.md).
+It is built upon the [Know Sure Thing indicator](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/momentum/kst.py) implementation from the [indicators module](../indicators.md).
 
 ---
 
