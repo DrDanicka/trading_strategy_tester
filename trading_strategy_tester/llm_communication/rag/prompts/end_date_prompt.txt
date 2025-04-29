@@ -1,0 +1,15 @@
+Your task is to extract end date of a strategy from the given text that is description of a trading Strategy if there is any end date mentioned. The end date is the date when the strategy ends to be executed.
+
+End date is defined as a object datetime object so it should look like this: datetime(YYYY: int, MM: int, DD: int) where YYYY is the year, MM is the month and DD is the day.
+
+End date can also be `None` if there is no end date mentioned in the description.
+
+[RESPONSE INSTRUCTIONS]
+- Your task is to extract the end date from the given text and return it in the format: end_date=datetime(YYYY, MM, DD), where YYYY is the year, MM is the month and DD is the day and all are integers. If there is no end date in the description of the strategy return `None`.
+- If no end date is mentioned in the text, return `None`.
+- Do NOT include any additional text or explanations.
+- Respond only with `end_date=datetime(...)` or `None` — absolutely no other text.
+
+Here is the description of the strategy you need to extract the end date from:
+[DESCRIPTION]
+{description}

@@ -1,0 +1,26 @@
+Your task is to extract position type from the given text that is description of a trading Strategy. The position type is a classification of trades executed in the strategy. Trades can be long, short or combination of both.
+
+Position type is defined as a enum PositionTypeEnum which has three possible values: PositionTypeEnum.LONG, PositionTypeEnum.SHORT and PositionTypeEnum.LONG_SHORT_COMBINED.
+
+Position type does not mean that if there are buy and sell conditions it is a long-short combination strategy. It is a classification of trades executed in the strategy. If there are buy and sell conditions, it can be a long-short combination strategy or it can be a long strategy or short strategy. The position type is defined in the first part of the description explicitly and if not mentioned, it is a long strategy by default.
+
+[EXAMPLE 1]
+description: Would you be able to create a long strategy for HCA that take a short position when the Tenkan-sen fluctuates by 16.88 percent over 29 days and Open Price changes by 79.7 percent over 62 days after 89 days or Negative Directional Indicator is more than EOM is felicitous and buy when the Aroon Indicator Down falling trends for 87 days is true. Apply stop-loss at 24.86%. Apply take-profit at 16.66%. Set the interval to 3 months for the data. Set order size per trade to 6 percent of equity. Set trade commissions to 1 percent.
+response: position_type=PositionTypeEnum.LONG
+
+[EXAMPLE 2]
+description: Is it possible for you to create a short strategy for MSFT that take a short position when the Open moves by 47.73 percent over 25 days and Rate of Change sways by 70.94 percent over 95 days or TRIX with length is set to 30 oscillates by 61.6 percent over 95 days after 21 days is felicitous and longs when the price is in a 38.2% fibonacci level during a downtrend is proper. Set the start date equal to 2011-10-7. Set the initial capital to 118797$.
+response: position_type=PositionTypeEnum.SHORT
+
+[EXAMPLE 3]
+description: Can you provide a long-short combination strategy for VRTX that sells when the price is in a 50% fibonacci level during a downtrend or Choppiness Index where offset is 25, length is equal to 4 oscillates by 43.28 percent over 55 days is right and go long when the DI+ with length is equal to 67 fluctuates by 7.88 percent over 6 days or price is in a 50% fibonacci level during an uptrend and Mass Index shifts by 25.94 percent within a interval is met. Set the period to 2 years for the strategy. Set the interval as 3 months.
+response: position_type=PositionTypeEnum.LONG_SHORT_COMBINED
+
+[RESPONSE INSTRUCTIONS]
+- Your task is to extract the position type from the given text and return it in the format: position_type=PositionTypeEnum.value, where value is either LONG, SHORT or LONG_SHORT_COMBINED.
+- If no position type is mentioned in the text, return default value PositionTypeEnum.LONG.
+- Do NOT include any additional text or explanations.
+
+Here is the description of the strategy you need to extract the position type from:
+[DESCRIPTION]
+{description}

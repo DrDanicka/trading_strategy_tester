@@ -1,10 +1,11 @@
 from trading_strategy_tester.enums.llm_model_enum import LLMModel
 import ollama
+import os
 
 # ----- Import conditions -----
 
 # Import fibonacci retracement level conditions
-from trading_strategy_tester.conditions.fibonacci_retracement_levels_conditions.downtrend_fib_retracement import DowntrendFibRetracementLevelCondition
+from trading_strategy_tester.conditions.fibonacci_retracement_levels_conditions.downtrend_fib_retracement_level import DowntrendFibRetracementLevelCondition
 from trading_strategy_tester.conditions.fibonacci_retracement_levels_conditions.uptrend_fib_retracement_level import UptrendFibRetracementLevelCondition
 # Import logical conditions
 from trading_strategy_tester.conditions.logical_conditions.or_condition import OR
@@ -20,6 +21,7 @@ from trading_strategy_tester.conditions.stoploss_takeprofit.take_profit import T
 from trading_strategy_tester.conditions.threshold_conditions.greater_than_condition import GreaterThanCondition
 from trading_strategy_tester.conditions.threshold_conditions.less_than_condition import LessThanCondition
 from trading_strategy_tester.conditions.threshold_conditions.cross_over_condition import CrossOverCondition
+from trading_strategy_tester.conditions.threshold_conditions.cross_under_condition import CrossUnderCondition
 # Import trend conditions
 from trading_strategy_tester.conditions.trend_conditions.uptrend_for_x_days_condition import UptrendForXDaysCondition
 from trading_strategy_tester.conditions.trend_conditions.downtrend_for_x_days_condition import DowntrendForXDaysCondition
@@ -35,21 +37,19 @@ from trading_strategy_tester.enums.source_enum import SourceType
 
 # ----- Import trades -----
 from trading_strategy_tester.trade.order_size.contracts import Contracts
-from trading_strategy_tester.trade.order_size.order_size import OrderSize
 from trading_strategy_tester.trade.order_size.percent_of_equity import PercentOfEquity
 from trading_strategy_tester.trade.order_size.usd import USD
 from trading_strategy_tester.trade.trade_commissions.money_commissions import MoneyCommissions
 from trading_strategy_tester.trade.trade_commissions.percentage_commissions import PercentageCommissions
-from trading_strategy_tester.trade.trade_commissions.trade_commissions import TradeCommissions
 
 # ----- Import trading series -----
 from trading_strategy_tester.trading_series.adx_series.adx_series import ADX
 from trading_strategy_tester.trading_series.aroon_series.aroon_up_series import AROON_UP
 from trading_strategy_tester.trading_series.aroon_series.aroon_down_series import AROON_DOWN
 from trading_strategy_tester.trading_series.atr_series.atr_series import ATR
-from trading_strategy_tester.trading_series.bb_series.bb_lower_series import BBLOWER
-from trading_strategy_tester.trading_series.bb_series.bb_upper_series import BBUPPER
-from trading_strategy_tester.trading_series.bb_series.bb_middle_series import BBMIDDLE
+from trading_strategy_tester.trading_series.bb_series.bb_lower_series import BB_LOWER
+from trading_strategy_tester.trading_series.bb_series.bb_upper_series import BB_UPPER
+from trading_strategy_tester.trading_series.bb_series.bb_middle_series import BB_MIDDLE
 from trading_strategy_tester.trading_series.bbp_series.bbp_series import BBP
 from trading_strategy_tester.trading_series.candlestick_series.hammer_series import HAMMER
 from trading_strategy_tester.trading_series.cci_series.cci_series import CCI
@@ -104,6 +104,8 @@ from trading_strategy_tester.trading_series.willr_series.willr_series import WIL
 from trading_strategy_tester.strategy.strategy import Strategy
 
 from datetime import datetime
+from trading_strategy_tester.training_data.training_data import FIELDS
+from trading_strategy_tester.validation.strategy_validator import validate_strategy_string
 
 namespace = {
     'DowntrendFibRetracementLevelCondition': DowntrendFibRetracementLevelCondition,
@@ -118,6 +120,7 @@ namespace = {
     'GreaterThanCondition': GreaterThanCondition,
     'LessThanCondition': LessThanCondition,
     'CrossOverCondition': CrossOverCondition,
+    'CrossUnderCondition': CrossUnderCondition,
     'UptrendForXDaysCondition': UptrendForXDaysCondition,
     'DowntrendForXDaysCondition': DowntrendForXDaysCondition,
     'FibonacciLevels': FibonacciLevels,
@@ -128,19 +131,17 @@ namespace = {
     'StopLossType': StopLossType,
     'SourceType': SourceType,
     'Contracts': Contracts,
-    'OrderSize': OrderSize,
     'PercentOfEquity': PercentOfEquity,
     'USD': USD,
     'MoneyCommissions': MoneyCommissions,
     'PercentageCommissions': PercentageCommissions,
-    'TradeCommissions': TradeCommissions,
     'ADX': ADX,
     'AROON_UP': AROON_UP,
     'AROON_DOWN': AROON_DOWN,
     'ATR': ATR,
-    'BBLOWER': BBLOWER,
-    'BBUPPER': BBUPPER,
-    'BBMIDDLE': BBMIDDLE,
+    'BB_LOWER': BB_LOWER,
+    'BB_UPPER': BB_UPPER,
+    'BB_MIDDLE': BB_MIDDLE,
     'BBP': BBP,
     'HAMMER': HAMMER,
     'CCI': CCI,
@@ -194,43 +195,92 @@ namespace = {
     'datetime': datetime
 }
 
-'''
-Delete After strats:
-
-Strategy(ticker='AAPL',position_type=PositionTypeEnum.LONG,buy_condition=CrossOverCondition(RSI('AAPL'),CONST(30)),sell_condition=CrossOverCondition(CONST(70),RSI('AAPL')),start_date=datetime(2020, 1, 1),end_date=datetime(2025, 1, 1))
-
-Strategy(ticker='TSLA', position_type=PositionTypeEnum.LONG, buy_condition=OR( CrossOverCondition(first_series=RSI('TSLA'), second_series=CONST(30)), LessThanCondition(first_series=EMA('TSLA'), second_series=CLOSE('TSLA'))), sell_condition=OR( CrossOverCondition(first_series=CONST(70), second_series=RSI('TSLA')), IntraIntervalChangeOfXPercentCondition(series=CLOSE('TSLA'), percent=5)), stop_loss=StopLoss(percentage=5, stop_loss_type=StopLossType.NORMAL), take_profit=TakeProfit(percentage=10), start_date=datetime(2020, 1, 1), end_date=datetime(2024, 1, 1), initial_capital=1000)
-
-'''
-
-def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_1B):
+def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
     '''
     This function processes the prompt and returns the result.
     '''
     client = ollama.Client()
 
     # Process the prompt using the specified LLM model
-    if llm_model in [
-        LLMModel.LLAMA_1B,
-        LLMModel.QWEN_0_5B
-    ]:
+    if llm_model == LLMModel.LLAMA_ALL:
         # Process the prompt using llama
         response = client.generate(
             model = llm_model.value,
-            prompt = prompt
+            prompt = prompt,
+            options={
+                'temperature': 0,
+            }
         )
         result = response.response
-    elif llm_model == LLMModel.CHAT_GPT_API:
-        # Process the prompt using chat-gpt-api
+    elif llm_model == LLMModel.LLAMA_FIELDS:
+        # Process the prompt using llama models trained on fields
+        responses = []
+        for field in FIELDS:
+            llm_model_value = llm_model.value
+            if field == 'conditions':
+                llm_model_value = llm_model_value.replace('1B', '3B')
+
+            response = client.generate(
+                model = f'{llm_model_value}{field}',
+                prompt = prompt,
+                options={
+                    'temperature': 0,
+                }
+            )
+            if response.response != '':
+                responses.append(response.response)
+        result = 'Strategy(' + ', '.join(responses) + ')'
+    elif llm_model == LLMModel.LLAMA_ALL_RAG:
+        # Process the prompt using RAG for all fields
+        script_dir = os.path.dirname(__file__)
+        prompt_path = os.path.join(script_dir, 'prompts')
+
+        # TODO : Implement RAG for all fields
+
+        response = client.generate(
+            model = llm_model.value,
+        )
+
         result = ...
+    elif llm_model == LLMModel.LLAMA_FIELDS_RAG:
+        # Process the prompt using RAG for fields
+        responses = []
+
+        script_dir = os.path.dirname(__file__)
+        prompt_path = os.path.join(script_dir, 'prompts')
+
+        for field in FIELDS:
+            current_prompt_path = os.path.join(prompt_path, f'{field}_prompt.txt')
+            with open(current_prompt_path, 'r') as f:
+                rag_prompt = f.read().format(description=prompt)
+
+            response = client.generate(
+                model = 'llama3.2',
+                prompt=rag_prompt,
+                options={
+                    'temperature': 0,
+                }
+            )
+            if response.response != '' or str.lower(response.response).endswith('none'):
+                responses.append(response.response)
+
+        result = 'Strategy(' + ', '.join(responses) + ')'
     elif llm_model == LLMModel.STRATEGY_OBJECT:
-        # TODO add validation
+        # Just take the strategy object as is
         result = prompt
     else:
         raise ValueError("Invalid LLM model specified")
 
+    print(result)
+    # Validate the result
+    validation_result, strategy_object, changes = validate_strategy_string(result)
     # Evaluate the result
-    strat : Strategy = eval(result, namespace)
-    strat.execute()
+    if validation_result:
+        strat : Strategy = eval(strategy_object, namespace)
+        strat.execute()
+    else:
+        print("Validation failed")
+        print(changes)
+        return None, None, None
 
     return strat.get_trades(), strat.get_graphs(), strat.get_statistics()

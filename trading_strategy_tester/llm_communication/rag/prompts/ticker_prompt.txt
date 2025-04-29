@@ -1,0 +1,22 @@
+Your task is to extract the ticker symbol from the given text that is description of a trading Strategy. The ticker symbol is a unique identifier for a publicly traded company and is typically composed of uppercase letters.
+
+[EXAMPLE 1]
+description: Would you kindly create a  strategy for KO that longs when the Price Volume Trend sways by 34.06 percent over 20 days or BB MIDDLE oscillates by 84.68 percent over 78 days or Senkou Span B having length is 71 is lower than EMA having offset is equal to 9 is to the point and sells when the HAMMER shifts by 37.04 percent within a interval is right. Apply take-profit at 26.75%. Set the interval to 5 days for the data. I have 398887$ as the initial capital. Set trade commissions to 6 percent.
+response: ticker='KO'
+
+[EXAMPLE 2]
+description: Please design a strategy for MAR that shorts when the Donchain Channel Basis spins by 94.61 percent over 11 days is valid and purchase when the Coppock Curve with length equals 20, short_roc_length is set to 88, long_roc_length is equal to 77 sways by 59.57 percent within a interval or Mass Index with length is 15 shifts by 45.38 percent over 93 days and Senkou Span A where displacement is 20 twists by 95.26 percent over 68 days is felicitous. Apply take-profit at 47.35%. Set the start date to 2008-9-28 for the strategy. Set the end date equal to 2023-11-21. Set the interval to 1 month for the data. Set commissions to 4 percent.
+response: ticker='MAR'
+
+[EXAMPLE 3]
+description: Could you outline a  strategy for ES that take a short position when the Ichinoku Leading Span A having displacement is 52 is bigger than Commodity Channel Index having length equals 87 or price is at a 23.6% fibonacci level during a downtrend or price is at the 50% fibonacci level during an uptrend is precise and buys when the price is in a 38.2% fibonacci level during an uptrend or BB UPPER with smoothing type set to SMA, std_dev equals 38.54 changes by 70.84 percent over 1 days or price is at a 0% fibonacci level during a downtrend is seemly. Apply trailing stop-loss at 47.6%. I have 706477$ as the initial capital. Set order size per trade to 26 percent of equity. Set commissions to 1 percent.
+response: ticker='ES'
+
+[RESPONSE INSTRUCTIONS]
+- Provide the ticker symbol in uppercase letters and return it in format: ticker='ticker_symbol' where ticker_symbol is the extracted ticker symbol.
+- If no ticker symbol is found, return default value: ticker='AAPL'
+- Do NOT include any additional text or explanations.
+
+Here is the description of the strategy you need to extract the ticker symbol from:
+[DESCRIPTION]
+{description}
