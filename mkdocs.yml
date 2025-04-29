@@ -36,6 +36,7 @@ nav:
           - Trading plot: dev/modules/trading_plot.md
           - Trade: dev/modules/trade.md
           - Statistics: dev/modules/statistics.md
+          - Validation: dev/modules/validation.md
       - Enums:
           - SourceType: dev/modules/enums/source.md
           - SmoothingType: dev/modules/enums/smoothing.md
