@@ -7,21 +7,11 @@ Interval is defined as a enum Interval which takes 5 possible values:
 - Interval.ONE_MONTH
 - Interval.THREE_MONTHS
 
-[EXAMPLE 1]
-description: Would you kindly create a  strategy for KO that longs when the Price Volume Trend sways by 34.06 percent over 20 days or BB MIDDLE oscillates by 84.68 percent over 78 days or Senkou Span B having length is 71 is lower than EMA having offset is equal to 9 is to the point and sells when the HAMMER shifts by 37.04 percent within a interval is right. Apply take-profit at 26.75%. Set the interval to 5 days for the data. I have 398887$ as the initial capital. Set trade commissions to 6 percent.
-response: interval=Interval.FIVE_DAYS
-
-[EXAMPLE 2]
-description: Please design a strategy for MAR that shorts when the Donchain Channel Basis spins by 94.61 percent over 11 days is valid and purchase when the Coppock Curve with length equals 20, short_roc_length is set to 88, long_roc_length is equal to 77 sways by 59.57 percent within a interval or Mass Index with length is 15 shifts by 45.38 percent over 93 days and Senkou Span A where displacement is 20 twists by 95.26 percent over 68 days is felicitous. Apply take-profit at 47.35%. Set the start date to 2008-9-28 for the strategy. Set the end date equal to 2023-11-21. Set the interval to 1 month for the data. Set commissions to 4 percent.
-response: interval=Interval.ONE_MONTH
-
-[EXAMPLE 3]
-description: Can you structure a long strategy for CSGP that purchase when the MACD Signal having fast_length is 31, slow_length equals 51 is smaller than MACD having slow_length is equal to 59, source set to Open, smoothing type set to EMA and DC basis having length is 57 twists by 0.88 percent over 71 days and Donchain Channel Upper moves below Positive Volume Index is proper and sell off when the Donchain Channel Upper sways by 82.87 percent over 6 days after 99 days and Chaikin osc. having slow_length is equal to 15, fast_length equals 89 is in a downtrend for 48 days or Commodity Channel Index where length is 6 falling trends for 32 days is accurate. Set normal stop-loss at 1.34 percent. Set take-profit at 46.23 percent. Go into every trade with 48 contracts. Set trade commissions to 3 percent.
-response: None
+Interval can also be `None` if there is no interval mentioned in the text.
 
 [RESPONSE INSTRUCTIONS]
-- Your task is to extract the interval from the given text and return it in the format: interval=Interval.value, where value is one of the possible values listed above.
-- If no interval is mentioned in the text, return None
+- Your task is to extract the interval from the given text if exists and return it in the format: interval=Interval.value, where value is one of the possible values listed above.
+- If no interval is mentioned in the text, return `None`
 - Do NOT include any additional text or explanations
 
 Here is the description of the strategy you need to extract the interval from:

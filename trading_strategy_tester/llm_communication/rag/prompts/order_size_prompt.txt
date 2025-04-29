@@ -5,28 +5,13 @@ Order size is of type OrderSize which is an abstract class with 3 subclasses:
 - Contracts(value: float)
 - PercentOfEquity(value: float)
 
-value: is a float value that represents the order size in USD, number of contracts or percentage of equity respectively.
+value: is a float value that represents the order size in USD, number of contracts or percentage of equity respectively. If there is X percent of equity, the value should be X.
 
-[EXAMPLE 1]
-description: Can you structure a long strategy for CSGP that purchase when the MACD Signal having fast_length is 31, slow_length equals 51 is smaller than MACD having slow_length is equal to 59, source set to Open, smoothing type set to EMA and DC basis having length is 57 twists by 0.88 percent over 71 days and Donchain Channel Upper moves below Positive Volume Index is proper and sell off when the Donchain Channel Upper sways by 82.87 percent over 6 days after 99 days and Chaikin osc. having slow_length is equal to 15, fast_length equals 89 is in a downtrend for 48 days or Commodity Channel Index where length is 6 falling trends for 32 days is accurate. Set normal stop-loss at 1.34 percent. Set take-profit at 46.23 percent. Go into every trade with 48 contracts. Set trade commissions to 3 percent.
-response: order_size=Contracts(48)
-
-[EXAMPLE 2]
-description: Could you outline a  strategy for ES that take a short position when the Ichinoku Leading Span A having displacement is 52 is bigger than Commodity Channel Index having length equals 87 or price is at a 23.6% fibonacci level during a downtrend or price is at the 50% fibonacci level during an uptrend is precise and buys when the price is in a 38.2% fibonacci level during an uptrend or BB UPPER with smoothing type set to SMA, std_dev equals 38.54 changes by 70.84 percent over 1 days or price is at a 0% fibonacci level during a downtrend is seemly. Apply trailing stop-loss at 47.6%. I have 706477$ as the initial capital. Set order size per trade to 26 percent of equity. Set commissions to 1 percent.
-response: order_size=PercentOfEquity(26)
-
-[EXAMPLE 3]
-description: Would you mind crafting a short strategy for DOV that goes short when the Choppiness Index with length is equal to 86, offset is equal to 98 is in a negative trend for 81 days is befitting and purchases when the Negative Directional Indicator having length is set to 33 turns by 46.09 percent over 94 days is met. Use take-profit at 3.12 percent. I have 700143$ to invest.
-response: None
-
-[EXAMPLE 4]
-description: Would you be able to create a long strategy for HCA that take a short position when the Tenkan-sen fluctuates by 16.88 percent over 29 days and Open Price changes by 79.7 percent over 62 days after 89 days or Negative Directional Indicator is more than EOM is felicitous and buy when the Aroon Indicator Down falling trends for 87 days is true. Apply stop-loss at 24.86%. Apply take-profit at 16.66%. Set the interval to 3 months for the data. Set order size per trade to 47628 USD. Set trade commissions to 1 percent.
-response: order_size=USD(47628)
+Order size can also be `None` if there is no order size mentioned in the text.
 
 [RESPONSE INSTRUCTIONS]
 - Your task is to extract the order size from the given text and return it in the format: order_size=OrderSizeType(value), where OrderSizeType is one of the subclasses (USD, Contracts, PercentOfEquity) and value is the extracted value.
-- Do NOT write 'value=' before the extracted value.
-- If no order size is mentioned in the text, return None
+- If no order size is mentioned in the text, return `None`
 - Do NOT include any additional text or explanations
 
 Here is the description of the strategy you need to extract the order size from:
