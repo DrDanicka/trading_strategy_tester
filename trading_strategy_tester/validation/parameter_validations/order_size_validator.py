@@ -29,7 +29,17 @@ def validate_order_size(order_size, changes: dict, logs: bool) -> (bool, str, di
         if order_size_id not in ['Contracts', 'USD', 'PercentOfEquity']:
             raise Exception("Invalid order size type")
 
-        order_size_value = order_size.args[0].value
+        if len(order_size.args) == 1 and len(order_size.keywords) == 0:
+            order_size_value = order_size.args[0].value
+        elif len(order_size.args) == 0 and len(order_size.keywords) == 1:
+            if 'value' != order_size.keywords[0].arg:
+                message = f"Missing 'value' keyword in order_size function call. Defaulting to 'Contracts(1)'."
+                raise Exception(message)
+            else:
+                order_size_value = order_size.keywords[0].value.value
+        else:
+            message = f"Invalid number of arguments in order_size function call. Defaulting to 'Contracts(1)'."
+            raise Exception(message)
 
         if not isinstance(order_size_value, (int, float)):
             message = f"order_size argument should be a number. Defaulting to 'Contracts(1)'."
