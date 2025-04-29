@@ -21,3 +21,6 @@ class TestingSeries(TradingSeries):
 
     def get_name(self) -> str:
         return self.name
+
+    def to_dict(self) -> dict:
+        return {}
