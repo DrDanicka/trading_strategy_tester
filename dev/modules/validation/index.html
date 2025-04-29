@@ -8,21 +8,25 @@
       
       
       
-        <link rel="canonical" href="https://DrDanicka.github.io/trading_strategy_tester/dev/modules/trading_series/dpo/">
+        <link rel="canonical" href="https://DrDanicka.github.io/trading_strategy_tester/dev/modules/validation/">
       
       
+        <link rel="prev" href="../statistics/">
       
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+        <link rel="next" href="../enums/source/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
     
     
       
-        <title>DPO — Detrended Price Oscillator Trading Series - Trading Strategy Tester</title>
+        <title>Validation - Trading Strategy Tester</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.2afb09e1.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2afb09e1.min.css">
       
       
 
@@ -41,7 +45,7 @@
       
     
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -60,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#dpo-detrended-price-oscillator-trading-series" class="md-skip">
+        <a href="#validation-module" class="md-skip">
           Skip to content
         </a>
       
@@ -74,7 +78,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="Trading Strategy Tester" class="md-header__button md-logo" aria-label="Trading Strategy Tester" data-md-component="logo">
+    <a href="../../.." title="Trading Strategy Tester" class="md-header__button md-logo" aria-label="Trading Strategy Tester" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -94,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              DPO — Detrended Price Oscillator Trading Series
+              Validation
             
           </span>
         </div>
@@ -181,7 +185,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -202,7 +206,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../user/" class="md-tabs__link">
+        <a href="../../../user/" class="md-tabs__link">
           
   
   
@@ -218,11 +222,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
   
@@ -256,7 +262,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Trading Strategy Tester" class="md-nav__button md-logo" aria-label="Trading Strategy Tester" data-md-component="logo">
+    <a href="../../.." title="Trading Strategy Tester" class="md-nav__button md-logo" aria-label="Trading Strategy Tester" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -286,7 +292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -351,7 +357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../user/" class="md-nav__link">
+      <a href="../../../user/" class="md-nav__link">
         
   
   
@@ -378,26 +384,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -410,7 +419,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Developer Documentation
@@ -424,7 +433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -444,8 +453,10 @@
                 
   
   
+    
   
   
+  
     
     
     
@@ -454,13 +465,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
         
           
           <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
@@ -476,7 +485,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             Modules
@@ -490,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../download/" class="md-nav__link">
+      <a href="../download/" class="md-nav__link">
         
   
   
@@ -556,7 +565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../strategy/" class="md-nav__link">
+      <a href="../strategy/" class="md-nav__link">
         
   
   
@@ -622,7 +631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../strategy_parameters/position_type.md" class="md-nav__link">
+      <a href="../strategy_parameters/position_type.md" class="md-nav__link">
         
   
   
@@ -688,7 +697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../conditions/" class="md-nav__link">
+      <a href="../conditions/" class="md-nav__link">
         
   
   
@@ -711,7 +720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../conditions/fibonacci_retracement_levels_conditions/" class="md-nav__link">
+      <a href="../conditions/fibonacci_retracement_levels_conditions/" class="md-nav__link">
         
   
   
@@ -734,7 +743,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../conditions/logical_conditions/" class="md-nav__link">
+      <a href="../conditions/logical_conditions/" class="md-nav__link">
         
   
   
@@ -757,7 +766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../conditions/parameterized_conditions/" class="md-nav__link">
+      <a href="../conditions/parameterized_conditions/" class="md-nav__link">
         
   
   
@@ -780,7 +789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../conditions/threshold_conditions/" class="md-nav__link">
+      <a href="../conditions/threshold_conditions/" class="md-nav__link">
         
   
   
@@ -803,7 +812,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../conditions/trend_conditions/" class="md-nav__link">
+      <a href="../conditions/trend_conditions/" class="md-nav__link">
         
   
   
@@ -834,7 +843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../strategy_parameters/stop_loss/" class="md-nav__link">
+      <a href="../strategy_parameters/stop_loss/" class="md-nav__link">
         
   
   
@@ -857,7 +866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../strategy_parameters/take_profit/" class="md-nav__link">
+      <a href="../strategy_parameters/take_profit/" class="md-nav__link">
         
   
   
@@ -880,7 +889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../strategy_parameters/order_size/" class="md-nav__link">
+      <a href="../strategy_parameters/order_size/" class="md-nav__link">
         
   
   
@@ -903,7 +912,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../strategy_parameters/trade_commissions/" class="md-nav__link">
+      <a href="../strategy_parameters/trade_commissions/" class="md-nav__link">
         
   
   
@@ -942,7 +951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../indicators/" class="md-nav__link">
+      <a href="../indicators/" class="md-nav__link">
         
   
   
@@ -965,7 +974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../trading_series/" class="md-nav__link">
         
   
   
@@ -988,7 +997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../trading_plot/" class="md-nav__link">
+      <a href="../trading_plot/" class="md-nav__link">
         
   
   
@@ -1011,7 +1020,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../trade/" class="md-nav__link">
+      <a href="../trade/" class="md-nav__link">
         
   
   
@@ -1034,7 +1043,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../statistics/" class="md-nav__link">
+      <a href="../statistics/" class="md-nav__link">
         
   
   
@@ -1054,10 +1063,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../validation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Validation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1068,6 +1099,44 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1131,7 +1200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../enums/source/" class="md-nav__link">
+      <a href="../enums/source/" class="md-nav__link">
         
   
   
@@ -1154,7 +1223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../enums/smoothing/" class="md-nav__link">
+      <a href="../enums/smoothing/" class="md-nav__link">
         
   
   
@@ -1177,7 +1246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../enums/position_type/" class="md-nav__link">
+      <a href="../enums/position_type/" class="md-nav__link">
         
   
   
@@ -1200,7 +1269,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../enums/fibonacci_levels/" class="md-nav__link">
+      <a href="../enums/fibonacci_levels/" class="md-nav__link">
         
   
   
@@ -1223,7 +1292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../enums/interval/" class="md-nav__link">
+      <a href="../enums/interval/" class="md-nav__link">
         
   
   
@@ -1246,7 +1315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../enums/period/" class="md-nav__link">
+      <a href="../enums/period/" class="md-nav__link">
         
   
   
@@ -1320,7 +1389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../examples/index.md" class="md-nav__link">
+      <a href="../../examples/index.md" class="md-nav__link">
         
   
   
@@ -1351,7 +1420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../testing/" class="md-nav__link">
+      <a href="../../testing/" class="md-nav__link">
         
   
   
@@ -1401,27 +1470,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#structure" class="md-nav__link">
     <span class="md-ellipsis">
-      Parameters
+      Structure
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
+  <a href="#how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
-      Description
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example Usage
+      How It Works
     </span>
   </a>
   
@@ -1446,33 +1506,62 @@
   
 
 
-<h1 id="dpo-detrended-price-oscillator-trading-series"><code>DPO</code> — Detrended Price Oscillator Trading Series</h1>
-<p>The <code>DPO</code> trading series represents the Detrended Price Oscillator, used to remove long-term trends from prices and focus on short-term cycles.</p>
-<p>It is built upon the <a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/indicators/trend/dpo.py">Detrended Price Oscillator indicator</a> implementation from the <a href="../../indicators/">indicators module</a>.</p>
+<h1 id="validation-module">Validation Module</h1>
+<p>The <code>validation</code> module is responsible for ensuring that trading strategies and their parameters are correctly defined before execution. This helps prevent simulation errors and enforces logical consistency across strategies.</p>
+<p>Main objective of this module is to validate outputs from the LLMs (large language models) and ensure that the strategies are executable. It checks for required fields, correct types and syntax. In some cases when it's possible to fix the output by obeying not required fields, the model will do it. </p>
+<p>This module is composed of two main parts:
+- Validation of entire strategies
+- Validation of individual parameters</p>
 <hr />
-<h2 id="parameters">Parameters</h2>
-<pre><code class="language-python">DPO(
-    ticker: str,
-    length: int = 20
-)
-</code></pre>
+<h2 id="structure">Structure</h2>
 <ul>
-<li><strong><code>ticker</code></strong> (<code>str</code>): Asset ticker symbol (e.g., <code>"AAPL"</code>).</li>
-<li><strong><code>length</code></strong> (<code>int</code>): Lookback period to detrend the price series. Default is 20.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/implemented_objects.py"><strong><code>implemented_objects.py</code></strong></a></li>
+<li>
+<p>Defines supported indicators, conditions, and other elements that are allowed in strategy definitions.</p>
+</li>
+<li>
+<p><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/strategy_validator.py"><strong><code>strategy_validator.py</code></strong></a></p>
+</li>
+<li>
+<p>Provides functionality to validate the overall structure of a trading strategy, ensuring that required fields are present and correctly configured. It provides this functionality by function <code>validate_strategy_string(strategy_str: str, logs: bool = False)</code> which takes a strategy string and returns a boolean indicating whether the strategy is valid or not. It also returns a dictionary of errors or changes made to the strategy string.</p>
+</li>
+<li>
+<p><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/"><strong><code>parameter_validations/</code></strong></a></p>
+</li>
+<li>Contains specialized validators for different types of parameters:<ul>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/order_size_validator.py"><strong><code>order_size_validator.py</code></strong></a>: Validates order size parameters.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/stop_loss_validator.py"><strong><code>stop_loss_validator.py</code></strong></a>: Validates stop loss settings.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/take_profit_validator.py"><strong><code>take_profit_validator.py</code></strong></a>: Validates take profit settings.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/ticker_validator.py"><strong><code>ticker_validator.py</code></strong></a>: Ensures ticker symbols are valid.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/date_validator.py"><strong><code>date_validator.py</code></strong></a>: Checks the validity of start and end dates.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/period_validator.py"><strong><code>period_validator.py</code></strong></a>: Validates time periods.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/capital_validator.py"><strong><code>capital_validator.py</code></strong></a>: Ensures initial capital settings are realistic.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/position_type_validator.py"><strong><code>position_type_validator.py</code></strong></a>: Validates if the strategy is for long/short/both positions.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/interval_validator.py"><strong><code>interval_validator.py</code></strong></a>: Ensures the trading interval is properly defined.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/trade_commissions_validator.py"><strong><code>trade_commissions_validator.py</code></strong></a>: Validates trade commission structures.</li>
+<li><a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/validation/parameter_validations/condition_validator.py"><strong><code>condition_validator.py</code></strong></a>: Verifies that trading conditions are syntactically and logically correct.</li>
+</ul>
+</li>
 </ul>
 <hr />
-<h2 id="description">Description</h2>
+<h2 id="how-it-works">How It Works</h2>
+<ol>
+<li><strong>Strategy Validation:</strong></li>
+<li>
+<p>The <code>strategy_validator</code> reads a strategy definition and checks:</p>
 <ul>
-<li>Helps identify short-term cycles without the influence of larger trends.</li>
-<li>Useful for timing entries and exits based on price oscillations.</li>
+<li>All required fields are present.</li>
+<li>Fields conform to expected types and value ranges.</li>
+<li>Conditions reference only implemented indicators or functions.</li>
 </ul>
+</li>
+<li>
+<p><strong>Parameter Validation:</strong></p>
+</li>
+<li>Each parameter (e.g., stop loss, ticker, capital) is independently validated by its corresponding validator module.</li>
+<li>This modular approach allows for flexible extension if new parameters are introduced.</li>
+</ol>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
-<pre><code class="language-python">DPO(
-    ticker=&quot;AAPL&quot;,
-    length=20
-)
-</code></pre>
 
 
 
@@ -1521,10 +1610,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.expand", "navigation.tabs", "search.suggest", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.expand", "navigation.tabs", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
   </body>
