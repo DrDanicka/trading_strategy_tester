@@ -1,0 +1,26 @@
+Loading pretrained model
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 33756.97it/s]
+Loading datasets
+Training
+Trainable parameters: 78.745% (973.144M/1235.814M)
+Starting training..., iters: 100
+Iter 1: Val loss 5.038, Val took 19.546s
+Iter 10: Train loss 2.414, Learning Rate 1.000e-05, It/sec 0.151, Tokens/sec 102.828, Trained Tokens 6800, Peak mem 10.746 GB
+Iter 20: Val loss 1.301, Val took 17.313s
+Iter 20: Train loss 1.326, Learning Rate 1.000e-05, It/sec 0.095, Tokens/sec 60.078, Trained Tokens 13128, Peak mem 10.746 GB
+Iter 30: Train loss 1.188, Learning Rate 1.000e-05, It/sec 0.105, Tokens/sec 71.735, Trained Tokens 19928, Peak mem 10.746 GB
+Iter 40: Val loss 1.087, Val took 16.195s
+Iter 40: Train loss 1.096, Learning Rate 1.000e-05, It/sec 0.082, Tokens/sec 59.706, Trained Tokens 27184, Peak mem 11.276 GB
+Iter 50: Train loss 1.033, Learning Rate 1.000e-05, It/sec 0.107, Tokens/sec 69.382, Trained Tokens 33664, Peak mem 11.276 GB
+Iter 60: Val loss 1.029, Val took 15.151s
+Iter 60: Train loss 1.031, Learning Rate 1.000e-05, It/sec 0.088, Tokens/sec 66.939, Trained Tokens 41284, Peak mem 11.276 GB
+Iter 70: Train loss 0.985, Learning Rate 1.000e-05, It/sec 0.149, Tokens/sec 101.895, Trained Tokens 48120, Peak mem 11.276 GB
+Iter 80: Val loss 0.977, Val took 13.589s
+Iter 80: Train loss 0.952, Learning Rate 1.000e-05, It/sec 0.158, Tokens/sec 105.214, Trained Tokens 54772, Peak mem 11.276 GB
+Iter 90: Train loss 0.937, Learning Rate 1.000e-05, It/sec 0.279, Tokens/sec 179.502, Trained Tokens 61196, Peak mem 11.276 GB
+Iter 100: Val loss 0.953, Val took 16.884s
+Iter 100: Train loss 0.957, Learning Rate 1.000e-05, It/sec 0.248, Tokens/sec 172.598, Trained Tokens 68152, Peak mem 11.276 GB
+Iter 100: Saved adapter weights to adapters/adapters_llama3-2-1B_tst_ft-period/adapters.safetensors and adapters/adapters_llama3-2-1B_tst_ft-period/0000100_adapters.safetensors.
+Saved final weights to adapters/adapters_llama3-2-1B_tst_ft-period/adapters.safetensors.

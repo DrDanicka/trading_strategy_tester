@@ -1,0 +1,26 @@
+Loading pretrained model
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 76783.60it/s]
+Loading datasets
+Training
+Trainable parameters: 78.745% (973.144M/1235.814M)
+Starting training..., iters: 100
+Iter 1: Val loss 5.046, Val took 15.056s
+Iter 10: Train loss 2.411, Learning Rate 1.000e-05, It/sec 0.078, Tokens/sec 53.233, Trained Tokens 6831, Peak mem 10.746 GB
+Iter 20: Val loss 1.247, Val took 16.956s
+Iter 20: Train loss 1.306, Learning Rate 1.000e-05, It/sec 0.103, Tokens/sec 65.242, Trained Tokens 13191, Peak mem 10.746 GB
+Iter 30: Train loss 1.150, Learning Rate 1.000e-05, It/sec 0.155, Tokens/sec 106.034, Trained Tokens 20023, Peak mem 10.746 GB
+Iter 40: Val loss 1.069, Val took 15.315s
+Iter 40: Train loss 1.072, Learning Rate 1.000e-05, It/sec 0.098, Tokens/sec 71.096, Trained Tokens 27311, Peak mem 11.291 GB
+Iter 50: Train loss 0.986, Learning Rate 1.000e-05, It/sec 0.147, Tokens/sec 95.896, Trained Tokens 33819, Peak mem 11.291 GB
+Iter 60: Val loss 1.003, Val took 15.550s
+Iter 60: Train loss 1.034, Learning Rate 1.000e-05, It/sec 0.064, Tokens/sec 49.272, Trained Tokens 41475, Peak mem 11.291 GB
+Iter 70: Train loss 0.945, Learning Rate 1.000e-05, It/sec 0.090, Tokens/sec 61.815, Trained Tokens 48335, Peak mem 11.291 GB
+Iter 80: Val loss 0.970, Val took 14.299s
+Iter 80: Train loss 0.988, Learning Rate 1.000e-05, It/sec 0.120, Tokens/sec 80.349, Trained Tokens 55015, Peak mem 11.291 GB
+Iter 90: Train loss 0.957, Learning Rate 1.000e-05, It/sec 0.292, Tokens/sec 188.378, Trained Tokens 61467, Peak mem 11.291 GB
+Iter 100: Val loss 0.987, Val took 17.774s
+Iter 100: Train loss 0.960, Learning Rate 1.000e-05, It/sec 0.200, Tokens/sec 139.719, Trained Tokens 68439, Peak mem 11.291 GB
+Iter 100: Saved adapter weights to adapters/adapters_llama3-2-1B_tst_ft-interval/adapters.safetensors and adapters/adapters_llama3-2-1B_tst_ft-interval/0000100_adapters.safetensors.
+Saved final weights to adapters/adapters_llama3-2-1B_tst_ft-interval/adapters.safetensors.

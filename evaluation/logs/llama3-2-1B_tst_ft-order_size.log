@@ -1,0 +1,26 @@
+Loading pretrained model
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 21385.87it/s]
+Loading datasets
+Training
+Trainable parameters: 78.745% (973.144M/1235.814M)
+Starting training..., iters: 100
+Iter 1: Val loss 5.031, Val took 15.537s
+Iter 10: Train loss 2.362, Learning Rate 1.000e-05, It/sec 0.137, Tokens/sec 93.891, Trained Tokens 6864, Peak mem 10.746 GB
+Iter 20: Val loss 1.306, Val took 15.761s
+Iter 20: Train loss 1.318, Learning Rate 1.000e-05, It/sec 0.158, Tokens/sec 100.790, Trained Tokens 13256, Peak mem 10.746 GB
+Iter 30: Train loss 1.160, Learning Rate 1.000e-05, It/sec 0.068, Tokens/sec 46.812, Trained Tokens 20132, Peak mem 10.746 GB
+Iter 40: Val loss 1.077, Val took 17.058s
+Iter 40: Train loss 1.053, Learning Rate 1.000e-05, It/sec 0.072, Tokens/sec 52.997, Trained Tokens 27462, Peak mem 11.420 GB
+Iter 50: Train loss 0.994, Learning Rate 1.000e-05, It/sec 0.146, Tokens/sec 95.485, Trained Tokens 34010, Peak mem 11.420 GB
+Iter 60: Val loss 1.017, Val took 17.723s
+Iter 60: Train loss 1.022, Learning Rate 1.000e-05, It/sec 0.062, Tokens/sec 47.923, Trained Tokens 41718, Peak mem 11.420 GB
+Iter 70: Train loss 0.982, Learning Rate 1.000e-05, It/sec 0.112, Tokens/sec 77.519, Trained Tokens 48619, Peak mem 11.420 GB
+Iter 80: Val loss 0.967, Val took 15.503s
+Iter 80: Train loss 0.969, Learning Rate 1.000e-05, It/sec 0.220, Tokens/sec 148.066, Trained Tokens 55343, Peak mem 11.420 GB
+Iter 90: Train loss 0.948, Learning Rate 1.000e-05, It/sec 0.165, Tokens/sec 107.168, Trained Tokens 61835, Peak mem 11.420 GB
+Iter 100: Val loss 0.956, Val took 16.175s
+Iter 100: Train loss 0.977, Learning Rate 1.000e-05, It/sec 0.119, Tokens/sec 83.367, Trained Tokens 68863, Peak mem 11.420 GB
+Iter 100: Saved adapter weights to adapters/adapters_llama3-2-1B_tst_ft-order_size/adapters.safetensors and adapters/adapters_llama3-2-1B_tst_ft-order_size/0000100_adapters.safetensors.
+Saved final weights to adapters/adapters_llama3-2-1B_tst_ft-order_size/adapters.safetensors.

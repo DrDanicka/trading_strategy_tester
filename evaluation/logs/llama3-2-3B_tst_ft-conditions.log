@@ -1,0 +1,26 @@
+Loading pretrained model
+
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]
+Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 15236.90it/s]
+Loading datasets
+Training
+Trainable parameters: 50.135% (1610.711M/3212.750M)
+Starting training..., iters: 100
+Iter 1: Val loss 3.672, Val took 86.336s
+Iter 10: Train loss 1.738, Learning Rate 1.000e-05, It/sec 0.014, Tokens/sec 16.617, Trained Tokens 11817, Peak mem 19.228 GB
+Iter 20: Val loss 0.833, Val took 66.332s
+Iter 20: Train loss 0.840, Learning Rate 1.000e-05, It/sec 0.016, Tokens/sec 17.136, Trained Tokens 22669, Peak mem 19.228 GB
+Iter 30: Train loss 0.742, Learning Rate 1.000e-05, It/sec 0.014, Tokens/sec 17.069, Trained Tokens 34513, Peak mem 19.228 GB
+Iter 40: Val loss 0.675, Val took 70.538s
+Iter 40: Train loss 0.696, Learning Rate 1.000e-05, It/sec 0.015, Tokens/sec 19.407, Trained Tokens 47241, Peak mem 20.302 GB
+Iter 50: Train loss 0.656, Learning Rate 1.000e-05, It/sec 0.014, Tokens/sec 15.038, Trained Tokens 58361, Peak mem 20.302 GB
+Iter 60: Val loss 0.631, Val took 69.820s
+Iter 60: Train loss 0.637, Learning Rate 1.000e-05, It/sec 0.015, Tokens/sec 20.218, Trained Tokens 71893, Peak mem 20.302 GB
+Iter 70: Train loss 0.611, Learning Rate 1.000e-05, It/sec 0.014, Tokens/sec 16.847, Trained Tokens 83821, Peak mem 20.302 GB
+Iter 80: Val loss 0.601, Val took 62.368s
+Iter 80: Train loss 0.591, Learning Rate 1.000e-05, It/sec 0.015, Tokens/sec 16.883, Trained Tokens 95343, Peak mem 20.302 GB
+Iter 90: Train loss 0.601, Learning Rate 1.000e-05, It/sec 0.012, Tokens/sec 13.592, Trained Tokens 106355, Peak mem 20.302 GB
+Iter 100: Val loss 0.589, Val took 67.728s
+Iter 100: Train loss 0.597, Learning Rate 1.000e-05, It/sec 0.014, Tokens/sec 17.240, Trained Tokens 118487, Peak mem 20.302 GB
+Iter 100: Saved adapter weights to adapters/adapters_llama3-2-3B_tst_ft-conditions/adapters.safetensors and adapters/adapters_llama3-2-3B_tst_ft-conditions/0000100_adapters.safetensors.
+Saved final weights to adapters/adapters_llama3-2-3B_tst_ft-conditions/adapters.safetensors.

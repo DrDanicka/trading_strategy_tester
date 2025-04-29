@@ -1,0 +1,26 @@
+Loading pretrained model
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 103883.69it/s]
+Loading datasets
+Training
+Trainable parameters: 78.745% (973.144M/1235.814M)
+Starting training..., iters: 100
+Iter 1: Val loss 4.955, Val took 12.271s
+Iter 10: Train loss 2.480, Learning Rate 1.000e-05, It/sec 0.606, Tokens/sec 411.741, Trained Tokens 6800, Peak mem 10.746 GB
+Iter 20: Val loss 1.281, Val took 11.355s
+Iter 20: Train loss 1.368, Learning Rate 1.000e-05, It/sec 0.637, Tokens/sec 402.522, Trained Tokens 13120, Peak mem 10.746 GB
+Iter 30: Train loss 1.174, Learning Rate 1.000e-05, It/sec 0.610, Tokens/sec 415.093, Trained Tokens 19920, Peak mem 10.746 GB
+Iter 40: Val loss 1.061, Val took 12.108s
+Iter 40: Train loss 1.081, Learning Rate 1.000e-05, It/sec 0.577, Tokens/sec 418.859, Trained Tokens 27176, Peak mem 11.291 GB
+Iter 50: Train loss 1.047, Learning Rate 1.000e-05, It/sec 0.625, Tokens/sec 404.291, Trained Tokens 33640, Peak mem 11.291 GB
+Iter 60: Val loss 0.992, Val took 11.661s
+Iter 60: Train loss 1.034, Learning Rate 1.000e-05, It/sec 0.560, Tokens/sec 427.941, Trained Tokens 41284, Peak mem 11.291 GB
+Iter 70: Train loss 0.969, Learning Rate 1.000e-05, It/sec 0.603, Tokens/sec 411.634, Trained Tokens 48116, Peak mem 11.291 GB
+Iter 80: Val loss 0.978, Val took 10.653s
+Iter 80: Train loss 0.961, Learning Rate 1.000e-05, It/sec 0.620, Tokens/sec 411.635, Trained Tokens 54760, Peak mem 11.291 GB
+Iter 90: Train loss 0.931, Learning Rate 1.000e-05, It/sec 0.633, Tokens/sec 405.724, Trained Tokens 61168, Peak mem 11.291 GB
+Iter 100: Val loss 1.000, Val took 11.234s
+Iter 100: Train loss 0.968, Learning Rate 1.000e-05, It/sec 0.597, Tokens/sec 416.265, Trained Tokens 68140, Peak mem 11.291 GB
+Iter 100: Saved adapter weights to adapters/adapters_llama3-2-1B_tst_ft-end_date/adapters.safetensors and adapters/adapters_llama3-2-1B_tst_ft-end_date/0000100_adapters.safetensors.
+Saved final weights to adapters/adapters_llama3-2-1B_tst_ft-end_date/adapters.safetensors.

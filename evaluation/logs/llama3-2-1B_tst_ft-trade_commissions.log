@@ -1,0 +1,26 @@
+Loading pretrained model
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 60133.39it/s]
+Loading datasets
+Training
+Trainable parameters: 78.745% (973.144M/1235.814M)
+Starting training..., iters: 100
+Iter 1: Val loss 5.016, Val took 11.639s
+Iter 10: Train loss 2.343, Learning Rate 1.000e-05, It/sec 0.603, Tokens/sec 415.087, Trained Tokens 6888, Peak mem 10.828 GB
+Iter 20: Val loss 1.265, Val took 11.616s
+Iter 20: Train loss 1.315, Learning Rate 1.000e-05, It/sec 0.632, Tokens/sec 405.485, Trained Tokens 13308, Peak mem 10.828 GB
+Iter 30: Train loss 1.203, Learning Rate 1.000e-05, It/sec 0.601, Tokens/sec 414.272, Trained Tokens 20204, Peak mem 10.828 GB
+Iter 40: Val loss 1.074, Val took 13.184s
+Iter 40: Train loss 1.090, Learning Rate 1.000e-05, It/sec 0.575, Tokens/sec 423.270, Trained Tokens 27568, Peak mem 11.447 GB
+Iter 50: Train loss 0.994, Learning Rate 1.000e-05, It/sec 0.625, Tokens/sec 409.812, Trained Tokens 34124, Peak mem 11.447 GB
+Iter 60: Val loss 1.014, Val took 11.852s
+Iter 60: Train loss 1.051, Learning Rate 1.000e-05, It/sec 0.557, Tokens/sec 431.208, Trained Tokens 41868, Peak mem 11.447 GB
+Iter 70: Train loss 0.977, Learning Rate 1.000e-05, It/sec 0.604, Tokens/sec 418.921, Trained Tokens 48804, Peak mem 11.447 GB
+Iter 80: Val loss 0.958, Val took 11.222s
+Iter 80: Train loss 0.932, Learning Rate 1.000e-05, It/sec 0.605, Tokens/sec 408.718, Trained Tokens 55561, Peak mem 11.447 GB
+Iter 90: Train loss 0.939, Learning Rate 1.000e-05, It/sec 0.627, Tokens/sec 408.985, Trained Tokens 62081, Peak mem 11.447 GB
+Iter 100: Val loss 0.934, Val took 11.437s
+Iter 100: Train loss 0.939, Learning Rate 1.000e-05, It/sec 0.570, Tokens/sec 402.304, Trained Tokens 69137, Peak mem 11.447 GB
+Iter 100: Saved adapter weights to adapters/adapters_llama3-2-1B_tst_ft-trade_commissions/adapters.safetensors and adapters/adapters_llama3-2-1B_tst_ft-trade_commissions/0000100_adapters.safetensors.
+Saved final weights to adapters/adapters_llama3-2-1B_tst_ft-trade_commissions/adapters.safetensors.

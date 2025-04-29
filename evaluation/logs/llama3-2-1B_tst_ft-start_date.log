@@ -1,0 +1,26 @@
+Loading pretrained model
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 67378.38it/s]
+Loading datasets
+Training
+Trainable parameters: 78.745% (973.144M/1235.814M)
+Starting training..., iters: 100
+Iter 1: Val loss 5.032, Val took 20.139s
+Iter 10: Train loss 2.453, Learning Rate 1.000e-05, It/sec 0.176, Tokens/sec 120.318, Trained Tokens 6840, Peak mem 10.819 GB
+Iter 20: Val loss 1.265, Val took 16.777s
+Iter 20: Train loss 1.309, Learning Rate 1.000e-05, It/sec 0.105, Tokens/sec 66.681, Trained Tokens 13204, Peak mem 10.819 GB
+Iter 30: Train loss 1.162, Learning Rate 1.000e-05, It/sec 0.096, Tokens/sec 65.773, Trained Tokens 20048, Peak mem 10.819 GB
+Iter 40: Val loss 1.072, Val took 18.792s
+Iter 40: Train loss 1.097, Learning Rate 1.000e-05, It/sec 0.076, Tokens/sec 55.486, Trained Tokens 27356, Peak mem 11.420 GB
+Iter 50: Train loss 1.028, Learning Rate 1.000e-05, It/sec 0.129, Tokens/sec 83.738, Trained Tokens 33864, Peak mem 11.420 GB
+Iter 60: Val loss 1.002, Val took 16.515s
+Iter 60: Train loss 1.048, Learning Rate 1.000e-05, It/sec 0.054, Tokens/sec 41.444, Trained Tokens 41560, Peak mem 11.420 GB
+Iter 70: Train loss 1.012, Learning Rate 1.000e-05, It/sec 0.149, Tokens/sec 102.650, Trained Tokens 48440, Peak mem 11.420 GB
+Iter 80: Val loss 0.969, Val took 17.705s
+Iter 80: Train loss 0.956, Learning Rate 1.000e-05, It/sec 0.196, Tokens/sec 130.796, Trained Tokens 55124, Peak mem 11.420 GB
+Iter 90: Train loss 0.962, Learning Rate 1.000e-05, It/sec 0.225, Tokens/sec 145.436, Trained Tokens 61576, Peak mem 11.420 GB
+Iter 100: Val loss 0.947, Val took 14.556s
+Iter 100: Train loss 0.954, Learning Rate 1.000e-05, It/sec 0.177, Tokens/sec 123.813, Trained Tokens 68583, Peak mem 11.420 GB
+Iter 100: Saved adapter weights to adapters/adapters_llama3-2-1B_tst_ft-start_date/adapters.safetensors and adapters/adapters_llama3-2-1B_tst_ft-start_date/0000100_adapters.safetensors.
+Saved final weights to adapters/adapters_llama3-2-1B_tst_ft-start_date/adapters.safetensors.

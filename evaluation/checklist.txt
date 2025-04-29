@@ -1,0 +1,29 @@
+FINE-TUNE
+    - ticker                DONE
+    - position_type         DONE
+    - conditions            CHECKED
+    - stop_loss             DONE
+    - take_profit           DONE
+    - start_date            DONE
+    - end_date
+    - interval              DONE
+    - period                DONE
+    - initial_capital       DONE
+    - order_size            DONE
+    - trade_commissions     DONE
+    - all
+
+RAG
+    - ticker                DONE
+    - position_type         DONE
+    - conditions            CELE ZLE
+    - stop_loss             DONE - zle vysledky
+    - take_profit           DONE - zle vysledky
+    - start_date            DONE
+    - end_date              DONE
+    - interval              WRONG CHECK
+    - period                WRONG CHECK
+    - initial_capital       DONE
+    - order_size            DONE
+    - trade_commissions     DONE
+    - all

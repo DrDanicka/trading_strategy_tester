@@ -1,0 +1,26 @@
+Loading pretrained model
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 41070.30it/s]
+Loading datasets
+Training
+Trainable parameters: 78.745% (973.144M/1235.814M)
+Starting training..., iters: 100
+Iter 1: Val loss 4.948, Val took 22.653s
+Iter 10: Train loss 2.331, Learning Rate 1.000e-05, It/sec 0.103, Tokens/sec 72.894, Trained Tokens 7072, Peak mem 10.828 GB
+Iter 20: Val loss 1.271, Val took 16.452s
+Iter 20: Train loss 1.299, Learning Rate 1.000e-05, It/sec 0.072, Tokens/sec 47.280, Trained Tokens 13628, Peak mem 10.828 GB
+Iter 30: Train loss 1.214, Learning Rate 1.000e-05, It/sec 0.088, Tokens/sec 61.888, Trained Tokens 20692, Peak mem 10.828 GB
+Iter 40: Val loss 1.047, Val took 17.602s
+Iter 40: Train loss 1.065, Learning Rate 1.000e-05, It/sec 0.067, Tokens/sec 50.486, Trained Tokens 28244, Peak mem 11.420 GB
+Iter 50: Train loss 1.020, Learning Rate 1.000e-05, It/sec 0.120, Tokens/sec 80.609, Trained Tokens 34963, Peak mem 11.420 GB
+Iter 60: Val loss 1.003, Val took 17.235s
+Iter 60: Train loss 1.036, Learning Rate 1.000e-05, It/sec 0.053, Tokens/sec 41.830, Trained Tokens 42911, Peak mem 11.420 GB
+Iter 70: Train loss 0.942, Learning Rate 1.000e-05, It/sec 0.101, Tokens/sec 71.608, Trained Tokens 50011, Peak mem 11.420 GB
+Iter 80: Val loss 0.933, Val took 14.461s
+Iter 80: Train loss 0.941, Learning Rate 1.000e-05, It/sec 0.179, Tokens/sec 123.618, Trained Tokens 56927, Peak mem 11.420 GB
+Iter 90: Train loss 0.906, Learning Rate 1.000e-05, It/sec 0.152, Tokens/sec 101.779, Trained Tokens 63603, Peak mem 11.420 GB
+Iter 100: Val loss 0.920, Val took 17.050s
+Iter 100: Train loss 0.926, Learning Rate 1.000e-05, It/sec 0.112, Tokens/sec 80.903, Trained Tokens 70823, Peak mem 11.420 GB
+Iter 100: Saved adapter weights to adapters/adapters_llama3-2-1B_tst_ft-stop_loss/adapters.safetensors and adapters/adapters_llama3-2-1B_tst_ft-stop_loss/0000100_adapters.safetensors.
+Saved final weights to adapters/adapters_llama3-2-1B_tst_ft-stop_loss/adapters.safetensors.
