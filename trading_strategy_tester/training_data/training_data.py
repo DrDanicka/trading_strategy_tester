@@ -34,15 +34,25 @@ def generate_trading_data(number_of_training_data: int, output_prefix: str = "tr
     # Initialize PromptBuilder with a fixed random seed
     pb = PromptBuilder(random_seed=random_seed)
 
+    script_dir = os.path.dirname(__file__)
+    data_path = os.path.join(script_dir, '..', '..', 'evaluation', '_data')
+    fields_dir = os.path.join(data_path, 'fields')
+    full_dir = os.path.join(data_path, 'full')
+
+    os.makedirs(full_dir, exist_ok=True)
+    os.makedirs(fields_dir, exist_ok=True)
+
     # Open main JSONL file for full training data
-    full_file = open(f"_data/full/{output_prefix}.jsonl", "w")
+    full_file = open(os.path.join(full_dir, f'{output_prefix}.jsonl'), "w")
 
     # Open separate JSONL files for each field
     field_files = {}
     for field in FIELDS:
-        field_dir = f"_data/fields/{field}"
+        #field_dir = f"_data/fields/{field}"
+        field_dir = os.path.join(fields_dir, field)
         os.makedirs(field_dir, exist_ok=True)
-        field_files[field] = open(f"{field_dir}/{output_prefix}.jsonl", "w")
+        field_files[field] = open(os.path.join(field_dir, f"{output_prefix}.jsonl"), "w")
+        #field_files[field] = open(f"{field_dir}/{output_prefix}.jsonl", "w")
 
     # Generate training samples
     for _ in range(number_of_training_data):
@@ -66,8 +76,8 @@ def generate_trading_data(number_of_training_data: int, output_prefix: str = "tr
     for f in field_files.values():
         f.close()
 
-    print(f"Saved {number_of_training_data} prompts to '_data/full/{output_prefix}.jsonl'")
-    print(f"Also saved per-field JSONL files under '_data/fields/<field>/{output_prefix}.jsonl'")
+    print(f"Saved {number_of_training_data} prompts to evaluation module '_data/full/{output_prefix}.jsonl'")
+    print(f"Also saved per-field JSONL files under evaluation module '_data/fields/<field>/{output_prefix}.jsonl'")
 
 if __name__ == "__main__":
     # Generate training, validation, and testing datasets
