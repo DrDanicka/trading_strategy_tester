@@ -43,7 +43,7 @@ class TradingSeries(ABC):
 
 ---
 
-# Available Trading Series
+## Available Trading Series
 
 Below is a complete list of all implemented TradingSeries classes in alphabetical order. There is a link for each class to its documentation, which includes a description of the class and its parameters
 
