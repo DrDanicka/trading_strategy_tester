@@ -5,3 +5,5 @@ docs/specifikace.docx
 test.ipynb
 _data/
 site/
+*.safetensors
+*.gguf
