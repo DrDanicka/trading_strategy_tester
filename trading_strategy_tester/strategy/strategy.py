@@ -1,8 +1,6 @@
 from datetime import datetime
-
 import pandas as pd
 
-from build.lib.examples.chatgpt_generated_strat_1 import take_profit
 from trading_strategy_tester.conditions.condition import Condition
 from trading_strategy_tester.conditions.stoploss_takeprofit.stop_loss import StopLoss
 from trading_strategy_tester.conditions.stoploss_takeprofit.take_profit import TakeProfit
@@ -157,7 +155,7 @@ class Strategy:
         """
         return self.stats
 
-    def get_dict_strategy(self) -> dict:
+    def to_dict(self) -> dict:
         """
         Returns a dictionary representation of the strategy.
 
@@ -167,10 +165,10 @@ class Strategy:
         return {
             "ticker": self.ticker,
             "position_type": self.position_type_enum,
-            "buy_condition": self.buy_condition,
-            "sell_condition": self.sell_condition,
+            "buy_condition": self.buy_condition.to_dict(),
+            "sell_condition": self.sell_condition.to_dict(),
             "stop_loss": self.stop_loss if self.stop_loss else None,
-            "take_profit": self.take_profit if take_profit else None,
+            "take_profit": self.take_profit if self.take_profit else None,
             "start_date": self.start_date,
             "end_date": self.end_date,
             "interval": self.interval,
