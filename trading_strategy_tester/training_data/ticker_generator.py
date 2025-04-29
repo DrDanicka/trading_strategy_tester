@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+import os
 
 def get_random_ticker(rng: random.Random=None):
     '''
@@ -11,7 +12,10 @@ def get_random_ticker(rng: random.Random=None):
     :rtype: tuple
     '''
 
-    tickers = pd.read_csv('sp500.csv')
+    script_dir = os.path.dirname(__file__)
+    sp500_path = os.path.join(script_dir, 'prompt_data', 'sp500.csv')
+
+    tickers = pd.read_csv(sp500_path)
 
     random_ticker_index = rng.randint(0, len(tickers) - 1)
 
