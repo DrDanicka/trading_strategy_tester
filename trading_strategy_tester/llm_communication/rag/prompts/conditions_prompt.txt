@@ -2,19 +2,19 @@ Your task is to extract buy and sell conditions from the given text that is desc
 
 Buy and sell condition is of type Condition which is a abstract class. All subclasses of Condition are listed here:
 
-- AND(*conditions: Condition) - A logical AND condition that combines multiple conditions. Parameters are of type Condition.
-- OR(*conditions: Condition) - A logical OR condition that combines multiple conditions. Parameters are of type Condition.
-- CrossOverCondition(first_series: TradingSeries, second_series: TradingSeries) - A condition that checks if the first series crosses over the second series. Parameters are of type TradingSeries.
-- CrossUnderCondition(first_series: TradingSeries, second_series: TradingSeries) - A condition that checks if the first series crosses under the second series. Parameters are of type TradingSeries.
-- GreaterThanCondition(first_series: TradingSeries, second_series: TradingSeries) - A condition that checks if the first series is greater than the second series. Parameters are of type TradingSeries.
-- LessThanCondition(first_series: TradingSeries, second_series: TradingSeries) - A condition that checks if the first series is less than the second series. Parameters are of type TradingSeries.
-- UptrendForXDaysCondition(series: TradingSeries, number_of_days: int) - A condition that checks if the series is in an uptrend for a specified number of days. Parameters are of type TradingSeries and int.
-- DowntrendForXDaysCondition(series: TradingSeries, number_of_days: int) - A condition that checks if the series is in a downtrend for a specified number of days. Parameters are of type TradingSeries and int.
-- UptrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int) - A condition that checks if the series is in an uptrend at a specified Fibonacci retracement level. Parameters are of type FibonacciLevels and int.
-- DowntrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int) - A condition that checks if the series is in a downtrend at a specified Fibonacci retracement level. Parameters are of type FibonacciLevels and int.
-- AfterXDaysCondition(condition: Condition, number_of_days: int) - A condition that checks if a specified condition is satisfied after a certain number of days. Parameters are of type Condition and int.
-- ChangeOfXPercentPerYDaysCondition(series: TradingSeries, percent: float, number_of_days: int) - A condition that checks if the series changes by a specified percentage over a certain number of days. Parameters are of type TradingSeries, float and int.
-- IntraIntervalChangeOfXPercentCondition(series: TradingSeries, percent: float) - A condition that checks if the series changes by a specified percentage within a given interval. Parameters are of type TradingSeries and float.
+- AND(*conditions: Condition)
+- OR(*conditions: Condition)
+- CrossOverCondition(first_series: TradingSeries, second_series: TradingSeries)
+- CrossUnderCondition(first_series: TradingSeries, second_series: TradingSeries)
+- GreaterThanCondition(first_series: TradingSeries, second_series: TradingSeries)
+- LessThanCondition(first_series: TradingSeries, second_series: TradingSeries)
+- UptrendForXDaysCondition(series: TradingSeries, number_of_days: int)
+- DowntrendForXDaysCondition(series: TradingSeries, number_of_days: int)
+- UptrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int)
+- DowntrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int)
+- AfterXDaysCondition(condition: Condition, number_of_days: int)
+- ChangeOfXPercentPerYDaysCondition(series: TradingSeries, percent: float, number_of_days: int)
+- IntraIntervalChangeOfXPercentCondition(series: TradingSeries, percent: float)
 
 Many of the conditions have parameters that are of type TradingSeries. TradingSeries is a class that represents a series of trading data, such as price or volume, over time. Supported trading series are:
 
@@ -114,10 +114,18 @@ response: buy_condition=OR(IntraIntervalChangeOfXPercentCondition(series=COPPOCK
 description: Can you structure a  strategy for LYB that take a long position when the Chaikin Money Flow sways by 35.46 percent within a interval is to the point and goes short when the ATR having smoothing type set to EMA, length equals 25 rises above Ease of Movement where length is set to 36 or price is in a 61.8% fibonacci level during a downtrend and Chaikin osc. where slow_length is set to 28 drops under Chaikin osc. is seemly. Apply take-profit at 9.58%. Set the interval to 1 day.
 response: buy_condition=IntraIntervalChangeOfXPercentCondition(series=CMF('LYB'), percent=35.46), sell_condition=OR(CrossOverCondition(first_series=ATR('LYB', smoothing_type=SmoothingType.EMA, length=25), second_series=EOM('LYB', length=36)), AND(DowntrendFibRetracementLevelCondition(fib_level=FibonacciLevels.LEVEL_61_8, length=84), CrossUnderCondition(first_series=CHAIKIN_OSC('LYB', slow_length=28), second_series=CHAIKIN_OSC('LYB'))))
 
+[EXAMPLE 4]
+description: Can you provide a  strategy for GEV that shorts when the Close sways by 39.53 percent over 85 days after 21 days or price is within a 50% fibonacci level during a downtrend is precise and purchase when the High Price sways by 67.3 percent within a interval or price is in a 0% fibonacci level during a downtrend is right. Set take-profit at 47.87%. Set the interval as 3 months. Set the initial capital to 130221$. Set order size per trade to 601538$. Set trade commissions to 9 percent.
+response: buy_condition=OR(IntraIntervalChangeOfXPercentCondition(series=HIGH('GEV'), percent=67.3), DowntrendFibRetracementLevelCondition(fib_level=FibonacciLevels.LEVEL_0, length=90)), sell_condition=OR(AfterXDaysCondition(condition=ChangeOfXPercentPerYDaysCondition(series=CLOSE('GEV'), percent=39.53, number_of_days=85), number_of_days=21), DowntrendFibRetracementLevelCondition(fib_level=FibonacciLevels.LEVEL_50, length=96))
+
+[EXAMPLE 5]
+description: Would you kindly create a  strategy for KO that sell off when the TRIX is more than DI- with length is 67 and Ichinoku Conversion twists by 88.13 percent over 57 days is correct and purchase when the Volume is greater than Aron Indicator Up where length is set to 61 is right. Set take-profit at 30.14%. Set the period as maximum.
+response: buy_condition=GreaterThanCondition(first_series=VOLUME('KO'), second_series=AROON_UP('KO', length=61)), sell_condition=AND(GreaterThanCondition(first_series=TRIX('KO'), second_series=DI_MINUS('KO', length=67)), ChangeOfXPercentPerYDaysCondition(series=ICHIMOKU_CONVERSION('KO'), percent=88.13, number_of_days=57))
+
 [RESPONSE INSTRUCTIONS]
 - Your task is to extract the BUY and SELL CONDITIONS from the given text and return them in the format: buy_condition=BuyCondition, sell_condition=SellCondition, where BuyCondition and SellCondition are the extracted conditions.
 - Always make sure to include the buy_condition and sell_condition in the response separated by a comma and space.
-- Use only the classes and parameters mentioned above to construct the buy condition.
+- USE ONLY the classes and parameters provided in the prompt. DO NOT use any other classes or parameters.
 - If there are multiple buy conditions, combine them using AND or OR as appropriate.
 - Do NOT include any additional text or explanations.
 

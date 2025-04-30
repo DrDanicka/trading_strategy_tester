@@ -12,7 +12,6 @@ Period is defined as a enum Period which takes 12 possible values:
 - Period.TEN_YEARS
 - Period.YEAR_TO_DATE
 - Period.MAX
-- None
 
 period can also be `None` if there is no period mentioned in the description.
 
