@@ -233,15 +233,20 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
     elif llm_model == LLMModel.LLAMA_ALL_RAG:
         # Process the prompt using RAG for all fields
         script_dir = os.path.dirname(__file__)
-        prompt_path = os.path.join(script_dir, 'prompts')
+        prompt_path = os.path.join(script_dir, 'prompts', 'all_prompt.txt')
 
-        # TODO : Implement RAG for all fields
+        with open(prompt_path, 'r') as f:
+            rag_prompt = f.read().format(description=prompt)
 
         response = client.generate(
-            model = llm_model.value,
+            model = 'llama3.2',
+            prompt=rag_prompt,
+            options={
+                'temperature': 0,
+            }
         )
 
-        result = ...
+        result = response.response
     elif llm_model == LLMModel.LLAMA_FIELDS_RAG:
         # Process the prompt using RAG for fields
         responses = []
@@ -281,6 +286,6 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
     else:
         print("Validation failed")
         print(changes)
-        return None, None, None
+        return None, None, None, result
 
-    return strat.get_trades(), strat.get_graphs(), strat.get_statistics()
+    return strat.get_trades(), strat.get_graphs(), strat.get_statistics(), strategy_object
