@@ -8,3 +8,4 @@ site/
 *.safetensors
 *.gguf
 build/
+trading_strategy_tester.egg-info/
