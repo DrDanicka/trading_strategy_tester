@@ -58,6 +58,5 @@ nav:
           - Local: admin/installation/local.md
   - LLM Documentation:
       - Overview: llm/index.md
-      - Examples:
-          - Strategy: llm/examples/strategy_examples.md
-          - Indicators: llm/examples/indicator_examples.md
+      - Training data: llm/training_data.md
+      - How to write a prompt: llm/how_to_write_prompt.md
