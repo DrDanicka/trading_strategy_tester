@@ -44,6 +44,4 @@ nav:
           - Fibonacci Levels: dev/modules/enums/fibonacci_levels.md
           - Interval: dev/modules/enums/interval.md
           - Period: dev/modules/enums/period.md
-      - Examples:
-          - Overview: dev/examples/index.md
       - Testing: dev/testing.md
