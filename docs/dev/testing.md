@@ -29,6 +29,16 @@ While an 86% coverage rate demonstrates a high level of confidence in the system
 
 ---
 
+## How to Run Tests
+
+To run the tests, use the following command from the root directory of the project:
+
+```bash
+python -m unittest discover -s tests
+  ```
+
+It will automatically discover and execute all test cases in the `tests` directory. You can also use your IDE to run the tests. In this case it is important to set a default testing framework to `unittest`.
+
 ## Conclusion
 
 The testing strategy balances thoroughness with practicality, ensuring that the critical business logic is rigorously tested while recognizing that some visual and auxiliary components are better validated through manual inspection or integration testing.
