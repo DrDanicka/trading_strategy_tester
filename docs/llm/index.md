@@ -25,3 +25,10 @@ In this project we use the [LLama](https://www.llama.com) model for LLM integrat
 ### Running locally
 
 To run the LLM locally we used the [Ollama](https://ollama.com) framework. Because of the hardware limitations, we used 1B and 3B Llama models which can be fine-tuned on a single GPU or Neural Engine in Apple Silicon which was our case. 
+
+## Generating strategies
+
+For generating strategies we use two approaches:
+
+- First is to generate whole strategy object from natural language description.
+- Second is to generate only parameters of the strategy listed in the [Strategy module](../dev/modules/strategy.md) and then combine them into the strategy object.
