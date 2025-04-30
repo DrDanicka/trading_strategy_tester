@@ -530,6 +530,6 @@ class xTester:
         print(f"Number of all parameters: {self.number_of_all_parameters}")
 
 
-tester = xTester('llama3-2-3B_tst_ft-conditions', log=False)
+tester = xTester('llama3-2-3B_tst_ft-all', log=False)
 tester.test_all()
 tester.print_results()
