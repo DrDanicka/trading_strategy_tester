@@ -7,3 +7,4 @@ _data/
 site/
 *.safetensors
 *.gguf
+build/
