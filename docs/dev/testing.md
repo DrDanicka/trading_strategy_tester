@@ -1,14 +1,15 @@
 
 # Testing Overview
 
-The Trading Strategy Tester project places a strong emphasis on code quality and reliability. Comprehensive testing has been conducted to ensure that the system behaves as expected across a wide range of scenarios.
+The Trading Strategy Tester project places a strong emphasis on code quality and reliability. Comprehensive testing has been conducted to ensure that the system behaves as expected across a wide range of scenarios. Tests to this project are available [here](https://github.com/DrDanicka/trading_strategy_tester/tree/main/tests)
 
 ---
 
 ## Test Coverage
 
 - **Total Unit Tests**: Approximately **600**
-- **Lines of Code Covered**: **86%**
+- **Files Covered**: **97%**
+- **Lines of Code Covered**: **83%**
 
 This extensive test suite covers the core logic, including:
 - Trade execution and management

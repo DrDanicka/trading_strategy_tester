@@ -12,6 +12,9 @@ nav:
   - Home: index.md
   - User Documentation:
       - Overview: user/index.md
+      - Examples:
+          - Strategy: user/examples/strategy_examples.md
+          - Indicators: user/examples/indicator_examples.md
   - Developer Documentation:
       - Overview: dev/index.md
       - Modules:
@@ -19,7 +22,7 @@ nav:
           - Strategy:
             - Overview: dev/modules/strategy.md
             - Parameters:
-                - Position type: dev/modules/strategy_parameters/position_type.md
+                - Position Type: dev/modules/enums/position_type.md
                 - Conditions:
                   - Overview: dev/modules/conditions/index.md
                   - Fibonacci Retracement Levels: dev/modules/conditions/fibonacci_retracement_levels_conditions.md
@@ -29,6 +32,8 @@ nav:
                   - Trend: dev/modules/conditions/trend_conditions.md
                 - Stop loss: dev/modules/strategy_parameters/stop_loss.md
                 - Take profit: dev/modules/strategy_parameters/take_profit.md
+                - Interval: dev/modules/enums/interval.md
+                - Period: dev/modules/enums/period.md
                 - Order size: dev/modules/strategy_parameters/order_size.md
                 - Commission: dev/modules/strategy_parameters/trade_commissions.md
           - Indicators: dev/modules/indicators.md
@@ -45,3 +50,14 @@ nav:
           - Interval: dev/modules/enums/interval.md
           - Period: dev/modules/enums/period.md
       - Testing: dev/testing.md
+  - Administrator Documentation:
+      - Overview: admin/index.md
+      - Installation:
+          - Requirements: admin/installation/requirements.md
+          - Docker: admin/installation/docker.md
+          - Local: admin/installation/local.md
+  - LLM Documentation:
+      - Overview: llm/index.md
+      - Examples:
+          - Strategy: llm/examples/strategy_examples.md
+          - Indicators: llm/examples/indicator_examples.md
