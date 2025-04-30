@@ -9,3 +9,4 @@ site/
 *.gguf
 build/
 trading_strategy_tester.egg-info/
+dist/
