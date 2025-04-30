@@ -4,6 +4,7 @@ Welcome to the documentation for the **Trading Strategy Tester** package. This p
 
 Here you can find the documentation for the Python package. The documentation is organized into two sections:
 
+- [Administrator Documentation](admin/index.md)
 - [Developer Documentation](dev/index.md)
 - [User Documentation](user/index.md)
 
