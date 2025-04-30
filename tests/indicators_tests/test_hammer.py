@@ -15,7 +15,8 @@ class TestHammer(unittest.TestCase):
         """
         Testing on AAPL stock from 2020-1-1 until 2024-1-1
         """
-        self.data = pd.read_csv(os.path.join('testing_data', 'AAPL_testing_data.csv'))
+        script_dir = os.path.dirname(__file__)
+        self.data = pd.read_csv(os.path.join(script_dir, 'testing_data', 'AAPL_testing_data.csv'))
         self.downloader = DownloadModule(
             start_date=datetime(2020, 1, 1),
             end_date=datetime(2024, 1, 1)

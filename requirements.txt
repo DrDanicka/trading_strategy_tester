@@ -1,8 +1,0 @@
-pandas~=2.2.2
-yfinance~=0.2.41
-plotly~=5.23.0
-numpy~=2.0.1
-ollama~=0.4.7
-setuptools~=72.2.0
-pandas_ta~=0.3.14b0
-deepdiff~=8.4.2
