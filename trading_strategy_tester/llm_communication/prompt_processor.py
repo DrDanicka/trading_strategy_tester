@@ -233,7 +233,7 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
     elif llm_model == LLMModel.LLAMA_ALL_RAG:
         # Process the prompt using RAG for all fields
         script_dir = os.path.dirname(__file__)
-        prompt_path = os.path.join(script_dir, 'prompts', 'all_prompt.txt')
+        prompt_path = os.path.join(script_dir, 'rag', 'prompts', 'all_prompt.txt')
 
         with open(prompt_path, 'r') as f:
             rag_prompt = f.read().format(description=prompt)
@@ -252,7 +252,7 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
         responses = []
 
         script_dir = os.path.dirname(__file__)
-        prompt_path = os.path.join(script_dir, 'prompts')
+        prompt_path = os.path.join(script_dir, 'rag', 'prompts')
 
         for field in FIELDS:
             current_prompt_path = os.path.join(prompt_path, f'{field}_prompt.txt')
@@ -266,7 +266,7 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
                     'temperature': 0,
                 }
             )
-            if response.response != '' or str.lower(response.response).endswith('none'):
+            if response.response != '' and not str.lower(response.response.strip()).endswith('none'):
                 responses.append(response.response)
 
         result = 'Strategy(' + ', '.join(responses) + ')'
@@ -286,6 +286,6 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
     else:
         print("Validation failed")
         print(changes)
-        return None, None, None, result
+        return None, None, None, result, changes
 
-    return strat.get_trades(), strat.get_graphs(), strat.get_statistics(), strategy_object
+    return strat.get_trades(), strat.get_graphs(), strat.get_statistics(), strategy_object, changes
