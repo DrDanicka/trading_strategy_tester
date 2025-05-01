@@ -289,11 +289,22 @@ def validate_int(int_value, changes: dict, logs: bool, buy: bool, param_name, pa
         message += f' Using defined default value.)'
 
     try:
-        # Get the value of the integer
-        int_value_value = int_value.value
+        negative = True
 
-        if not isinstance(int_value_value, int):
-            raise Exception(message)
+        # Check if the value is negative
+        try:
+            negative_int = (-1) * int_value.operand.value
+        except Exception:
+            negative = False
+
+        if negative:
+            int_value_value = negative_int
+        else:
+            # Get the value of the integer
+            int_value_value = int_value.value
+
+            if not isinstance(int_value_value, int):
+                raise Exception(message)
     except Exception:
         not_valid = True
 

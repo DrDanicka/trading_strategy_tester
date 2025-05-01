@@ -1,4 +1,5 @@
 import ast
+from datetime import datetime
 
 from trading_strategy_tester.validation.parameter_validations.capital_validator import validate_initial_capital
 from trading_strategy_tester.validation.parameter_validations.order_size_validator import validate_order_size
@@ -208,6 +209,59 @@ def validate_strategy_string(strategy_str: str, logs: bool = False) -> (bool, st
                     changes['strategy'] = 'No position type specified. Defaulting to long positions.'
                 else:
                     raise Exception('Missing mandatory buy or sell condition parameter.')
+
+        wrong_date = False
+
+        # Check if start_date and end_date are present
+        if 'start_date' in valid_parameters and 'end_date' in valid_parameters:
+            start_date_args = next((kwarg for kwarg in strategy_object.keywords if kwarg.arg == 'start_date'), None).value.args
+            end_date_args = next((kwarg for kwarg in strategy_object.keywords if kwarg.arg == 'end_date'), None).value.args
+
+            start_date = datetime(year=start_date_args[0].value, month=start_date_args[1].value, day=start_date_args[2].value)
+            end_date = datetime(year=end_date_args[0].value, month=end_date_args[1].value, day=end_date_args[2].value)
+
+            if start_date and end_date:
+                if start_date > end_date:
+                    wrong_date = True
+
+        # Check in only end_date is present
+        if 'end_date' in valid_parameters and 'start_date' not in valid_parameters:
+            end_date_args = next((kwarg for kwarg in strategy_object.keywords if kwarg.arg == 'end_date'), None).value.args
+            end_date = datetime(year=end_date_args[0].value, month=end_date_args[1].value, day=end_date_args[2].value)
+
+            # Compare end_date with January 1, 2024 (default for strategy)
+            default_date = datetime(2024, 1, 1)
+
+            if end_date < default_date:
+                wrong_date = True
+
+        if wrong_date:
+            changes['date'] = "Start date cannot be after end date. Setting end date to today and keeping start date as is."
+
+            for kwarg in strategy_object.keywords:
+                if kwarg.arg == 'start_date':
+                    start_date = datetime(2024, 1, 1)
+                    kwarg.value = ast.Call(
+                        func=ast.Name(id='datetime', ctx=ast.Load()),
+                        args=[
+                            ast.Constant(value=start_date.year),
+                            ast.Constant(value=start_date.month),
+                            ast.Constant(value=start_date.day),
+                        ],
+                        keywords=[]
+                    )
+                elif kwarg.arg == 'end_date':
+                    current_date = datetime.today()
+                    kwarg.value = ast.Call(
+                        func=ast.Name(id='datetime', ctx=ast.Load()),
+                        args=[
+                            ast.Constant(value=current_date.year),
+                            ast.Constant(value=current_date.month),
+                            ast.Constant(value=current_date.day),
+                        ],
+                        keywords=[]
+                    )
+
 
     except Exception as e:
         if message == '':
