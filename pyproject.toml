@@ -24,3 +24,9 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["trading_strategy_tester*"]
+
+[tool.setuptools]
+include-package-data = true  # ✅ keep this
+
+[tool.setuptools.package-data]
+"trading_strategy_tester.llm_communication.rag.prompts" = ["*.txt"]
