@@ -87,7 +87,7 @@ class OR(Condition):
         for condition in self.conditions:
             signals.append(condition.to_string())
 
-        return f'OrCondition({', '.join(signals)})'
+        return f"OrCondition({', '.join(signals)})"
 
     def to_dict(self) -> dict:
         """

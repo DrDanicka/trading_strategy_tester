@@ -89,7 +89,7 @@ class IfThenElse(Condition):
         :return: A string representing the IfThenElseCondition.
         :rtype: str
         """
-        return f'IfThenElseCondition({self.if_condition.to_string()}, {self.else_condition.to_string()})'
+        return f"IfThenElseCondition({self.if_condition.to_string()}, {self.else_condition.to_string()})"
 
     def to_dict(self) -> dict:
         """
