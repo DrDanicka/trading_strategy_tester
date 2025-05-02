@@ -69,9 +69,9 @@ class ChangeOfXPercentPerYDaysPlot(TradingPlot):
         set_y_axis_range(fig, self.series, self.series)
 
         # Set the title of the plot
-        title = f'{series_title} Change of {self.percent}% per {self.number_of_days} {'tick' if self.number_of_days == 1 else 'ticks'} Shifted' \
+        title = f"{series_title} Change of {self.percent}% per {self.number_of_days} {'tick' if self.number_of_days == 1 else 'ticks'} Shifted" \
             if self.days_to_shift > 0 else \
-            f'{series_title} Change of {self.percent}% per {self.number_of_days} {'tick' if self.number_of_days == 1 else 'ticks'}'
+            f"{series_title} Change of {self.percent}% per {self.number_of_days} {'tick' if self.number_of_days == 1 else 'ticks'}"
 
         # Apply dark or light mode theme based on parameter
         if dark:

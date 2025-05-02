@@ -112,7 +112,7 @@ def validate_trading_series(trading_series, changes: dict, logs: bool, buy: bool
         if logs:
             print(message)
 
-        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes_name = f"{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}"
         changes[changes_name] = message
 
         return False, None, changes
@@ -143,7 +143,7 @@ def validate_source(source, changes: dict, logs: bool, buy: bool, param_name, pa
         valid_source_types = ['CLOSE', 'OPEN', 'HIGH', 'LOW', 'HLC3', 'HL2', 'OHLC4', 'HLCC4', 'VOLUME']
 
         if attr not in valid_source_types:
-            message += f' Valid source types are: {', '.join(valid_source_types)}.'
+            message += f" Valid source types are: {', '.join(valid_source_types)}."
             raise Exception(message)
 
     except Exception:
@@ -153,7 +153,7 @@ def validate_source(source, changes: dict, logs: bool, buy: bool, param_name, pa
         if logs:
             print(message)
 
-        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes_name = f"{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}"
         changes[changes_name] = message
 
         return False, None, changes
@@ -177,7 +177,7 @@ def validate_smoothing_type(smoothing_type, changes: dict, logs: bool, buy: bool
         valid_smoothing_types = ['RMA', 'SMA', 'EMA', 'WMA']
 
         if attr not in valid_smoothing_types:
-            message += f' Valid smoothing types are: {', '.join(valid_smoothing_types)}.'
+            message += f" Valid smoothing types are: {', '.join(valid_smoothing_types)}."
             raise Exception(message)
 
     except Exception:
@@ -187,7 +187,7 @@ def validate_smoothing_type(smoothing_type, changes: dict, logs: bool, buy: bool
         if logs:
             print(message)
 
-        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes_name = f"{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}"
         changes[changes_name] = message
 
         return False, None, changes
@@ -212,7 +212,7 @@ def validate_bool(bool_value, changes: dict, logs: bool, buy: bool, param_name, 
         if logs:
             print(message)
 
-        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes_name = f"{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}"
         changes[changes_name] = message
 
         return False, None, changes
@@ -258,7 +258,7 @@ def validate_fibonacci_levels(fibonacci_levels, changes: dict, logs: bool, buy: 
         valid_fibonacci_levels = ['LEVEL_0', 'LEVEL_23_6', 'LEVEL_38_2', 'LEVEL_50', 'LEVEL_61_8', 'LEVEL_100']
 
         if attr not in valid_fibonacci_levels:
-            message += f' Valid Fibonacci levels are: {', '.join(valid_fibonacci_levels)}.'
+            message += f" Valid Fibonacci levels are: {', '.join(valid_fibonacci_levels)}."
             raise Exception(message)
 
     except Exception:
@@ -268,7 +268,7 @@ def validate_fibonacci_levels(fibonacci_levels, changes: dict, logs: bool, buy: 
         if logs:
             print(message)
 
-        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes_name = f"{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}"
         changes[changes_name] = message
 
         default_ast_attribute = ast.Attribute(
@@ -312,7 +312,7 @@ def validate_int(int_value, changes: dict, logs: bool, buy: bool, param_name, pa
         if logs:
             print(message)
 
-        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes_name = f"{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}"
         changes[changes_name] = message
 
         return False, None, changes
@@ -338,7 +338,7 @@ def validate_float(float_value, changes: dict, logs: bool, buy: bool, param_name
         if logs:
             print(message)
 
-        changes_name = f'{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}'
+        changes_name = f"{'buy_condition' if buy else 'sell_condition'}_{parent_name}_{param_name}"
         changes[changes_name] = message
 
         return False, None, changes

@@ -4,7 +4,7 @@ from trading_strategy_tester.enums.source_enum import SourceType
 from trading_strategy_tester.trade.order_size.order_size import OrderSize
 from trading_strategy_tester.trade.trade import Trade
 
-def get_strategy_stats(trades: [Trade], df: pd.DataFrame, initial_capital: float, order_size: OrderSize) -> dict:
+def get_strategy_stats(trades: list[Trade], df: pd.DataFrame, initial_capital: float, order_size: OrderSize) -> dict:
     """
     Calculates and returns various statistics for a given trading strategy based on a list of trades and market data.
 
