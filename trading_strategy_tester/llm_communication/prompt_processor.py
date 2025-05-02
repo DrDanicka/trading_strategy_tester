@@ -197,8 +197,41 @@ namespace = {
 
 def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
     '''
-    This function processes the prompt and returns the result.
+    Processes a natural language trading strategy prompt using a specified LLM model,
+    validates the generated strategy, and executes it to produce trades, graphs, and statistics.
+
+    The function supports various modes of operation based on the `llm_model`:
+    - Full strategy generation via a single LLM call.
+    - Field-specific generation by calling the LLM separately for each field.
+    - Retrieval-Augmented Generation (RAG) prompts to enhance field or full strategy creation.
+    - Direct strategy string input (no LLM processing).
+
+    After processing, the strategy is validated for correctness. If valid, it is executed
+    to simulate trades and calculate statistics; otherwise, the function returns validation errors.
+
+    :param prompt: The natural language description of the trading strategy to process.
+    :type prompt: str
+    :param llm_model: The LLM model/mode to use for processing. Determines how the prompt is handled.
+                      Defaults to LLMModel.LLAMA_ALL.
+    :type llm_model: LLMModel
+
+    :return: A tuple containing:
+             - trades (list or None): List of Trade objects if validation succeeds; None otherwise.
+             - graphs (dict or None): Dictionary of Plotly graph objects ('PRICE', 'BUY', 'SELL') if valid; None otherwise.
+             - statistics (dict or None): Performance metrics dictionary if valid; None otherwise.
+             - strategy_object (str): The raw strategy string (from LLM output or direct input).
+             - changes (dict): A dict describing validation changes or errors (empty if no issues).
+    :rtype: tuple
+
+    :raises ValueError: If an invalid LLM model is specified.
+
+    :notes:
+        - The function uses the OLLAMA_HOST environment variable to connect to the Ollama server
+          (defaults to 'http://127.0.0.1:11434' if unset).
+        - Logs the raw generated strategy string and validation results to the console.
+        - The validation step ensures the strategy string can be converted to a valid Strategy object.
     '''
+
     ollama_host = os.getenv('OLLAMA_HOST', 'http://127.0.0.1:11434')
 
     client = ollama.Client(host=ollama_host)

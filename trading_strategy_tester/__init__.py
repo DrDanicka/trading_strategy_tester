@@ -8,6 +8,7 @@ from .enums.interval_enum import Interval
 from .enums.smoothing_enum import SmoothingType
 from .enums.source_enum import SourceType
 from .enums.stoploss_enum import StopLossType
+from .enums.llm_model_enum import LLMModel
 
 # Import stop loss and take profit classes
 from .conditions.stoploss_takeprofit.stop_loss import StopLoss
@@ -21,6 +22,9 @@ from .trade.order_size.percent_of_equity import PercentOfEquity
 # Import all commissions classes
 from .trade.trade_commissions.money_commissions import MoneyCommissions
 from .trade.trade_commissions.percentage_commissions import PercentageCommissions
+
+# Import llm communication
+from .llm_communication.prompt_processor import process_prompt
 
 _all__ = [
     'Strategy',
