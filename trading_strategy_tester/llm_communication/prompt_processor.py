@@ -199,7 +199,9 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
     '''
     This function processes the prompt and returns the result.
     '''
-    client = ollama.Client()
+    ollama_host = os.getenv('OLLAMA_HOST', 'http://127.0.0.1:11434')
+
+    client = ollama.Client(host=ollama_host)
 
     # Process the prompt using the specified LLM model
     if llm_model == LLMModel.LLAMA_ALL:
