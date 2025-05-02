@@ -50,16 +50,16 @@ Strategy(
     ticker="AAPL",
     position_type= PositionTypeEnum.LONG_SHORT_COMBINED,
     buy_condition= CrossOverCondition(
-        RSI(ticker='AAPL'),
-        CONST(30)
+        first_series=RSI('AAPL'),
+        second_series=CONST(30)
     ),
     sell_condition=CrossUnderCondition(
-        RSI(ticker='AAPL'),
-        CONST(70)
+        first_series=RSI('AAPL'),
+        second_series=CONST(70)
     ),
-    start_date=datetime(2010, 1, 1),
+    start_date=datetime(2016, 1, 1),
     end_date=datetime(2020, 1, 1),
-    order_size=Contracts(1)
+    order_size=Contracts(value=1)
 )
 ```
 
@@ -72,15 +72,15 @@ Strategy(
     ticker="MSFT",
     position_type= PositionTypeEnum.LONG,
     buy_condition= UptrendForXDaysCondition(
-        SMA(ticker='MSFT', length=21),
+        series=SMA('MSFT', length=21),
         number_of_days=5
     ),
     sell_condition=LessThanCondition(
-        Close(ticker='MSFT'),
-        EMA(ticker='MSFT', length=50)
+        first_series=CLOSE('MSFT'),
+        second_series=EMA('MSFT', length=50)
     ),
-    period=Period.MAX,
-    order_size=USD(100)
+    period=Period.ONE_YEAR,
+    order_size=USD(value=100)
 )
 ```
 
@@ -94,28 +94,28 @@ Strategy(
     position_type= PositionTypeEnum.LONG_SHORT_COMBINED,
     buy_condition= OR(
         CrossOverCondition(
-            CLOSE(ticker='GOOGL'),
-            SMA(ticker='GOOGL', source=SourceType.CLOSE, length=9, offset=0)
+            first_series=CLOSE('GOOGL'),
+            second_series=SMA('GOOGL', source=SourceType.CLOSE, length=9, offset=0)
         ),
         CrossOverCondition(
-            CCI(ticker='GOOGL', source=SourceType.HLC3, length=20),
-            CONST(-100)
+            first_series=CCI('GOOGL', source=SourceType.HLC3, length=20),
+            second_series=CONST(-100)
         )
     ),
     sell_condition=OR(
         CrossOverCondition(
-            SMA(ticker='GOOGL', source=SourceType.CLOSE, length=9, offset=0),
-            CLOSE(ticker='GOOGL')
+            first_series=SMA('GOOGL', source=SourceType.CLOSE, length=9, offset=0),
+            second_series=CLOSE('GOOGL')
         ),
-        CrossOverCondition(
-            CONST(100),
-            CCI(ticker='GOOGL', source=SourceType.HLC3, length=20),
+        CrossUnderCondition(
+            second_series=CCI('GOOGL', source=SourceType.HLC3, length=20),
+            first_series=CONST(100)
         )
     ),
-    stop_loss=StopLoss(7),
-    take_profit=TakeProfit(15),
+    stop_loss=StopLoss(percentage=7, stop_loss_type=StopLossType.NORMAL),
+    take_profit=TakeProfit(percentage=15),
     start_date=datetime(2020, 1, 1),
     end_date=datetime(2024, 1, 1),
-    trade_commissions=MoneyCommissions(0.1)
+    trade_commissions=MoneyCommissions(value=0.1)
 )
 ```

@@ -1,3 +1,2 @@
 
 
-git clone --recurse-submodules https://github.com/DrDanicka/trading_strategy_tester.git
