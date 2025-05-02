@@ -83,14 +83,14 @@ def single_model_train(model, data, learning_rate, iters, fine_tune_type, name, 
             "--de-quantize"
         ])
 
-    # Step 4: Convert to GGUF using script
-    run_command([
-        "python3", "llama.cpp/convert_hf_to_gguf.py",
-        "./fused_model",
-        "--outfile", f"./fused_model/{name}.gguf",
-        "--no-lazy",
-        "--verbose"
-    ])
+        # Step 4: Convert to GGUF using script
+        run_command([
+            "python3", "llama.cpp/convert_hf_to_gguf.py",
+            "./fused_model",
+            "--outfile", f"./fused_model/{name}.gguf",
+            "--no-lazy",
+            "--verbose"
+        ])
 
     # Step 5: Modelfile
     file_to_read = 'modelfiles/Modelfile_llama3' if model.startswith('meta-llama') else 'modelfiles/Modelfile_qwen'
@@ -108,4 +108,3 @@ def single_model_train(model, data, learning_rate, iters, fine_tune_type, name, 
     # Step 7: Clean up
     for file in glob.glob("fused_model/*.safetensors"):
         os.remove(file)
-
