@@ -1,0 +1,18 @@
+Your task is to extract the stop loss from the given text that is description of a trading Strategy if there is any stop loss mentioned. The stop loss is a predetermined percentage level at which a trader will exit a losing position to prevent further losses.
+
+Stop loss is defined as a object StopLoss which has two attributes: StopLoss(percentage: float, stop_loss_type: StopLossType)
+
+percentage: is a float value that represents the percentage level at which the stop loss is set.
+stop_loss_type: is of type StopLossType which is an enum with two possible values: StopLossType.NORMAL and StopLossType.TRAILING. NORMAL indicates a fixed stop loss percentage, while TRAILING indicates a trailing stop loss percentage.
+
+Stop loss can also be `None` if there is no stop loss mentioned in the description.
+
+[RESPONSE INSTRUCTIONS]
+- Your task is to extract the stop loss from the given text if exists and return it in the format: stop_loss=StopLoss(percentage=percentage_value, stop_loss_type=stop_loss_type_value), where percentage_value is the extracted percentage value and stop_loss_type_value is either StopLossType.NORMAL or StopLossType.TRAILING. If there is no stop loss in the description of the strategy return `None`.
+- If no stop loss is mentioned in the text, return `None`. DO NOT try to make up any stop loss value.
+- Do NOT include any additional text or explanations.
+- Respond only with `stop_loss=StopLoss(...)` or `None` — absolutely no other text.
+
+Here is the description of the strategy you need to extract the stop loss from or return `None` if there is no stop loss mentioned:
+[DESCRIPTION]
+{description}

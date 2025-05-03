@@ -1,0 +1,179 @@
+Your task is to create a Strategy object from the given text that is a description of a trading Strategy.
+
+Ths Strategy object looks like this:
+
+Strategy(
+    ticker: str,
+    position_type: PositionTypeEnum,
+    buy_condition: Condition,
+    sell_condition: Condition,
+    stop_loss: Optional[StopLoss] = None,
+    take_profit: Optional[TakeProfit] = None,
+    start_date: datetime = None,
+    end_date: datetime = None,
+    interval: Interval = Interval.ONE_DAY,
+    period: Period = Period.NOT_PASSED,
+    initial_capital: float = 1_000_000,
+    order_size: OrderSize = Contracts(value=1),
+    trade_commissions: TradeCommissions = MoneyCommissions(0.0)
+)
+
+I will give you all the classes you need to create the Strategy object. You have to use only those classes to create the object.
+
+ticker is a string that represents the ticker of the asset you want to trade. It can be any string.
+
+position_type is of type PositionTypeEnum. It can be either PositionTypeEnum.LONG, PositionTypeEnum.SHORT or PositionTypeEnum.LONG_SHORT_COMBINED.
+
+buy_condition and sell_condition are of type Condition. They can be any of the following classes:
+- AND(*conditions: Condition)
+- OR(*conditions: Condition)
+- CrossOverCondition(first_series: TradingSeries, second_series: TradingSeries)
+- CrossUnderCondition(first_series: TradingSeries, second_series: TradingSeries)
+- GreaterThanCondition(first_series: TradingSeries, second_series: TradingSeries)
+- LessThanCondition(first_series: TradingSeries, second_series: TradingSeries)
+- UptrendForXDaysCondition(series: TradingSeries, number_of_days: int)
+- DowntrendForXDaysCondition(series: TradingSeries, number_of_days: int)
+- UptrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int)
+- DowntrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int)
+- AfterXDaysCondition(condition: Condition, number_of_days: int)
+- ChangeOfXPercentPerYDaysCondition(series: TradingSeries, percent: float, number_of_days: int)
+- IntraIntervalChangeOfXPercentCondition(series: TradingSeries, percent: float)
+
+Many of the conditions have parameters that are of type TradingSeries. TradingSeries is a class that represents a series of trading data, such as price or volume, over time. Supported trading series are:
+
+ADX(ticker:str smoothing_length:int length:int) - Average Directional Index
+AROON_DOWN(ticker:str, length:int) - Aroon Indicator Down
+AROON_UP(ticker:str, length:int) - Aron Indicator Up
+ATR(ticker:str length:int smoothing_type:SmoothingType) - Average True Range
+BB_LOWER(ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int) - Bollinger Bands Lower band
+BB_MIDDLE(ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int) - Bollinger Bands Middle band
+BB_UPPER(ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int) - Bollinger Bands Upper band
+BBP(ticker:str length:int) - Bull and Bear Power
+CCI(ticker:str source:SourceType length:int) - Commodity Channel Index
+CCI_SMOOTHENED(ticker:str source:SourceType length:int smoothing_type:SmoothingType smoothing_length:int) - Commodity Channel Index Smoothened
+CHAIKIN_OSC(ticker:str fast_length:int slow_length:int) - Chaikin Oscillator
+CHOP(ticker:str length:int offset:int) - Choppiness Index
+CMF(ticker:str length:int) - Chaikin Money Flow
+CMO(ticker:str source:SourceType length:int) - Chande Momentum Oscillator
+COPPOCK(ticker:str length:int long_roc_length:int short_roc_length:int) - Coppock Curve
+DC_BASIS(ticker:str length:int offset:int) - Donchain Channel Basis
+DC_UPPER(ticker:str length:int offset:int) - Donchain Channel Upper
+DC_LOWER(ticker:str length:int offset:int) - Donchain Channel Lower
+CLOSE(ticker:str) - Close Price
+CONST(const_number:int) - Constant line
+HIGH(ticker:str) - High Price
+LOW(ticker:str) - Low Price
+OPEN(ticker:str) - Open Price
+VOLUME(ticker:str) - Volume
+DI_MINUS(ticker:str length:int) - Negative Directional Indicator
+DI_PLUS(ticker:str length:int) - Positive Directional Indicator
+DPO(ticker:str length:int) - Detrended Price Oscillator
+EFI(ticker:str length:int) - Elder Force Index
+EOM(ticker:str length:int divisor:int) - Ease of Movement
+HAMMER(ticker:str) - Hammer Candlestick Pattern
+ICHIMOKU_BASE(ticker:str length:int) - Kijun-sen
+ICHIMOKU_CONVERSION(ticker:str length:int) - Tenkan-sen
+ICHIMOKU_LEADING_SPAN_A(ticker:str displacement:int) - Senkou Span A
+ICHIMOKU_LAGGING_SPAN(ticker:str displacement:int) - Chikou Span
+ICHIMOKU_LEADING_SPAN_B(ticker:str length:int displacement:int) - Senkou Span B
+KC_LOWER(ticker:str source:SourceType length:int multiplier:int use_exp_ma:bool atr_length:int) - Keltner Channel Lower
+KC_UPPER(ticker:str source:SourceType length:int multiplier:int use_exp_ma:bool atr_length:int) - Keltner Channel Upper
+KST(ticker:str source:SourceType roc_length_1:int roc_length_2:int roc_length_3:int roc_length_4:int sma_length_1:int sma_length_2:int sma_length_3:int sma_length_4:int) - Know Sure Thing
+KST_SIGNAL(ticker:str source:SourceType roc_length_1:int roc_length_2:int roc_length_3:int roc_length_4:int sma_length_1:int sma_length_2:int sma_length_3:int sma_length_4:int signal_length:int) - Know Sure Thing Signal
+EMA(ticker:str source:SourceType length:int offset:int) - Exponential Moving Average
+SMA(ticker:str source:SourceType length:int offset:int) - Simple Moving Average
+MACD(ticker:str source:SourceType fast_length:int slow_length:int ma_type:SmoothingType) - Moving Average Convergence Divergence
+MACD_SIGNAL(ticker:str source:SourceType fast_length:int slow_length:int oscillator_ma_type:SmoothingType signal_ma_type:SmoothingType signal_length:int) - Moving Average Convergence Divergence Signal
+MASS_INDEX(ticker:str length:int) - Mass Index
+MFI(ticker:str length:int) - Money Flow Index
+MOMENTUM(ticker:str source:SourceType length:int) - Momentum Indicator
+OBV(ticker:str) - On Balance Volume
+PVI(ticker:str) - Positive Volume Index
+PVT(ticker:str) - Price Volume Trend
+ROC(ticker:str source:SourceType length:int) - Rate of Change
+RSI(ticker:str source:SourceType length:int) - Relative Strength Index
+STOCH_PERCENT_D(ticker:str length:int smoothing_length:int) - Stochastic Percent D
+STOCH_PERCENT_K(ticker:str length:int) - Stochastic Percent K
+TRIX(ticker:str length:int) - Triple Exponential Average
+UO(ticker:str fast_length:int middle_length:int slow_length:int) - Ultimate Oscillator
+WILLR(ticker:str source:SourceType length:int) - Williams %R
+
+FibonacciLevels is a class that represents the Fibonacci retracement levels. The supported Fibonacci levels are:
+- FibonacciLevels.LEVEL_0
+- FibonacciLevels.LEVEL_23_6
+- FibonacciLevels.LEVEL_38_2
+- FibonacciLevels.LEVEL_50
+- FibonacciLevels.LEVEL_61_8
+- FibonacciLevels.LEVEL_100
+
+SourceType is a class that represents the source type for the trading series. The supported source types are:
+- SourceType.CLOSE
+- SourceType.OPEN
+- SourceType.HIGH
+- SourceType.LOW
+- SourceType.VOLUME
+- SourceType.HLC3
+- SourceType.HL2
+- SourceType.OHLC4
+- SourceType.HLCC4
+
+SmoothingType is a class that represents the smoothing type for the trading series. The supported smoothing types are:
+- SmoothingType.SMA
+- SmoothingType.EMA
+- SmoothingType.WMA
+- SmoothingType.RMA
+
+stop_loss is of type: StopLoss(percentage: float, stop_loss_type: StopLossType)
+percentage: is a float value that represents the percentage level at which the stop loss is set.
+stop_loss_type: is of type StopLossType which is an enum with two possible values: StopLossType.NORMAL and StopLossType.TRAILING. NORMAL indicates a fixed stop loss percentage, while TRAILING indicates a trailing stop loss percentage.
+If no stop loss is mentioned in the text do not include it in the object.
+
+take_profit is defined as a object: TakeProfit(percentage: float)
+percentage: is a float value that represents the percentage level at which the take profit is set.
+If no take profit is mentioned in the text do not include it in the object.
+
+start_date and end_date are of type datetime. They look like this: datetime(YYYY: int, MM: int, DD: int) where YYYY is the year, MM is the month and DD is the day.
+If no start date or end date is mentioned in the text do not include it in the object.
+
+interval is of type Interval. It takes 5 possible values: Interval.ONE_DAY, Interval.FIVE_DAYS, Interval.ONE_WEEK, Interval.ONE_MONTH, Interval.THREE_MONTHS
+If no interval is mentioned in the text do not include it in the object.
+
+period is of type Period. It takes 12 possible values: Period.ONE_DAY, Period.FIVE_DAYS, Period.ONE_MONTH, Period.THREE_MONTHS, Period.SIX_MONTHS, Period.ONE_YEAR, Period.TWO_YEARS, Period.FIVE_YEARS, Period.TEN_YEARS, Period.YEAR_TO_DATE, Period.MAX
+If no period is mentioned in the text do not include it in the object.
+
+initial_capital is a float value that represents the initial capital for the strategy.
+If no initial capital is mentioned in the text do not include it in the object.
+
+order_size is of type OrderSize which is an abstract class with 3 subclasses:
+- USD(value: float)
+- Contracts(value: float)
+- PercentOfEquity(value: float)
+value: is a float value that represents the order size in USD, number of contracts or percentage of equity respectively. If there is X percent of equity, the value should be X.
+If no order size is mentioned in the text do not include it in the object.
+
+trade_commissions is of type TradeCommissions which is an abstract class with 2 subclasses:
+- MoneyCommissions(value: float)
+- PercentageCommissions(value: float)
+value: is a float value that represents the trade commissions in USD or percentage respectively. If there is X% commission, the value should be X. If there is a commission of $X, the value should be X.
+If no trade commissions is mentioned in the text do not include it in the object.
+
+Follwing are some examples of how to create the Strategy object from the description:
+
+[EXAMPLE 1]
+description: Could you develop a  strategy for RVTY that shorts when the Commodity Channel Index having length equals 90 turns by 44.87 percent over 1 days or Chande Momentum Oscillator where length equals 37, source set to HLC3 is larger than Average True Range where smoothing type set to SMA or Momentum Indicator where length is 1 falls under KC Upper where source set to HL2 is true and goes long when the price is within a 61.8% fibonacci level during an uptrend and MACD where source set to Open, slow_length is equal to 37 fluctuates by 44.94 percent over 66 days or COPPOCK where length is set to 7, long_roc_length is 65 sways by 99.35 percent within a interval is fitting. Set the interval equal to 1 week.
+response: Strategy(ticker='RVTY', position_type=PositionTypeEnum.LONG, buy_condition=OR(AND(UptrendFibRetracementLevelCondition(fib_level=FibonacciLevels.LEVEL_61_8, length=26), ChangeOfXPercentPerYDaysCondition(series=MACD('RVTY', source=SourceType.OPEN, slow_length=37), percent=44.94, number_of_days=66)), IntraIntervalChangeOfXPercentCondition(series=COPPOCK('RVTY', length=7, long_roc_length=65), percent=99.35)), sell_condition=OR(ChangeOfXPercentPerYDaysCondition(series=CCI('RVTY', length=90), percent=44.87, number_of_days=1), GreaterThanCondition(first_series=CMO('RVTY', length=37, source=SourceType.HLC3), second_series=ATR('RVTY', smoothing_type=SmoothingType.SMA)), CrossUnderCondition(first_series=MOMENTUM('RVTY', length=1), second_series=KC_UPPER('RVTY', source=SourceType.HL2))), interval=Interval.ONE_WEEK)
+
+[EXAMPLE 2]
+description: Would you be willing to create a short strategy for CSX that acquires when the Keltner Channel Upper with atr_length is set to 82 twists by 32.83 percent over 52 days is exact and takes a short position when the High Price is in a downtrend for 34 days is precise. Set the period equal to 6 months. Set the initial capital to 727420$. Set order size per trade to 701224 USD. Set commissions to 5 percent.
+response: Strategy(ticker='CSX', position_type=PositionTypeEnum.SHORT, buy_condition=ChangeOfXPercentPerYDaysCondition(series=KC_UPPER('CSX', atr_length=82), percent=32.83, number_of_days=52), sell_condition=DowntrendForXDaysCondition(series=HIGH('CSX'), number_of_days=34), period=Period.SIX_MONTHS, initial_capital=727420, order_size=USD(701224), trade_commissions=PercentageCommissions(5))
+
+[RESPONSE INSTRUCTIONS]
+- Your task is to create a Strategy object from the given text and return it in the format: Strategy(ticker='ticker', position_type=position_type, buy_condition=buy_condition, sell_condition=sell_condition, stop_loss=stop_loss, take_profit=take_profit, start_date=start_date, end_date=end_date, interval=interval, period=period, initial_capital=initial_capital, order_size=order_size, trade_commissions=trade_commissions) where all the parameters are the extracted values from the text. If any parameter is not mentioned in the text, do not include it in the object.
+- DO NOT write None for any parameter but just omit it from the object.
+- USE EXACTLY the same format as shown in the examples.
+- USE ONLY the classes and enums provided in the description to create the object.
+- Do NOT include any additional text or explanations.
+
+Here is the description of the strategy you need to create the Strategy object from:
+[DESCRIPTION]
+{description}

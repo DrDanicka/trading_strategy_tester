@@ -203,7 +203,7 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
     The function supports various modes of operation based on the `llm_model`:
     - Full strategy generation via a single LLM call.
     - Field-specific generation by calling the LLM separately for each field.
-    - Retrieval-Augmented Generation (RAG) prompts to enhance field or full strategy creation.
+    - Few-shot prompting that prompts to enhance field or full strategy creation.
     - Direct strategy string input (no LLM processing).
 
     After processing, the strategy is validated for correctness. If valid, it is executed
@@ -266,16 +266,16 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
                 responses.append(response.response)
         result = 'Strategy(' + ', '.join(responses) + ')'
     elif llm_model == LLMModel.LLAMA_ALL_RAG:
-        # Process the prompt using RAG for all fields
+        # Process the prompt using few-shot prompting for all fields
         script_dir = os.path.dirname(__file__)
-        prompt_path = os.path.join(script_dir, 'rag', 'prompts', 'all_prompt.txt')
+        prompt_path = os.path.join(script_dir, 'few_shot_prompting', 'prompts', 'all_prompt.txt')
 
         with open(prompt_path, 'r') as f:
-            rag_prompt = f.read().format(description=prompt)
+            fsp_prompt = f.read().format(description=prompt)
 
         response = client.generate(
             model = 'llama3.2',
-            prompt=rag_prompt,
+            prompt=fsp_prompt,
             options={
                 'temperature': 0,
             }
@@ -283,20 +283,20 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
 
         result = response.response
     elif llm_model == LLMModel.LLAMA_FIELDS_RAG:
-        # Process the prompt using RAG for fields
+        # Process the prompt using few-shot prompting for fields
         responses = []
 
         script_dir = os.path.dirname(__file__)
-        prompt_path = os.path.join(script_dir, 'rag', 'prompts')
+        prompt_path = os.path.join(script_dir, 'few_shot_prompting', 'prompts')
 
         for field in FIELDS:
             current_prompt_path = os.path.join(prompt_path, f'{field}_prompt.txt')
             with open(current_prompt_path, 'r') as f:
-                rag_prompt = f.read().format(description=prompt)
+                fsp_prompt = f.read().format(description=prompt)
 
             response = client.generate(
                 model = 'llama3.2',
-                prompt=rag_prompt,
+                prompt=fsp_prompt,
                 options={
                     'temperature': 0,
                 }

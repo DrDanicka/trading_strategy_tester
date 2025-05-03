@@ -3,7 +3,7 @@ import ollama
 import pandas as pd
 import os
 import json
-from trading_strategy_tester.llm_communication.rag.get_rag_response import get_rag_response
+from trading_strategy_tester.llm_communication.few_shot_prompting.get_fsp_response import get_fsp_response
 
 # --- Model List ---
 ollama_models = [
@@ -20,19 +20,19 @@ ollama_models = [
     'llama3-2-1B_tst_ft-trade_commissions',
     'llama3-2-3B_tst_ft-conditions',
     'llama3-2-3B_tst_ft-all',
-    'llama3-2-ticker-rag',
-    'llama3-2-position_type-rag',
-    'llama3-2-stop_loss-rag',
-    'llama3-2-take_profit-rag',
-    'llama3-2-start_date-rag',
-    'llama3-2-end_date-rag',
-    'llama3-2-period-rag',
-    'llama3-2-interval-rag',
-    'llama3-2-initial_capital-rag',
-    'llama3-2-order_size-rag',
-    'llama3-2-trade_commissions-rag',
-    'llama3-2-conditions-rag',
-    'llama3-2-all-rag',
+    'llama3-2-ticker-fsp',
+    'llama3-2-position_type-fsp',
+    'llama3-2-stop_loss-fsp',
+    'llama3-2-take_profit-fsp',
+    'llama3-2-start_date-fsp',
+    'llama3-2-end_date-fsp',
+    'llama3-2-period-fsp',
+    'llama3-2-interval-fsp',
+    'llama3-2-initial_capital-fsp',
+    'llama3-2-order_size-fsp',
+    'llama3-2-trade_commissions-fsp',
+    'llama3-2-conditions-fsp',
+    'llama3-2-all-fsp',
 ]
 
 
@@ -42,10 +42,10 @@ def process_model(model, data_path):
 
     client = ollama.Client()
     model_for = model.split('-')[-1]
-    is_rag = False
+    is_fsp = False
 
-    if model_for == 'rag':
-        is_rag = True
+    if model_for == 'fsp':
+        is_fsp = True
         model_for = model.split('-')[-2]
 
     if data_path:
@@ -79,8 +79,8 @@ def process_model(model, data_path):
             prompt = row['prompt']
             completion = row['completion']
 
-            if is_rag:
-                response = get_rag_response(model, prompt)
+            if is_fsp:
+                response = get_fsp_response(model, prompt)
             else:
                 response = client.generate(
                     model=model,
@@ -90,7 +90,7 @@ def process_model(model, data_path):
 
             response = response.response.strip()
 
-            # Handle rag returning None
+            # Handle fsp returning None
             if str.lower(response).endswith('none'):
                 response = ''
 
@@ -106,7 +106,7 @@ def process_model(model, data_path):
 
 # --- Entry point ---
 def main():
-    parser = argparse.ArgumentParser(description="Test fine-tuned or RAG Ollama models against test data")
+    parser = argparse.ArgumentParser(description="Test fine-tuned or few-shot prompting Ollama models against test data")
     parser.add_argument('--model', required=True, help="Model name to test or 'all' for batch testing")
     parser.add_argument('--data', help="(Required if model != all) Path to test data file")
 

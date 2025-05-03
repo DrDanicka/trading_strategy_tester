@@ -1,0 +1,134 @@
+Your task is to extract buy and sell conditions from the given text that is description of a trading Strategy.
+
+Buy and sell condition is of type Condition which is a abstract class. All subclasses of Condition are listed here:
+
+- AND(*conditions: Condition)
+- OR(*conditions: Condition)
+- CrossOverCondition(first_series: TradingSeries, second_series: TradingSeries)
+- CrossUnderCondition(first_series: TradingSeries, second_series: TradingSeries)
+- GreaterThanCondition(first_series: TradingSeries, second_series: TradingSeries)
+- LessThanCondition(first_series: TradingSeries, second_series: TradingSeries)
+- UptrendForXDaysCondition(series: TradingSeries, number_of_days: int)
+- DowntrendForXDaysCondition(series: TradingSeries, number_of_days: int)
+- UptrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int)
+- DowntrendFibRetracementLevelCondition(fib_level: FibonacciLevels, length: int)
+- AfterXDaysCondition(condition: Condition, number_of_days: int)
+- ChangeOfXPercentPerYDaysCondition(series: TradingSeries, percent: float, number_of_days: int)
+- IntraIntervalChangeOfXPercentCondition(series: TradingSeries, percent: float)
+
+Many of the conditions have parameters that are of type TradingSeries. TradingSeries is a class that represents a series of trading data, such as price or volume, over time. Supported trading series are:
+
+ADX(ticker:str smoothing_length:int length:int) - Average Directional Index
+AROON_DOWN(ticker:str, length:int) - Aroon Indicator Down
+AROON_UP(ticker:str, length:int) - Aron Indicator Up
+ATR(ticker:str length:int smoothing_type:SmoothingType) - Average True Range
+BB_LOWER(ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int) - Bollinger Bands Lower band
+BB_MIDDLE(ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int) - Bollinger Bands Middle band
+BB_UPPER(ticker:str source:SourceType length:int ma_type:SmoothingType std_dev:float offset:int) - Bollinger Bands Upper band
+BBP(ticker:str length:int) - Bull and Bear Power
+CCI(ticker:str source:SourceType length:int) - Commodity Channel Index
+CCI_SMOOTHENED(ticker:str source:SourceType length:int smoothing_type:SmoothingType smoothing_length:int) - Commodity Channel Index Smoothened
+CHAIKIN_OSC(ticker:str fast_length:int slow_length:int) - Chaikin Oscillator
+CHOP(ticker:str length:int offset:int) - Choppiness Index
+CMF(ticker:str length:int) - Chaikin Money Flow
+CMO(ticker:str source:SourceType length:int) - Chande Momentum Oscillator
+COPPOCK(ticker:str length:int long_roc_length:int short_roc_length:int) - Coppock Curve
+DC_BASIS(ticker:str length:int offset:int) - Donchain Channel Basis
+DC_UPPER(ticker:str length:int offset:int) - Donchain Channel Upper
+DC_LOWER(ticker:str length:int offset:int) - Donchain Channel Lower
+CLOSE(ticker:str) - Close Price
+CONST(const_number:int) - Constant line
+HIGH(ticker:str) - High Price
+LOW(ticker:str) - Low Price
+OPEN(ticker:str) - Open Price
+VOLUME(ticker:str) - Volume
+DI_MINUS(ticker:str length:int) - Negative Directional Indicator
+DI_PLUS(ticker:str length:int) - Positive Directional Indicator
+DPO(ticker:str length:int) - Detrended Price Oscillator
+EFI(ticker:str length:int) - Elder Force Index
+EOM(ticker:str length:int divisor:int) - Ease of Movement
+HAMMER(ticker:str) - Hammer Candlestick Pattern
+ICHIMOKU_BASE(ticker:str length:int) - Kijun-sen
+ICHIMOKU_CONVERSION(ticker:str length:int) - Tenkan-sen
+ICHIMOKU_LEADING_SPAN_A(ticker:str displacement:int) - Senkou Span A
+ICHIMOKU_LAGGING_SPAN(ticker:str displacement:int) - Chikou Span
+ICHIMOKU_LEADING_SPAN_B(ticker:str length:int displacement:int) - Senkou Span B
+KC_LOWER(ticker:str source:SourceType length:int multiplier:int use_exp_ma:bool atr_length:int) - Keltner Channel Lower
+KC_UPPER(ticker:str source:SourceType length:int multiplier:int use_exp_ma:bool atr_length:int) - Keltner Channel Upper
+KST(ticker:str source:SourceType roc_length_1:int roc_length_2:int roc_length_3:int roc_length_4:int sma_length_1:int sma_length_2:int sma_length_3:int sma_length_4:int) - Know Sure Thing
+KST_SIGNAL(ticker:str source:SourceType roc_length_1:int roc_length_2:int roc_length_3:int roc_length_4:int sma_length_1:int sma_length_2:int sma_length_3:int sma_length_4:int signal_length:int) - Know Sure Thing Signal
+EMA(ticker:str source:SourceType length:int offset:int) - Exponential Moving Average
+SMA(ticker:str source:SourceType length:int offset:int) - Simple Moving Average
+MACD(ticker:str source:SourceType fast_length:int slow_length:int ma_type:SmoothingType) - Moving Average Convergence Divergence
+MACD_SIGNAL(ticker:str source:SourceType fast_length:int slow_length:int oscillator_ma_type:SmoothingType signal_ma_type:SmoothingType signal_length:int) - Moving Average Convergence Divergence Signal
+MASS_INDEX(ticker:str length:int) - Mass Index
+MFI(ticker:str length:int) - Money Flow Index
+MOMENTUM(ticker:str source:SourceType length:int) - Momentum Indicator
+OBV(ticker:str) - On Balance Volume
+PVI(ticker:str) - Positive Volume Index
+PVT(ticker:str) - Price Volume Trend
+ROC(ticker:str source:SourceType length:int) - Rate of Change
+RSI(ticker:str source:SourceType length:int) - Relative Strength Index
+STOCH_PERCENT_D(ticker:str length:int smoothing_length:int) - Stochastic Percent D
+STOCH_PERCENT_K(ticker:str length:int) - Stochastic Percent K
+TRIX(ticker:str length:int) - Triple Exponential Average
+UO(ticker:str fast_length:int middle_length:int slow_length:int) - Ultimate Oscillator
+WILLR(ticker:str source:SourceType length:int) - Williams %R
+
+FibonacciLevels is a class that represents the Fibonacci retracement levels. The supported Fibonacci levels are:
+- FibonacciLevels.LEVEL_0
+- FibonacciLevels.LEVEL_23_6
+- FibonacciLevels.LEVEL_38_2
+- FibonacciLevels.LEVEL_50
+- FibonacciLevels.LEVEL_61_8
+- FibonacciLevels.LEVEL_100
+
+SourceType is a class that represents the source type for the trading series. The supported source types are:
+- SourceType.CLOSE
+- SourceType.OPEN
+- SourceType.HIGH
+- SourceType.LOW
+- SourceType.VOLUME
+- SourceType.HLC3
+- SourceType.HL2
+- SourceType.OHLC4
+- SourceType.HLCC4
+
+SmoothingType is a class that represents the smoothing type for the trading series. The supported smoothing types are:
+- SmoothingType.SMA
+- SmoothingType.EMA
+- SmoothingType.WMA
+- SmoothingType.RMA
+
+In all of the TradingSeries parameters, ticker is the only required parameter. The rest of the parameters are optional and do not need to be included in the response if they are not specified in the description.
+
+[EXAMPLE 1]
+description: Would you kindly create a  strategy for KO that longs when the Price Volume Trend sways by 34.06 percent over 20 days or BB MIDDLE oscillates by 84.68 percent over 78 days or Senkou Span B having length is 71 is lower than EMA having offset is equal to 9 is to the point and sells when the HAMMER shifts by 37.04 percent within a interval is right. Apply take-profit at 26.75%. Set the interval to 5 days for the data. I have 398887$ as the initial capital. Set trade commissions to 6 percent.
+response: buy_condition=OR(ChangeOfXPercentPerYDaysCondition(series=PVT('KO'), percent=34.06, number_of_days=20), ChangeOfXPercentPerYDaysCondition(series=BB_MIDDLE('KO'), percent=84.68, number_of_days=78), LessThanCondition(first_series=ICHIMOKU_LEADING_SPAN_B('KO', length=71), second_series=EMA('KO', offset=9))), sell_condition=IntraIntervalChangeOfXPercentCondition(series=HAMMER('KO'), percent=37.04)
+
+[EXAMPLE 2]
+description: Please design a strategy for MAR that shorts when the Donchain Channel Basis spins by 94.61 percent over 11 days is valid and purchase when the Coppock Curve with length equals 20, short_roc_length is set to 88, long_roc_length is equal to 77 sways by 59.57 percent within a interval or Mass Index with length is 15 shifts by 45.38 percent over 93 days and Senkou Span A where displacement is 20 twists by 95.26 percent over 68 days is felicitous. Apply take-profit at 47.35%. Set the start date to 2008-9-28 for the strategy. Set the end date equal to 2023-11-21. Set the interval to 1 month for the data. Set commissions to 4 percent.
+response: buy_condition=OR(IntraIntervalChangeOfXPercentCondition(series=COPPOCK('MAR', length=20, short_roc_length=88, long_roc_length=77), percent=59.57), AND(ChangeOfXPercentPerYDaysCondition(series=MASS_INDEX('MAR', length=15), percent=45.38, number_of_days=93), ChangeOfXPercentPerYDaysCondition(series=ICHIMOKU_LEADING_SPAN_A('MAR', displacement=20), percent=95.26, number_of_days=68))), sell_condition=ChangeOfXPercentPerYDaysCondition(series=DC_BASIS('MAR'), percent=94.61, number_of_days=11)
+
+[EXAMPLE 3]
+description: Can you structure a  strategy for LYB that take a long position when the Chaikin Money Flow sways by 35.46 percent within a interval is to the point and goes short when the ATR having smoothing type set to EMA, length equals 25 rises above Ease of Movement where length is set to 36 or price is in a 61.8% fibonacci level during a downtrend and Chaikin osc. where slow_length is set to 28 drops under Chaikin osc. is seemly. Apply take-profit at 9.58%. Set the interval to 1 day.
+response: buy_condition=IntraIntervalChangeOfXPercentCondition(series=CMF('LYB'), percent=35.46), sell_condition=OR(CrossOverCondition(first_series=ATR('LYB', smoothing_type=SmoothingType.EMA, length=25), second_series=EOM('LYB', length=36)), AND(DowntrendFibRetracementLevelCondition(fib_level=FibonacciLevels.LEVEL_61_8, length=84), CrossUnderCondition(first_series=CHAIKIN_OSC('LYB', slow_length=28), second_series=CHAIKIN_OSC('LYB'))))
+
+[EXAMPLE 4]
+description: Can you provide a  strategy for GEV that shorts when the Close sways by 39.53 percent over 85 days after 21 days or price is within a 50% fibonacci level during a downtrend is precise and purchase when the High Price sways by 67.3 percent within a interval or price is in a 0% fibonacci level during a downtrend is right. Set take-profit at 47.87%. Set the interval as 3 months. Set the initial capital to 130221$. Set order size per trade to 601538$. Set trade commissions to 9 percent.
+response: buy_condition=OR(IntraIntervalChangeOfXPercentCondition(series=HIGH('GEV'), percent=67.3), DowntrendFibRetracementLevelCondition(fib_level=FibonacciLevels.LEVEL_0, length=90)), sell_condition=OR(AfterXDaysCondition(condition=ChangeOfXPercentPerYDaysCondition(series=CLOSE('GEV'), percent=39.53, number_of_days=85), number_of_days=21), DowntrendFibRetracementLevelCondition(fib_level=FibonacciLevels.LEVEL_50, length=96))
+
+[EXAMPLE 5]
+description: Would you kindly create a  strategy for KO that sell off when the TRIX is more than DI- with length is 67 and Ichinoku Conversion twists by 88.13 percent over 57 days is correct and purchase when the Volume is greater than Aron Indicator Up where length is set to 61 is right. Set take-profit at 30.14%. Set the period as maximum.
+response: buy_condition=GreaterThanCondition(first_series=VOLUME('KO'), second_series=AROON_UP('KO', length=61)), sell_condition=AND(GreaterThanCondition(first_series=TRIX('KO'), second_series=DI_MINUS('KO', length=67)), ChangeOfXPercentPerYDaysCondition(series=ICHIMOKU_CONVERSION('KO'), percent=88.13, number_of_days=57))
+
+[RESPONSE INSTRUCTIONS]
+- Your task is to extract the BUY and SELL CONDITIONS from the given text and return them in the format: buy_condition=BuyCondition, sell_condition=SellCondition, where BuyCondition and SellCondition are the extracted conditions.
+- Always make sure to include the buy_condition and sell_condition in the response separated by a comma and space.
+- USE ONLY the classes and parameters provided in the prompt. DO NOT use any other classes or parameters.
+- If there are multiple buy conditions, combine them using AND or OR as appropriate.
+- Do NOT include any additional text or explanations.
+
+Here is the description of the strategy you need to extract the buy and sell conditions from:
+[DESCRIPTION]
+{description}

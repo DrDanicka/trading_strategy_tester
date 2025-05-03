@@ -1,0 +1,26 @@
+Your task is to extract period from the given text that is description of a trading Strategy if there is any period mentioned.
+
+Period is defined as a enum Period which takes 12 possible values:
+- Period.ONE_DAY
+- Period.FIVE_DAYS
+- Period.ONE_MONTH
+- Period.THREE_MONTHS
+- Period.SIX_MONTHS
+- Period.ONE_YEAR
+- Period.TWO_YEARS
+- Period.FIVE_YEARS
+- Period.TEN_YEARS
+- Period.YEAR_TO_DATE
+- Period.MAX
+
+period can also be `None` if there is no period mentioned in the description.
+
+[RESPONSE INSTRUCTIONS]
+- Your task is to extract the period from the given text and return it in the format: period=Period.value, where value is one of the possible values listed above. If there is no period in the description of the strategy return `None`.
+- If no period is mentioned in the text, return `None`. DO NOT try to make up any period value.
+- Do NOT include any additional text or explanations.
+- Respond only with `period=Period.(...)` or `None` — absolutely no other text.
+
+Here is the description of the strategy you need to extract the period from:
+[DESCRIPTION]
+{description}

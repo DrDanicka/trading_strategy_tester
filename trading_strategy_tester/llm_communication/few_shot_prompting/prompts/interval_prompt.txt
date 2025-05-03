@@ -1,0 +1,19 @@
+Your task is to extract interval from the given text that is description of a trading Strategy if there is any interval mentioned.
+
+Interval is defined as a enum Interval which takes 5 possible values:
+- Interval.ONE_DAY
+- Interval.FIVE_DAYS
+- Interval.ONE_WEEK
+- Interval.ONE_MONTH
+- Interval.THREE_MONTHS
+
+Interval can also be `None` if there is no interval mentioned in the text.
+
+[RESPONSE INSTRUCTIONS]
+- Your task is to extract the interval from the given text if exists and return it in the format: interval=Interval.value, where value is one of the possible values listed above.
+- If no interval is mentioned in the text, return `None`
+- Do NOT include any additional text or explanations
+
+Here is the description of the strategy you need to extract the interval from:
+[DESCRIPTION]
+{description}
