@@ -15,6 +15,9 @@ nav:
       - Examples:
           - Strategy: user/examples/strategy_examples.md
           - Indicators: user/examples/indicator_examples.md
+      - Web UI:
+          - Main page: user/web_ui/main_page.md
+          - Results page: user/web_ui/strategy_results.md
   - Developer Documentation:
       - Overview: dev/index.md
       - Modules:
@@ -54,6 +57,6 @@ nav:
   - LLM Documentation:
       - Overview: llm/index.md
       - Fine-tuning: llm/fine_tuning.md
-      - RAG: llm/rag.md
+      - Few-shot prompting: llm/fsp.md
       - Training data: llm/training_data.md
       - How to write a prompt: llm/how_to_write_prompt.md
