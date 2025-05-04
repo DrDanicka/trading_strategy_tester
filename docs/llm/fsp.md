@@ -8,7 +8,7 @@ In Few-shot prompting, the generation is done by base model `LLama 3.2`. We use 
 
 ## Prompts
 
-For every parameter that we want to generate using Few-shot prompting, we have [templates](https://github.com/DrDanicka/trading_strategy_tester/tree/main/trading_strategy_tester/llm_communication/rag/prompts) with contex and knowledge base for given parameter. The final prompt than consists of:
+For every parameter that we want to generate using Few-shot prompting, we have [templates](https://github.com/DrDanicka/trading_strategy_tester/tree/main/trading_strategy_tester/llm_communication/few_shot_prompting/prompts) with contex and knowledge base for given parameter. The final prompt than consists of:
 
 1. **Context and Knowledge base**: This is the context that is provided to the model. It contains information about the parameter that we want to generate. The context is created from the project’s internal documentation and strategy schema.
 2. **Examples**: These are the examples of the parameter that we want to generate. The examples are created using the same templates as in the fine-tuning process. They are used to guide the model in generating the parameter.

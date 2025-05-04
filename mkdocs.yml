@@ -3,6 +3,8 @@ site_url: https://DrDanicka.github.io/trading_strategy_tester/
 repo_url: https://github.com/DrDanicka/trading_strategy_tester
 theme:
   name: material
+  logo: img/logo.png
+  favicon: img/logo.ico
   features:
     - navigation.expand
     - navigation.tabs
@@ -59,4 +61,4 @@ nav:
       - Fine-tuning: llm/fine_tuning.md
       - Few-shot prompting: llm/fsp.md
       - Training data: llm/training_data.md
-      - How to write a prompt: llm/how_to_write_prompt.md
+      - How to write prompts: llm/how_to_write_prompt.md
