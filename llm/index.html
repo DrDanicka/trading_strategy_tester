@@ -17,7 +17,7 @@
         <link rel="next" href="fine_tuning/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../img/logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
     
     
@@ -80,8 +80,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Trading Strategy Tester" class="md-header__button md-logo" aria-label="Trading Strategy Tester" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -303,8 +302,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Trading Strategy Tester" class="md-nav__button md-logo" aria-label="Trading Strategy Tester" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     Trading Strategy Tester
@@ -491,6 +489,103 @@
   
   <span class="md-ellipsis">
     Indicators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Web UI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Web UI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/web_ui/main_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Main page
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/web_ui/strategy_results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Results page
     
   </span>
   
@@ -1622,9 +1717,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#retrieval-augmented-generation-rag" class="md-nav__link">
+  <a href="#few-shot-prompting" class="md-nav__link">
     <span class="md-ellipsis">
-      Retrieval-Augmented Generation (RAG)
+      Few-shot prompting
     </span>
   </a>
   
@@ -1702,12 +1797,12 @@
   
   
     <li class="md-nav__item">
-      <a href="rag/" class="md-nav__link">
+      <a href="fsp/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    RAG
+    Few-shot prompting
     
   </span>
   
@@ -1753,7 +1848,7 @@
   
   
   <span class="md-ellipsis">
-    How to write a prompt
+    How to write prompts
     
   </span>
   
@@ -1807,9 +1902,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#retrieval-augmented-generation-rag" class="md-nav__link">
+  <a href="#few-shot-prompting" class="md-nav__link">
     <span class="md-ellipsis">
-      Retrieval-Augmented Generation (RAG)
+      Few-shot prompting
     </span>
   </a>
   
@@ -1874,10 +1969,10 @@
 <p>Fine-tuning involves taking a pre-trained model and training it further on a custom dataset. This allows the model to specialize in interpreting and generating trading strategy code.</p>
 <p>The dataset consists of natural language strategy descriptions paired with their code implementations. It is created using the <a href="training_data/"><code>training_data</code></a> module.</p>
 <p>To learn more about fine-tuning, check the <a href="fine_tuning/">Fine-tuning section</a>.</p>
-<h2 id="retrieval-augmented-generation-rag">Retrieval-Augmented Generation (RAG)</h2>
-<p>RAG enhances language model outputs by retrieving relevant information from a knowledge base during generation. In this project, RAG is used to inject context (e.g., existing strategy documentation or indicator definitions) into the LLM’s response.</p>
-<p>The knowledge base is generated from the project’s internal documentation and strategy schema.</p>
-<p>To learn more about RAG, check the <a href="rag/">RAG section</a>.</p>
+<h2 id="few-shot-prompting">Few-shot prompting</h2>
+<p>Few-shot prompting improves the performance of a language model by providing a few illustrative examples along with the user’s query. In this project, few-shot prompting is used to guide the LLM in generating precise outputs by showing it prior examples of strategy descriptions and their corresponding DSL representations.</p>
+<p>The examples are carefully constructed to cover typical strategy structures and edge cases, helping the model understand the expected format and logic without needing additional fine-tuning.</p>
+<p>To learn more about Few-shot prompting, check the <a href="fsp/">Few-shot prompting section</a>.</p>
 <hr />
 <h2 id="llama">LLama</h2>
 <p>In this project we use the <a href="https://www.llama.com">LLama</a> model for LLM integration. We chose this model because of its open-source nature and its ability to be fine-tuned on custom datasets.</p>
@@ -1890,7 +1985,7 @@
 <p>First is to generate whole strategy object from natural language description. For this approach we use:</p>
 <ul>
 <li><strong>Fine-tuning</strong>: The <strong>3B</strong> model</li>
-<li><strong>RAG</strong>: The <strong>3B</strong> model</li>
+<li><strong>Few-shot prompting</strong>: The <strong>3B</strong> model</li>
 </ul>
 <p>This model is more capable of generating complex code which is needed for generating whole strategy object. The model is trained on a dataset of natural language descriptions and their corresponding strategy objects. </p>
 </li>
@@ -1902,8 +1997,8 @@
 <li><strong>3B</strong> model for the <code>buy_condition</code> and <code>sell_condition</code> parameters. This is because these parameters are more complex and require a more capable model to generate them correctly.</li>
 </ul>
 </li>
-<li><strong>RAG</strong>:<ul>
-<li>In this case we use the <strong>3B</strong> model for all of the parameters. This is because RAG needs more context to generate the parameters correctly and the <strong>3B</strong> model is more capable of generating complex code.</li>
+<li><strong>Few-shot prompting</strong>:<ul>
+<li>In this case we use the <strong>3B</strong> model for all of the parameters. This is because Few-shot prompting needs more context to generate the parameters correctly and the <strong>3B</strong> model is more capable of generating complex code.</li>
 </ul>
 </li>
 </ul>
