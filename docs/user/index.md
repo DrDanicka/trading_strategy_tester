@@ -42,16 +42,16 @@ strat = Strategy(
     ticker="AAPL",
     position_type= PositionTypeEnum.LONG_SHORT_COMBINED,
     buy_condition= CrossOverCondition(
-        RSI(ticker='AAPL'),
-        CONST(30)
+        first_series=RSI('AAPL', length=14),
+        second_series=CONST(30)
     ),
     sell_condition=CrossUnderCondition(
-        RSI(ticker='AAPL'),
-        CONST(70)
+        first_series=RSI('AAPL'),
+        second_series=CONST(70)
     ),
-    start_date=datetime(2010, 1, 1),
+    start_date=datetime(2015, 1, 1),
     end_date=datetime(2020, 1, 1),
-    order_size=Contracts(1)
+    order_size=Contracts(value=1)
 )
 
 # Execute the strategy

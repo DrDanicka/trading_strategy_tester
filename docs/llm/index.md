@@ -12,13 +12,13 @@ The dataset consists of natural language strategy descriptions paired with their
 
 To learn more about fine-tuning, check the [Fine-tuning section](fine_tuning.md).
 
-## Retrieval-Augmented Generation (RAG)
+## Few-shot prompting
 
-RAG enhances language model outputs by retrieving relevant information from a knowledge base during generation. In this project, RAG is used to inject context (e.g., existing strategy documentation or indicator definitions) into the LLM’s response.
+Few-shot prompting improves the performance of a language model by providing a few illustrative examples along with the user’s query. In this project, few-shot prompting is used to guide the LLM in generating precise outputs by showing it prior examples of strategy descriptions and their corresponding DSL representations.
 
-The knowledge base is generated from the project’s internal documentation and strategy schema.
+The examples are carefully constructed to cover typical strategy structures and edge cases, helping the model understand the expected format and logic without needing additional fine-tuning.
 
-To learn more about RAG, check the [RAG section](rag.md).
+To learn more about Few-shot prompting, check the [Few-shot prompting section](fsp.md).
 
 ---
 
@@ -36,7 +36,7 @@ For generating strategies we use two approaches:
 
 - First is to generate whole strategy object from natural language description. For this approach we use:
       - **Fine-tuning**: The **3B** model
-      - **RAG**: The **3B** model
+      - **Few-shot prompting**: The **3B** model
 
     This model is more capable of generating complex code which is needed for generating whole strategy object. The model is trained on a dataset of natural language descriptions and their corresponding strategy objects. 
 
@@ -44,5 +44,5 @@ For generating strategies we use two approaches:
     - **Fine-tuning**:
         - **1B** model for all of the parameters except the `buy_condition` and `sell_condition`.
         - **3B** model for the `buy_condition` and `sell_condition` parameters. This is because these parameters are more complex and require a more capable model to generate them correctly.
-    - **RAG**:
-        - In this case we use the **3B** model for all of the parameters. This is because RAG needs more context to generate the parameters correctly and the **3B** model is more capable of generating complex code.
+    - **Few-shot prompting**:
+        - In this case we use the **3B** model for all of the parameters. This is because Few-shot prompting needs more context to generate the parameters correctly and the **3B** model is more capable of generating complex code.
