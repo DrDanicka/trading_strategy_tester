@@ -1901,7 +1901,7 @@
 <h2 id="how-does-few-shot-prompting-work">How does Few-shot prompting work?</h2>
 <p>In Few-shot prompting, the generation is done by base model <code>LLama 3.2</code>. We use the same prompts as in the fine-tuning process, but we also provide additional context from a knowledge base. The knowledge base is created from the project’s internal documentation and strategy schema. This allows the model to retrieve relevant information and use it to generate more accurate and contextually relevant responses.</p>
 <h2 id="prompts">Prompts</h2>
-<p>For every parameter that we want to generate using Few-shot prompting, we have <a href="https://github.com/DrDanicka/trading_strategy_tester/tree/main/trading_strategy_tester/llm_communication/rag/prompts">templates</a> with contex and knowledge base for given parameter. The final prompt than consists of:</p>
+<p>For every parameter that we want to generate using Few-shot prompting, we have <a href="https://github.com/DrDanicka/trading_strategy_tester/tree/main/trading_strategy_tester/llm_communication/few_shot_prompting/prompts">templates</a> with contex and knowledge base for given parameter. The final prompt than consists of:</p>
 <ol>
 <li><strong>Context and Knowledge base</strong>: This is the context that is provided to the model. It contains information about the parameter that we want to generate. The context is created from the project’s internal documentation and strategy schema.</li>
 <li><strong>Examples</strong>: These are the examples of the parameter that we want to generate. The examples are created using the same templates as in the fine-tuning process. They are used to guide the model in generating the parameter.</li>
