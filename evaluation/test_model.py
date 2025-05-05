@@ -1,4 +1,4 @@
-import ollama
+import os
 import pandas as pd
 import json
 from deepdiff import DeepDiff
@@ -212,12 +212,13 @@ ollama_models = [
 ]
 
 
-class xTester:
+class LLM_Tester:
     def __init__(self, model:str, log: bool = False):
         self.number_of_tested_cases = 0
 
         # Variable for validity of the output
         self.number_of_not_valid_outputs = 0
+        self.number_of_valid_outputs = 0
 
         # Variable for wrong outputs
         self.number_of_wrong_outputs = 0
@@ -226,9 +227,12 @@ class xTester:
         self.number_of_wrong_parameters = 0
         self.number_of_all_parameters = 0
 
+        # Number of correct trades in the output
+        self.number_of_correct_trades = 0
+
         self.model = model
         self.model_for = self.model.split('-')[-1]
-        if self.model_for == 'rag':
+        if self.model_for == 'fsp':
             self.model_for = self.model.split('-')[-2]
 
         self.test_data = self.load_data()
@@ -354,6 +358,19 @@ class xTester:
         strat1_dict = strat1.to_dict()
         strat2_dict = strat2.to_dict()
 
+        try:
+            # Execute both strategies to get the trades
+            strat1.execute()
+            strat2.execute()
+
+            # Get trades
+            trades1 = strat1.trades
+            trades2 = strat2.trades
+        except Exception:
+            trades1 = {}
+            trades2 = {}
+
+
         for key in strat1_dict.keys():
             # Compare conditions recursively
             arg1 = strat1_dict[key]
@@ -366,7 +383,7 @@ class xTester:
 
             number_of_parameters += 1 # For argument name
 
-        return number_of_parameters, number_of_faults, number_of_faults == 0
+        return number_of_parameters, number_of_faults, number_of_faults == 0, trades1, trades2
 
     def _compare_parameter_object(self, obj1_str: str, obj2_str: str):
         obj1_str = '='.join(obj1_str.split('=')[1:])
@@ -482,7 +499,25 @@ class xTester:
             number_of_params_buy, number_of_faults_buy, identical_buy = self._compare_parameter_object(buy_condition_expected, buy_condition_response)
             number_of_params_sell, number_of_faults_sell, identical_sell = self._compare_parameter_object(sell_condition_expected, sell_condition_response)
 
-            return number_of_params_buy + number_of_params_sell, number_of_faults_buy + number_of_faults_sell, identical_buy and identical_sell
+            strat_template = "Strategy(ticker='AAPL', position_type=PositionTypeEnum.LONG, {buy}, {sell}, start_date=datetime(2017, 1, 1), end_date=datetime(2022, 1, 1))"
+
+            strat_expected = strat_template.format(buy=buy_condition_expected, sell=sell_condition_expected)
+            strat_response = strat_template.format(buy=buy_condition_response, sell=sell_condition_response)
+
+            strat_expected = eval(strat_expected, namespace)
+            strat_response = eval(strat_response, namespace)
+
+            try:
+                strat_expected.execute()
+                strat_response.execute()
+
+                expected_trades = strat_expected.trades
+                generated_trades = strat_response.trades
+            except Exception:
+                expected_trades = {}
+                generated_trades = {}
+
+            return number_of_params_buy + number_of_params_sell, number_of_faults_buy + number_of_faults_sell, identical_buy and identical_sell, expected_trades, generated_trades
         elif self.model_for in ['stop_loss', 'take_profit', 'order_size', 'trade_commissions']:
             return self._compare_parameter_object(expected_completion, response)
         elif self.model_for in ['start_date', 'end_date']:
@@ -499,7 +534,21 @@ class xTester:
         if validation_result:
             string_to_test = validated_obj if self.model_for in ['all', 'conditions'] else response
 
-            number_of_params, number_of_wrong_params, identical = self.compare_outputs(expected_completion, string_to_test)
+            if self.model_for in ['conditions', 'all']:
+                number_of_params, number_of_wrong_params, identical, expected_trades, generated_trades = self.compare_outputs(expected_completion, string_to_test)
+
+                expected_entries = [entry.get_summary()['Entry Date'] for entry in expected_trades]
+                generated_entries = [entry.get_summary()['Entry Date'] for entry in generated_trades]
+
+                correct_trades = 0
+
+                for entry in expected_entries:
+                    if entry in generated_entries:
+                        correct_trades += 1
+
+                self.number_of_correct_trades += (correct_trades / len(expected_entries)) if len(expected_entries) > 0 else 1
+            else:
+                number_of_params, number_of_wrong_params, identical = self.compare_outputs(expected_completion, string_to_test)
 
             self.number_of_wrong_parameters += number_of_wrong_params
             self.number_of_all_parameters += number_of_params
@@ -522,14 +571,121 @@ class xTester:
 
             self.test(prompt, expected_completion, response)
 
+        self.number_of_valid_outputs = self.number_of_tested_cases - self.number_of_not_valid_outputs
+
     def print_results(self):
         print(f"Number of tested cases: {self.number_of_tested_cases}")
-        print(f"Number of not valid outputs: {self.number_of_not_valid_outputs}")
-        print(f"Number of wrong outputs: {self.number_of_wrong_outputs}")
-        print(f"Number of wrong parameters: {self.number_of_wrong_parameters}")
         print(f"Number of all parameters: {self.number_of_all_parameters}")
+        print()
+
+        print("Validation results:")
+        print(f"Number of valid outputs: {self.number_of_valid_outputs} / {self.number_of_tested_cases}")
+        print(f"Number of not valid outputs: {self.number_of_not_valid_outputs} / {self.number_of_tested_cases}")
+        print()
+
+        print("Comparison results out of valid strats:")
+        print(f"Number of identical outputs: {self.number_of_valid_outputs - self.number_of_wrong_outputs} / {self.number_of_valid_outputs}")
+        print(f"Number of different outputs: {self.number_of_wrong_outputs} / {self.number_of_valid_outputs}")
+        print()
+
+        print("Comparison results for all parameters:")
+        print(f"Number of correct parameters: {self.number_of_all_parameters - self.number_of_wrong_parameters} / {self.number_of_all_parameters}")
+        print(f"Number of wrong parameters: {self.number_of_wrong_parameters} / {self.number_of_all_parameters}")
+        print()
+
+        if self.model_for in ['all', 'conditions']:
+            print(f"Number of correct trades: {self.number_of_correct_trades} / {self.number_of_valid_outputs}")
+            print(f"Number of wrong trades: {self.number_of_valid_outputs - self.number_of_correct_trades} / {self.number_of_valid_outputs}")
+
+    def save_results(self):
+
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        results_dir = os.path.join(current_dir, 'results')
+        os.makedirs(results_dir, exist_ok=True)
 
 
-tester = xTester('llama3-2-all-fsp', log=False)
-tester.test_all()
-tester.print_results()
+        results = {
+            'number_of_tested_cases': self.number_of_tested_cases,
+            'number_of_all_parameters': self.number_of_all_parameters,
+            'number_of_valid_outputs': self.number_of_valid_outputs,
+            'number_of_not_valid_outputs': self.number_of_not_valid_outputs,
+            'number_of_identical_outputs': self.number_of_valid_outputs - self.number_of_wrong_outputs,
+            'number_of_wrong_outputs': self.number_of_wrong_outputs,
+            'number_of_correct_parameters': self.number_of_all_parameters - self.number_of_wrong_parameters,
+            'number_of_wrong_parameters': self.number_of_wrong_parameters,
+        }
+
+        if self.model_for in ['all', 'conditions']:
+            results['number_of_correct_trades'] = self.number_of_correct_trades
+            results['number_of_wrong_trades'] = self.number_of_valid_outputs - self.number_of_correct_trades
+
+        with open(os.path.join(results_dir, f'{self.model}_results.json'), 'w') as f:
+            json.dump(results, f, indent=4)
+
+
+all_models_to_test = [
+    'llama3-2-1B_tst_ft-ticker',
+    'llama3-2-1B_tst_ft-position_type',
+    'llama3-2-1B_tst_ft-stop_loss',
+    'llama3-2-1B_tst_ft-take_profit',
+    'llama3-2-1B_tst_ft-start_date',
+    'llama3-2-1B_tst_ft-end_date',
+    'llama3-2-1B_tst_ft-period',
+    'llama3-2-1B_tst_ft-initial_capital',
+    'llama3-2-1B_tst_ft-order_size',
+    'llama3-2-1B_tst_ft-trade_commissions'
+]
+
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Run LLM Tester.')
+    parser.add_argument('--model', type=str, required=True, help='Model name to test.')
+    parser.add_argument('--log', action='store_true', help='Enable detailed logging.')
+
+    args = parser.parse_args()
+
+    all_models = [
+        'llama3-2-1B_tst_ft-ticker',
+        'llama3-2-1B_tst_ft-position_type',
+        'llama3-2-3B_tst_ft-conditions',
+        'llama3-2-1B_tst_ft-stop_loss',
+        'llama3-2-1B_tst_ft-take_profit',
+        'llama3-2-1B_tst_ft-start_date',
+        'llama3-2-1B_tst_ft-end_date',
+        'llama3-2-1B_tst_ft-period',
+        'llama3-2-1B_tst_ft-interval',
+        'llama3-2-1B_tst_ft-initial_capital',
+        'llama3-2-1B_tst_ft-order_size',
+        'llama3-2-1B_tst_ft-trade_commissions',
+        'llama3-2-3B_tst_ft-all',
+        'llama3-2-ticker-fsp',
+        'llama3-2-position_type-fsp',
+        'llama3-2-conditions-fsp',
+        'llama3-2-stop_loss-fsp',
+        'llama3-2-take_profit-fsp',
+        'llama3-2-start_date-fsp',
+        'llama3-2-end_date-fsp',
+        'llama3-2-period-fsp',
+        'llama3-2-interval-fsp',
+        'llama3-2-initial_capital-fsp',
+        'llama3-2-order_size-fsp',
+        'llama3-2-trade_commissions-fsp',
+        'llama3-2-all-fsp',
+    ]
+
+    models_to_run = []
+
+    if args.model == 'all':
+        models_to_run = all_models
+    else:
+        models_to_run = [args.model]
+
+    for model_name in models_to_run:
+        print(f"\nRunning tester for model: {model_name}")
+        tester = LLM_Tester(model=model_name)
+        tester.test_all()
+        if args.log:
+            tester.print_results()
+        tester.save_results()

@@ -1,0 +1,10 @@
+{
+    "number_of_tested_cases": 10000,
+    "number_of_all_parameters": 19790,
+    "number_of_valid_outputs": 9895,
+    "number_of_not_valid_outputs": 105,
+    "number_of_identical_outputs": 9877,
+    "number_of_wrong_outputs": 18,
+    "number_of_correct_parameters": 19769,
+    "number_of_wrong_parameters": 21
+}

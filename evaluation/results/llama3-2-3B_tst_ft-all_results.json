@@ -1,0 +1,12 @@
+{
+    "number_of_tested_cases": 10000,
+    "number_of_all_parameters": 646546,
+    "number_of_valid_outputs": 8853,
+    "number_of_not_valid_outputs": 1147,
+    "number_of_identical_outputs": 1147,
+    "number_of_wrong_outputs": 7706,
+    "number_of_correct_parameters": 618321,
+    "number_of_wrong_parameters": 28225,
+    "number_of_correct_trades": 6542.940407870946,
+    "number_of_wrong_trades": 2310.059592129054
+}

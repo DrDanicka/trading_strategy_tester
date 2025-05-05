@@ -14,9 +14,9 @@ In every strategy, there are 4 mandatory fields that need to be specified, and t
 Those fields are mandatory, and the best practice is to start with them. So the first sentence of a prompt should be something like:
 ```
 Can you please generate a strategy for AAPL where you buy when RSI moves 
-above 30 and you sell when RSI falls below 70.
+above 30 and you sell when RSI crosses below 70.
 ```
-Simple and clear. The model will understand that you want to create a strategy for AAPL and that you want to buy when RSI moves above 30 and sell when RSI falls below 70. Position type is not specified, so the model will use the default value which is `LONG`.
+Simple and clear. The model will understand that you want to create a strategy for AAPL and that you want to buy when RSI moves above 30 and sell when RSI crosses below 70. Position type is not specified, so the model will use the default value which is `LONG`.
 
 Another and more complicated example of a prompt with mandatory fields:
 ```
@@ -146,7 +146,7 @@ This is how you can write prompts for LLMs to generate trading strategies. Quick
 
 ```
 Can you please generate a strategy for AAPL where you buy when RSI moves 
-above 30 and you sell when RSI falls below 70. Apply stop-loss at 10 percent. 
+above 30 and you sell when RSI crosses below 70. Apply stop-loss at 10 percent. 
 Set take-profit at 5 percent. Set the initial capital to 10000 dollars.
 ```
 
