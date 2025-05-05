@@ -265,7 +265,7 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
             if response.response != '':
                 responses.append(response.response)
         result = 'Strategy(' + ', '.join(responses) + ')'
-    elif llm_model == LLMModel.LLAMA_ALL_RAG:
+    elif llm_model == LLMModel.LLAMA_ALL_FSP:
         # Process the prompt using few-shot prompting for all fields
         script_dir = os.path.dirname(__file__)
         prompt_path = os.path.join(script_dir, 'few_shot_prompting', 'prompts', 'all_prompt.txt')
@@ -282,7 +282,7 @@ def process_prompt(prompt: str, llm_model: LLMModel = LLMModel.LLAMA_ALL):
         )
 
         result = response.response
-    elif llm_model == LLMModel.LLAMA_FIELDS_RAG:
+    elif llm_model == LLMModel.LLAMA_FIELDS_FSP:
         # Process the prompt using few-shot prompting for fields
         responses = []
 
