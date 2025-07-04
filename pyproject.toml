@@ -1,6 +1,6 @@
 [project]
 name = "trading-strategy-tester"
-version = "0.1.5"
+version = "0.1.6"
 description = "Simulate and evaluate trading strategies"
 authors = [{ name = "Daniel Šoltýs", email = "danielsytlos@gmail.com" }]
 license = "MIT"

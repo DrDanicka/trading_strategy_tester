@@ -2,7 +2,7 @@ pandas~=2.2.2
 numpy~=2.0.1
 matplotlib
 plotly~=5.23.0
-yfinance==0.2.57
+yfinance~=0.2.64
 ollama~=0.4.7
 pandas_ta~=0.3.14b0
 deepdiff~=8.4.2

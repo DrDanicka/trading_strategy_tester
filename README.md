@@ -25,7 +25,7 @@ You can find examples of how to use the package in the [`examples`](https://drda
 
 ## LLM Integration
 
-The project integrates with Large Language Models (LLMs) to help generate trading strategies from natural language descriptions. It is available in 2 types:
+The project integrates with Large Language Models to help generate trading strategies from natural language descriptions. It is available in 2 types:
 
 1. **WEB UI**: A web-based interface that allows users to input natural language prompts and visualize the results. You can find can learn more about the web app in this [repository](https://github.com/DrDanicka/trading_strategy_tester_web_app?tab=readme-ov-file).
 2. **Code interface**: You can use the LLM integration directly in your Python code. This can be done via `process_prompt(prompt: str, llm_model: LLMModel)` function. You can do it like this:
