@@ -1,4 +1,4 @@
-# Developer Documentation
+# Documentation for Developers
 
 Welcome to the **Developer Documentation** for the Trading Strategy Tester.
 

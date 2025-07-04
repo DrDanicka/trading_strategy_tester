@@ -1,6 +1,6 @@
-# Large Language Model Integration
+# Large Language Models Integration
 
-The project integrates with Large Language Models (LLMs) to help generate and optimize trading strategies from natural language descriptions.
+The project integrates with Large Language Models to help generate and optimize trading strategies from natural language descriptions.
 
 Two main techniques are used:
 
@@ -28,7 +28,7 @@ In this project we use the [LLama](https://www.llama.com) model for LLM integrat
 
 ### Running locally
 
-To run the LLM locally we used the [Ollama](https://ollama.com) framework. Because of the hardware limitations, we used 1B and 3B Llama models which can be fine-tuned on a single GPU or Neural Engine in Apple Silicon which was our case. 
+To run the LLM locally we used the [Ollama](https://ollama.com) framework. Because of the hardware limitations, we used 1B and 3B Llama models which can be fine-tuned on a single GPU or Neural Engine in Apple Silicon which we used in our case. 
 
 ## Generating strategies
 

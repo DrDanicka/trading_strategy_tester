@@ -1,6 +1,6 @@
 # Indicator Examples
 
-This section provides a collection of example indicators that can be used with the Trading Strategy Tester. Each example demonstrates a different approach to trading, showcasing the flexibility and power of the framework. You can use these examples as a starting point for your own indicators or as inspiration for new ideas.
+This section provides a collection of example indicators that can be used with the Trading Strategy Tester. They all return a series of the same length as the input series, containing the calculated indicator values. You can use them separately of the `Strategy` object for your own analysis or as part of a trading strategy.
 
 All available indicators can be found [here](../../dev/modules/indicators.md). The indicators are implemented as functions which take input series of type `pd.Series` and parameters and return a series of the same length with the indicator values for given input series. 
 

@@ -12,7 +12,7 @@ theme:
     - content.code.copy
 nav:
   - Home: index.md
-  - User Documentation:
+  - Documentation for Users:
       - Overview: user/index.md
       - Examples:
           - Strategy: user/examples/strategy_examples.md
@@ -20,7 +20,7 @@ nav:
       - Web UI:
           - Main page: user/web_ui/main_page.md
           - Results page: user/web_ui/strategy_results.md
-  - Developer Documentation:
+  - Documentation for Developers:
       - Overview: dev/index.md
       - Modules:
           - Download: dev/modules/download.md
@@ -55,7 +55,7 @@ nav:
           - Interval: dev/modules/enums/interval.md
           - Period: dev/modules/enums/period.md
       - Testing: dev/testing.md
-  - Administrator Documentation: admin/index.md
+  - Documentation for Administrators: admin/index.md
   - LLM Documentation:
       - Overview: llm/index.md
       - Fine-tuning: llm/fine_tuning.md

@@ -3,7 +3,7 @@
 
 This section provides a collection of example strategies that can be used with the Trading Strategy Tester. Each example demonstrates a different approach to trading, showcasing the flexibility and power of the framework. You can use these examples as a starting point for your own strategies or as inspiration for new ideas.
 
-Every strategy is defined using the `Strategy` class, which allows you to specify the ticker symbol, position type, entry and exit conditions, start and end dates for backtesting, and other parameters that can be seen [here](../../dev/modules/strategy.md).
+Every strategy is defined using the `Strategy` class, which allows you to specify the ticker symbol, position type, entry and exit conditions, start and end dates for backtesting, and other parameters that can be found [here](../../dev/modules/strategy.md).
 
 ### Importing the necessary modules
 
@@ -34,9 +34,17 @@ where `TradingSeries` can be one of the series linked [here](../../dev/modules/t
 ```python
 from trading_strategy_tester import PositionTypeEnum, StopLoss, StopLossType,TakeProfit, Interval, Period, Contracts, USD, PercentOfEquity, MoneyCommissions, PercentageCommissions
 ```
-where all the parameters have their own page to explain their usage. Here are the links: [PositionTypeEnum](../../dev/modules/enums/position_type.md), [StopLoss](../../dev/modules/strategy_parameters/stop_loss.md), [TakeProfit](../../dev/modules/strategy_parameters/take_profit.md), [Interval](../../dev/modules/enums/interval.md), [Period](../../dev/modules/enums/period.md), [OrderSize](../../dev/modules/strategy_parameters/order_size.md), [TradeCommissions](../../dev/modules/strategy_parameters/trade_commissions.md).
+where all the parameters have their own page to explain their usage. Here are the links:
 
-This is basically all you need to import in order to create a strategy. Following are some examples of strategies that can be created using the `Strategy` class.
+- [PositionTypeEnum](../../dev/modules/enums/position_type.md) 
+- [StopLoss](../../dev/modules/strategy_parameters/stop_loss.md) 
+- [TakeProfit](../../dev/modules/strategy_parameters/take_profit.md)
+- [Interval](../../dev/modules/enums/interval.md)
+- [Period](../../dev/modules/enums/period.md)
+- [OrderSize](../../dev/modules/strategy_parameters/order_size.md)
+- [TradeCommissions](../../dev/modules/strategy_parameters/trade_commissions.md)
+
+This is basically all you need to import to create a strategy. Following are some examples of strategies that can be created using the `Strategy` class.
 
 
 ## RSI Strategy

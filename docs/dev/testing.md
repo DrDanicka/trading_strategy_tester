@@ -12,10 +12,11 @@ The Trading Strategy Tester project places a strong emphasis on code quality and
 - **Lines of Code Covered**: **83%**
 
 This extensive test suite covers the core logic, including:
+
 - Trade execution and management
 - Strategy validation and evaluation
 - Indicator calculations and TradingSeries implementations
-  - Indicator values are tested against TradingView values available on the website.
+- Indicator values are tested against TradingView values available on the website.
 - Performance metrics calculations
 - Training data generation for LLMs
 - Input validation modules

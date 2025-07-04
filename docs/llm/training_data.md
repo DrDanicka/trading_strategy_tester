@@ -45,7 +45,7 @@ It produces prompt-response pairs useful for supervised fine-tuning.
 - [**`string_options.py`**](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/training_data/prompt_data/string_options.py)  
   Contains sets of predefined string values from which to randomly select to generate prompts.
 
-- [**`sp500.csv`**](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/training_data/prompt_data/sp500.csv))  
+- [**`sp500.csv`**](https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/training_data/prompt_data/sp500.csv)  
   A list of S&P 500 tickers used by the `ticker_generator`.
 
 ---

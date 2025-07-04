@@ -1,6 +1,6 @@
 # Few-shot prompting
 
-**Few-shot prompting** is a technique that combines the strengths of large language models (LLMs) with external knowledge sources to improve the quality and relevance of generated content. In this project, FSP is used to enhance the generation of trading strategies by providing context and information from a knowledge base during the generation process.
+**Few-shot prompting** is a technique that combines the strengths of large language models with external knowledge sources to improve the quality and relevance of generated content. In this project, FSP is used to enhance the generation of trading strategies by providing context and information from a knowledge base during the generation process.
 
 ## How does Few-shot prompting work?
 
