@@ -209,7 +209,7 @@
           
   
   
-  User Documentation
+  Documentation for Users
 
         </a>
       </li>
@@ -229,7 +229,7 @@
           
   
   
-  Developer Documentation
+  Documentation for Developers
 
         </a>
       </li>
@@ -249,7 +249,7 @@
   
     
   
-  Administrator Documentation
+  Documentation for Administrators
 
       </a>
     </li>
@@ -372,7 +372,7 @@
   
   
   <span class="md-ellipsis">
-    User Documentation
+    Documentation for Users
     
   </span>
   
@@ -383,7 +383,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            User Documentation
+            Documentation for Users
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -639,7 +639,7 @@
   
   
   <span class="md-ellipsis">
-    Developer Documentation
+    Documentation for Developers
     
   </span>
   
@@ -650,7 +650,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Developer Documentation
+            Documentation for Developers
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1595,7 +1595,7 @@
   
   
   <span class="md-ellipsis">
-    Administrator Documentation
+    Documentation for Administrators
     
   </span>
   
@@ -1924,21 +1924,27 @@
 </ul>
 <h2 id="how-do-we-fine-tune-the-model">How do we fine-tune the model?</h2>
 <p>In this project we used <code>mlx-lm</code> framework for fine-tuning the model. The <code>mlx-lm</code> framework is a powerful tool for training and deploying large language models. It provides a simple and flexible API for fine-tuning models on custom datasets. It is only available for Apple devices with <code>mlx</code> support.</p>
-<p>If you have an Apple device with <code>mlx</code> support you can train your models locally as well. Here are the steps to do it:
-1. Clone the repository:
-   <code>bash
-   git clone --recurse-submodules https://github.com/DrDanicka/trading_strategy_tester.git</code>
-2. Navigate to the evaluation directory:
-   <code>bash
-   cd trading_strategy_tester/evaluation</code>
-   and install the required dependencies:
-   <code>bash
-    pip install -r requirements.txt</code>
-3. Run <code>train.py</code> script:
-   <code>bash
-   python train.py --model all</code>
-   This will train all the models needed for the project. </p>
-<p>If you don't want to train the models you can still download them as written in <a href="../../admin/">Administrator Documentation</a>. You still have to have <code>Ollama</code> installed on your machine because the models are exported to <code>Ollama</code>. How to do it is also written in the <a href="../../admin/">Administrator Documentation</a>.</p>
+<p>If you have an Apple device with <code>mlx</code> support you can train your models locally as well. Here are the steps to do it:</p>
+<ul>
+<li>Clone the repository:</li>
+</ul>
+<pre><code class="language-bash">git clone --recurse-submodules https://github.com/DrDanicka/trading_strategy_tester.git
+</code></pre>
+<ul>
+<li>Navigate to the evaluation directory:</li>
+</ul>
+<pre><code class="language-bash">cd trading_strategy_tester/evaluation
+</code></pre>
+<p>and install the required dependencies:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+<ul>
+<li>Run <code>train.py</code> script:</li>
+</ul>
+<pre><code class="language-bash">python train.py --model all 
+</code></pre>
+<p>This will train all the models needed for the project. </p>
+<p>If you don't want to train the models you can still download them as written in <a href="../../admin/">Documentation for Administrators</a>. You still have to have <code>Ollama</code> installed on your machine because the models are exported to <code>Ollama</code>. How to do it is also written in the <a href="../../admin/">Documentation for Administrators</a>.</p>
 <h2 id="what-is-the-dataset">What is the dataset?</h2>
 <p>The dataset used for fine-tuning the model consists of natural language descriptions of trading strategies paired with their corresponding code implementations. The dataset is created using the <a href="../training_data/"><code>training_data</code></a> module.</p>
 

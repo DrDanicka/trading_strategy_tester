@@ -211,7 +211,7 @@
           
   
   
-  User Documentation
+  Documentation for Users
 
         </a>
       </li>
@@ -231,7 +231,7 @@
           
   
   
-  Developer Documentation
+  Documentation for Developers
 
         </a>
       </li>
@@ -251,7 +251,7 @@
   
     
   
-  Administrator Documentation
+  Documentation for Administrators
 
       </a>
     </li>
@@ -375,7 +375,7 @@
   
   
   <span class="md-ellipsis">
-    User Documentation
+    Documentation for Users
     
   </span>
   
@@ -386,7 +386,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            User Documentation
+            Documentation for Users
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -756,7 +756,7 @@
   
   
   <span class="md-ellipsis">
-    Developer Documentation
+    Documentation for Developers
     
   </span>
   
@@ -767,7 +767,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Developer Documentation
+            Documentation for Developers
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1712,7 +1712,7 @@
   
   
   <span class="md-ellipsis">
-    Administrator Documentation
+    Documentation for Administrators
     
   </span>
   
@@ -2006,7 +2006,7 @@
 
 <h1 id="strategy-examples">Strategy Examples</h1>
 <p>This section provides a collection of example strategies that can be used with the Trading Strategy Tester. Each example demonstrates a different approach to trading, showcasing the flexibility and power of the framework. You can use these examples as a starting point for your own strategies or as inspiration for new ideas.</p>
-<p>Every strategy is defined using the <code>Strategy</code> class, which allows you to specify the ticker symbol, position type, entry and exit conditions, start and end dates for backtesting, and other parameters that can be seen <a href="../../../dev/modules/strategy/">here</a>.</p>
+<p>Every strategy is defined using the <code>Strategy</code> class, which allows you to specify the ticker symbol, position type, entry and exit conditions, start and end dates for backtesting, and other parameters that can be found <a href="../../../dev/modules/strategy/">here</a>.</p>
 <h3 id="importing-the-necessary-modules">Importing the necessary modules</h3>
 <p>For every strategy you have to import the <code>Strategy</code> class. Based on the strategy want to implement, you will also need to import the necessary conditions, trading series and other modules and enums. Here is a list of the modules and parameters and way to import them:</p>
 <h3 id="import-strategy-class">Import Strategy class</h3>
@@ -2023,8 +2023,17 @@
 <h3 id="import-strategy-parameters">Import Strategy Parameters</h3>
 <pre><code class="language-python">from trading_strategy_tester import PositionTypeEnum, StopLoss, StopLossType,TakeProfit, Interval, Period, Contracts, USD, PercentOfEquity, MoneyCommissions, PercentageCommissions
 </code></pre>
-<p>where all the parameters have their own page to explain their usage. Here are the links: <a href="../../../dev/modules/enums/position_type/">PositionTypeEnum</a>, <a href="../../../dev/modules/strategy_parameters/stop_loss/">StopLoss</a>, <a href="../../../dev/modules/strategy_parameters/take_profit/">TakeProfit</a>, <a href="../../../dev/modules/enums/interval/">Interval</a>, <a href="../../../dev/modules/enums/period/">Period</a>, <a href="../../../dev/modules/strategy_parameters/order_size/">OrderSize</a>, <a href="../../../dev/modules/strategy_parameters/trade_commissions/">TradeCommissions</a>.</p>
-<p>This is basically all you need to import in order to create a strategy. Following are some examples of strategies that can be created using the <code>Strategy</code> class.</p>
+<p>where all the parameters have their own page to explain their usage. Here are the links:</p>
+<ul>
+<li><a href="../../../dev/modules/enums/position_type/">PositionTypeEnum</a> </li>
+<li><a href="../../../dev/modules/strategy_parameters/stop_loss/">StopLoss</a> </li>
+<li><a href="../../../dev/modules/strategy_parameters/take_profit/">TakeProfit</a></li>
+<li><a href="../../../dev/modules/enums/interval/">Interval</a></li>
+<li><a href="../../../dev/modules/enums/period/">Period</a></li>
+<li><a href="../../../dev/modules/strategy_parameters/order_size/">OrderSize</a></li>
+<li><a href="../../../dev/modules/strategy_parameters/trade_commissions/">TradeCommissions</a></li>
+</ul>
+<p>This is basically all you need to import to create a strategy. Following are some examples of strategies that can be created using the <code>Strategy</code> class.</p>
 <h2 id="rsi-strategy">RSI Strategy</h2>
 <p>We start with a simple strategy that uses the Relative Strength Index (RSI) to determine entry and exit points. The RSI is a momentum oscillator that measures the speed and change of price movements. It ranges from 0 to 100, with values above 70 indicating overbought conditions and values below 30 indicating oversold conditions.</p>
 <p>This strategy will enter a long position when the RSI crosses above 30 and exit when it crosses below 70. It will also enter a short position when the RSI crosses below 70 and exit when it crosses above 30. It will buy one contract and sell one contract at a time and the strategy will be backtested on AAPL stock data from 2010 to 2020.</p>
