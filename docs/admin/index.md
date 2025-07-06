@@ -22,7 +22,7 @@ in which you would be able to train your models locally.
 
 The web application is a separate project that uses the Trading Strategy Tester package as a backend. If you want to use the web application, you need to do the following:
 
-- Install and start `Ollama` on your machine using this [link](https://ollama.com/download).
+- Install and start `Ollama` on your machine using this [link](https://ollama.com/download). After installing `Ollama`, **restart your computer** to ensure that the installation is complete and the environment is set up correctly.
 
 - Clone the repository:
 

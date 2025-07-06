@@ -45,7 +45,7 @@ trades, graphs, stats, strategy_obj, changes = process_prompt(
 You can later use the `trades`, `graphs`, `stats`, `strategy_obj`, and `changes` variables to visualize the results, analyze the performance, and make further modifications to the strategy.
 
 This project uses `Llama 3.2` models via [Ollama](https://ollama.com) framework. The models need to be installed first so that the package can use them. Follow these steps:
-1. You need to install `Ollama` on your machine using this [link](https://ollama.com/download).
+1. You need to install `Ollama` on your machine using this [link](https://ollama.com/download). After installing `Ollama`, **restart your computer** to ensure that the installation is complete and the environment is set up correctly.
 2. After that, you have to download the [model weights](https://huggingface.co/drdanicka/trading-strategy-tester-weights/tree/main). You can do the following:
 
 ```bash
