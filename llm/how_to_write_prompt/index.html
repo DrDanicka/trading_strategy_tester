@@ -1894,6 +1894,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance note
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#important-note-at-the-end" class="md-nav__link">
     <span class="md-ellipsis">
       Important note at the end
@@ -2035,6 +2053,24 @@
   <a href="#examples-of-full-prompts" class="md-nav__link">
     <span class="md-ellipsis">
       Examples of full prompts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance note
     </span>
   </a>
   
@@ -2183,6 +2219,37 @@ is equal to 26 varies by 13.6 percent within a interval. Set the start date
 to 2022-1-1 and set end of the strategy to 2024-1-1. Set trade commissions 
 to 0.01 percent.
 </code></pre>
+<h2 id="workflow">Workflow</h2>
+<p>The expected workflow for generating trading strategies with an LLM is as follows:</p>
+<ol>
+<li>
+<p><strong>Choose a model</strong><br />
+   Use any LLM to generate strategy prompts, but we <strong>recommend using Llama 3.2</strong>.<br />
+   This is the fine-tuned model that generates <strong>all parameters in a single step</strong>.<br />
+   It is both fast and produces good results.</p>
+</li>
+<li>
+<p><strong>Generate the initial strategy</strong><br />
+   Start by writing a clear prompt using the guidelines above.<br />
+   Llama 3.2 will generate a complete draft of the strategy including both mandatory and optional fields.</p>
+</li>
+<li>
+<p><strong>Review the result in the "Generated" tab</strong><br />
+   Once the strategy is generated, inspect the output in the <em>Generated</em> tab.<br />
+   This tab shows the parsed structure of the strategy that is simulated and validated.</p>
+</li>
+<li>
+<p><strong>Decide on next steps</strong>  </p>
+<ul>
+<li>If the generated strategy looks good and matches your expectations, you can proceed directly.  </li>
+<li>If the strategy is not fully aligned with your intent, you can <strong>manually edit</strong> the parameters resubmit as <code>Strategy object</code> in LLM selection.</li>
+</ul>
+</li>
+</ol>
+<h2 id="performance-note">Performance note</h2>
+<p>Generating strategies using LLMs can be time-consuming, especially when running models locally. On an Apple M3 Pro chip, a single query to the 3B model takes approximately <strong>15 seconds</strong>. On older GPUs like the NVIDIA 1070, the runtime is similar. However, on machines <strong>without a dedicated GPU</strong>, a single call to the 3B model can take up to <strong>1 minute</strong> or more.</p>
+<p>In the case of the approach that generates strategy fields individually, <strong>up to 12 models may run in parallel</strong> (one per field). This means that on non-GPU systems, total generation time can stretch to <strong>several minutes</strong>. On systems with a capable GPU, this multi-model parallelism usually completes in <strong>around one minute</strong>.</p>
+<p>Keep this in mind when choosing between full-strategy generation and per-field generation workflows.</p>
 <h2 id="important-note-at-the-end">Important note at the end</h2>
 <p>It is highly recommended to work with the documentation of a <a href="../../dev/modules/strategy/"><code>Strategy</code></a> object to know what parameters are available for each condition and how to use them. You can also check the <a href="../../dev/modules/trading_series/">TradingSeries</a> documentation to see what parameters are available for each indicator. The model will understand the prompt better if you specify the parameters in the prompt.</p>
 <p>If you are not sure how to write something in the prompt, you can look at the file at this <a href="https://github.com/DrDanicka/trading_strategy_tester/blob/main/trading_strategy_tester/training_data/prompt_data/string_options.py">link</a>. There are some options on how to specify the parameters in the prompt. If you use the same patterns as in the file, the model will understand it better because those are the patterns that were used for training the model.</p>

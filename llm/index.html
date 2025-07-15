@@ -1758,6 +1758,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#performance-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance note
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1943,6 +1952,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#performance-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance note
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2004,6 +2022,10 @@
 </ul>
 </li>
 </ul>
+<h2 id="performance-note">Performance note</h2>
+<p>Generating strategies using LLMs can be time-consuming, especially when running models locally. On an Apple M3 Pro chip, a single query to the 3B model takes approximately <strong>15 seconds</strong>. On older GPUs like the NVIDIA 1070, the runtime is similar. However, on machines <strong>without a dedicated GPU</strong>, a single call to the 3B model can take up to <strong>1 minute</strong> or more.</p>
+<p>In the case of the approach that generates strategy fields individually, <strong>up to 12 models may run in parallel</strong> (one per field). This means that on non-GPU systems, total generation time can stretch to <strong>several minutes</strong>. On systems with a capable GPU, this multi-model parallelism usually completes in <strong>around one minute</strong>.</p>
+<p>Keep this in mind when choosing between full-strategy generation and per-field generation workflows.</p>
 
 
 
