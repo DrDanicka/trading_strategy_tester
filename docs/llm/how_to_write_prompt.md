@@ -161,6 +161,37 @@ to 2022-1-1 and set end of the strategy to 2024-1-1. Set trade commissions
 to 0.01 percent.
 ```
 
+## Workflow
+
+The expected workflow for generating trading strategies with an LLM is as follows:
+
+1. **Choose a model**  
+   Use any LLM to generate strategy prompts, but we **recommend using Llama 3.2**.  
+   This is the fine-tuned model that generates **all parameters in a single step**.  
+   It is both fast and produces good results.
+
+2. **Generate the initial strategy**  
+   Start by writing a clear prompt using the guidelines above.  
+   Llama 3.2 will generate a complete draft of the strategy including both mandatory and optional fields.
+
+3. **Review the result in the "Generated" tab**  
+   Once the strategy is generated, inspect the output in the *Generated* tab.  
+   This tab shows the parsed structure of the strategy that is simulated and validated.
+
+4. **Decide on next steps**  
+    - If the generated strategy looks good and matches your expectations, you can proceed directly.  
+    - If the strategy is not fully aligned with your intent, you can **manually edit** the parameters resubmit as `Strategy object` in LLM selection.
+
+
+## Performance note  
+
+Generating strategies using LLMs can be time-consuming, especially when running models locally. On an Apple M3 Pro chip, a single query to the 3B model takes approximately **15 seconds**. On older GPUs like the NVIDIA 1070, the runtime is similar. However, on machines **without a dedicated GPU**, a single call to the 3B model can take up to **1 minute** or more.
+
+In the case of the approach that generates strategy fields individually, **up to 12 models may run in parallel** (one per field). This means that on non-GPU systems, total generation time can stretch to **several minutes**. On systems with a capable GPU, this multi-model parallelism usually completes in **around one minute**.
+
+Keep this in mind when choosing between full-strategy generation and per-field generation workflows.
+
+
 ## Important note at the end
 
 It is highly recommended to work with the documentation of a [`Strategy`](../dev/modules/strategy.md) object to know what parameters are available for each condition and how to use them. You can also check the [TradingSeries](../dev/modules/trading_series.md) documentation to see what parameters are available for each indicator. The model will understand the prompt better if you specify the parameters in the prompt.

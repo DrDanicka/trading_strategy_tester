@@ -46,3 +46,11 @@ For generating strategies we use two approaches:
         - **3B** model for the `buy_condition` and `sell_condition` parameters. This is because these parameters are more complex and require a more capable model to generate them correctly.
     - **Few-shot prompting**:
         - In this case we use the **3B** model for all of the parameters. This is because Few-shot prompting needs more context to generate the parameters correctly and the **3B** model is more capable of generating complex code.
+
+## Performance note  
+
+Generating strategies using LLMs can be time-consuming, especially when running models locally. On an Apple M3 Pro chip, a single query to the 3B model takes approximately **15 seconds**. On older GPUs like the NVIDIA 1070, the runtime is similar. However, on machines **without a dedicated GPU**, a single call to the 3B model can take up to **1 minute** or more.
+
+In the case of the approach that generates strategy fields individually, **up to 12 models may run in parallel** (one per field). This means that on non-GPU systems, total generation time can stretch to **several minutes**. On systems with a capable GPU, this multi-model parallelism usually completes in **around one minute**.
+
+Keep this in mind when choosing between full-strategy generation and per-field generation workflows.
